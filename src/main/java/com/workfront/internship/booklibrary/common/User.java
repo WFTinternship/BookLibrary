@@ -1,33 +1,56 @@
 package com.workfront.internship.booklibrary.common;
 
 /**
- * Created by Workfront on 7/1/2016.
+ * Created by Sona on 7/1/2016.
  */
 public class User {
     //void builder(){};
 
-    private int user_id;
+    private int userId;
     private String name;
     private String surname;
     private String username;
     private String password;
     private String address;
-    private String e_mail;
+    private String eMail;
     private String phone;
-    private String access_privilage;
+    private String accessPrivilege;
 
 
-    public User(){} //todo
-
-    public User(int id, String name, String surname, String username, String pass,
-                String address, String mail, String phone, String access){}
-
-    public int getUser_id() {
-        return user_id;
+    public User(){
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public User(User user){
+        setUserId(user.getUserId());
+        setName(user.getName());
+        setSurname(user.getSurname());
+        setUsername(user.getUsername());
+        setPassword(user.getPassword());
+        setAddress(user.getAddress());
+        seteMail(user.geteMail());
+        setPhone(user.getPhone());
+        setAccessPrivilege(user.getAccessPrivilege());
+    }
+
+    public User(int userId, String name, String surname, String username, String password, String address,
+                String eMail, String phone, String accessPrivilege) {
+        this.userId = userId;
+        this.name = name;
+        this.surname = surname;
+        this.username = username;
+        this.password = password;
+        this.address = address;
+        this.eMail = eMail;
+        this.phone = phone;
+        this.accessPrivilege = accessPrivilege;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getName() {
@@ -70,12 +93,12 @@ public class User {
         this.address = address;
     }
 
-    public String getE_mail() {
-        return e_mail;
+    public String geteMail() {
+        return eMail;
     }
 
-    public void setE_mail(String e_mail) {
-        this.e_mail = e_mail;
+    public void seteMail(String eMail) {
+        this.eMail = eMail;
     }
 
     public String getPhone() {
@@ -86,11 +109,62 @@ public class User {
         this.phone = phone;
     }
 
-    public String getAccess_privilage() {
-        return access_privilage;
+    public String getAccessPrivilege() {
+        return accessPrivilege;
     }
 
-    public void setAccess_privilage(String access_privilage) {
-        this.access_privilage = access_privilage;
+    public void setAccessPrivilege(String access_privilege) {
+        this.accessPrivilege = access_privilege;
+    }
+
+
+    @Override
+    public int hashCode() {
+        int result = getUserId();
+        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
+        result = 31 * result + (getSurname() != null ? getSurname().hashCode() : 0);
+        result = 31 * result + (getUsername() != null ? getUsername().hashCode() : 0);
+        result = 31 * result + (getPassword() != null ? getPassword().hashCode() : 0);
+        result = 31 * result + (getAddress() != null ? getAddress().hashCode() : 0);
+        result = 31 * result + (geteMail() != null ? geteMail().hashCode() : 0);
+        result = 31 * result + (getPhone() != null ? getPhone().hashCode() : 0);
+        result = 31 * result + (getAccessPrivilege() != null ? getAccessPrivilege().hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", address='" + address + '\'' +
+                ", eMail='" + eMail + '\'' +
+                ", phone='" + phone + '\'' +
+                ", accessPrivilege='" + accessPrivilege + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (getUserId() != user.getUserId()) return false;
+        if (getName() != null ? !getName().equals(user.getName()) : user.getName() != null) return false;
+        if (getSurname() != null ? !getSurname().equals(user.getSurname()) : user.getSurname() != null) return false;
+        if (getUsername() != null ? !getUsername().equals(user.getUsername()) : user.getUsername() != null)
+            return false;
+        if (getPassword() != null ? !getPassword().equals(user.getPassword()) : user.getPassword() != null)
+            return false;
+        if (getAddress() != null ? !getAddress().equals(user.getAddress()) : user.getAddress() != null) return false;
+        if (geteMail() != null ? !geteMail().equals(user.geteMail()) : user.geteMail() != null) return false;
+        if (getPhone() != null ? !getPhone().equals(user.getPhone()) : user.getPhone() != null) return false;
+        return getAccessPrivilege() != null ? getAccessPrivilege().equals(user.getAccessPrivilege()) : user.getAccessPrivilege() == null;
+
     }
 }

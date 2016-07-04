@@ -4,7 +4,7 @@ import com.workfront.internship.booklibrary.common.User;
 import java.util.List;
 
 /**
- * Created by Workfront on 6/30/2016.
+ * Created by Sona on 6/30/2016.
  */
 public interface UserDAO {
 
@@ -15,10 +15,10 @@ public interface UserDAO {
     User getUserByID(int id);
 
     //get all data fields of all the users in the database
-    List<User> getAllAuthors();
+    List<User> getAllUsers();
 
     //update all fields in a row
     void updateUser(User u);
 
-    void deleteUser(User u);
+    void deleteUser(int id);
 }
