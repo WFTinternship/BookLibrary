@@ -119,20 +119,6 @@ public class User {
 
 
     @Override
-    public int hashCode() {
-        int result = getUserId();
-        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
-        result = 31 * result + (getSurname() != null ? getSurname().hashCode() : 0);
-        result = 31 * result + (getUsername() != null ? getUsername().hashCode() : 0);
-        result = 31 * result + (getPassword() != null ? getPassword().hashCode() : 0);
-        result = 31 * result + (getAddress() != null ? getAddress().hashCode() : 0);
-        result = 31 * result + (geteMail() != null ? geteMail().hashCode() : 0);
-        result = 31 * result + (getPhone() != null ? getPhone().hashCode() : 0);
-        result = 31 * result + (getAccessPrivilege() != null ? getAccessPrivilege().hashCode() : 0);
-        return result;
-    }
-
-    @Override
     public String toString() {
         return "User{" +
                 "userId=" + userId +
@@ -166,5 +152,19 @@ public class User {
         if (getPhone() != null ? !getPhone().equals(user.getPhone()) : user.getPhone() != null) return false;
         return getAccessPrivilege() != null ? getAccessPrivilege().equals(user.getAccessPrivilege()) : user.getAccessPrivilege() == null;
 
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getUserId();
+        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
+        result = 31 * result + (getSurname() != null ? getSurname().hashCode() : 0);
+        result = 31 * result + (getUsername() != null ? getUsername().hashCode() : 0);
+        result = 31 * result + (getPassword() != null ? getPassword().hashCode() : 0);
+        result = 31 * result + (getAddress() != null ? getAddress().hashCode() : 0);
+        result = 31 * result + (geteMail() != null ? geteMail().hashCode() : 0);
+        result = 31 * result + (getPhone() != null ? getPhone().hashCode() : 0);
+        result = 31 * result + (getAccessPrivilege() != null ? getAccessPrivilege().hashCode() : 0);
+        return result;
     }
 }

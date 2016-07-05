@@ -1,12 +1,10 @@
 package com.workfront.internship.booklibrary.dao;
 
 import com.workfront.internship.booklibrary.common.User;
-
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
 
 /**
  * Created by Sona on 7/1/2016.
@@ -54,7 +52,7 @@ public class UserDAOImpl extends General implements UserDAO {
         try{
             connection = DataSource.getInstance().getConnection();
             String sql;
-            sql = "SELECT * FROM User WHERE user_id=" + id + "";
+            sql = "SELECT * FROM User WHERE user_id=" + id;
 
             preparedStatement = connection.prepareStatement(sql);
             ResultSet rs = preparedStatement.executeQuery();
@@ -84,8 +82,41 @@ public class UserDAOImpl extends General implements UserDAO {
     }
 
     public List<User> getAllUsers() {
-        List<User> list = new ArrayList<User>();
-        return null;
+        List<User> users = new ArrayList<User>();
+        User user = null;
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+        try{
+            connection = DataSource.getInstance().getConnection();
+            String sql;
+            sql = "SELECT * FROM User";
+            preparedStatement = connection.prepareStatement(sql);
+            rs = preparedStatement.executeQuery();
+            //ResultSetMetaData rsmd = rs.getMetaData();
+            while (rs.next()) {
+                user.setUserId(rs.getInt(1));
+                user.setName(rs.getString(2));
+                user.setSurname(rs.getString(3));
+                user.setUsername(rs.getString(4));
+                user.setPassword(rs.getString(5));
+                user.setAddress(rs.getString(6));
+                user.seteMail(rs.getString(7));
+                user.setPhone(rs.getString(8));
+                user.setAccessPrivilege(rs.getString(9));
+
+                users.add(user);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            closeConnection(rs, preparedStatement, connection);
+        }
+
+        return users;
     }// TODO
 
     public void updateUser(User u) {
@@ -132,7 +163,7 @@ public class UserDAOImpl extends General implements UserDAO {
             connection = DataSource.getInstance().getConnection();
 
             String sql;
-            sql ="DELETE FROM User WHERE user_id="  + id + "";
+            sql ="DELETE FROM User WHERE user_id="  + id;
             //  sql ="DELETE FROM User WHERE user_id=?";
             // preparedStatement.setInt(1, id);
 

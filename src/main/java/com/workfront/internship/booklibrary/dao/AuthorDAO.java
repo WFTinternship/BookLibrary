@@ -8,15 +8,17 @@ import java.util.List;
  */
 public interface AuthorDAO {
 
-    void createAuthor(Author author); //insert all data fields of an author to the database
+    //insert all data fields of an author to the database
+    void createAuthor(Author author);
 
-    Author getAuthorByID(int id); //get all data fields of an author entry by 'author_id' field
-    Author getAuthorByName(String name); //get all data fields of an author entry by 'name' field
-    List<Author> getAllAuthors(); //get all data fields of all the authors in the database
+    //get all data fields of an author entry by 'author_id' field
+    Author getAuthorByID(int id);
 
-    void updateAuthor(Author a); //update all fields in a row
-    void updateAuthor(int id); //update author_id field of an author
-    void updateAuthor(String s); //update one of name, surname, email, web_page, biography fields of an author
+    //get all data fields of all the authors in the database
+    List<Author> getAllAuthors();
 
-    void deleteAuthor(Author a);
+    //update all fields in a row
+    void updateAuthor(Author a);
+
+    void deleteAuthor(int id);
 }

@@ -37,7 +37,7 @@ public class Test {
     }
 
     public static void getUserByIDTest(){
-        UserDAOImpl userDao  = new UserDAOImpl();
+        UserDAOImpl userDao = new UserDAOImpl();
         User user = userDao.getUserByID(1);
         System.out.println("user_id: " + user.getUserId());
         System.out.println("name: " + user.getName());
@@ -50,14 +50,18 @@ public class Test {
         System.out.println("access privilege: " + user.getAccessPrivilege());
     }
 
-    public static void getAllAuthorsTest(){} // TODO
+    public static void getAllUsersTest(){
+        UserDAOImpl userDAO = new UserDAOImpl();
+
+
+    } // TODO
 
     public static void updateUserTest(){
         UserDAOImpl userDAO = new UserDAOImpl();
         User user = userDAO.getUserByID(1);
         user.setName("Sonaki");
         userDAO.updateUser(user);
-    } // TODO
+    }
 
 
 
