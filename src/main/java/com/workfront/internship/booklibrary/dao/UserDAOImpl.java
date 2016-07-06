@@ -1,6 +1,8 @@
 package com.workfront.internship.booklibrary.dao;
 
 import com.workfront.internship.booklibrary.common.User;
+
+import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,7 +16,6 @@ public class UserDAOImpl extends General implements UserDAO {
     public void createUser(User user) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-
 
         try{
             connection = DataSource.getInstance().getConnection();
@@ -34,12 +35,13 @@ public class UserDAOImpl extends General implements UserDAO {
 
             preparedStatement.executeUpdate();
 
-
         } catch (IOException e) {
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally{
+        } catch (PropertyVetoException e) {
+            e.printStackTrace();
+        } finally{
             closeConnection( preparedStatement, connection);
         }
 
@@ -74,7 +76,9 @@ public class UserDAOImpl extends General implements UserDAO {
             e.printStackTrace();
         } catch(SQLException e){
             e.printStackTrace();
-        }finally{
+        } catch (PropertyVetoException e) {
+            e.printStackTrace();
+        } finally{
             closeConnection( preparedStatement, connection);
         }
 
@@ -82,28 +86,30 @@ public class UserDAOImpl extends General implements UserDAO {
     }
 
     public List<User> getAllUsers() {
-        List<User> users = new ArrayList<User>();
+        List<User> users = null;
         User user = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        ResultSet rs = null;
+        ResultSet resultSets = null;
         try{
             connection = DataSource.getInstance().getConnection();
+            users = new ArrayList<User>();
             String sql;
             sql = "SELECT * FROM User";
             preparedStatement = connection.prepareStatement(sql);
-            rs = preparedStatement.executeQuery();
+            resultSets = preparedStatement.executeQuery();
             //ResultSetMetaData rsmd = rs.getMetaData();
-            while (rs.next()) {
-                user.setUserId(rs.getInt(1));
-                user.setName(rs.getString(2));
-                user.setSurname(rs.getString(3));
-                user.setUsername(rs.getString(4));
-                user.setPassword(rs.getString(5));
-                user.setAddress(rs.getString(6));
-                user.seteMail(rs.getString(7));
-                user.setPhone(rs.getString(8));
-                user.setAccessPrivilege(rs.getString(9));
+            while (resultSets.next()) {
+                user = new User();
+                user.setUserId(resultSets.getInt(1));
+                user.setName(resultSets.getString(2));
+                user.setSurname(resultSets.getString(3));
+                user.setUsername(resultSets.getString(4));
+                user.setPassword(resultSets.getString(5));
+                user.setAddress(resultSets.getString(6));
+                user.seteMail(resultSets.getString(7));
+                user.setPhone(resultSets.getString(8));
+                user.setAccessPrivilege(resultSets.getString(9));
 
                 users.add(user);
             }
@@ -112,35 +118,37 @@ public class UserDAOImpl extends General implements UserDAO {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
-            closeConnection(rs, preparedStatement, connection);
+        } catch (PropertyVetoException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection(resultSets, preparedStatement, connection);
         }
 
         return users;
-    }// TODO
+    }
 
-    public void updateUser(User u) {
+    public void updateUser(User user) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
         try{
-            if(u.getUserId()!=0) {
+            if(user.getUserId()!=0) {
                 connection = DataSource.getInstance().getConnection();
                 String sql;
                 sql = "UPDATE User SET " +
                         "name = ?, surname = ?, username = ?, password = ?, address =?, e_mail = ?, phone =?, access_privilege = ?" +
-                        " WHERE user_id=" + u.getUserId();
+                        " WHERE user_id=" + user.getUserId();
 
                 preparedStatement = connection.prepareStatement(sql);
 
-                preparedStatement.setString(1, u.getName());
-                preparedStatement.setString(2, u.getSurname());
-                preparedStatement.setString(3, u.getUsername());
-                preparedStatement.setString(4, u.getPassword());
-                preparedStatement.setString(5, u.getAddress());
-                preparedStatement.setString(6, u.geteMail());
-                preparedStatement.setString(7, u.getPhone());
-                preparedStatement.setString(8, u.getAccessPrivilege());
+                preparedStatement.setString(1, user.getName());
+                preparedStatement.setString(2, user.getSurname());
+                preparedStatement.setString(3, user.getUsername());
+                preparedStatement.setString(4, user.getPassword());
+                preparedStatement.setString(5, user.getAddress());
+                preparedStatement.setString(6, user.geteMail());
+                preparedStatement.setString(7, user.getPhone());
+                preparedStatement.setString(8, user.getAccessPrivilege());
 
                 preparedStatement.executeUpdate();
             }
@@ -149,7 +157,9 @@ public class UserDAOImpl extends General implements UserDAO {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }finally{
+        } catch (PropertyVetoException e) {
+            e.printStackTrace();
+        } finally{
             closeConnection( preparedStatement, connection);
         }
 
@@ -174,7 +184,9 @@ public class UserDAOImpl extends General implements UserDAO {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }finally{
+        } catch (PropertyVetoException e) {
+            e.printStackTrace();
+        } finally{
             closeConnection( preparedStatement, connection);
         }
     }

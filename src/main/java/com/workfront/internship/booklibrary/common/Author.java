@@ -11,73 +11,59 @@ public class Author {
     private String webPage;
     private String biography;
 
-    public Author(){}
-
-    public Author(Author author){
-        setAuthorId(author.getAuthorId());
-        setName(author.getName());
-        setSurname(author.getSurname());
-        seteMail(author.geteMail());
-        setWebPage(author.getWebPage());
-        setBiography(author.getBiography());
-    }
-
-    public Author(int authorId, String name, String surname,
-                String eMail, String webPage, String biography) {
-        this.authorId = authorId;
-        this.name = name;
-        this.surname = surname;
-        this.eMail = eMail;
-        this.webPage = webPage;
-        this.biography = biography;
-    }
 
     public int getAuthorId() {
         return authorId;
     }
 
-    public void setAuthorId(int authorId) {
+    public Author setAuthorId(int authorId) {
         this.authorId = authorId;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public Author setName(String name) {
         this.name = name;
+        return this;
     }
 
     public String getSurname() {
         return surname;
     }
 
-    public void setSurname(String surname) {
+    public Author setSurname(String surname) {
         this.surname = surname;
+        return this;
     }
 
     public String geteMail() {
         return eMail;
     }
 
-    public void seteMail(String eMail) {
+    public Author seteMail(String eMail) {
         this.eMail = eMail;
+        return this;
     }
 
     public String getWebPage() {
         return webPage;
     }
 
-    public void setWebPage(String webPage) {
+    public Author setWebPage(String webPage) {
         this.webPage = webPage;
+        return this;
     }
 
     public String getBiography() {
         return biography;
     }
 
-    public void setBiography(String biography) {
+    public Author setBiography(String biography) {
         this.biography = biography;
+        return this;
     }
 
     @Override

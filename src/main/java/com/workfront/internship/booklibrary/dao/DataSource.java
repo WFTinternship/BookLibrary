@@ -13,7 +13,7 @@ public class DataSource {
     private static DataSource datasource;
     private BasicDataSource ds;
 
-    private DataSource() throws IOException, SQLException { //PropertyVetoException
+    private DataSource() throws IOException, SQLException, PropertyVetoException {
         ds = new BasicDataSource();
         ds.setDriverClassName("com.mysql.jdbc.Driver");
         ds.setUsername("root");
@@ -27,7 +27,7 @@ public class DataSource {
 
     }
 
-    public static DataSource getInstance() throws IOException, SQLException  { //PropertyVetoException
+    public static DataSource getInstance() throws IOException, SQLException, PropertyVetoException {
         if (datasource == null) {
             datasource = new DataSource();
         }

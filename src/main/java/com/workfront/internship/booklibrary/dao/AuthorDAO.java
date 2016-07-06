@@ -18,7 +18,7 @@ public interface AuthorDAO {
     List<Author> getAllAuthors();
 
     //update all fields in a row
-    void updateAuthor(Author a);
+    void updateAuthor(Author author);
 
     void deleteAuthor(int id);
 }

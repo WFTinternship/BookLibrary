@@ -17,104 +17,85 @@ public class User {
     private String accessPrivilege;
 
 
-    public User(){
-    }
-
-    public User(User user){
-        setUserId(user.getUserId());
-        setName(user.getName());
-        setSurname(user.getSurname());
-        setUsername(user.getUsername());
-        setPassword(user.getPassword());
-        setAddress(user.getAddress());
-        seteMail(user.geteMail());
-        setPhone(user.getPhone());
-        setAccessPrivilege(user.getAccessPrivilege());
-    }
-
-    public User(int userId, String name, String surname, String username, String password, String address,
-                String eMail, String phone, String accessPrivilege) {
-        this.userId = userId;
-        this.name = name;
-        this.surname = surname;
-        this.username = username;
-        this.password = password;
-        this.address = address;
-        this.eMail = eMail;
-        this.phone = phone;
-        this.accessPrivilege = accessPrivilege;
-    }
-
     public int getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public User setUserId(int userId) {
         this.userId = userId;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public User setName(String name) {
         this.name = name;
+        return this;
     }
 
     public String getSurname() {
         return surname;
     }
 
-    public void setSurname(String surname) {
+    public User setSurname(String surname) {
         this.surname = surname;
+        return this;
     }
 
     public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
+    public User setUsername(String username) {
         this.username = username;
+        return this;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public User setPassword(String password) {
         this.password = password;
+        return this;
     }
 
     public String getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public User setAddress(String address) {
         this.address = address;
+        return this;
     }
 
     public String geteMail() {
         return eMail;
     }
 
-    public void seteMail(String eMail) {
+    public User seteMail(String eMail) {
         this.eMail = eMail;
+        return this;
     }
 
     public String getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public User setPhone(String phone) {
         this.phone = phone;
+        return this;
     }
 
     public String getAccessPrivilege() {
         return accessPrivilege;
     }
 
-    public void setAccessPrivilege(String access_privilege) {
+    public User setAccessPrivilege(String access_privilege) {
         this.accessPrivilege = access_privilege;
+        return this;
     }
 
 
@@ -134,11 +115,11 @@ public class User {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
 
-        User user = (User) o;
+        User user = (User) obj;
 
         if (getUserId() != user.getUserId()) return false;
         if (getName() != null ? !getName().equals(user.getName()) : user.getName() != null) return false;

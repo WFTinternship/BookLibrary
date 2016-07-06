@@ -1,13 +1,14 @@
 package com.workfront.internship.booklibrary.dao;
 
 import com.workfront.internship.booklibrary.common.Author;
-import com.workfront.internship.booklibrary.common.User;
 
+import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,7 +39,9 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally{
+        } catch (PropertyVetoException e) {
+            e.printStackTrace();
+        } finally{
             closeConnection( preparedStatement, connection);
         }
     }
@@ -56,6 +59,7 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
             ResultSet rs = preparedStatement.executeQuery();
 
             while(rs.next()){
+                author = new Author();
                 author.setAuthorId(rs.getInt(1));
                 author.setName(rs.getString(2));
                 author.setSurname(rs.getString(3));
@@ -68,7 +72,9 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }finally{
+        } catch (PropertyVetoException e) {
+            e.printStackTrace();
+        } finally{
             closeConnection(preparedStatement, connection);
         }
 
@@ -76,27 +82,63 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
     }
 
     public List<Author> getAllAuthors() {
-        return null;
-    } // TODO
+        List<Author> authors = null;
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
 
-    public void updateAuthor(Author a) {
+        try{
+            connection = DataSource.getInstance().getConnection();
+            authors = new ArrayList<Author>();
+            String sql;
+            sql = "SELECT * FROM Author";
+            preparedStatement = connection.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                Author author = new Author();
+
+                author.setAuthorId(resultSet.getInt(1));
+                author.setName(resultSet.getString(2));
+                author.setSurname(resultSet.getString(3));
+                author.seteMail(resultSet.getString(4));
+                author.setWebPage(resultSet.getString(5));
+                author.setBiography(resultSet.getString(6));
+
+                authors.add(author);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (PropertyVetoException e) {
+            e.printStackTrace();
+        }finally {
+            closeConnection(resultSet, preparedStatement, connection);
+        }
+
+        return authors;
+    }
+
+    public void updateAuthor(Author author) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
         try{
-            if(a.getAuthorId() != 0){
+            if(author.getAuthorId() != 0){
                 connection = DataSource.getInstance().getConnection();
                 String sql;
                 sql = "UPDATE Author SET " +
                         "name = ?, surname = ?, email = ?, web_page = ?, biography = ? " +
-                        "WHERE author_id = " + a.getAuthorId();
+                        "WHERE author_id = " + author.getAuthorId();
                 preparedStatement = connection.prepareStatement(sql);
 
-                preparedStatement.setString(1, a.getName());
-                preparedStatement.setString(2, a.getSurname());
-                preparedStatement.setString(3, a.geteMail());
-                preparedStatement.setString(4, a.getWebPage());
-                preparedStatement.setString(5, a.getBiography());
+                preparedStatement.setString(1, author.getName());
+                preparedStatement.setString(2, author.getSurname());
+                preparedStatement.setString(3, author.geteMail());
+                preparedStatement.setString(4, author.getWebPage());
+                preparedStatement.setString(5, author.getBiography());
 
                 preparedStatement.executeUpdate();
             }
@@ -105,7 +147,9 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
+        } catch (PropertyVetoException e) {
+            e.printStackTrace();
+        } finally {
             closeConnection(preparedStatement, connection);
         }
 
@@ -126,7 +170,9 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
+        } catch (PropertyVetoException e) {
+            e.printStackTrace();
+        } finally {
             closeConnection(preparedStatement, connection);
         }
     }

@@ -4,10 +4,10 @@ package com.workfront.internship.booklibrary.common;
  * Created by Workfront on 7/1/2016.
  */
 public class Book {
-    private int book_id;
+    private int bookId;
     private String ISBN;
     private String title;
-    private int genre_id;
+    private Genre genre;
     private int volume;
     private String bookAbstract;
     private String language;
@@ -16,141 +16,121 @@ public class Book {
     private int pages;
     private String countryOfEdition;
 
-    public Book(){}
 
-    public Book(Book book){
-        setBook_id(book.getBook_id());
-        setISBN(book.getISBN());
-        setTitle(book.getTitle());
-        setGenre_id(book.getGenre_id());
-        setVolume(book.getVolume());
-        setBookAbstract(book.getBookAbstract());
-        setLanguage(book.getLanguage());
-        setCount(book.getCount());
-        setEditionYear(book.getEditionYear());
-        setPages(book.getPages());
-        setCountryOfEdition(book.getCountryOfEdition());
+    public int getBookId() {
+        return bookId;
     }
 
-    public Book(int bookId, String ISBN, String title, int genreId, int volume, String bookAbstract,
-                String language, int count, String editionYear, int pages, String countryOfEdition){
-        this.book_id = bookId;
-        this.ISBN = ISBN;
-        this.title = title;
-        this.genre_id = genreId;
-        this.volume = volume;
-        this.bookAbstract = bookAbstract;
-        this.language = language;
-        this.count = count;
-        this.editionYear = editionYear;
-        this.pages = pages;
-        this.countryOfEdition = countryOfEdition;
-    }
-
-
-    public int getBook_id() {
-        return book_id;
-    }
-
-    public void setBook_id(int book_id) {
-        this.book_id = book_id;
+    public Book setBookId(int bookId) {
+        this.bookId = bookId;
+        return this;
     }
 
     public String getISBN() {
         return ISBN;
     }
 
-    public void setISBN(String ISBN) {
+    public Book setISBN(String ISBN) {
         this.ISBN = ISBN;
+        return this;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public Book setTitle(String title) {
         this.title = title;
+        return this;
     }
 
-    public int getGenre_id() {
-        return genre_id;
+    public Genre getGenre() {
+        return genre;
     }
 
-    public void setGenre_id(int genre_id) {
-        this.genre_id = genre_id;
+    public Book setGenre(Genre genre) {
+        this.genre = genre;
+        return this;
     }
 
     public int getVolume() {
         return volume;
     }
 
-    public void setVolume(int volume) {
+    public Book setVolume(int volume) {
         this.volume = volume;
+        return this;
     }
 
     public String getBookAbstract() {
         return bookAbstract;
     }
 
-    public void setBookAbstract(String bookAbstract) {
+    public Book setBookAbstract(String bookAbstract) {
         this.bookAbstract = bookAbstract;
+        return this;
     }
 
     public String getLanguage() {
         return language;
     }
 
-    public void setLanguage(String language) {
+    public Book setLanguage(String language) {
         this.language = language;
+        return this;
     }
 
     public int getCount() {
         return count;
     }
 
-    public void setCount(int count) {
+    public Book setCount(int count) {
         this.count = count;
+        return this;
     }
 
     public String getEditionYear() {
         return editionYear;
     }
 
-    public void setEditionYear(String editionYear) {
+    public Book setEditionYear(String editionYear) {
         this.editionYear = editionYear;
+        return this;
     }
 
     public int getPages() {
         return pages;
     }
 
-    public void setPages(int pages) {
+    public Book setPages(int pages) {
         this.pages = pages;
+        return this;
     }
 
     public String getCountryOfEdition() {
         return countryOfEdition;
     }
 
-    public void setCountryOfEdition(String countryOfEdition) {
+    public Book setCountryOfEdition(String countryOfEdition) {
         this.countryOfEdition = countryOfEdition;
+        return this;
     }
 
 
     @Override
     public String toString() {
         return "Book{" +
-                "book_id=" + book_id +
+                "book_id=" + bookId +
                 ", ISBN='" + ISBN + '\'' +
                 ", title='" + title + '\'' +
-                ", genre_id='" + genre_id + '\'' +
+                ", genreId='" + genre + '\'' +
                 ", volume='" + volume + '\'' +
                 ", abstract='" + bookAbstract + '\'' +
                 ", language='" + language + '\'' +
                 ", count='" + count + '\'' +
-                ", edition_year='" + editionYear + '\'' +
+                ", editionYear='" + editionYear + '\'' +
                 ", pages='" + pages + '\'' +
-                ", country_of_edition='" + countryOfEdition + '\'' +
+                ", countryOfEdition='" + countryOfEdition + '\'' +
                 '}';
     }
 
@@ -161,10 +141,10 @@ public class Book {
 
         Book book = (Book) obj;
 
-        if (getBook_id() != book.getBook_id()) return false;
+        if (getBookId() != book.getBookId()) return false;
         if (getISBN() != null ? !getISBN().equals(book.getISBN()) : book.getISBN() != null) return false;
         if (getTitle() != null ? !getTitle().equals(book.getTitle()) : book.getTitle() != null) return false;
-        if (getGenre_id() != book.getGenre_id()) return false;
+        if (getGenre() != book.getGenre()) return false;
         if (getVolume() != book.getVolume()) return false;
 
         if (getBookAbstract() != null ? !getBookAbstract().equals(book.getBookAbstract()) : book.getBookAbstract() != null)
@@ -180,10 +160,10 @@ public class Book {
 
     @Override
     public int hashCode() {
-        int result = getBook_id();
+        int result = getBookId();
         result = 31 * result + (getISBN() != null ? getISBN().hashCode() : 0);
         result = 31 * result + (getTitle() != null ? getTitle().hashCode() : 0);
-        result = 31 * result + getGenre_id();
+        result = 31 * result + (getGenre() != null ? getGenre().hashCode() : 0);
         result = 31 * result + getVolume();
         result = 31 * result + (getBookAbstract() != null ? getBookAbstract().hashCode() : 0);
         result = 31 * result + (getLanguage() != null ? getLanguage().hashCode() : 0);
