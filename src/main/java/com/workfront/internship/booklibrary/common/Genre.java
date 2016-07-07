@@ -1,11 +1,11 @@
 package com.workfront.internship.booklibrary.common;
 
-/**
- * Created by Sona on 7/1/2016.
- */
+import java.util.List;
+
 public class Genre {
     private int genreId;
     private String genre;
+    private List<Book> books;
 
 
     public int getGenreId() {

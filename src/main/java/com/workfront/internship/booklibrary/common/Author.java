@@ -1,8 +1,7 @@
 package com.workfront.internship.booklibrary.common;
 
-/**
- * Created by Workfront on 7/1/2016.
- */
+import java.util.List;
+
 public class Author {
     private int authorId;
     private String name;
@@ -10,6 +9,7 @@ public class Author {
     private String eMail;
     private String webPage;
     private String biography;
+    private List<Book> books;
 
 
     public int getAuthorId() {
@@ -102,5 +102,13 @@ public class Author {
         result = 31 * result + (getWebPage() != null ? getWebPage().hashCode() : 0);
         result = 31 * result + (getBiography() != null ? getBiography().hashCode() : 0);
         return result;
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
     }
 }

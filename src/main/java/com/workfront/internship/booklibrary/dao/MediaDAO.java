@@ -1,7 +1,16 @@
 package com.workfront.internship.booklibrary.dao;
 
-/**
- * Created by Workfront on 6/30/2016.
- */
+import com.workfront.internship.booklibrary.common.Media;
+import java.util.List;
+
 public interface MediaDAO {
+    void createMedia(Media media);
+
+    Media getMediaByID(int id);
+
+    List<Media> getAllMedia();
+
+    void updateMedia(Media media);
+
+    void deleteMedia(int id);
 }

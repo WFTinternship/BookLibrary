@@ -1,8 +1,7 @@
 package com.workfront.internship.booklibrary.common;
 
-/**
- * Created by Workfront on 7/1/2016.
- */
+import java.util.List;
+
 public class Book {
     private int bookId;
     private String ISBN;
@@ -16,6 +15,10 @@ public class Book {
     private int pages;
     private String countryOfEdition;
 
+    private List<Media> medias;
+    private List<Author> authors;
+    private List<Pending> pendingList;
+    private List<PickBook> pickBookList;
 
     public int getBookId() {
         return bookId;
@@ -116,6 +119,13 @@ public class Book {
         return this;
     }
 
+    public List<Media> getMedias() {
+        return medias;
+    }
+
+    public void setMedias(List<Media> medias) {
+        this.medias = medias;
+    }
 
     @Override
     public String toString() {
@@ -172,5 +182,30 @@ public class Book {
         result = 31 * result + getPages();
         result = 31 * result + (getCountryOfEdition() != null ? getCountryOfEdition().hashCode() : 0);
         return result;
+    }
+
+
+    public List<Author> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(List<Author> authors) {
+        this.authors = authors;
+    }
+
+    public List<Pending> getPendingList() {
+        return pendingList;
+    }
+
+    public void setPendingList(List<Pending> pendingList) {
+        this.pendingList = pendingList;
+    }
+
+    public List<PickBook> getPickBookList() {
+        return pickBookList;
+    }
+
+    public void setPickBookList(List<PickBook> pickBookList) {
+        this.pickBookList = pickBookList;
     }
 }

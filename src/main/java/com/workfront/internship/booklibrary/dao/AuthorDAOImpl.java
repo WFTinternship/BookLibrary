@@ -11,9 +11,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by ${Sona} on 7/5/2016.
- */
 public class AuthorDAOImpl extends General implements AuthorDAO {
 
     public void createAuthor(Author author) {

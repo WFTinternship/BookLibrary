@@ -1,7 +1,10 @@
 package com.workfront.internship.booklibrary.common;
 
-/**
- * Created by Workfront on 7/1/2016.
- */
+import java.util.Date;
+
 public class Pending {
+    private int pendingId;
+    private int userId;
+    private int bookId;
+    private Date pendingTime;
 }

@@ -5,9 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-/**
- * Created by Sona on 7/1/2016.
- */
+
 public class General {
     protected void closeConnection(Statement st, Connection c) {
         closeConnection(null, st, c);

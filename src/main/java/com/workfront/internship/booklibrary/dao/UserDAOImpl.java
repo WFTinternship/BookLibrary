@@ -8,9 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Sona on 7/1/2016.
- */
+
 public class UserDAOImpl extends General implements UserDAO {
 
     public void createUser(User user) {

@@ -6,9 +6,7 @@ import com.workfront.internship.booklibrary.common.User;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Sona on 7/1/2016.
- */
+
 public class Test {
     public static void main(String[] args) {
         // createUserTest();

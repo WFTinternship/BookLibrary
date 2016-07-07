@@ -12,9 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by ${Sona} on 7/5/2016.
- */
+
 public class BookDAOImpl extends General implements BookDAO {
     public void createBook(Book book) {
         Connection connection = null;
@@ -29,9 +27,7 @@ public class BookDAOImpl extends General implements BookDAO {
             preparedStatement.setInt(1, book.getBookId());
             preparedStatement.setString(2, book.getISBN());
             preparedStatement.setString(3, book.getTitle());
-
             preparedStatement.setInt(4,book.getGenre().getGenreId());
-
             preparedStatement.setInt(5, book.getVolume());
             preparedStatement.setString(6, book.getBookAbstract());
             preparedStatement.setString(7, book.getLanguage());
@@ -62,6 +58,7 @@ public class BookDAOImpl extends General implements BookDAO {
         try{
             connection = DataSource.getInstance().getConnection();
             book = new Book();
+            Genre genre = new Genre();
             String sql;
             //sql = "SELECT FROM Book WHERE book_id=" + id;
             sql = "SELECT * FROM Book LEFT JOIN Genre " +
@@ -75,7 +72,7 @@ public class BookDAOImpl extends General implements BookDAO {
                 book.setBookId(resultSet.getInt(1));
                 book.setISBN(resultSet.getString(2));
                 book.setTitle(resultSet.getString(3));
-              //  book.setGenre(resultSet.getInt(4));
+              //book.setGenre(resultSet.getInt(4));
                 book.setVolume(resultSet.getInt(5));
                 book.setBookAbstract(resultSet.getString(6));
                 book.setLanguage(resultSet.getString(7));
@@ -83,7 +80,7 @@ public class BookDAOImpl extends General implements BookDAO {
                 book.setEditionYear(resultSet.getString(9));
                 book.setPages(resultSet.getInt(10));
                 book.setCountryOfEdition(resultSet.getString(11));
-                Genre genre = new Genre();
+
                 genre.setGenreId(resultSet.getInt(12));
                 genre.setGenre(resultSet.getString(13));
                 book.setGenre(genre);
@@ -120,11 +117,12 @@ public class BookDAOImpl extends General implements BookDAO {
 
             while(resultSet.next()){
                 Book book = new Book();
+                Genre genre = new Genre();
 
                 book.setBookId(resultSet.getInt(1));
                 book.setISBN(resultSet.getString(2));
                 book.setTitle(resultSet.getString(3));
-                /////////////////////////////book.setGenre(resultSet.getInt(4));
+                //book.setGenre(resultSet.getInt(4));
                 book.setVolume(resultSet.getInt(5));
                 book.setBookAbstract(resultSet.getString(6));
                 book.setLanguage(resultSet.getString(7));
@@ -132,6 +130,10 @@ public class BookDAOImpl extends General implements BookDAO {
                 book.setEditionYear(resultSet.getString(9));
                 book.setPages(resultSet.getInt(10));
                 book.setCountryOfEdition(resultSet.getString(11));
+
+                genre.setGenreId(resultSet.getInt(12));
+                genre.setGenre(resultSet.getString(13));
+                book.setGenre(genre);
 
                 books.add(book);
             }
@@ -165,7 +167,7 @@ public class BookDAOImpl extends General implements BookDAO {
 
                 preparedStatement.setString(1, book.getISBN());
                 preparedStatement.setString(2, book.getTitle());
-               /////////////////////////////////////// preparedStatement.setInt(3, book.getGenre());
+                preparedStatement.setInt(3, book.getGenre().getGenreId());
                 preparedStatement.setInt(4, book.getVolume());
                 preparedStatement.setString(5, book.getBookAbstract());
                 preparedStatement.setString(6, book.getLanguage());

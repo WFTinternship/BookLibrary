@@ -1,8 +1,8 @@
 package com.workfront.internship.booklibrary.common;
 
-/**
- * Created by Sona on 7/1/2016.
- */
+import java.util.List;
+
+
 public class User {
     //void builder(){};
 
@@ -15,6 +15,9 @@ public class User {
     private String eMail;
     private String phone;
     private String accessPrivilege;
+
+    private List<Pending> pendingList;
+    private List<PickBook> pickBookList;
 
 
     public int getUserId() {

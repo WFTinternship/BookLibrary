@@ -12,10 +12,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
-/**
- * Created by Sona on 7/6/2016.
- */
+
 public class GenreDAOImpl extends General implements GenreDAO {
     public void createGenre(Genre genre) {
         Connection connection = null;
@@ -112,6 +111,7 @@ public class GenreDAOImpl extends General implements GenreDAO {
     }
 
     public void updateGenre(Genre genre) {
+        Book book = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 

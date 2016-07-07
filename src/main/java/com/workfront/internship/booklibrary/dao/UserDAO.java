@@ -3,9 +3,7 @@ package com.workfront.internship.booklibrary.dao;
 import com.workfront.internship.booklibrary.common.User;
 import java.util.List;
 
-/**
- * Created by Sona on 6/30/2016.
- */
+
 public interface UserDAO {
 
     //insert all data fields of a user to the database

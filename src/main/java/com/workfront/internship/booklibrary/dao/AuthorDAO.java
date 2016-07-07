@@ -3,9 +3,6 @@ package com.workfront.internship.booklibrary.dao;
 import com.workfront.internship.booklibrary.common.Author;
 import java.util.List;
 
-/**
- * Created by Workfront on 7/1/2016.
- */
 public interface AuthorDAO {
 
     //insert all data fields of an author to the database

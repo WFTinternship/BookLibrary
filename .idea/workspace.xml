@@ -2,18 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0a17644c-020e-4dea-a6a2-e4c586dd2d3e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/GenreDAOImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/MediaDAOImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/TestClass.java" afterPath="$PROJECT_DIR$/src/main/java/TestClass.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Author.java" afterPath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Author.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Book.java" afterPath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Book.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Genre.java" afterPath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Genre.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Media.java" afterPath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Media.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Pending.java" afterPath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Pending.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/PickBook.java" afterPath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/PickBook.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/User.java" afterPath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/User.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/AuthorDAO.java" afterPath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/AuthorDAO.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/AuthorDAOImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/AuthorDAOImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/BookDAO.java" afterPath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/BookDAO.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/BookDAOImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/BookDAOImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/DataSource.java" afterPath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/DataSource.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/General.java" afterPath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/General.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/GenreDAO.java" afterPath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/GenreDAO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/GenreDAOImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/GenreDAOImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/MediaDAO.java" afterPath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/MediaDAO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/PendingDAO.java" afterPath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/PendingDAO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/PickBookDAO.java" afterPath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/PickBookDAO.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/Test.java" afterPath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/Test.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/UserDAO.java" afterPath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/UserDAO.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/UserDAOImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/UserDAOImpl.java" />
@@ -50,8 +59,8 @@
       <file leaf-file-name="BookDAO.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/BookDAO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="21" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
+            <state relative-caret-position="51">
+              <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -62,10 +71,37 @@
       <file leaf-file-name="GenreDAO.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/GenreDAO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="17" column="27" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
+            <state relative-caret-position="68">
+              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Book.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Book.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+              <folding>
+                <element signature="e#2451#2452#0" expanded="true" />
+                <element signature="e#2480#2481#0" expanded="true" />
+                <element signature="e#2529#2530#0" expanded="true" />
+                <element signature="e#2565#2566#0" expanded="true" />
+                <element signature="e#5369#5370#0" expanded="true" />
+                <element signature="e#5399#5400#0" expanded="true" />
+                <element signature="e#5451#5452#0" expanded="true" />
+                <element signature="e#5489#5490#0" expanded="true" />
+                <element signature="e#5534#5535#0" expanded="true" />
+                <element signature="e#5568#5569#0" expanded="true" />
+                <element signature="e#5629#5630#0" expanded="true" />
+                <element signature="e#5675#5676#0" expanded="true" />
+                <element signature="e#5722#5723#0" expanded="true" />
+                <element signature="e#5757#5758#0" expanded="true" />
+                <element signature="e#5821#5822#0" expanded="true" />
+                <element signature="e#5869#5870#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -74,83 +110,29 @@
       <file leaf-file-name="BookDAOImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/BookDAOImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="42" column="35" selection-start-line="42" selection-start-column="35" selection-end-line="42" selection-end-column="35" />
+            <state relative-caret-position="68">
+              <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1467824830216" expanded="true" signature="767:823" ph="INSERT INTO Book... " />
-                <marker date="1467824830216" expanded="true" signature="2297:2328" ph="SELECT FROM Book... " />
-                <marker date="1467824830216" expanded="true" signature="2355:2494" ph="SELECT * FRO... Book" />
-                <marker date="1467824830216" expanded="true" signature="2355:2495" ph="SELECT * FRO... Book" />
-                <marker date="1467824830216" expanded="true" signature="4205:4223" ph="SELECT * FRO... Book" />
-                <marker date="1467824830216" expanded="true" signature="4245:4313" ph="SELECT * FRO... Book" />
-                <marker date="1467824830216" expanded="true" signature="5864:6070" ph="UPDATE Book " />
-                <marker date="1467824830216" expanded="true" signature="7495:7526" ph="DELETE FROM " />
+                <marker date="1467889935605" expanded="true" signature="725:781" ph="INSERT INTO Book... " />
+                <marker date="1467889935605" expanded="true" signature="2292:2323" ph="SELECT FROM Book... " />
+                <marker date="1467889935605" expanded="true" signature="2350:2489" ph="SELECT * FRO... Book" />
+                <marker date="1467889935605" expanded="true" signature="2350:2490" ph="SELECT * FRO... Book" />
+                <marker date="1467889935605" expanded="true" signature="4156:4174" ph="SELECT * FRO... Book" />
+                <marker date="1467889935605" expanded="true" signature="4196:4264" ph="SELECT * FRO... Book" />
+                <marker date="1467889935605" expanded="true" signature="5983:6189" ph="UPDATE Book " />
+                <marker date="1467889935605" expanded="true" signature="7588:7619" ph="DELETE FROM " />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PreparedStatement.java" pinned="false" current-in-tab="false">
-        <entry file="jar://C:/Program Files/Java/jdk1.8.0_92/src.zip!/java/sql/PreparedStatement.java">
+      <file leaf-file-name="Media.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Media.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="82" column="31" selection-start-line="82" selection-start-column="31" selection-end-line="82" selection-end-column="31" />
+            <state relative-caret-position="323">
+              <caret line="23" column="27" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Book.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Book.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="50" column="29" selection-start-line="50" selection-start-column="29" selection-end-line="50" selection-end-column="29" />
-              <folding>
-                <element signature="e#915#916#0" expanded="true" />
-                <element signature="e#943#944#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Genre.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Genre.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Test.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/Test.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-91">
-              <caret line="56" column="21" selection-start-line="56" selection-start-column="21" selection-end-line="56" selection-end-column="21" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#3605#3611#0" expanded="true" />
-                <marker date="1467825041073" expanded="true" signature="4845:4902" ph="SELECT user_... user" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GenreDAOImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/GenreDAOImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2029">
-              <caret line="164" column="5" selection-start-line="164" selection-start-column="5" selection-end-line="164" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <marker date="1467811620257" expanded="true" signature="798:828" ph="INSERT INTO Genre... " />
-                <marker date="1467811620257" expanded="true" signature="1729:1762" ph="SELECT FROM Genre... " />
-                <marker date="1467811620257" expanded="true" signature="2769:2788" ph="SELECT * FRO... Genre" />
-                <marker date="1467811620257" expanded="true" signature="3812:3910" ph="UPDATE Genre... " />
-                <marker date="1467811620257" expanded="true" signature="4699:4731" ph="DELETE FROM " />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -182,28 +164,35 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/TestClass.java" />
-        <option value="$PROJECT_DIR$/src/main/java/TestConnection.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/Book.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/ConnectionPool.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/LibraryConnectionPool.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/UserDAOImplementation.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/General.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/AuthorDAO.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/DataSource.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Book.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Author.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/BookDAO.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/UserDAOImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/AuthorDAOImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/UserDAO.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/User.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Genre.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Media.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Pending.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/PickBook.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/User.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/AuthorDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/AuthorDAOImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/BookDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/BookDAOImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/DataSource.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/General.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/GenreDAO.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/GenreDAOImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Book.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/MediaDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/MediaDAOImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/PendingDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/PickBookDAO.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/Test.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/BookDAOImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/UserDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/UserDAOImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/TestClass.java" />
+        <option value="$PROJECT_DIR$/src/main/java/TestConnection.java" />
       </list>
     </option>
   </component>
@@ -256,8 +245,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -418,7 +408,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -898,7 +887,9 @@
       <workItem from="1467624687281" duration="25822000" />
       <workItem from="1467714853762" duration="13805000" />
       <workItem from="1467789636881" duration="2922000" />
-      <workItem from="1467798344500" duration="24185000" />
+      <workItem from="1467798344500" duration="24499000" />
+      <workItem from="1467873465850" duration="14655000" />
+      <workItem from="1467891592511" duration="66000" />
     </task>
     <task id="LOCAL-00001" summary="1.07.2016 commit">
       <created>1467381628099</created>
@@ -921,11 +912,18 @@
       <option name="project" value="LOCAL" />
       <updated>1467729175489</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="06.07.2016 commit">
+      <created>1467825891958</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1467825891958</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="98681000" />
+    <option name="totallyTimeSpent" value="113716000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -942,13 +940,11 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1058264" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32818073" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15304948" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936978" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -958,12 +954,14 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26918074" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26918074" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32818073" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936978" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13555291" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -982,7 +980,8 @@
     <MESSAGE value="1.07.2016 commit" />
     <MESSAGE value="04.07.2016 commit" />
     <MESSAGE value="05.07.2016 commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="05.07.2016 commit" />
+    <MESSAGE value="06.07.2016 commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="06.07.2016 commit" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -995,20 +994,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/MediaDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/PendingDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="24" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/PickBookDAO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -1038,68 +1023,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/TestConnection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/MediaDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/PickBookDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/PendingDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="24" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/TestClass.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/Bla.java" />
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
           <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/PickBook.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="21" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Pending.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="20" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Media.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="18" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -1165,7 +1094,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="279" column="9" selection-start-line="279" selection-start-column="9" selection-end-line="279" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1180,10 +1108,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1581">
           <caret line="163" column="11" selection-start-line="163" selection-start-column="11" selection-end-line="163" selection-end-column="11" />
-          <folding>
-            <element signature="e#6252#6253#0" expanded="false" />
-            <element signature="e#6320#6321#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1198,7 +1122,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="526">
           <caret line="866" column="22" selection-start-line="866" selection-start-column="22" selection-end-line="866" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1220,101 +1143,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Author.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-84">
-          <caret line="64" column="35" selection-start-line="64" selection-start-column="35" selection-end-line="64" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_92/src.zip!/java/sql/Statement.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="448">
           <caret line="64" column="14" selection-start-line="64" selection-start-column="14" selection-end-line="64" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/AuthorDAOImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="123" column="16" selection-start-line="123" selection-start-column="16" selection-end-line="123" selection-end-column="16" />
-          <folding>
-            <marker date="1467807489305" expanded="true" signature="723:766" ph="INSERT INTO Author... " />
-            <marker date="1467807489305" expanded="true" signature="1871:1908" ph="SELECT * FRO... Author" />
-            <marker date="1467807489305" expanded="true" signature="3143:3163" ph="SELECT * FRO... Author" />
-            <marker date="1467807489305" expanded="true" signature="4437:4593" ph="UPDATE Autho... " />
-            <marker date="1467807489305" expanded="true" signature="5662:5698" ph="DELETE FROM " />
-            <marker date="1467807489305" expanded="true" signature="5662:5699" ph="DELETE FROM " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/AuthorDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="20" column="9" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/DataSource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/General.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="19" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#290#291#0" expanded="true" />
-            <element signature="e#334#335#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/UserDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="22" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="652">
-          <caret line="149" column="5" selection-start-line="149" selection-start-column="5" selection-end-line="149" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/UserDAOImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2193">
-          <caret line="129" column="16" selection-start-line="129" selection-start-column="16" selection-end-line="129" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1467807489493" expanded="true" signature="607:631" ph="INSERT INTO User... " />
-            <marker date="1467807489493" expanded="true" signature="607:657" ph="INSERT INTO User... " />
-            <marker date="1467807489493" expanded="true" signature="1934:1967" ph="SELECT * FRO... User" />
-            <marker date="1467807489493" expanded="true" signature="1934:1973" ph="SELECT * FRO... User" />
-            <marker date="1467807489493" expanded="true" signature="3421:3439" ph="SELECT * FRO... User" />
-            <marker date="1467807489493" expanded="true" signature="4917:4932" ph="UPDATE User " />
-            <marker date="1467807489493" expanded="true" signature="4917:4933" ph="UPDATE User " />
-            <marker date="1467807489493" expanded="true" signature="4917:5111" ph="UPDATE User " />
-            <marker date="1467807489493" expanded="true" signature="6373:6404" ph="DELETE FROM " />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1322,79 +1154,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1479">
           <caret line="110" column="17" selection-start-line="110" selection-start-column="17" selection-end-line="110" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/GenreDAOImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2029">
-          <caret line="164" column="5" selection-start-line="164" selection-start-column="5" selection-end-line="164" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1467811620257" expanded="true" signature="798:828" ph="INSERT INTO Genre... " />
-            <marker date="1467811620257" expanded="true" signature="1729:1762" ph="SELECT FROM Genre... " />
-            <marker date="1467811620257" expanded="true" signature="2769:2788" ph="SELECT * FRO... Genre" />
-            <marker date="1467811620257" expanded="true" signature="3812:3910" ph="UPDATE Genre... " />
-            <marker date="1467811620257" expanded="true" signature="4699:4731" ph="DELETE FROM " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/BookDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="21" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/GenreDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="27" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Book.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="50" column="29" selection-start-line="50" selection-start-column="29" selection-end-line="50" selection-end-column="29" />
-          <folding>
-            <element signature="e#915#916#0" expanded="true" />
-            <element signature="e#943#944#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Genre.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/BookDAOImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="42" column="35" selection-start-line="42" selection-start-column="35" selection-end-line="42" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1467824830216" expanded="true" signature="767:823" ph="INSERT INTO Book... " />
-            <marker date="1467824830216" expanded="true" signature="2297:2328" ph="SELECT FROM Book... " />
-            <marker date="1467824830216" expanded="true" signature="2355:2494" ph="SELECT * FRO... Book" />
-            <marker date="1467824830216" expanded="true" signature="2355:2495" ph="SELECT * FRO... Book" />
-            <marker date="1467824830216" expanded="true" signature="4205:4223" ph="SELECT * FRO... Book" />
-            <marker date="1467824830216" expanded="true" signature="4245:4313" ph="SELECT * FRO... Book" />
-            <marker date="1467824830216" expanded="true" signature="5864:6070" ph="UPDATE Book " />
-            <marker date="1467824830216" expanded="true" signature="7495:7526" ph="DELETE FROM " />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1402,19 +1161,223 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="82" column="31" selection-start-line="82" selection-start-column="31" selection-end-line="82" selection-end-column="31" />
-          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_92/src.zip!/java/util/Map.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="765">
+          <caret line="128" column="17" selection-start-line="128" selection-start-column="17" selection-end-line="128" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Author.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Book.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <folding>
+            <element signature="e#2451#2452#0" expanded="true" />
+            <element signature="e#2480#2481#0" expanded="true" />
+            <element signature="e#2529#2530#0" expanded="true" />
+            <element signature="e#2565#2566#0" expanded="true" />
+            <element signature="e#5369#5370#0" expanded="true" />
+            <element signature="e#5399#5400#0" expanded="true" />
+            <element signature="e#5451#5452#0" expanded="true" />
+            <element signature="e#5489#5490#0" expanded="true" />
+            <element signature="e#5534#5535#0" expanded="true" />
+            <element signature="e#5568#5569#0" expanded="true" />
+            <element signature="e#5629#5630#0" expanded="true" />
+            <element signature="e#5675#5676#0" expanded="true" />
+            <element signature="e#5722#5723#0" expanded="true" />
+            <element signature="e#5757#5758#0" expanded="true" />
+            <element signature="e#5821#5822#0" expanded="true" />
+            <element signature="e#5869#5870#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Genre.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Pending.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/PickBook.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/AuthorDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/AuthorDAOImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/BookDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/DataSource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/General.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/GenreDAOImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/MediaDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/GenreDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/MediaDAOImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <marker date="1467889934900" expanded="true" signature="787:823" ph="INSERT INTO Media... " />
+            <marker date="1467889934900" expanded="true" signature="1934:2073" ph="SELECT * FRO... Media" />
+            <marker date="1467889934900" expanded="true" signature="3961:4052" ph="SELECT * FRO... Media" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/PendingDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/PickBookDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/BookDAOImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <marker date="1467889935605" expanded="true" signature="725:781" ph="INSERT INTO Book... " />
+            <marker date="1467889935605" expanded="true" signature="2292:2323" ph="SELECT FROM Book... " />
+            <marker date="1467889935605" expanded="true" signature="2350:2489" ph="SELECT * FRO... Book" />
+            <marker date="1467889935605" expanded="true" signature="2350:2490" ph="SELECT * FRO... Book" />
+            <marker date="1467889935605" expanded="true" signature="4156:4174" ph="SELECT * FRO... Book" />
+            <marker date="1467889935605" expanded="true" signature="4196:4264" ph="SELECT * FRO... Book" />
+            <marker date="1467889935605" expanded="true" signature="5983:6189" ph="UPDATE Book " />
+            <marker date="1467889935605" expanded="true" signature="7588:7619" ph="DELETE FROM " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/UserDAOImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/UserDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/Test.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-91">
-          <caret line="56" column="21" selection-start-line="56" selection-start-column="21" selection-end-line="56" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3605#3611#0" expanded="true" />
-            <marker date="1467825041073" expanded="true" signature="4845:4902" ph="SELECT user_... user" />
-          </folding>
+        <state relative-caret-position="136">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/TestConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/TestClass.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Media.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="23" column="27" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
+          <folding />
         </state>
       </provider>
     </entry>
