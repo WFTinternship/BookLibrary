@@ -2,6 +2,7 @@ package com.workfront.internship.booklibrary.dao;
 
 import com.workfront.internship.booklibrary.common.Book;
 import com.workfront.internship.booklibrary.common.Genre;
+import com.workfront.internship.booklibrary.common.Pending;
 
 import java.beans.PropertyVetoException;
 import java.io.IOException;
@@ -212,4 +213,5 @@ public class BookDAOImpl extends General implements BookDAO {
             closeConnection(preparedStatement, connection);
         }
     }
+
 }

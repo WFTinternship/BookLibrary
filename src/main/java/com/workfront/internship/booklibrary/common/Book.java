@@ -189,23 +189,26 @@ public class Book {
         return authors;
     }
 
-    public void setAuthors(List<Author> authors) {
+    public Book setAuthors(List<Author> authors) {
         this.authors = authors;
+        return this;
     }
 
     public List<Pending> getPendingList() {
         return pendingList;
     }
 
-    public void setPendingList(List<Pending> pendingList) {
+    public Book setPendingList(List<Pending> pendingList) {
         this.pendingList = pendingList;
+        return this;
     }
 
     public List<PickBook> getPickBookList() {
         return pickBookList;
     }
 
-    public void setPickBookList(List<PickBook> pickBookList) {
+    public Book setPickBookList(List<PickBook> pickBookList) {
         this.pickBookList = pickBookList;
+        return this;
     }
 }
