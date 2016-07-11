@@ -27,10 +27,11 @@ public class TestPendingDAOImpl {
     public void setUp(){
         try{
             connection = DataSource.getInstance().getConnection();
+            pending = new Pending();
             pending.setPendingId(4);
             pending.setUserId(3);
             pending.setBookId(2);
-            pending.setPendingDate(Timestamp.valueOf("05-08-12 01:02:03"));
+            pending.setPendingDate(Timestamp.valueOf("2016-08-12 01:02:03"));
 
             String sql;
             sql = "INSERT INTO Pending VALUES(?, ?, ?, ?)";
@@ -49,14 +50,6 @@ public class TestPendingDAOImpl {
             e.printStackTrace();
         } catch (PropertyVetoException e) {
             e.printStackTrace();
-        }finally {
-            try{
-                if (preparedStatement != null) preparedStatement.close();
-                if (connection != null) connection.close();
-                if (resultSet != null) resultSet.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
 
     }
@@ -75,12 +68,13 @@ public class TestPendingDAOImpl {
 
 
     @Test
-    public void createPending(Pending pending) {
+    public void TestCreatePending() {
         PendingDAO pendingDao = new PendingDAOImpl();
         Pending actualPending = pendingDao.getPendingByID(pending.getPendingId());
 
 
         assertNotNull(actualPending);
+        assertEquals(pending.getPendingId(), actualPending.getPendingId());
         assertEquals(pending.getUserId(), actualPending.getUserId());
         assertEquals(pending.getBookId(), actualPending.getBookId());
         assertEquals(pending.getPendingDate(), actualPending.getPendingDate());

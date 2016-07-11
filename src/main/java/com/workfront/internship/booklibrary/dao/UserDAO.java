@@ -12,6 +12,10 @@ public interface UserDAO {
     //get all data fields of a user entry by 'user_id' field
     User getUserByID(int id);
 
+    User getUserByName(String name);
+
+    User getUserByUsername(String userName);
+
     //get all data fields of all the users in the database
     List<User> getAllUsers();
 

@@ -9,12 +9,12 @@ import java.util.List;
 
 public class Test {
     public static void main(String[] args) {
-        // createUserTest();
+         createUserTest();
         //deleteUserTest();
         //getUserByIDTest();
         //getAllUsersTest();
         //updateUserTest();
-        createBookTest();
+        //createBookTest();
         //getBookByIDTest();
     }
 
@@ -42,7 +42,7 @@ public class Test {
         book.setISBN("165465416541");
         book.setTitle("MYSQL workbench");
 
-        book.setGenre(genre);
+       // book.setGenre(genre);
         book.setVolume(0);
         book.setBookAbstract("Working with workbench");
         book.setLanguage("English");
@@ -82,8 +82,8 @@ public class Test {
         System.out.println("title: " + book.getTitle());
 
         //System.out.println("genreId: " + book.getGenre());
-        System.out.println("genreId: " + book.getGenre().getGenreId());
-        System.out.println("genre: " +book.getGenre().getGenre());
+       // System.out.println("genreId: " + book.getGenre().getGenreId());
+       // System.out.println("genre: " +book.getGenre().getGenre());
 
         System.out.println("volume: " + book.getVolume());
         System.out.println("abstract: " + book.getBookAbstract());

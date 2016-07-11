@@ -10,10 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
-
 
 public class GenreDAOImpl extends General implements GenreDAO {
     public void createGenre(Genre genre) {
@@ -71,7 +68,39 @@ public class GenreDAOImpl extends General implements GenreDAO {
             closeConnection(resultSet, preparedStatement, connection);
         }
 
-        return null;
+        return genre;
+    }
+
+    public Genre getGenreByGenreName(String genreName) {
+        Genre genre = null;
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try{
+            connection = DataSource.getInstance().getConnection();
+            genre = new Genre();
+            String sql;
+            sql = "SELECT FROM Genre WHERE genre=" + genreName;
+            preparedStatement = connection.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next()){
+                genre.setGenreId(resultSet.getInt(1));
+                genre.setGenre(resultSet.getString(2));
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (PropertyVetoException e) {
+            e.printStackTrace();
+        }finally {
+            closeConnection(resultSet, preparedStatement, connection);
+        }
+
+        return genre;
     }
 
     public List<Genre> getAllGenres() {

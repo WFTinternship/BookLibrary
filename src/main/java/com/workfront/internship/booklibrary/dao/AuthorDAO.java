@@ -11,6 +11,8 @@ public interface AuthorDAO {
     //get all data fields of an author entry by 'author_id' field
     Author getAuthorByID(int id);
 
+    Author getAuthorByName(String name);
+
     //get all data fields of all the authors in the database
     List<Author> getAllAuthors();
 

@@ -1,7 +1,6 @@
 package com.workfront.internship.booklibrary.dao;
 
 import com.workfront.internship.booklibrary.common.User;
-
 import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.sql.*;
@@ -22,23 +21,20 @@ public class UserDAOImpl extends General implements UserDAO {
             sql = "INSERT INTO User VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, user.getUserId());
-            preparedStatement.setString(2, user.getName());
-            preparedStatement.setString(3, user.getSurname());
-            preparedStatement.setString(4, user.getUsername());
-            preparedStatement.setString(5, user.getPassword());
-            preparedStatement.setString(6, user.getAddress());
-            preparedStatement.setString(7, user.geteMail());
-            preparedStatement.setString(8, user.getPhone());
-            preparedStatement.setString(9, user.getAccessPrivilege());
+            preparedStatement.setString(1, user.getName());
+            preparedStatement.setString(2, user.getSurname());
+            preparedStatement.setString(3, user.getUsername());
+            preparedStatement.setString(4, user.getPassword());
+            preparedStatement.setString(5, user.getAddress());
+            preparedStatement.setString(6, user.geteMail());
+            preparedStatement.setString(7, user.getPhone());
+            preparedStatement.setString(8, user.getAccessPrivilege());
 
             preparedStatement.executeUpdate();
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
-            e.printStackTrace();
+        } catch (IOException  | SQLException | PropertyVetoException e) {
+            // TODO add log
+           throw new RuntimeException(e);
         } finally{
             closeConnection( preparedStatement, connection);
         }
@@ -56,8 +52,81 @@ public class UserDAOImpl extends General implements UserDAO {
 
             preparedStatement = connection.prepareStatement(sql);
             ResultSet rs = preparedStatement.executeQuery();
-            // ResultSet rs = statement.executeQuery();
-            // int columns = rs.getColumnCount();
+
+            while(rs.next()){
+                user.setUserId(rs.getInt(1));
+                user.setName(rs.getString(2));
+                user.setSurname(rs.getString(3));
+                user.setUsername(rs.getString(4));
+                user.setPassword(rs.getString(5));
+                user.setAddress(rs.getString(6));
+                user.seteMail(rs.getString(7));
+                user.setPhone(rs.getString(8));
+                user.setAccessPrivilege(rs.getString(9));
+            }
+
+        } catch (IOException e){
+            e.printStackTrace();
+        } catch(SQLException e){
+            e.printStackTrace();
+        } catch (PropertyVetoException e) {
+            e.printStackTrace();
+        } finally{
+            closeConnection( preparedStatement, connection);
+        }
+
+        return user;
+    }
+
+    public User getUserByName(String name) {
+        User user = new User();
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        try{
+            connection = DataSource.getInstance().getConnection();
+            String sql;
+            sql = "SELECT * FROM User WHERE name=" + name;
+
+            preparedStatement = connection.prepareStatement(sql);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while(rs.next()){
+                user.setUserId(rs.getInt(1));
+                user.setName(rs.getString(2));
+                user.setSurname(rs.getString(3));
+                user.setUsername(rs.getString(4));
+                user.setPassword(rs.getString(5));
+                user.setAddress(rs.getString(6));
+                user.seteMail(rs.getString(7));
+                user.setPhone(rs.getString(8));
+                user.setAccessPrivilege(rs.getString(9));
+            }
+
+        } catch (IOException e){
+            e.printStackTrace();
+        } catch(SQLException e){
+            e.printStackTrace();
+        } catch (PropertyVetoException e) {
+            e.printStackTrace();
+        } finally{
+            closeConnection( preparedStatement, connection);
+        }
+
+        return user;
+    }
+
+    public User getUserByUsername(String userName) {
+        User user = new User();
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        try{
+            connection = DataSource.getInstance().getConnection();
+            String sql;
+            sql = "SELECT * FROM User WHERE username=" + userName;
+
+            preparedStatement = connection.prepareStatement(sql);
+            ResultSet rs = preparedStatement.executeQuery();
+
             while(rs.next()){
                 user.setUserId(rs.getInt(1));
                 user.setName(rs.getString(2));
@@ -189,4 +258,94 @@ public class UserDAOImpl extends General implements UserDAO {
         }
     }
 
+    public List<User> getAllUsersByPickedBookId(int bookId){
+        List<User> userList = null;
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try{
+            connection = DataSource.getInstance().getConnection();
+            userList = new ArrayList<User>();
+            String sql;
+            sql = "SELECT * FROM user left join pick_book" +
+                    "on user.user_id = pick_book.user_id" +
+                    "where pick_book.book_id =" + bookId;
+            preparedStatement = connection.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next()){
+                User user = new User();
+
+                user.setUserId(resultSet.getInt("user_id"));
+                user.setName(resultSet.getString("name"));
+                user.setSurname(resultSet.getString("surname"));
+                user.setUsername(resultSet.getString("username"));
+                user.setPassword(resultSet.getString("password"));
+                user.setAddress(resultSet.getString("address"));
+                user.seteMail(resultSet.getString("e_mail"));
+                user.setPhone(resultSet.getString("phone"));
+                user.setAccessPrivilege(resultSet.getString("access_privilege"));
+
+                userList.add(user);
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (PropertyVetoException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection(resultSet, preparedStatement, connection);
+        }
+        return userList;
+    }
+
+    public List<User> getAllUsersByPendingBookId(int bookId){
+        List<User> userList = null;
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try{
+            connection = DataSource.getInstance().getConnection();
+            userList = new ArrayList<User>();
+            String sql;
+            sql = "SELECT * FROM user left join pending" +
+                    "on user.user_id = pending.user_id" +
+                    "where pending.book_id =" + bookId;
+            preparedStatement = connection.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next()){
+                User user = new User();
+
+                user.setUserId(resultSet.getInt("user_id"));
+                user.setName(resultSet.getString("name"));
+                user.setSurname(resultSet.getString("surname"));
+                user.setUsername(resultSet.getString("username"));
+                user.setPassword(resultSet.getString("password"));
+                user.setAddress(resultSet.getString("address"));
+                user.seteMail(resultSet.getString("e_mail"));
+                user.setPhone(resultSet.getString("phone"));
+                user.setAccessPrivilege(resultSet.getString("access_privilege"));
+
+                userList.add(user);
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (PropertyVetoException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection(resultSet, preparedStatement, connection);
+        }
+
+        return userList;
+    }
 }

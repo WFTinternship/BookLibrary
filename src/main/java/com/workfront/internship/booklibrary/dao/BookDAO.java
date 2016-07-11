@@ -8,6 +8,8 @@ public interface BookDAO {
 
     Book getBookByID(int id);
 
+    Book getBookByTitle(String title);
+
     List<Book> getAllBooks();
 
     void updateBook(Book book);

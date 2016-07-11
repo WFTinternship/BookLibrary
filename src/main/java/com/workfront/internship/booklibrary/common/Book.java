@@ -6,7 +6,8 @@ public class Book {
     private int bookId;
     private String ISBN;
     private String title;
-    private Genre genre;
+    //private Genre genre;
+    private int genreId;
     private int volume;
     private String bookAbstract;
     private String language;
@@ -47,6 +48,7 @@ public class Book {
         return this;
     }
 
+    /**
     public Genre getGenre() {
         return genre;
     }
@@ -54,6 +56,15 @@ public class Book {
     public Book setGenre(Genre genre) {
         this.genre = genre;
         return this;
+    }
+     */
+
+    public int getGenreId() {
+        return genreId;
+    }
+
+    public void setGenreId(int genreId) {
+        genreId = genreId;
     }
 
     public int getVolume() {
@@ -133,7 +144,7 @@ public class Book {
                 "book_id=" + bookId +
                 ", ISBN='" + ISBN + '\'' +
                 ", title='" + title + '\'' +
-                ", genreId='" + genre + '\'' +
+                ", genreId='" + genreId + '\'' +
                 ", volume='" + volume + '\'' +
                 ", abstract='" + bookAbstract + '\'' +
                 ", language='" + language + '\'' +
@@ -154,7 +165,7 @@ public class Book {
         if (getBookId() != book.getBookId()) return false;
         if (getISBN() != null ? !getISBN().equals(book.getISBN()) : book.getISBN() != null) return false;
         if (getTitle() != null ? !getTitle().equals(book.getTitle()) : book.getTitle() != null) return false;
-        if (getGenre() != book.getGenre()) return false;
+        if (getGenreId() != book.getGenreId()) return false;
         if (getVolume() != book.getVolume()) return false;
 
         if (getBookAbstract() != null ? !getBookAbstract().equals(book.getBookAbstract()) : book.getBookAbstract() != null)
@@ -173,7 +184,7 @@ public class Book {
         int result = getBookId();
         result = 31 * result + (getISBN() != null ? getISBN().hashCode() : 0);
         result = 31 * result + (getTitle() != null ? getTitle().hashCode() : 0);
-        result = 31 * result + (getGenre() != null ? getGenre().hashCode() : 0);
+        result = 31 * result + getGenreId();
         result = 31 * result + getVolume();
         result = 31 * result + (getBookAbstract() != null ? getBookAbstract().hashCode() : 0);
         result = 31 * result + (getLanguage() != null ? getLanguage().hashCode() : 0);
@@ -184,7 +195,7 @@ public class Book {
         return result;
     }
 
-
+/**
     public List<Author> getAuthors() {
         return authors;
     }
@@ -211,4 +222,6 @@ public class Book {
         this.pickBookList = pickBookList;
         return this;
     }
+*/
+
 }

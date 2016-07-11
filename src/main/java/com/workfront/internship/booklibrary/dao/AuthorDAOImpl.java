@@ -78,6 +78,41 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
         return author;
     }
 
+    public Author getAuthorByName(String name){
+        Author author = new Author();
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        try{
+            connection = DataSource.getInstance().getConnection();
+            String sql;
+            sql = "SELECT * FROM Author WHERE name=" + name;
+            preparedStatement = connection.prepareStatement(sql);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while(rs.next()){
+                author = new Author();
+                author.setAuthorId(rs.getInt(1));
+                author.setName(rs.getString(2));
+                author.setSurname(rs.getString(3));
+                author.seteMail(rs.getString(4));
+                author.setWebPage(rs.getString(5));
+                author.setBiography(rs.getString(6));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (PropertyVetoException e) {
+            e.printStackTrace();
+        } finally{
+            closeConnection(preparedStatement, connection);
+        }
+
+        return author;
+    }
+
     public List<Author> getAllAuthors() {
         List<Author> authors = null;
         Connection connection = null;
@@ -172,5 +207,48 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
         } finally {
             closeConnection(preparedStatement, connection);
         }
+    }
+
+    public List<Author> getAllAuthorsByBookId(int bookId){
+        List<Author> authorList = null;
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try{
+            connection = DataSource.getInstance().getConnection();
+            authorList = new ArrayList<Author>();
+            String sql;
+            sql = "SELECT * FROM book_author" +
+                    "where book_author.author_id" + bookId;
+
+            preparedStatement = connection.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next()){
+                Author author = new Author();
+
+                author.setAuthorId(resultSet.getInt("author_id"));
+                author.setName(resultSet.getString("name"));
+                author.setSurname(resultSet.getString("surname"));
+                author.seteMail(resultSet.getString("email"));
+                author.setWebPage(resultSet.getString("web_page"));
+                author.setBiography(resultSet.getString("biography"));
+
+                authorList.add(author);
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (PropertyVetoException e) {
+            e.printStackTrace();
+        }finally {
+            closeConnection(resultSet, preparedStatement, connection);
+        }
+
+        return authorList;
     }
 }

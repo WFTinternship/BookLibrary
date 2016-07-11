@@ -9,6 +9,8 @@ public interface GenreDAO {
 
     Genre getGenreByID(int id);
 
+    Genre getGenreByGenreName(String genreName);
+
     List<Genre> getAllGenres();
 
     void updateGenre(Genre genre);

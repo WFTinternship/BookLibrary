@@ -1,8 +1,6 @@
 package com.workfront.internship.booklibrary.dao;
 
 import com.workfront.internship.booklibrary.common.Book;
-import com.workfront.internship.booklibrary.common.Genre;
-import com.workfront.internship.booklibrary.common.Pending;
 
 import java.beans.PropertyVetoException;
 import java.io.IOException;
@@ -28,7 +26,7 @@ public class BookDAOImpl extends General implements BookDAO {
             preparedStatement.setInt(1, book.getBookId());
             preparedStatement.setString(2, book.getISBN());
             preparedStatement.setString(3, book.getTitle());
-            preparedStatement.setInt(4,book.getGenre().getGenreId());
+            preparedStatement.setInt(4,book.getGenreId());
             preparedStatement.setInt(5, book.getVolume());
             preparedStatement.setString(6, book.getBookAbstract());
             preparedStatement.setString(7, book.getLanguage());
@@ -59,9 +57,8 @@ public class BookDAOImpl extends General implements BookDAO {
         try{
             connection = DataSource.getInstance().getConnection();
             book = new Book();
-            Genre genre = new Genre();
+
             String sql;
-            //sql = "SELECT FROM Book WHERE book_id=" + id;
             sql = "SELECT * FROM Book LEFT JOIN Genre " +
                     "ON Book.genre_id = Genre.genre_id " +
                     "where Book.book_id = " + id;
@@ -73,7 +70,6 @@ public class BookDAOImpl extends General implements BookDAO {
                 book.setBookId(resultSet.getInt(1));
                 book.setISBN(resultSet.getString(2));
                 book.setTitle(resultSet.getString(3));
-              //book.setGenre(resultSet.getInt(4));
                 book.setVolume(resultSet.getInt(5));
                 book.setBookAbstract(resultSet.getString(6));
                 book.setLanguage(resultSet.getString(7));
@@ -81,11 +77,50 @@ public class BookDAOImpl extends General implements BookDAO {
                 book.setEditionYear(resultSet.getString(9));
                 book.setPages(resultSet.getInt(10));
                 book.setCountryOfEdition(resultSet.getString(11));
+            }
 
-                genre.setGenreId(resultSet.getInt(12));
-                genre.setGenre(resultSet.getString(13));
-                book.setGenre(genre);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (PropertyVetoException e) {
+            e.printStackTrace();
+        }finally {
+            closeConnection(resultSet, preparedStatement, connection);
+        }
 
+        return book;
+    }
+
+    public Book getBookByTitle(String title) {
+        Book book = null;
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try{
+            connection = DataSource.getInstance().getConnection();
+            book = new Book();
+
+            String sql;
+            sql = "SELECT * FROM Book LEFT JOIN Genre " +
+                    "ON Book.genre_id = Genre.genre_id " +
+                    "where Book.title = " + title;
+
+            preparedStatement = connection.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next()){
+                book.setBookId(resultSet.getInt(1));
+                book.setISBN(resultSet.getString(2));
+                book.setTitle(resultSet.getString(3));
+                book.setVolume(resultSet.getInt(5));
+                book.setBookAbstract(resultSet.getString(6));
+                book.setLanguage(resultSet.getString(7));
+                book.setCount(resultSet.getInt(8));
+                book.setEditionYear(resultSet.getString(9));
+                book.setPages(resultSet.getInt(10));
+                book.setCountryOfEdition(resultSet.getString(11));
             }
 
         } catch (IOException e) {
@@ -111,19 +146,17 @@ public class BookDAOImpl extends General implements BookDAO {
             connection = DataSource.getInstance().getConnection();
             books = new ArrayList<Book>();
             String sql;
-            //sql = "SELECT * FROM Book";
             sql = "SELECT * FROM Book LEFT JOIN Genre ON Book.genre_id = Genre.genre_id";
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
 
             while(resultSet.next()){
                 Book book = new Book();
-                Genre genre = new Genre();
 
                 book.setBookId(resultSet.getInt(1));
                 book.setISBN(resultSet.getString(2));
                 book.setTitle(resultSet.getString(3));
-                //book.setGenre(resultSet.getInt(4));
+                book.setGenreId(resultSet.getInt(4));
                 book.setVolume(resultSet.getInt(5));
                 book.setBookAbstract(resultSet.getString(6));
                 book.setLanguage(resultSet.getString(7));
@@ -131,10 +164,6 @@ public class BookDAOImpl extends General implements BookDAO {
                 book.setEditionYear(resultSet.getString(9));
                 book.setPages(resultSet.getInt(10));
                 book.setCountryOfEdition(resultSet.getString(11));
-
-                genre.setGenreId(resultSet.getInt(12));
-                genre.setGenre(resultSet.getString(13));
-                book.setGenre(genre);
 
                 books.add(book);
             }
@@ -168,7 +197,7 @@ public class BookDAOImpl extends General implements BookDAO {
 
                 preparedStatement.setString(1, book.getISBN());
                 preparedStatement.setString(2, book.getTitle());
-                preparedStatement.setInt(3, book.getGenre().getGenreId());
+                preparedStatement.setInt(3, book.getGenreId());
                 preparedStatement.setInt(4, book.getVolume());
                 preparedStatement.setString(5, book.getBookAbstract());
                 preparedStatement.setString(6, book.getLanguage());
@@ -212,6 +241,103 @@ public class BookDAOImpl extends General implements BookDAO {
         }finally {
             closeConnection(preparedStatement, connection);
         }
+    }
+
+    public List<Book> getAllBooksByAuthorId(int authorId){
+        List<Book> bookList = null;
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try{
+            connection = DataSource.getInstance().getConnection();
+            bookList = new ArrayList<Book>();
+            String sql;
+            sql = "select * from book left join book_author on book.book_id = book_author.book_id" +
+                    "where book_author.author_id" + authorId;
+
+            preparedStatement = connection.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next()){
+                Book book = new Book();
+
+                book.setBookId(resultSet.getInt("book_id"));
+                book.setISBN(resultSet.getString("ISBN"));
+                book.setTitle(resultSet.getString("title"));
+                book.setGenreId(resultSet.getInt("genre_id"));
+                book.setVolume(resultSet.getInt("volume"));
+                book.setBookAbstract(resultSet.getString("abstract"));
+                book.setLanguage(resultSet.getString("language"));
+                book.setCount(resultSet.getInt("count"));
+                book.setEditionYear(resultSet.getString("edition_year"));
+                book.setPages(resultSet.getInt("pages"));
+                book.setCountryOfEdition(resultSet.getString("country_of_edition"));
+
+                bookList.add(book);
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (PropertyVetoException e) {
+            e.printStackTrace();
+        }finally {
+            closeConnection(resultSet, preparedStatement, connection);
+        }
+
+        return bookList;
+    }
+
+    public List<Book> getAllBooksByGenreId(int genreId){
+        List<Book> bookList = null;
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try{
+            connection = DataSource.getInstance().getConnection();
+            bookList = new ArrayList<Book>();
+            String sql;
+            sql = "select * from book left join genre" +
+                    "on book.genre_id = genre.genre_id" +
+                    "where book.genre_id=" + genreId;
+
+            preparedStatement = connection.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next()){
+                Book book = new Book();
+
+                book.setBookId(resultSet.getInt("book_id"));
+                book.setISBN(resultSet.getString("ISBN"));
+                book.setTitle(resultSet.getString("title"));
+                book.setGenreId(resultSet.getInt("genre_id"));
+                book.setVolume(resultSet.getInt("volume"));
+                book.setBookAbstract(resultSet.getString("abstract"));
+                book.setLanguage(resultSet.getString("language"));
+                book.setCount(resultSet.getInt("count"));
+                book.setEditionYear(resultSet.getString("edition_year"));
+                book.setPages(resultSet.getInt("pages"));
+                book.setCountryOfEdition(resultSet.getString("country_of_edition"));
+
+                bookList.add(book);
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (PropertyVetoException e) {
+            e.printStackTrace();
+        }finally {
+            closeConnection(resultSet, preparedStatement, connection);
+        }
+
+        return bookList;
     }
 
 }
