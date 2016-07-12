@@ -12,14 +12,15 @@ public class Author {
     private List<Book> books;
 
 
-    public int getAuthorId() {
+    public int getId() {
         return authorId;
     }
 
-    public Author setAuthorId(int authorId) {
-        this.authorId = authorId;
+    public Author setId(int id) {
+        this.authorId = id;
         return this;
     }
+
 
     public String getName() {
         return name;
@@ -66,6 +67,15 @@ public class Author {
         return this;
     }
 
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
+    }
+
+
     @Override
     public String toString() {
         return "Author{" +
@@ -85,7 +95,7 @@ public class Author {
 
         Author author = (Author) obj;
 
-        if (getAuthorId() != author.getAuthorId()) return false;
+        if (getId() != author.getId()) return false;
         if (getName() != null ? !getName().equals(author.getName()) : author.getName() != null) return false;
         if (getSurname() != null ? !getSurname().equals(author.getSurname()) : author.getSurname() != null) return false;
         if (geteMail() != null ? !geteMail().equals(author.geteMail()) : author.geteMail() != null) return false;
@@ -95,20 +105,12 @@ public class Author {
 
     @Override
     public int hashCode() {
-        int result = getAuthorId();
+        int result = getId();
         result = 31 * result + (getName() != null ? getName().hashCode() : 0);
         result = 31 * result + (getSurname() != null ? getSurname().hashCode() : 0);
         result = 31 * result + (geteMail() != null ? geteMail().hashCode() : 0);
         result = 31 * result + (getWebPage() != null ? getWebPage().hashCode() : 0);
         result = 31 * result + (getBiography() != null ? getBiography().hashCode() : 0);
         return result;
-    }
-
-    public List<Book> getBooks() {
-        return books;
-    }
-
-    public void setBooks(List<Book> books) {
-        this.books = books;
     }
 }

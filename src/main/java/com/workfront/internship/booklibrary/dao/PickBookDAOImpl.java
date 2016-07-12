@@ -17,7 +17,7 @@ public class PickBookDAOImpl extends General implements PickBookDAO {
 
         try{
             connection = DataSource.getInstance().getConnection();
-            connection.setAutoCommit(false);
+            //connection.setAutoCommit(false);
 
             String sqlBook = "";
 

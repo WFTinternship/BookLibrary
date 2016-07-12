@@ -6,7 +6,7 @@ import java.util.List;
 public interface AuthorDAO {
 
     //insert all data fields of an author to the database
-    void createAuthor(Author author);
+    void add(Author author);
 
     //get all data fields of an author entry by 'author_id' field
     Author getAuthorByID(int id);

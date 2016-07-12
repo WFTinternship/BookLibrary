@@ -23,6 +23,7 @@ public class DataSource {
         ds.setMaxIdle(20);
         ds.setMaxOpenPreparedStatements(180);
 
+        ds.getConnection();
     }
 
     public static DataSource getInstance() throws IOException, SQLException, PropertyVetoException {
