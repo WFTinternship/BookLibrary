@@ -27,20 +27,20 @@ public class BookDAOImpl extends General implements BookDAO {
             //genreDAO.createGenre(book.getGenre());
             connection = DataSource.getInstance().getConnection();
             String sql;
-            sql = "INSERT INTO Book VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            sql = "INSERT INTO Book(ISBN, title, genre_id, volume, abstract, language, count, edition_year, pages, country_of_edition) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             preparedStatement = connection.prepareStatement(sql);
 
-            preparedStatement.setInt(1, book.getId());
-            preparedStatement.setString(2, book.getISBN());
-            preparedStatement.setString(3, book.getTitle());
-            preparedStatement.setInt(4,book.getGenre().getGenreId());
-            preparedStatement.setInt(5, book.getVolume());
-            preparedStatement.setString(6, book.getBookAbstract());
-            preparedStatement.setString(7, book.getLanguage());
-            preparedStatement.setInt(8, book.getCount());
-            preparedStatement.setString(9, book.getEditionYear());
-            preparedStatement.setInt(10, book.getPages());
-            preparedStatement.setString(11, book.getCountryOfEdition());
+            //preparedStatement.setInt(1, book.getId());
+            preparedStatement.setString(1, book.getISBN());
+            preparedStatement.setString(2, book.getTitle());
+            preparedStatement.setInt(3,book.getGenre().getId());
+            preparedStatement.setInt(4, book.getVolume());
+            preparedStatement.setString(5, book.getBookAbstract());
+            preparedStatement.setString(6, book.getLanguage());
+            preparedStatement.setInt(7, book.getCount());
+            preparedStatement.setString(8, book.getEditionYear());
+            preparedStatement.setInt(9, book.getPages());
+            preparedStatement.setString(10, book.getCountryOfEdition());
 
             preparedStatement.executeUpdate();
             resultSet = preparedStatement.getGeneratedKeys();
@@ -49,13 +49,9 @@ public class BookDAOImpl extends General implements BookDAO {
             }
             book.setId(lastId);
 
-        } catch (IOException e) {
+        } catch (IOException | SQLException e){
             e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
-            e.printStackTrace();
-        }finally {
+        } finally {
             closeConnection(preparedStatement, connection);
         }
         return book.getId();
@@ -93,13 +89,9 @@ public class BookDAOImpl extends General implements BookDAO {
                 book.setCountryOfEdition(resultSet.getString(11));
             }
 
-        } catch (IOException e) {
+        } catch (IOException | SQLException e){
             e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
-            e.printStackTrace();
-        }finally {
+        } finally {
             closeConnection(resultSet, preparedStatement, connection);
         }
 
@@ -138,13 +130,9 @@ public class BookDAOImpl extends General implements BookDAO {
                 book.setCountryOfEdition(resultSet.getString(11));
             }
 
-        } catch (IOException e) {
+        } catch (IOException | SQLException e){
             e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
-            e.printStackTrace();
-        }finally {
+        } finally {
             closeConnection(resultSet, preparedStatement, connection);
         }
 
@@ -185,13 +173,9 @@ public class BookDAOImpl extends General implements BookDAO {
                 books.add(book);
             }
 
-        } catch (IOException e) {
+        } catch (IOException | SQLException e){
             e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
-            e.printStackTrace();
-        }finally {
+        } finally {
             closeConnection(resultSet, preparedStatement, connection);
         }
 
@@ -215,7 +199,7 @@ public class BookDAOImpl extends General implements BookDAO {
 
                 preparedStatement.setString(1, book.getISBN());
                 preparedStatement.setString(2, book.getTitle());
-                preparedStatement.setInt(3, book.getGenre().getGenreId());
+                preparedStatement.setInt(3, book.getGenre().getId());
                 preparedStatement.setInt(4, book.getVolume());
                 preparedStatement.setString(5, book.getBookAbstract());
                 preparedStatement.setString(6, book.getLanguage());
@@ -227,13 +211,9 @@ public class BookDAOImpl extends General implements BookDAO {
                 preparedStatement.executeUpdate();
 
             }
-        } catch (IOException e) {
+        } catch (IOException | SQLException e){
             e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
-            e.printStackTrace();
-        }finally {
+        } finally {
             closeConnection(preparedStatement, connection);
         }
     }
@@ -251,13 +231,9 @@ public class BookDAOImpl extends General implements BookDAO {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.executeUpdate();
 
-        } catch (IOException e) {
+        } catch (IOException | SQLException e){
             e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
-            e.printStackTrace();
-        }finally {
+        } finally {
             closeConnection(preparedStatement, connection);
         }
     }
@@ -300,13 +276,9 @@ public class BookDAOImpl extends General implements BookDAO {
             }
 
 
-        } catch (IOException e) {
+        } catch (IOException | SQLException e){
             e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
-            e.printStackTrace();
-        }finally {
+        } finally {
             closeConnection(resultSet, preparedStatement, connection);
         }
 
@@ -352,13 +324,9 @@ public class BookDAOImpl extends General implements BookDAO {
             }
 
 
-        } catch (IOException e) {
+        } catch (IOException | SQLException e){
             e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
-            e.printStackTrace();
-        }finally {
+        } finally {
             closeConnection(resultSet, preparedStatement, connection);
         }
 

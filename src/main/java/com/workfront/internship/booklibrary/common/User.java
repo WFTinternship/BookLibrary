@@ -6,7 +6,7 @@ import java.util.List;
 public class User {
     //void builder(){};
 
-    private int userId;
+    private int id;
     private String name;
     private String surname;
     private String username;
@@ -20,12 +20,12 @@ public class User {
     private List<PickBook> pickBookList;
 
 
-    public int getUserId() {
-        return userId;
+    public int getId() {
+        return id;
     }
 
-    public User setUserId(int userId) {
-        this.userId = userId;
+    public User setId(int id) {
+        this.id = id;
         return this;
     }
 
@@ -105,7 +105,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "userId=" + userId +
+                "userId=" + id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", username='" + username + '\'' +
@@ -124,7 +124,7 @@ public class User {
 
         User user = (User) obj;
 
-        if (getUserId() != user.getUserId()) return false;
+        if (getId() != user.getId()) return false;
         if (getName() != null ? !getName().equals(user.getName()) : user.getName() != null) return false;
         if (getSurname() != null ? !getSurname().equals(user.getSurname()) : user.getSurname() != null) return false;
         if (getUsername() != null ? !getUsername().equals(user.getUsername()) : user.getUsername() != null)
@@ -140,7 +140,7 @@ public class User {
 
     @Override
     public int hashCode() {
-        int result = getUserId();
+        int result = getId();
         result = 31 * result + (getName() != null ? getName().hashCode() : 0);
         result = 31 * result + (getSurname() != null ? getSurname().hashCode() : 0);
         result = 31 * result + (getUsername() != null ? getUsername().hashCode() : 0);

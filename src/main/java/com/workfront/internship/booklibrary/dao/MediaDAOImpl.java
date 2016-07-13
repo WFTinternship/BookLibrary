@@ -15,32 +15,36 @@ import java.util.List;
 
 
 public class MediaDAOImpl extends General implements MediaDAO{
-    public void createMedia(Media media) {
+    public int add(Media media) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        int lastId = 0;
 
         try{
             connection = DataSource.getInstance().getConnection();
             String sql;
-            sql = "INSERT INTO Media VALUES(?, ?, ?, ?)";
+            sql = "INSERT INTO Media(media, media_type, book_id) VALUES(?, ?, ?)";
             preparedStatement = connection.prepareStatement(sql);
 
-            preparedStatement.setInt(1,media.getMediaId());
-            preparedStatement.setString(2, media.getMedia());
-            preparedStatement.setString(3, media.getMediaType());
-            preparedStatement.setInt(4, media.getBookId());
+            //preparedStatement.setInt(1,media.getMediaId());
+            preparedStatement.setString(1, media.getLink());
+            preparedStatement.setString(2, media.getType());
+            preparedStatement.setInt(3, media.getBookId());
 
             preparedStatement.executeUpdate();
+            resultSet = preparedStatement.getGeneratedKeys();
+            if(resultSet.next()){
+                lastId = resultSet.getInt(1);
+            }
+            media.setId(lastId);
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
+        } catch (IOException | SQLException e){
             e.printStackTrace();
         }finally {
             closeConnection(preparedStatement, connection);
         }
+        return media.getId();
     }
 
     public Media getMediaByID(int id) {
@@ -63,13 +67,13 @@ public class MediaDAOImpl extends General implements MediaDAO{
             resultSet = preparedStatement.executeQuery();
 
             while(resultSet.next()){
-                media.setMediaId(resultSet.getInt("media_id"));
-                media.setMedia(resultSet.getString("media"));
-                media.setMediaType(resultSet.getString("media_type"));
+                media.setId(resultSet.getInt("media_id"));
+                media.setLink(resultSet.getString("media"));
+                media.setType(resultSet.getString("media_type"));
                 book.setId(resultSet.getInt("book_id"));
                 book.setISBN(resultSet.getString("ISBN"));
                 book.setTitle(resultSet.getString("title"));
-                genre.setGenreId(resultSet.getInt("genre_id"));
+                genre.setId(resultSet.getInt("genre_id"));
                 book.setVolume(resultSet.getInt("volume"));
                 book.setBookAbstract(resultSet.getString("abstract"));
                 book.setLanguage(resultSet.getString("language"));
@@ -82,11 +86,7 @@ public class MediaDAOImpl extends General implements MediaDAO{
                 //media.setBook(book);
             }
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
+        } catch (IOException | SQLException e){
             e.printStackTrace();
         }finally {
             closeConnection(resultSet, preparedStatement, connection);
@@ -116,13 +116,13 @@ public class MediaDAOImpl extends General implements MediaDAO{
                 Book book = new Book();
                 Genre genre = new Genre();
 
-                media.setMediaId(resultSet.getInt("media_id"));
-                media.setMedia(resultSet.getString("media"));
-                media.setMediaType(resultSet.getString("media_type"));
+                media.setId(resultSet.getInt("media_id"));
+                media.setLink(resultSet.getString("media"));
+                media.setType(resultSet.getString("media_type"));
                 book.setId(resultSet.getInt("book_id"));
                 book.setISBN(resultSet.getString("ISBN"));
                 book.setTitle(resultSet.getString("title"));
-                genre.setGenreId(resultSet.getInt("genre_id"));
+                genre.setId(resultSet.getInt("genre_id"));
                 book.setVolume(resultSet.getInt("volume"));
                 book.setBookAbstract(resultSet.getString("abstract"));
                 book.setLanguage(resultSet.getString("language"));
@@ -137,11 +137,7 @@ public class MediaDAOImpl extends General implements MediaDAO{
                 medias.add(media);
             }
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
+        } catch (IOException | SQLException e){
             e.printStackTrace();
         }finally {
             closeConnection(resultSet, preparedStatement,connection);
@@ -156,30 +152,26 @@ public class MediaDAOImpl extends General implements MediaDAO{
         PreparedStatement preparedStatement = null;
 
         try{
-            if(media.getMediaId() != 0){
+            if(media.getId() != 0){
                 connection = DataSource.getInstance().getConnection();
                 String sql;
                 sql = "UPDATE Media SET " +
                         "media_id=?, media=?, media_type=?, book_id=?" +
-                        " WHERE media_id=" + media.getMediaId();
+                        " WHERE media_id=" + media.getId();
 
                 preparedStatement = connection.prepareStatement(sql);
 
-                preparedStatement.setInt(1, media.getMediaId());
-                preparedStatement.setString(2, media.getMedia());
-                preparedStatement.setString(3, media.getMediaType());
+                preparedStatement.setInt(1, media.getId());
+                preparedStatement.setString(2, media.getLink());
+                preparedStatement.setString(3, media.getType());
                 preparedStatement.setInt(4, media.getBookId());
 
                 preparedStatement.executeUpdate();
 
             }
-        } catch (IOException e) {
+        } catch (IOException | SQLException e){
             e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
-            e.printStackTrace();
-        }finally {
+        } finally {
             closeConnection(preparedStatement, connection);
         }
     }
@@ -196,11 +188,7 @@ public class MediaDAOImpl extends General implements MediaDAO{
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.executeUpdate();
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
+        } catch (IOException | SQLException e){
             e.printStackTrace();
         }finally {
             closeConnection(preparedStatement, connection);
@@ -224,19 +212,15 @@ public class MediaDAOImpl extends General implements MediaDAO{
             while(resultSet.next()){
                 Media media = new Media();
 
-                media.setMediaId(resultSet.getInt("media_id"));
-                media.setMedia(resultSet.getString("media"));
-                media.setMediaType(resultSet.getString("media_type"));
+                media.setId(resultSet.getInt("media_id"));
+                media.setLink(resultSet.getString("media"));
+                media.setType(resultSet.getString("media_type"));
                 media.setBookId(resultSet.getInt("book_id"));
 
                 mediaList.add(media);
             }
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
+        } catch (IOException | SQLException e){
             e.printStackTrace();
         } finally {
             closeConnection(resultSet, preparedStatement, connection);

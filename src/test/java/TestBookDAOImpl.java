@@ -45,15 +45,14 @@ public class TestBookDAOImpl {
         Book expectedBook = getRandomBook();
         Genre expectedGenre = getRandomGenre();
 
-
-
-        addGenre(expectedGenre);
-
+        int genre_ID = addGenre(expectedGenre);
+        expectedGenre.setId(genre_ID);
+        expectedBook.setGenre(expectedGenre);
         // test method
         bookDAO.add(expectedBook);
-        expectedBook.setGenre(expectedGenre);
+
         Book book = getBookByIdHelper(expectedBook.getId());
-        Genre genre = getGenreByIdHelper(expectedGenre.getGenreId());
+        Genre genre = getGenreByIdHelper(expectedGenre.getId());
         book.setGenre(genre);
 
         assertNotNull(expectedBook);
@@ -160,14 +159,14 @@ public class TestBookDAOImpl {
         ResultSet rs = preparedStatement.executeQuery();
         while (rs.next()){
             //genre = new Genre();
-            genre.setGenreId(rs.getInt(1));
+            genre.setId(rs.getInt(1));
             genre.setGenre(rs.getString(2));
         }
 
         return genre;
     }
 
-    private void addGenre(Genre genre) throws PropertyVetoException, SQLException, IOException {
+    private int addGenre(Genre genre) throws PropertyVetoException, SQLException, IOException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
@@ -177,10 +176,12 @@ public class TestBookDAOImpl {
             sql = "INSERT INTO Genre VALUES(?, ?)";
             preparedStatement = connection.prepareStatement(sql);
 
-            preparedStatement.setInt(1, genre.getGenreId());
+            preparedStatement.setInt(1, genre.getId());
             preparedStatement.setString(2, genre.getGenre());
 
             preparedStatement.executeUpdate();
+
+        return genre.getId();
 
     //    }
     /**finally {

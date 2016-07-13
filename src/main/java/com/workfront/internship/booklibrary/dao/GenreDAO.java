@@ -5,7 +5,7 @@ import java.util.List;
 
 
 public interface GenreDAO {
-    void add(Genre genre);
+    int add(Genre genre);
 
     Genre getGenreByID(int id);
 

@@ -4,18 +4,18 @@ import java.util.Date;
 
 
 public class PickBook {
-    private int pickId;
+    private int id;
     private int bookId;
     private int userId;
     private Date pickingDate;
     private Date returnDate;
 
-    public int getPickId() {
-        return pickId;
+    public int getId() {
+        return id;
     }
 
-    public PickBook setPickId(int pickId) {
-        this.pickId = pickId;
+    public PickBook setId(int id) {
+        this.id = id;
         return this;
     }
 
@@ -58,7 +58,7 @@ public class PickBook {
     @Override
     public String toString() {
         return "PickBook{" +
-                "pickBook_id=" + pickId +
+                "pickBook_id=" + id +
                 ", book_id='" + bookId + '\'' +
                 ", user_id='" + userId + '\'' +
                 ", pickingDate='" + pickingDate + '\'' +
@@ -73,7 +73,7 @@ public class PickBook {
 
         PickBook pickBook = (PickBook) obj;
 
-        if (getPickId() != pickBook.getPickId()) return false;
+        if (getId() != pickBook.getId()) return false;
         if (getBookId() != pickBook.getBookId()) return false;
         if (getUserId() != pickBook.getUserId()) return false;
         if (getPickingDate() != null ? !getPickingDate().equals(pickBook.getPickingDate()) : pickBook.getPickingDate() != null) return false;
@@ -82,7 +82,7 @@ public class PickBook {
 
     @Override
     public int hashCode() {
-        int result = getPickId();
+        int result = getId();
         result = 31 * result + getBookId();
         result = 31 * result + getUserId();
         result = 31 * result + (getPickingDate() != null ? getPickingDate().hashCode() : 0);

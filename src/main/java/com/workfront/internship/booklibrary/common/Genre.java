@@ -8,11 +8,11 @@ public class Genre {
     private List<Book> books;
 
 
-    public int getGenreId() {
+    public int getId() {
         return id;
     }
 
-    public Genre setGenreId(int genreId) {
+    public Genre setId(int genreId) {
         this.id = genreId;
         return this;
     }
@@ -41,14 +41,14 @@ public class Genre {
 
         Genre genre = (Genre) obj;
 
-        if (getGenreId() != genre.getGenreId()) return false;
+        if (getId() != genre.getId()) return false;
 
         return getGenre() != null ? getGenre().equals(genre.getGenre()) : genre.getGenre() == null;
     }
 
     @Override
     public int hashCode() {
-        int result = getGenreId();
+        int result = getId();
         result = 31 * result + (getGenre() != null ? getGenre().hashCode() : 0);
         return result;
     }

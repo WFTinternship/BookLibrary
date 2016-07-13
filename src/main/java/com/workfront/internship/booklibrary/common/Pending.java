@@ -3,17 +3,17 @@ package com.workfront.internship.booklibrary.common;
 import java.util.Date;
 
 public class Pending {
-    private int pendingId;
+    private int id;
     private int userId;
     private int bookId;
     private Date pendingDate;
 
-    public int getPendingId() {
-        return pendingId;
+    public int getId() {
+        return id;
     }
 
-    public Pending setPendingId(int pendingId) {
-        this.pendingId = pendingId;
+    public Pending setId(int pendingId) {
+        this.id = pendingId;
         return this;
     }
 
@@ -47,7 +47,7 @@ public class Pending {
     @Override
     public String toString() {
         return "Pending{" +
-                "pending_id=" + pendingId +
+                "pending_id=" + id +
                 ", user_id='" + userId + '\'' +
                 ", book_id='" + bookId + '\'' +
                 ", pendingTime='" + pendingDate + '\'' +
@@ -61,7 +61,7 @@ public class Pending {
 
         Pending pending = (Pending) obj;
 
-        if (getPendingId() != pending.getPendingId()) return false;
+        if (getId() != pending.getId()) return false;
         if (getUserId() != pending.getUserId()) return false;
         if (getBookId() != pending.getBookId()) return false;
         return (getPendingDate() != null ? !getPendingDate().equals(pending.getPendingDate()) : pending.getPendingDate() != null);
@@ -69,7 +69,7 @@ public class Pending {
 
     @Override
     public int hashCode() {
-        int result = getPendingId();
+        int result = getId();
         result = 31 * result + getUserId();
         result = 31 * result + getBookId();
         result = 31 * result + (getPendingDate() != null ? getPendingDate().hashCode() : 0);

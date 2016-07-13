@@ -13,30 +13,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GenreDAOImpl extends General implements GenreDAO {
-    public void add(Genre genre) {
+    public int add(Genre genre) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        int lastId = 0;
 
         try{
             connection = DataSource.getInstance().getConnection();
             String sql;
-            sql = "INSERT INTO Genre VALUES(?, ?)";
+            sql = "INSERT INTO Genre(genre) VALUES(?)";
             preparedStatement = connection.prepareStatement(sql);
 
-            preparedStatement.setInt(1, genre.getGenreId());
-            preparedStatement.setString(2, genre.getGenre());
+            //preparedStatement.setInt(1, genre.getId());
+            preparedStatement.setString(1, genre.getGenre());
 
             preparedStatement.executeUpdate();
+            resultSet = preparedStatement.getGeneratedKeys();
+            if(resultSet.next()){
+                lastId = resultSet.getInt(1);
+            }
+            genre.setId(lastId);
 
-        } catch (IOException e) {
+        } catch (IOException | SQLException e){
             e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
-            e.printStackTrace();
-        }finally {
+        } finally {
             closeConnection(preparedStatement, connection);
         }
+        return genre.getId();
     }
 
     public Genre getGenreByID(int id) {
@@ -54,15 +58,11 @@ public class GenreDAOImpl extends General implements GenreDAO {
             resultSet = preparedStatement.executeQuery();
 
             while(resultSet.next()){
-                genre.setGenreId(resultSet.getInt(1));
+                genre.setId(resultSet.getInt(1));
                 genre.setGenre(resultSet.getString(2));
             }
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
+        } catch (IOException | SQLException e){
             e.printStackTrace();
         }finally {
             closeConnection(resultSet, preparedStatement, connection);
@@ -86,15 +86,11 @@ public class GenreDAOImpl extends General implements GenreDAO {
             resultSet = preparedStatement.executeQuery();
 
             while(resultSet.next()){
-                genre.setGenreId(resultSet.getInt(1));
+                genre.setId(resultSet.getInt(1));
                 genre.setGenre(resultSet.getString(2));
             }
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
+        } catch (IOException | SQLException e){
             e.printStackTrace();
         }finally {
             closeConnection(resultSet, preparedStatement, connection);
@@ -120,17 +116,13 @@ public class GenreDAOImpl extends General implements GenreDAO {
             while(resultSet.next()){
                 Genre genre = new Genre();
 
-                genre.setGenreId(resultSet.getInt(1));
+                genre.setId(resultSet.getInt(1));
                 genre.setGenre(resultSet.getString(2));
 
                 genres.add(genre);
             }
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
+        } catch (IOException | SQLException e){
             e.printStackTrace();
         }finally {
             closeConnection(resultSet, preparedStatement, connection);
@@ -145,12 +137,12 @@ public class GenreDAOImpl extends General implements GenreDAO {
         PreparedStatement preparedStatement = null;
 
         try{
-            if(genre.getGenreId() != 0){
+            if(genre.getId() != 0){
                 connection = DataSource.getInstance().getConnection();
                 String sql;
                 sql = "UPDATE Genre SET " +
                         "genre=?" +
-                        " WHERE genre_id=" + genre.getGenreId();
+                        " WHERE genre_id=" + genre.getId();
 
                 preparedStatement = connection.prepareStatement(sql);
 
@@ -159,11 +151,7 @@ public class GenreDAOImpl extends General implements GenreDAO {
                 preparedStatement.executeUpdate();
 
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
+        } catch (IOException | SQLException e){
             e.printStackTrace();
         }finally {
             closeConnection(preparedStatement, connection);
@@ -182,11 +170,7 @@ public class GenreDAOImpl extends General implements GenreDAO {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.executeUpdate();
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
+        } catch (IOException | SQLException e){
             e.printStackTrace();
         }finally {
             closeConnection(preparedStatement, connection);

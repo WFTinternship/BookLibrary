@@ -10,17 +10,19 @@ import java.util.List;
 
 public class UserDAOImpl extends General implements UserDAO {
 
-    public void createUser(User user) {
+    public int add(User user) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        int lastId = 0;
 
         try{
             connection = DataSource.getInstance().getConnection();
 
             String sql;
-            sql = "INSERT INTO User VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            sql = "INSERT INTO User(name, surname, username, password, address, e_mail, phone, access_privelege) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, user.getUserId());
+            //preparedStatement.setInt(1, user.getId());
             preparedStatement.setString(1, user.getName());
             preparedStatement.setString(2, user.getSurname());
             preparedStatement.setString(3, user.getUsername());
@@ -31,13 +33,19 @@ public class UserDAOImpl extends General implements UserDAO {
             preparedStatement.setString(8, user.getAccessPrivilege());
 
             preparedStatement.executeUpdate();
+            resultSet = preparedStatement.getGeneratedKeys();
+            if(resultSet.next()){
+                lastId = resultSet.getInt(1);
+            }
+            user.setId(lastId);
 
-        } catch (IOException  | SQLException | PropertyVetoException e) {
+        } catch (IOException | SQLException e) {
             // TODO add log
            throw new RuntimeException(e);
         } finally{
             closeConnection( preparedStatement, connection);
         }
+        return user.getId();
 
     }
 
@@ -54,7 +62,7 @@ public class UserDAOImpl extends General implements UserDAO {
             ResultSet rs = preparedStatement.executeQuery();
 
             while(rs.next()){
-                user.setUserId(rs.getInt(1));
+                user.setId(rs.getInt(1));
                 user.setName(rs.getString(2));
                 user.setSurname(rs.getString(3));
                 user.setUsername(rs.getString(4));
@@ -65,13 +73,9 @@ public class UserDAOImpl extends General implements UserDAO {
                 user.setAccessPrivilege(rs.getString(9));
             }
 
-        } catch (IOException e){
+        } catch (IOException | SQLException e){
             e.printStackTrace();
-        } catch(SQLException e){
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
-            e.printStackTrace();
-        } finally{
+        }  finally{
             closeConnection( preparedStatement, connection);
         }
 
@@ -91,7 +95,7 @@ public class UserDAOImpl extends General implements UserDAO {
             ResultSet rs = preparedStatement.executeQuery();
 
             while(rs.next()){
-                user.setUserId(rs.getInt(1));
+                user.setId(rs.getInt(1));
                 user.setName(rs.getString(2));
                 user.setSurname(rs.getString(3));
                 user.setUsername(rs.getString(4));
@@ -102,11 +106,7 @@ public class UserDAOImpl extends General implements UserDAO {
                 user.setAccessPrivilege(rs.getString(9));
             }
 
-        } catch (IOException e){
-            e.printStackTrace();
-        } catch(SQLException e){
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
+        } catch (IOException | SQLException e){
             e.printStackTrace();
         } finally{
             closeConnection( preparedStatement, connection);
@@ -128,7 +128,7 @@ public class UserDAOImpl extends General implements UserDAO {
             ResultSet rs = preparedStatement.executeQuery();
 
             while(rs.next()){
-                user.setUserId(rs.getInt(1));
+                user.setId(rs.getInt(1));
                 user.setName(rs.getString(2));
                 user.setSurname(rs.getString(3));
                 user.setUsername(rs.getString(4));
@@ -139,13 +139,9 @@ public class UserDAOImpl extends General implements UserDAO {
                 user.setAccessPrivilege(rs.getString(9));
             }
 
-        } catch (IOException e){
+        } catch (IOException | SQLException e){
             e.printStackTrace();
-        } catch(SQLException e){
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
-            e.printStackTrace();
-        } finally{
+        }finally{
             closeConnection( preparedStatement, connection);
         }
 
@@ -168,7 +164,7 @@ public class UserDAOImpl extends General implements UserDAO {
             //ResultSetMetaData rsmd = rs.getMetaData();
             while (resultSets.next()) {
                 user = new User();
-                user.setUserId(resultSets.getInt(1));
+                user.setId(resultSets.getInt(1));
                 user.setName(resultSets.getString(2));
                 user.setSurname(resultSets.getString(3));
                 user.setUsername(resultSets.getString(4));
@@ -181,11 +177,7 @@ public class UserDAOImpl extends General implements UserDAO {
                 users.add(user);
             }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
+        } catch (IOException | SQLException e){
             e.printStackTrace();
         } finally {
             closeConnection(resultSets, preparedStatement, connection);
@@ -199,12 +191,12 @@ public class UserDAOImpl extends General implements UserDAO {
         PreparedStatement preparedStatement = null;
 
         try{
-            if(user.getUserId()!=0) {
+            if(user.getId()!=0) {
                 connection = DataSource.getInstance().getConnection();
                 String sql;
                 sql = "UPDATE User SET " +
                         "name = ?, surname = ?, username = ?, password = ?, address =?, e_mail = ?, phone =?, access_privilege = ?" +
-                        " WHERE user_id=" + user.getUserId();
+                        " WHERE user_id=" + user.getId();
 
                 preparedStatement = connection.prepareStatement(sql);
 
@@ -220,11 +212,7 @@ public class UserDAOImpl extends General implements UserDAO {
                 preparedStatement.executeUpdate();
             }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
+        } catch (IOException | SQLException e){
             e.printStackTrace();
         } finally{
             closeConnection( preparedStatement, connection);
@@ -247,11 +235,7 @@ public class UserDAOImpl extends General implements UserDAO {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.executeUpdate();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
+        } catch (IOException | SQLException e){
             e.printStackTrace();
         } finally{
             closeConnection( preparedStatement, connection);
@@ -277,7 +261,7 @@ public class UserDAOImpl extends General implements UserDAO {
             while(resultSet.next()){
                 User user = new User();
 
-                user.setUserId(resultSet.getInt("user_id"));
+                user.setId(resultSet.getInt("user_id"));
                 user.setName(resultSet.getString("name"));
                 user.setSurname(resultSet.getString("surname"));
                 user.setUsername(resultSet.getString("username"));
@@ -291,11 +275,7 @@ public class UserDAOImpl extends General implements UserDAO {
             }
 
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
+        } catch (IOException | SQLException e){
             e.printStackTrace();
         } finally {
             closeConnection(resultSet, preparedStatement, connection);
@@ -322,7 +302,7 @@ public class UserDAOImpl extends General implements UserDAO {
             while(resultSet.next()){
                 User user = new User();
 
-                user.setUserId(resultSet.getInt("user_id"));
+                user.setId(resultSet.getInt("user_id"));
                 user.setName(resultSet.getString("name"));
                 user.setSurname(resultSet.getString("surname"));
                 user.setUsername(resultSet.getString("username"));
@@ -336,11 +316,7 @@ public class UserDAOImpl extends General implements UserDAO {
             }
 
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
+        }catch (IOException | SQLException e){
             e.printStackTrace();
         } finally {
             closeConnection(resultSet, preparedStatement, connection);

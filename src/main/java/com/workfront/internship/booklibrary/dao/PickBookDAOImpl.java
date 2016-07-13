@@ -10,10 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PickBookDAOImpl extends General implements PickBookDAO {
-    public void createPickBook(PickBook pickedBook) {
+    public int add(PickBook pickedBook) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         PreparedStatement preparedStatementAssign = null;
+        ResultSet resultSet = null;
+        int lastId = 0;
 
         try{
             connection = DataSource.getInstance().getConnection();
@@ -23,16 +25,22 @@ public class PickBookDAOImpl extends General implements PickBookDAO {
 
 
             String sql;
-            sql = "INSERT INTO Pick_Book VALUES(?, ?, ?, ?, ?)";
+            sql = "INSERT INTO Pick_Book(book_id, user_id, picking_date, return_date) VALUES(?, ?, ?, ?)";
             preparedStatement = connection.prepareStatement(sql);
 
-            preparedStatement.setInt(1, pickedBook.getPickId());
-            preparedStatement.setInt(2, pickedBook.getBookId());
-            preparedStatement.setInt(3, pickedBook.getUserId());
-            preparedStatement.setTimestamp(4, new Timestamp(pickedBook.getPickingDate().getTime()));
-            preparedStatement.setTimestamp(5, new Timestamp(pickedBook.getReturnDate().getTime()));
+            //preparedStatement.setInt(1, pickedBook.getId());
+            preparedStatement.setInt(1, pickedBook.getBookId());
+            preparedStatement.setInt(2, pickedBook.getUserId());
+            preparedStatement.setTimestamp(3, new Timestamp(pickedBook.getPickingDate().getTime()));
+            preparedStatement.setTimestamp(4, new Timestamp(pickedBook.getReturnDate().getTime()));
 
             int changeMade = preparedStatement.executeUpdate();
+            resultSet = preparedStatement.getGeneratedKeys();
+            if(resultSet.next()){
+                lastId = resultSet.getInt(1);
+            }
+            pickedBook.setId(lastId);
+
             if(changeMade == 1){  //transaction sarqel
 
             }
@@ -40,15 +48,12 @@ public class PickBookDAOImpl extends General implements PickBookDAO {
 
 
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
+        } catch (IOException | SQLException e){
             e.printStackTrace();
         }finally {
             closeConnection(preparedStatement, connection);
         }
+        return lastId;
     }
 
     public PickBook getPickedBookByID(int id) {
@@ -61,24 +66,20 @@ public class PickBookDAOImpl extends General implements PickBookDAO {
             connection = DataSource.getInstance().getConnection();
             pickedBook = new PickBook();
             String sql;
-            sql = "select * from Pick_Book where Pick_Book.pick_id =" + pickedBook.getPickId();
+            sql = "select * from Pick_Book where Pick_Book.pick_id =" + pickedBook.getId();
 
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
 
             while(resultSet.next()){
-                pickedBook.setPickId(resultSet.getInt("pick_id"));
+                pickedBook.setId(resultSet.getInt("pick_id"));
                 pickedBook.setBookId(resultSet.getInt("book_id"));
                 pickedBook.setUserId(resultSet.getInt("user_id"));
                 pickedBook.setPickingDate(resultSet.getTimestamp("picking_date"));
                 pickedBook.setReturnDate(resultSet.getTimestamp("return_date"));
             }
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
+        } catch (IOException | SQLException e){
             e.printStackTrace();
         }finally {
             closeConnection(resultSet, preparedStatement, connection);
@@ -107,7 +108,7 @@ public class PickBookDAOImpl extends General implements PickBookDAO {
             while(resultSet.next()){
                 PickBook pickedBook = new PickBook();
 
-                pickedBook.setPickId(resultSet.getInt("pick_id"));
+                pickedBook.setId(resultSet.getInt("pick_id"));
                 pickedBook.setBookId(resultSet.getInt("book_id"));
                 pickedBook.setUserId(resultSet.getInt("user_id"));
                 pickedBook.setPickingDate(resultSet.getTimestamp("picking_date"));
@@ -117,13 +118,9 @@ public class PickBookDAOImpl extends General implements PickBookDAO {
             }
 
 
-        } catch (IOException e) {
+        } catch (IOException | SQLException e){
             e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
-            e.printStackTrace();
-        }finally {
+        } finally {
             closeConnection(resultSet, preparedStatement, connection);
         }
 
@@ -135,15 +132,15 @@ public class PickBookDAOImpl extends General implements PickBookDAO {
         PreparedStatement preparedStatement = null;
 
         try{
-            if(pickedBook.getPickId() != 0){
+            if(pickedBook.getId() != 0){
                 connection = DataSource.getInstance().getConnection();
                 String sql;
                 sql = "UPDATE Pick_Book SET " +
                         "pick_id = ?, book_id = ?, user_id = ?, picking_date = ?, return_date = ? " +
-                        "WHERE pick_id = " + pickedBook.getPickId();
+                        "WHERE pick_id = " + pickedBook.getId();
                 preparedStatement = connection.prepareStatement(sql);
 
-                preparedStatement.setInt(1, pickedBook.getPickId());
+                preparedStatement.setInt(1, pickedBook.getId());
                 preparedStatement.setInt(2, pickedBook.getBookId());
                 preparedStatement.setInt(3, pickedBook.getUserId());
                 //preparedStatement.setDate(4, pickedBook.getPickingDate()); // TODO
@@ -152,11 +149,7 @@ public class PickBookDAOImpl extends General implements PickBookDAO {
                 preparedStatement.executeUpdate();
             }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
+        } catch (IOException | SQLException e){
             e.printStackTrace();
         } finally {
             closeConnection(preparedStatement, connection);
@@ -175,11 +168,7 @@ public class PickBookDAOImpl extends General implements PickBookDAO {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.executeUpdate();
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
+        } catch (IOException | SQLException e){
             e.printStackTrace();
         } finally {
             closeConnection(preparedStatement, connection);
@@ -208,7 +197,7 @@ public class PickBookDAOImpl extends General implements PickBookDAO {
             while(resultSet.next()){
                 PickBook pickedBook = new PickBook();
 
-                pickedBook.setPickId(resultSet.getInt("pick_id"));
+                pickedBook.setId(resultSet.getInt("pick_id"));
                 pickedBook.setBookId(resultSet.getInt("book_id"));
                 pickedBook.setUserId(resultSet.getInt("user_id"));
                 pickedBook.setPickingDate(resultSet.getTimestamp("picking_date"));
@@ -218,13 +207,9 @@ public class PickBookDAOImpl extends General implements PickBookDAO {
             }
 
 
-        } catch (IOException e) {
+        } catch (IOException | SQLException e){
             e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
-            e.printStackTrace();
-        }finally {
+        } finally {
             closeConnection(resultSet, preparedStatement, connection);
         }
 

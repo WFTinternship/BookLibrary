@@ -39,11 +39,7 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
             }
             author.setId(lastId);
 
-        }catch (IOException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
+        } catch (IOException | SQLException e){
             e.printStackTrace();
         } finally{
             closeConnection( preparedStatement, connection);
@@ -73,11 +69,7 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
                 author.setBiography(rs.getString(6));
             }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
+        } catch (IOException | SQLException e){
             e.printStackTrace();
         } finally{
             closeConnection(preparedStatement, connection);
@@ -109,11 +101,7 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
                 author.setBiography(resultSet.getString(6));
             }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
+        } catch (IOException | SQLException e){
             e.printStackTrace();
         } finally{
             closeConnection(resultSet, preparedStatement, connection);
@@ -149,13 +137,9 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
                 authors.add(author);
             }
 
-        } catch (IOException e) {
+        } catch (IOException | SQLException e){
             e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
-            e.printStackTrace();
-        }finally {
+        } finally {
             closeConnection(resultSet, preparedStatement, connection);
         }
 
@@ -193,13 +177,9 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
             }
 
 
-        } catch (IOException e) {
+        } catch (IOException | SQLException e){
             e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
-            e.printStackTrace();
-        }finally {
+        } finally {
             closeConnection(resultSet, preparedStatement, connection);
         }
 
@@ -229,11 +209,7 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
                 preparedStatement.executeUpdate();
             }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
+        } catch (IOException | SQLException e){
             e.printStackTrace();
         } finally {
             closeConnection(preparedStatement, connection);
@@ -253,11 +229,7 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.executeUpdate();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
+        } catch (IOException | SQLException e){
             e.printStackTrace();
         } finally {
             closeConnection(preparedStatement, connection);

@@ -4,7 +4,7 @@ import com.workfront.internship.booklibrary.common.PickBook;
 import java.util.List;
 
 public interface PickBookDAO {
-    void createPickBook(PickBook pickedBook);
+    int add(PickBook pickedBook);
 
     PickBook getPickedBookByID(int id);
 

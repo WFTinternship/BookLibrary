@@ -1,35 +1,35 @@
 package com.workfront.internship.booklibrary.common;
 
 public class Media {
-    private int mediaId;
-    private String media;
+    private int id;
+    private String mediaLink;
     private String mediaType;
     //private Book book;
     private int bookId;
 
-    public int getMediaId() {
-        return mediaId;
+    public int getId() {
+        return id;
     }
 
-    public Media setMediaId(int mediaId) {
-        this.mediaId = mediaId;
+    public Media setId(int id) {
+        this.id = id;
         return this;
     }
 
-    public String getMedia() {
-        return media;
+    public String getLink() {
+        return mediaLink;
     }
 
-    public Media setMedia(String media) {
-        this.media = media;
+    public Media setLink(String mediaLink) {
+        this.mediaLink = mediaLink;
         return this;
     }
 
-    public String getMediaType() {
+    public String getType() {
         return mediaType;
     }
 
-    public Media setMediaType(String mediaType) {
+    public Media setType(String mediaType) {
         this.mediaType = mediaType;
         return this;
     }
@@ -46,8 +46,8 @@ public class Media {
     @Override
     public String toString() {
         return "Media{" +
-                "media_id=" + mediaId +
-                ", media='" + media + '\'' +
+                "media_id=" + id +
+                ", mediaLink='" + mediaLink + '\'' +
                 ", mediaType='" + mediaType + '\'' +
                 ", book_id='" + bookId + '\'' +
                 '}';
@@ -60,9 +60,9 @@ public class Media {
 
         Media media = (Media) obj;
 
-        if (getMediaId() != media.getMediaId()) return false;
-        if (getMedia() != null ? !getMedia().equals(media.getMedia()) : media.getMedia() != null) return false;
-        if (getMediaType() != null ? !getMediaType().equals(media.getMediaType()) : media.getMediaType() != null) return false;
+        if (getId() != media.getId()) return false;
+        if (getLink() != null ? !getLink().equals(media.getLink()) : media.getLink() != null) return false;
+        if (getType() != null ? !getType().equals(media.getType()) : media.getType() != null) return false;
 
         return (getBookId() != media.getBookId());
 
@@ -70,9 +70,9 @@ public class Media {
 
     @Override
     public int hashCode() {
-        int result = getMediaId();
-        result = 31 * result + (getMedia() != null ? getMedia().hashCode() : 0);
-        result = 31 * result + (getMediaType() != null ? getMediaType().hashCode() : 0);
+        int result = getId();
+        result = 31 * result + (getLink() != null ? getLink().hashCode() : 0);
+        result = 31 * result + (getType() != null ? getType().hashCode() : 0);
         result = 31 * result + getBookId();
 
         return result;

@@ -7,7 +7,7 @@ import java.util.List;
 public interface UserDAO {
 
     //insert all data fields of a user to the database
-    void createUser(User user);
+    int add(User user);
 
     //get all data fields of a user entry by 'user_id' field
     User getUserByID(int id);

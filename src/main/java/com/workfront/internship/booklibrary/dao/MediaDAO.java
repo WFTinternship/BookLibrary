@@ -4,7 +4,7 @@ import com.workfront.internship.booklibrary.common.Media;
 import java.util.List;
 
 public interface MediaDAO {
-    void createMedia(Media media);
+    int add(Media media);
 
     Media getMediaByID(int id);
 

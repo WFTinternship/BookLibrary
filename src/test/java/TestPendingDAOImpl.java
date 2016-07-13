@@ -28,7 +28,7 @@ public class TestPendingDAOImpl {
         try{
             connection = DataSource.getInstance().getConnection();
             pending = new Pending();
-            pending.setPendingId(4);
+            pending.setId(4);
             pending.setUserId(3);
             pending.setBookId(2);
             pending.setPendingDate(Timestamp.valueOf("2016-08-12 01:02:03"));
@@ -37,7 +37,7 @@ public class TestPendingDAOImpl {
             sql = "INSERT INTO Pending VALUES(?, ?, ?, ?)";
             preparedStatement = connection.prepareStatement(sql);
 
-            preparedStatement.setInt(1, pending.getPendingId());
+            preparedStatement.setInt(1, pending.getId());
             preparedStatement.setInt(2, pending.getUserId());
             preparedStatement.setInt(3, pending.getBookId());
             preparedStatement.setTimestamp(4, new Timestamp(pending.getPendingDate().getTime()));
@@ -70,11 +70,11 @@ public class TestPendingDAOImpl {
     @Test
     public void TestCreatePending() {
         PendingDAO pendingDao = new PendingDAOImpl();
-        Pending actualPending = pendingDao.getPendingByID(pending.getPendingId());
+        Pending actualPending = pendingDao.getPendingByID(pending.getId());
 
 
         assertNotNull(actualPending);
-        assertEquals(pending.getPendingId(), actualPending.getPendingId());
+        assertEquals(pending.getId(), actualPending.getId());
         assertEquals(pending.getUserId(), actualPending.getUserId());
         assertEquals(pending.getBookId(), actualPending.getBookId());
         assertEquals(pending.getPendingDate(), actualPending.getPendingDate());

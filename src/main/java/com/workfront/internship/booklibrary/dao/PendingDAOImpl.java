@@ -10,32 +10,36 @@ import java.util.List;
 
 public class PendingDAOImpl extends General implements PendingDAO{
 
-    public void createPending(Pending pending) {
+    public int add(Pending pending) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        int lastId = 0;
 
         try{
             connection = DataSource.getInstance().getConnection();
             String sql;
-            sql = "INSERT INTO Pending VALUES(?, ?, ?, ?)";
+            sql = "INSERT INTO Pending(user_id, book_id, pending_time) VALUES(?, ?, ?)";
             preparedStatement = connection.prepareStatement(sql);
 
-            preparedStatement.setInt(1, pending.getPendingId());
-            preparedStatement.setInt(2, pending.getUserId());
-            preparedStatement.setInt(3, pending.getBookId());
-            preparedStatement.setTimestamp(4, new Timestamp(pending.getPendingDate().getTime()));
+            //preparedStatement.setInt(1, pending.getPendingId());
+            preparedStatement.setInt(1, pending.getUserId());
+            preparedStatement.setInt(2, pending.getBookId());
+            preparedStatement.setTimestamp(3, new Timestamp(pending.getPendingDate().getTime()));
 
             preparedStatement.executeUpdate();
+            resultSet = preparedStatement.getGeneratedKeys();
+            if(resultSet.next()){
+                lastId = resultSet.getInt(1);
+            }
+            pending.setUserId(lastId);
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
+        } catch (IOException | SQLException e){
             e.printStackTrace();
         }finally {
             closeConnection(preparedStatement, connection);
         }
+        return pending.getId();
     }
 
     public Pending getPendingByID(int id) {
@@ -54,17 +58,13 @@ public class PendingDAOImpl extends General implements PendingDAO{
             resultSet = preparedStatement.executeQuery();
 
             while(resultSet.next()){
-                pending.setPendingId(resultSet.getInt("pending_id"));
+                pending.setId(resultSet.getInt("pending_id"));
                 pending.setUserId(resultSet.getInt("user_id"));
                 pending.setBookId(resultSet.getInt("book_id"));
                 pending.setPendingDate(resultSet.getTimestamp("pending_time"));
             }
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
+        } catch (IOException | SQLException e){
             e.printStackTrace();
         }finally {
             closeConnection(resultSet, preparedStatement, connection);
@@ -94,7 +94,7 @@ public class PendingDAOImpl extends General implements PendingDAO{
             while(resultSet.next()){
                 Pending pending = new Pending();
 
-                pending.setPendingId(resultSet.getInt("pending_id"));
+                pending.setId(resultSet.getInt("pending_id"));
                 pending.setUserId(resultSet.getInt("user_id"));
                 pending.setBookId(resultSet.getInt("book_id"));
                 pending.setPendingDate(resultSet.getTimestamp("pending_time"));
@@ -103,11 +103,7 @@ public class PendingDAOImpl extends General implements PendingDAO{
             }
 
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
+        } catch (IOException | SQLException e){
             e.printStackTrace();
         }finally {
             closeConnection(resultSet, preparedStatement, connection);
@@ -138,7 +134,7 @@ public class PendingDAOImpl extends General implements PendingDAO{
             while(resultSet.next()){
                 Pending pending = new Pending();
 
-                pending.setPendingId(resultSet.getInt("pending_id"));
+                pending.setId(resultSet.getInt("pending_id"));
                 pending.setUserId(resultSet.getInt("user_id"));
                 pending.setBookId(resultSet.getInt("book_id"));
                 pending.setPendingDate(resultSet.getTimestamp("pending_time"));
@@ -147,11 +143,7 @@ public class PendingDAOImpl extends General implements PendingDAO{
             }
 
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
+        } catch (IOException | SQLException e){
             e.printStackTrace();
         }finally {
             closeConnection(resultSet, preparedStatement, connection);
@@ -172,11 +164,7 @@ public class PendingDAOImpl extends General implements PendingDAO{
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.executeUpdate();
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
+        } catch (IOException | SQLException e){
             e.printStackTrace();
         } finally {
             closeConnection(preparedStatement, connection);

@@ -4,7 +4,7 @@ import com.workfront.internship.booklibrary.common.Pending;
 import java.util.List;
 
 public interface PendingDAO {
-    void createPending(Pending pending);
+    int add(Pending pending);
 
     Pending getPendingByID(int id);
 
