@@ -66,7 +66,7 @@ public class MediaDAOImpl extends General implements MediaDAO{
                 media.setMediaId(resultSet.getInt("media_id"));
                 media.setMedia(resultSet.getString("media"));
                 media.setMediaType(resultSet.getString("media_type"));
-                book.setBookId(resultSet.getInt("book_id"));
+                book.setId(resultSet.getInt("book_id"));
                 book.setISBN(resultSet.getString("ISBN"));
                 book.setTitle(resultSet.getString("title"));
                 genre.setGenreId(resultSet.getInt("genre_id"));
@@ -119,7 +119,7 @@ public class MediaDAOImpl extends General implements MediaDAO{
                 media.setMediaId(resultSet.getInt("media_id"));
                 media.setMedia(resultSet.getString("media"));
                 media.setMediaType(resultSet.getString("media_type"));
-                book.setBookId(resultSet.getInt("book_id"));
+                book.setId(resultSet.getInt("book_id"));
                 book.setISBN(resultSet.getString("ISBN"));
                 book.setTitle(resultSet.getString("title"));
                 genre.setGenreId(resultSet.getInt("genre_id"));

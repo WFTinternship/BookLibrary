@@ -6,8 +6,8 @@ public class Book {
     private int bookId;
     private String ISBN;
     private String title;
-    //private Genre genre;
-    private int genreId;
+    private Genre genre;
+    //private int genreId;
     private int volume;
     private String bookAbstract;
     private String language;
@@ -21,11 +21,11 @@ public class Book {
     private List<Pending> pendingList;
     private List<PickBook> pickBookList;
 
-    public int getBookId() {
+    public int getId() {
         return bookId;
     }
 
-    public Book setBookId(int bookId) {
+    public Book setId(int bookId) {
         this.bookId = bookId;
         return this;
     }
@@ -59,12 +59,12 @@ public class Book {
     }
      */
 
-    public int getGenreId() {
-        return genreId;
+    public Genre getGenre() {
+        return genre;
     }
 
-    public void setGenreId(int genreId) {
-        genreId = genreId;
+    public void setGenre(Genre genre) {
+        this.genre = genre;
     }
 
     public int getVolume() {
@@ -144,7 +144,7 @@ public class Book {
                 "book_id=" + bookId +
                 ", ISBN='" + ISBN + '\'' +
                 ", title='" + title + '\'' +
-                ", genreId='" + genreId + '\'' +
+                ", genre='" + genre + '\'' +
                 ", volume='" + volume + '\'' +
                 ", abstract='" + bookAbstract + '\'' +
                 ", language='" + language + '\'' +
@@ -162,10 +162,10 @@ public class Book {
 
         Book book = (Book) obj;
 
-        if (getBookId() != book.getBookId()) return false;
+        if (getId() != book.getId()) return false;
         if (getISBN() != null ? !getISBN().equals(book.getISBN()) : book.getISBN() != null) return false;
         if (getTitle() != null ? !getTitle().equals(book.getTitle()) : book.getTitle() != null) return false;
-        if (getGenreId() != book.getGenreId()) return false;
+        if (getGenre() != null ? !getGenre().equals(book.getGenre()) : book.getGenre() != null) return false;
         if (getVolume() != book.getVolume()) return false;
 
         if (getBookAbstract() != null ? !getBookAbstract().equals(book.getBookAbstract()) : book.getBookAbstract() != null)
@@ -181,10 +181,10 @@ public class Book {
 
     @Override
     public int hashCode() {
-        int result = getBookId();
+        int result = getId();
         result = 31 * result + (getISBN() != null ? getISBN().hashCode() : 0);
         result = 31 * result + (getTitle() != null ? getTitle().hashCode() : 0);
-        result = 31 * result + getGenreId();
+        result = 31 * result + (getGenre() != null ? getGenre().hashCode() : 0);
         result = 31 * result + getVolume();
         result = 31 * result + (getBookAbstract() != null ? getBookAbstract().hashCode() : 0);
         result = 31 * result + (getLanguage() != null ? getLanguage().hashCode() : 0);

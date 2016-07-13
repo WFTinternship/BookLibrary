@@ -3,17 +3,17 @@ package com.workfront.internship.booklibrary.common;
 import java.util.List;
 
 public class Genre {
-    private int genreId;
+    private int id;
     private String genre;
     private List<Book> books;
 
 
     public int getGenreId() {
-        return genreId;
+        return id;
     }
 
     public Genre setGenreId(int genreId) {
-        this.genreId = genreId;
+        this.id = genreId;
         return this;
     }
 
@@ -29,7 +29,7 @@ public class Genre {
     @Override
     public String toString() {
         return "Genre{" +
-                "genreId=" + genreId +
+                "genreId=" + id +
                 ", genre='" + genre + '\'' +
                 '}';
     }

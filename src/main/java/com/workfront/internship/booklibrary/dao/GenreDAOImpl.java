@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GenreDAOImpl extends General implements GenreDAO {
-    public void createGenre(Genre genre) {
+    public void add(Genre genre) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 

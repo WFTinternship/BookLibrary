@@ -4,7 +4,7 @@ import com.workfront.internship.booklibrary.common.Book;
 import java.util.List;
 
 public interface BookDAO {
-    void createBook(Book book);
+    int add(Book book);
 
     Book getBookByID(int id);
 

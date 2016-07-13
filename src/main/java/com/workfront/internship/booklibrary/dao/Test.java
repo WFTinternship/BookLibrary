@@ -52,7 +52,7 @@ public class Test {
         book.setCountryOfEdition("UK");
 
         BookDAOImpl bookDAO = new BookDAOImpl();
-        bookDAO.createBook(book);
+        bookDAO.add(book);
     }
 
     public static void deleteUserTest() {
@@ -77,7 +77,7 @@ public class Test {
     public static void getBookByIDTest() {
         BookDAOImpl bookDao = new BookDAOImpl();
         Book book = bookDao.getBookByID(1);
-        System.out.println("book_id: " + book.getBookId());
+        System.out.println("book_id: " + book.getId());
         System.out.println("ISBN: " + book.getISBN());
         System.out.println("title: " + book.getTitle());
 

@@ -1,6 +1,7 @@
 package com.workfront.internship.booklibrary.dao;
 
 import com.workfront.internship.booklibrary.common.Book;
+import com.workfront.internship.booklibrary.common.Genre;
 
 import java.beans.PropertyVetoException;
 import java.io.IOException;
@@ -13,20 +14,26 @@ import java.util.List;
 
 
 public class BookDAOImpl extends General implements BookDAO {
-    public void createBook(Book book) {
+    GenreDAO genreDAO = new GenreDAOImpl();
+    public int add(Book book) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        Genre genre = null;
+        int lastId = 0;
+
 
         try{
+            //genreDAO.createGenre(book.getGenre());
             connection = DataSource.getInstance().getConnection();
             String sql;
             sql = "INSERT INTO Book VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             preparedStatement = connection.prepareStatement(sql);
 
-            preparedStatement.setInt(1, book.getBookId());
+            preparedStatement.setInt(1, book.getId());
             preparedStatement.setString(2, book.getISBN());
             preparedStatement.setString(3, book.getTitle());
-            preparedStatement.setInt(4,book.getGenreId());
+            preparedStatement.setInt(4,book.getGenre().getGenreId());
             preparedStatement.setInt(5, book.getVolume());
             preparedStatement.setString(6, book.getBookAbstract());
             preparedStatement.setString(7, book.getLanguage());
@@ -36,6 +43,11 @@ public class BookDAOImpl extends General implements BookDAO {
             preparedStatement.setString(11, book.getCountryOfEdition());
 
             preparedStatement.executeUpdate();
+            resultSet = preparedStatement.getGeneratedKeys();
+            if(resultSet.next()){
+                lastId = resultSet.getInt(1);
+            }
+            book.setId(lastId);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -46,6 +58,7 @@ public class BookDAOImpl extends General implements BookDAO {
         }finally {
             closeConnection(preparedStatement, connection);
         }
+        return book.getId();
     }
 
     public Book getBookByID(int id) {
@@ -61,13 +74,14 @@ public class BookDAOImpl extends General implements BookDAO {
             String sql;
             sql = "SELECT * FROM Book LEFT JOIN Genre " +
                     "ON Book.genre_id = Genre.genre_id " +
-                    "where Book.book_id = " + id;
+                    "where Book.book_id = ?";
 
+            preparedStatement.setInt(1, id);
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
 
             while(resultSet.next()){
-                book.setBookId(resultSet.getInt(1));
+                book.setId(resultSet.getInt(1));
                 book.setISBN(resultSet.getString(2));
                 book.setTitle(resultSet.getString(3));
                 book.setVolume(resultSet.getInt(5));
@@ -105,13 +119,14 @@ public class BookDAOImpl extends General implements BookDAO {
             String sql;
             sql = "SELECT * FROM Book LEFT JOIN Genre " +
                     "ON Book.genre_id = Genre.genre_id " +
-                    "where Book.title = " + title;
+                    "where Book.title = ?";
 
+            preparedStatement.setString(1, title);
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
 
             while(resultSet.next()){
-                book.setBookId(resultSet.getInt(1));
+                book.setId(resultSet.getInt(1));
                 book.setISBN(resultSet.getString(2));
                 book.setTitle(resultSet.getString(3));
                 book.setVolume(resultSet.getInt(5));
@@ -152,11 +167,13 @@ public class BookDAOImpl extends General implements BookDAO {
 
             while(resultSet.next()){
                 Book book = new Book();
+                Genre genre = new Genre();
+                genre = genreDAO.getGenreByID(resultSet.getInt(4));
 
-                book.setBookId(resultSet.getInt(1));
+                book.setId(resultSet.getInt(1));
                 book.setISBN(resultSet.getString(2));
                 book.setTitle(resultSet.getString(3));
-                book.setGenreId(resultSet.getInt(4));
+                book.setGenre(genre);
                 book.setVolume(resultSet.getInt(5));
                 book.setBookAbstract(resultSet.getString(6));
                 book.setLanguage(resultSet.getString(7));
@@ -186,18 +203,19 @@ public class BookDAOImpl extends General implements BookDAO {
         PreparedStatement preparedStatement = null;
 
         try{
-            if(book.getBookId() != 0){
+            if(book.getId() != 0){
                 connection = DataSource.getInstance().getConnection();
                 String sql;
                 sql = "UPDATE Book SET " +
                         "ISBN=?, title=?, genre_id=?, volume=?, abstract=?, language=?, count=?, edition_year=?, pages=?, country_of_edition=?" +
-                        " WHERE book_id=" + book.getBookId();
+                        " WHERE book_id=?";
 
+                preparedStatement.setInt(1, book.getId());
                 preparedStatement = connection.prepareStatement(sql);
 
                 preparedStatement.setString(1, book.getISBN());
                 preparedStatement.setString(2, book.getTitle());
-                preparedStatement.setInt(3, book.getGenreId());
+                preparedStatement.setInt(3, book.getGenre().getGenreId());
                 preparedStatement.setInt(4, book.getVolume());
                 preparedStatement.setString(5, book.getBookAbstract());
                 preparedStatement.setString(6, book.getLanguage());
@@ -227,8 +245,9 @@ public class BookDAOImpl extends General implements BookDAO {
         try{
             connection = DataSource.getInstance().getConnection();
             String sql;
-            sql = "DELETE FROM Book WHERE book_id=" + id;
+            sql = "DELETE FROM Book WHERE book_id=?";
 
+            preparedStatement.setInt(1, id);
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.executeUpdate();
 
@@ -254,18 +273,21 @@ public class BookDAOImpl extends General implements BookDAO {
             bookList = new ArrayList<Book>();
             String sql;
             sql = "select * from book left join book_author on book.book_id = book_author.book_id" +
-                    "where book_author.author_id" + authorId;
+                    "where book_author.author_id=?";
 
+            preparedStatement.setInt(1, authorId);
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
 
             while(resultSet.next()){
                 Book book = new Book();
+                Genre genre = new Genre();
+                genre = genreDAO.getGenreByID(resultSet.getInt(4));
 
-                book.setBookId(resultSet.getInt("book_id"));
+                book.setId(resultSet.getInt("book_id"));
                 book.setISBN(resultSet.getString("ISBN"));
                 book.setTitle(resultSet.getString("title"));
-                book.setGenreId(resultSet.getInt("genre_id"));
+                book.setGenre(genre);
                 book.setVolume(resultSet.getInt("volume"));
                 book.setBookAbstract(resultSet.getString("abstract"));
                 book.setLanguage(resultSet.getString("language"));
@@ -303,18 +325,21 @@ public class BookDAOImpl extends General implements BookDAO {
             String sql;
             sql = "select * from book left join genre" +
                     "on book.genre_id = genre.genre_id" +
-                    "where book.genre_id=" + genreId;
+                    "where book.genre_id= ?";
 
+            preparedStatement.setInt(1, genreId);
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
 
             while(resultSet.next()){
                 Book book = new Book();
+                Genre genre = new Genre();
+                genre = genreDAO.getGenreByID(resultSet.getInt(4));
 
-                book.setBookId(resultSet.getInt("book_id"));
+                book.setId(resultSet.getInt("book_id"));
                 book.setISBN(resultSet.getString("ISBN"));
                 book.setTitle(resultSet.getString("title"));
-                book.setGenreId(resultSet.getInt("genre_id"));
+                book.setGenre(genre);
                 book.setVolume(resultSet.getInt("volume"));
                 book.setBookAbstract(resultSet.getString("abstract"));
                 book.setLanguage(resultSet.getString("language"));

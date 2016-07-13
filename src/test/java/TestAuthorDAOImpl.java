@@ -10,7 +10,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Random;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
@@ -33,7 +32,7 @@ public class TestAuthorDAOImpl {
 
     @After
     public void tearDown() throws PropertyVetoException, IOException, SQLException {
-        deleteCreatedAuthor(author);
+        //deleteCreatedAuthor(author);
 
         closeResource(resultSet);
         closeResource(preparedStatement);
@@ -41,26 +40,25 @@ public class TestAuthorDAOImpl {
     }
 
     @Test
-    public void insertAuthor() throws SQLException, PropertyVetoException, IOException {
-        Author newAuthor = getRandomAuthor();
-        authorDAO.add(newAuthor);
+    public void add_author() throws SQLException, PropertyVetoException, IOException {
+        Author expectedAuthor = getRandomAuthor();
+
         // test method
-        newAuthor.setId(newAuthor.getId()) ;
+        authorDAO.add(expectedAuthor);
 
-        Author author = getAuthorByIdHelper(newAuthor.getId());
-        assertNotNull(newAuthor);
-        assertTrue(newAuthor.getId() > 0);
-        assertEquals( newAuthor.getName()     , author.getName()    );
-        assertEquals( newAuthor.getSurname()  , author.getSurname()  );
-        assertEquals( newAuthor.geteMail()    , author.geteMail()   );
-        assertEquals( newAuthor.getWebPage()  , author.getWebPage()  );
-        assertEquals( newAuthor.getBiography(), author.getBiography());
+        Author author = getAuthorByIdHelper(expectedAuthor.getId());
+        assertNotNull(expectedAuthor);
+        assertTrue(expectedAuthor.getId() > 0);
+        assertEquals( expectedAuthor.getName(), author.getName());
+        assertEquals( expectedAuthor.getSurname(), author.getSurname());
+        assertEquals( expectedAuthor.geteMail(), author.geteMail());
+        assertEquals( expectedAuthor.getWebPage(), author.getWebPage());
+        assertEquals( expectedAuthor.getBiography(), author.getBiography());
 
-        deleteCreatedAuthor(newAuthor);
-
+        deleteCreatedAuthor(expectedAuthor);
     }
 
-    @Test
+  /**  @Test
     public void getAuthorByID() throws SQLException {
         author = getRandomAuthor();
         assertEquals(0, author.getId());
@@ -97,7 +95,7 @@ public class TestAuthorDAOImpl {
         assertEquals(author.getBiography(), newAuthor.getBiography());
     }
 
-
+*/
 
 
     private void closeResource(AutoCloseable closeable){
@@ -161,7 +159,8 @@ public class TestAuthorDAOImpl {
 
         connection = DataSource.getInstance().getConnection();
         String sql;
-        sql = "DELETE FROM Author WHERE author_id = " + author.getId();
+        sql = "DELETE FROM Author WHERE author_id = ?";
+        preparedStatement.setInt(1, author.getId());
         preparedStatement = connection.prepareStatement(sql);
         isExecuted = preparedStatement.executeUpdate();
         if (isExecuted == 0) {

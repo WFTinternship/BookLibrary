@@ -13,7 +13,7 @@ import java.util.List;
 
 public class AuthorDAOImpl extends General implements AuthorDAO {
 
-    public void add(Author author) {
+    public int add(Author author) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -48,6 +48,7 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
         } finally{
             closeConnection( preparedStatement, connection);
         }
+        return author.getId();
     }
 
     public Author getAuthorByID(int id) {
@@ -172,8 +173,9 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
             authorList = new ArrayList<Author>();
             String sql;
             sql = "SELECT * FROM book_author" +
-                    "where book_author.author_id" + bookId;
+                    "where book_author.author_id=?";
 
+            preparedStatement.setInt(1, bookId);
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
 
@@ -214,7 +216,8 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
                 String sql;
                 sql = "UPDATE Author SET " +
                         "name = ?, surname = ?, email = ?, web_page = ?, biography = ? " +
-                        "WHERE author_id = " + author.getId();
+                        "WHERE author_id = ?";
+                preparedStatement.setInt(1, author.getId());
                 preparedStatement = connection.prepareStatement(sql);
 
                 preparedStatement.setString(1, author.getName());
@@ -245,7 +248,8 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
         try{
             connection = DataSource.getInstance().getConnection();
             String sql;
-            sql = "DELETE FROM Author WHERE author_id = " + id;
+            sql = "DELETE FROM Author WHERE author_id = ?";
+            preparedStatement.setInt(1, id);
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.executeUpdate();
 
