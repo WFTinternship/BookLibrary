@@ -1,3 +1,5 @@
+package com.workfront.internship.booklibrary.dao;
+
 import com.workfront.internship.booklibrary.common.Pending;
 import com.workfront.internship.booklibrary.dao.DataSource;
 import com.workfront.internship.booklibrary.dao.General;
@@ -47,8 +49,6 @@ public class TestPendingDAOImpl {
         } catch (IOException e) {
             e.printStackTrace();
         } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
             e.printStackTrace();
         }
 

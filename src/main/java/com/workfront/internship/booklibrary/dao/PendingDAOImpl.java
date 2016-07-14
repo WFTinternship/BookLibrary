@@ -18,9 +18,8 @@ public class PendingDAOImpl extends General implements PendingDAO{
 
         try{
             connection = DataSource.getInstance().getConnection();
-            String sql;
-            sql = "INSERT INTO Pending(user_id, book_id, pending_time) VALUES(?, ?, ?)";
-            preparedStatement = connection.prepareStatement(sql);
+            String sql = "INSERT INTO Pending(user_id, book_id, pending_time) VALUES(?, ?, ?)";
+            preparedStatement = connection.prepareStatement(sql, preparedStatement.RETURN_GENERATED_KEYS);
 
             //preparedStatement.setInt(1, pending.getPendingId());
             preparedStatement.setInt(1, pending.getUserId());
@@ -36,6 +35,7 @@ public class PendingDAOImpl extends General implements PendingDAO{
 
         } catch (IOException | SQLException e){
             e.printStackTrace();
+            //todo use log4j
         }finally {
             closeConnection(preparedStatement, connection);
         }
@@ -51,8 +51,7 @@ public class PendingDAOImpl extends General implements PendingDAO{
         try{
             connection = DataSource.getInstance().getConnection();
             pending = new Pending();
-            String sql;
-            sql = "select * from pending where pending.pending_id =" + id; //pending.getPendingId();
+            String sql = "select * from pending where pending.pending_id =" + id; //pending.getPendingId();
 
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
@@ -84,8 +83,7 @@ public class PendingDAOImpl extends General implements PendingDAO{
             connection = DataSource.getInstance().getConnection();
             pendingList = new ArrayList<Pending>();
 
-            String sql;
-            sql = "SELECT * FROM pending" +
+            String sql = "SELECT * FROM pending" +
                     "where pending.book_id" + bookId;
 
             preparedStatement = connection.prepareStatement(sql);
@@ -124,8 +122,7 @@ public class PendingDAOImpl extends General implements PendingDAO{
             connection = DataSource.getInstance().getConnection();
             pendingList = new ArrayList<Pending>();
 
-            String sql;
-            sql = "SELECT * FROM pending" +
+            String sql = "SELECT * FROM pending" +
                     "where pending.user_id" + userId;
 
             preparedStatement = connection.prepareStatement(sql);
@@ -158,8 +155,7 @@ public class PendingDAOImpl extends General implements PendingDAO{
 
         try{
             connection = DataSource.getInstance().getConnection();
-            String sql;
-            sql = "DELETE * FROM Pending where pending_id=" + id;
+            String sql = "DELETE * FROM Pending where pending_id=" + id;
 
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.executeUpdate();

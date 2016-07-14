@@ -23,9 +23,8 @@ public class MediaDAOImpl extends General implements MediaDAO{
 
         try{
             connection = DataSource.getInstance().getConnection();
-            String sql;
-            sql = "INSERT INTO Media(media, media_type, book_id) VALUES(?, ?, ?)";
-            preparedStatement = connection.prepareStatement(sql);
+            String sql = "INSERT INTO Media(media, media_type, book_id) VALUES(?, ?, ?)";
+            preparedStatement = connection.prepareStatement(sql, preparedStatement.RETURN_GENERATED_KEYS);
 
             //preparedStatement.setInt(1,media.getMediaId());
             preparedStatement.setString(1, media.getLink());
@@ -41,6 +40,7 @@ public class MediaDAOImpl extends General implements MediaDAO{
 
         } catch (IOException | SQLException e){
             e.printStackTrace();
+            //todo use log4j
         }finally {
             closeConnection(preparedStatement, connection);
         }
@@ -58,8 +58,7 @@ public class MediaDAOImpl extends General implements MediaDAO{
             media = new Media();
             Book book = new Book();
             Genre genre = new Genre();
-            String sql;
-            sql = "SELECT * FROM Media LEFT JOIN Book " +
+            String sql = "SELECT * FROM Media LEFT JOIN Book " +
                     "ON Media.book_id = Book.book_id " +
                     "where Media.book_id = " + id;
 
@@ -104,8 +103,7 @@ public class MediaDAOImpl extends General implements MediaDAO{
         try{
             connection = DataSource.getInstance().getConnection();
             medias = new ArrayList<Media>();
-            String sql;
-            sql = "SELECT * FROM Media LEFT JOIN Book " +
+            String sql = "SELECT * FROM Media LEFT JOIN Book " +
                     "ON Media.book_id = Book.book_id";
 
             preparedStatement = connection.prepareStatement(sql);
@@ -154,8 +152,7 @@ public class MediaDAOImpl extends General implements MediaDAO{
         try{
             if(media.getId() != 0){
                 connection = DataSource.getInstance().getConnection();
-                String sql;
-                sql = "UPDATE Media SET " +
+                String sql = "UPDATE Media SET " +
                         "media_id=?, media=?, media_type=?, book_id=?" +
                         " WHERE media_id=" + media.getId();
 
@@ -182,8 +179,7 @@ public class MediaDAOImpl extends General implements MediaDAO{
 
         try{
             connection = DataSource.getInstance().getConnection();
-            String sql;
-            sql = "DELETE FROM Media WHERE media_id=" + id;
+            String sql = "DELETE FROM Media WHERE media_id=" + id;
 
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.executeUpdate();
@@ -204,8 +200,7 @@ public class MediaDAOImpl extends General implements MediaDAO{
         try{
             connection = DataSource.getInstance().getConnection();
             mediaList = new ArrayList<Media>();
-            String sql;
-            sql = "SELECT * FROM media where media.book_id = " + bookId;
+            String sql = "SELECT * FROM media where media.book_id = " + bookId;
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
 

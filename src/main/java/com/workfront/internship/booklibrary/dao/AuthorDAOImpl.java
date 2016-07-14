@@ -22,8 +22,8 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
         try{
             connection = DataSource.getInstance().getConnection();
 
-            String sql;
-            sql = "INSERT INTO Author(name, surname, email, web_page, biography) VALUES(?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO Author(name, surname, email, web_page, biography) VALUES(?, ?, ?, ?, ?)";
+
             preparedStatement = connection.prepareStatement(sql, preparedStatement.RETURN_GENERATED_KEYS);
 
             preparedStatement.setString(1, author.getName());
@@ -41,6 +41,7 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
 
         } catch (IOException | SQLException e){
             e.printStackTrace();
+            //todo use log4j
         } finally{
             closeConnection( preparedStatement, connection);
         }
@@ -54,8 +55,7 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
 
         try{
             connection = DataSource.getInstance().getConnection();
-            String sql;
-            sql = "SELECT * FROM Author WHERE author_id=" + id;
+            String sql = "SELECT * FROM Author WHERE author_id=" + id;
             preparedStatement = connection.prepareStatement(sql);
             ResultSet rs = preparedStatement.executeQuery();
 
@@ -86,8 +86,7 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
 
         try{
             connection = DataSource.getInstance().getConnection();
-            String sql;
-            sql = String.format("SELECT * FROM author WHERE name = '%s'", name);
+            String sql = String.format("SELECT * FROM author WHERE name = '%s'", name);
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
 
@@ -119,8 +118,7 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
         try{
             connection = DataSource.getInstance().getConnection();
             authors = new ArrayList<Author>();
-            String sql;
-            sql = "SELECT * FROM Author";
+            String sql = "SELECT * FROM Author";
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
 
@@ -155,8 +153,7 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
         try{
             connection = DataSource.getInstance().getConnection();
             authorList = new ArrayList<Author>();
-            String sql;
-            sql = "SELECT * FROM book_author" +
+            String sql = "SELECT * FROM book_author" +
                     "where book_author.author_id=?";
 
             preparedStatement.setInt(1, bookId);
@@ -193,8 +190,7 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
         try{
             if(author.getId() != 0){
                 connection = DataSource.getInstance().getConnection();
-                String sql;
-                sql = "UPDATE Author SET " +
+                String sql = "UPDATE Author SET " +
                         "name = ?, surname = ?, email = ?, web_page = ?, biography = ? " +
                         "WHERE author_id = ?";
                 preparedStatement.setInt(1, author.getId());
@@ -223,8 +219,7 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
 
         try{
             connection = DataSource.getInstance().getConnection();
-            String sql;
-            sql = "DELETE FROM Author WHERE author_id = ?";
+            String sql = "DELETE FROM Author WHERE author_id = ?";
             preparedStatement.setInt(1, id);
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.executeUpdate();

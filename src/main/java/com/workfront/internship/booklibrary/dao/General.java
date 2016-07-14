@@ -7,6 +7,10 @@ import java.sql.Statement;
 
 
 public class General {
+    protected void closeConnection(Connection c){
+        closeConnection(null, null, c);
+    }
+
     protected void closeConnection(Statement st, Connection c) {
         closeConnection(null, st, c);
     }

@@ -36,5 +36,5 @@ public class DataSource {
     public Connection getConnection() throws SQLException {
         return this.ds.getConnection();
     }
-}
+} //todo get connection from ConnectionResources.properties file
 

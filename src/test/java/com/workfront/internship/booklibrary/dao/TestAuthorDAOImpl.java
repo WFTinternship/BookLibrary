@@ -1,8 +1,11 @@
+package com.workfront.internship.booklibrary.dao;
+
 import com.workfront.internship.booklibrary.common.Author;
 import com.workfront.internship.booklibrary.dao.AuthorDAO;
 import com.workfront.internship.booklibrary.dao.AuthorDAOImpl;
 import com.workfront.internship.booklibrary.dao.DataSource;
 import org.junit.*;
+import org.junit.Test;
 
 import java.beans.PropertyVetoException;
 import java.io.IOException;
@@ -21,6 +24,7 @@ public class TestAuthorDAOImpl {
     ResultSet resultSet = null;
     AuthorDAO authorDAO = new AuthorDAOImpl();
     Author author = null;
+
 
     @Before
     public void setUp() throws PropertyVetoException, SQLException, IOException {
@@ -135,7 +139,7 @@ public class TestAuthorDAOImpl {
         return author;
     }
 
-    private Author getRandomAuthor() throws SQLException {
+    private Author getRandomAuthor() {
         Author author = new Author();
 
         author.setName("Hermann");

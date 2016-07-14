@@ -1,3 +1,5 @@
+package com.workfront.internship.booklibrary.dao;
+
 import com.workfront.internship.booklibrary.common.Author;
 import com.workfront.internship.booklibrary.common.Book;
 import com.workfront.internship.booklibrary.common.Genre;

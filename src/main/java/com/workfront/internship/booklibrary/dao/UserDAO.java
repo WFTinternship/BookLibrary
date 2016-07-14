@@ -12,7 +12,7 @@ public interface UserDAO {
     //get all data fields of a user entry by 'user_id' field
     User getUserByID(int id);
 
-    User getUserByName(String name);
+    User getUserByeMail(String email);
 
     User getUserByUsername(String userName);
 
@@ -23,4 +23,6 @@ public interface UserDAO {
     void updateUser(User user);
 
     void deleteUser(int id);
+
+    void deleteAll();
 }

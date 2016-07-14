@@ -21,9 +21,8 @@ public class GenreDAOImpl extends General implements GenreDAO {
 
         try{
             connection = DataSource.getInstance().getConnection();
-            String sql;
-            sql = "INSERT INTO Genre(genre) VALUES(?)";
-            preparedStatement = connection.prepareStatement(sql);
+            String sql = "INSERT INTO Genre(genre) VALUES(?)";
+            preparedStatement = connection.prepareStatement(sql, preparedStatement.RETURN_GENERATED_KEYS);
 
             //preparedStatement.setInt(1, genre.getId());
             preparedStatement.setString(1, genre.getGenre());
@@ -37,6 +36,7 @@ public class GenreDAOImpl extends General implements GenreDAO {
 
         } catch (IOException | SQLException e){
             e.printStackTrace();
+            //todo use log4j
         } finally {
             closeConnection(preparedStatement, connection);
         }
@@ -52,8 +52,7 @@ public class GenreDAOImpl extends General implements GenreDAO {
         try{
             connection = DataSource.getInstance().getConnection();
             genre = new Genre();
-            String sql;
-            sql = "SELECT FROM Genre WHERE genre_id=" + id;
+            String sql = "SELECT FROM Genre WHERE genre_id=" + id;
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
 
@@ -80,8 +79,7 @@ public class GenreDAOImpl extends General implements GenreDAO {
         try{
             connection = DataSource.getInstance().getConnection();
             genre = new Genre();
-            String sql;
-            sql = "SELECT FROM Genre WHERE genre=" + genreName;
+            String sql = "SELECT FROM Genre WHERE genre=" + genreName;
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
 
@@ -108,8 +106,7 @@ public class GenreDAOImpl extends General implements GenreDAO {
         try{
             connection = DataSource.getInstance().getConnection();
             genres = new ArrayList<Genre>();
-            String sql;
-            sql = "SELECT * FROM Genre";
+            String sql = "SELECT * FROM Genre";
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
 
@@ -139,8 +136,7 @@ public class GenreDAOImpl extends General implements GenreDAO {
         try{
             if(genre.getId() != 0){
                 connection = DataSource.getInstance().getConnection();
-                String sql;
-                sql = "UPDATE Genre SET " +
+                String sql = "UPDATE Genre SET " +
                         "genre=?" +
                         " WHERE genre_id=" + genre.getId();
 
@@ -164,8 +160,7 @@ public class GenreDAOImpl extends General implements GenreDAO {
 
         try{
             connection = DataSource.getInstance().getConnection();
-            String sql;
-            sql = "DELETE FROM Gener WHERE book_id=" + id;
+            String sql = "DELETE FROM Gener WHERE book_id=" + id;
 
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.executeUpdate();

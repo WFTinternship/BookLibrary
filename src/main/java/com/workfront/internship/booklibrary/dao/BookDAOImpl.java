@@ -26,9 +26,8 @@ public class BookDAOImpl extends General implements BookDAO {
         try{
             //genreDAO.createGenre(book.getGenre());
             connection = DataSource.getInstance().getConnection();
-            String sql;
-            sql = "INSERT INTO Book(ISBN, title, genre_id, volume, abstract, language, count, edition_year, pages, country_of_edition) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            preparedStatement = connection.prepareStatement(sql);
+            String sql = "INSERT INTO Book(ISBN, title, genre_id, volume, abstract, language, count, edition_year, pages, country_of_edition) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            preparedStatement = connection.prepareStatement(sql, preparedStatement.RETURN_GENERATED_KEYS);
 
             //preparedStatement.setInt(1, book.getId());
             preparedStatement.setString(1, book.getISBN());
@@ -51,6 +50,7 @@ public class BookDAOImpl extends General implements BookDAO {
 
         } catch (IOException | SQLException e){
             e.printStackTrace();
+            //todo use log4j
         } finally {
             closeConnection(preparedStatement, connection);
         }
@@ -67,8 +67,7 @@ public class BookDAOImpl extends General implements BookDAO {
             connection = DataSource.getInstance().getConnection();
             book = new Book();
 
-            String sql;
-            sql = "SELECT * FROM Book LEFT JOIN Genre " +
+            String sql = "SELECT * FROM Book LEFT JOIN Genre " +
                     "ON Book.genre_id = Genre.genre_id " +
                     "where Book.book_id = ?";
 
@@ -108,8 +107,7 @@ public class BookDAOImpl extends General implements BookDAO {
             connection = DataSource.getInstance().getConnection();
             book = new Book();
 
-            String sql;
-            sql = "SELECT * FROM Book LEFT JOIN Genre " +
+            String sql = "SELECT * FROM Book LEFT JOIN Genre " +
                     "ON Book.genre_id = Genre.genre_id " +
                     "where Book.title = ?";
 
@@ -148,8 +146,7 @@ public class BookDAOImpl extends General implements BookDAO {
         try{
             connection = DataSource.getInstance().getConnection();
             books = new ArrayList<Book>();
-            String sql;
-            sql = "SELECT * FROM Book LEFT JOIN Genre ON Book.genre_id = Genre.genre_id";
+            String sql = "SELECT * FROM Book LEFT JOIN Genre ON Book.genre_id = Genre.genre_id";
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
 
@@ -189,8 +186,7 @@ public class BookDAOImpl extends General implements BookDAO {
         try{
             if(book.getId() != 0){
                 connection = DataSource.getInstance().getConnection();
-                String sql;
-                sql = "UPDATE Book SET " +
+                String sql = "UPDATE Book SET " +
                         "ISBN=?, title=?, genre_id=?, volume=?, abstract=?, language=?, count=?, edition_year=?, pages=?, country_of_edition=?" +
                         " WHERE book_id=?";
 
@@ -224,8 +220,7 @@ public class BookDAOImpl extends General implements BookDAO {
 
         try{
             connection = DataSource.getInstance().getConnection();
-            String sql;
-            sql = "DELETE FROM Book WHERE book_id=?";
+            String sql = "DELETE FROM Book WHERE book_id=?";
 
             preparedStatement.setInt(1, id);
             preparedStatement = connection.prepareStatement(sql);
@@ -247,8 +242,7 @@ public class BookDAOImpl extends General implements BookDAO {
         try{
             connection = DataSource.getInstance().getConnection();
             bookList = new ArrayList<Book>();
-            String sql;
-            sql = "select * from book left join book_author on book.book_id = book_author.book_id" +
+            String sql = "select * from book left join book_author on book.book_id = book_author.book_id" +
                     "where book_author.author_id=?";
 
             preparedStatement.setInt(1, authorId);
@@ -294,8 +288,7 @@ public class BookDAOImpl extends General implements BookDAO {
         try{
             connection = DataSource.getInstance().getConnection();
             bookList = new ArrayList<Book>();
-            String sql;
-            sql = "select * from book left join genre" +
+            String sql = "select * from book left join genre" +
                     "on book.genre_id = genre.genre_id" +
                     "where book.genre_id= ?";
 

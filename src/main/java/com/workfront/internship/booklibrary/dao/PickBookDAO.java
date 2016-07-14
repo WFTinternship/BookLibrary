@@ -10,6 +10,8 @@ public interface PickBookDAO {
 
     List<PickBook> getAllPickedBooks();
 
+    List<PickBook> getAllPickedBooksByUserId(int userId);
+
     void updatePickedBook(PickBook pickedBook);
 
     void deletePickedBook(int id);

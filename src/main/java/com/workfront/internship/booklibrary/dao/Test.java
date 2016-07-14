@@ -31,13 +31,13 @@ public class Test {
         user.setAccessPrivilege("admin");
 
         UserDAOImpl userDao = new UserDAOImpl();
-        userDao.createUser(user);
+        userDao.add(user);
     }
     public static void createBookTest() {
         Book book = new Book();
 
         Genre genre = new Genre();
-        genre.setGenreId(1);
+        genre.setId(1);
 
         book.setISBN("165465416541");
         book.setTitle("MYSQL workbench");
@@ -63,7 +63,7 @@ public class Test {
     public static void getUserByIDTest() {
         UserDAOImpl userDao = new UserDAOImpl();
         User user = userDao.getUserByID(1);
-        System.out.println("user_id: " + user.getUserId());
+        System.out.println("user_id: " + user.getId());
         System.out.println("name: " + user.getName());
         System.out.println("surname: " + user.getSurname());
         System.out.println("username: " + user.getUsername());
