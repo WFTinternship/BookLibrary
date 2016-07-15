@@ -63,8 +63,9 @@ public class Book {
         return genre;
     }
 
-    public void setGenre(Genre genre) {
+    public Book setGenre(Genre genre) {
         this.genre = genre;
+        return this;
     }
 
     public int getVolume() {

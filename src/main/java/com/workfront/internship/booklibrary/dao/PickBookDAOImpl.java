@@ -60,7 +60,7 @@ public class PickBookDAOImpl extends General implements PickBookDAO {
 
             } */
 
-        } catch (IOException | SQLException e){
+        } catch (SQLException e){
             e.printStackTrace();
 
         }finally {
@@ -97,7 +97,7 @@ public class PickBookDAOImpl extends General implements PickBookDAO {
                 pickedBook.setReturnDate(resultSet.getTimestamp("return_date"));
             }
 
-        } catch (IOException | SQLException e){
+        } catch (SQLException e){
             e.printStackTrace();
         }finally {
             closeConnection(resultSet, preparedStatement, connection);
@@ -136,7 +136,7 @@ public class PickBookDAOImpl extends General implements PickBookDAO {
             }
 
 
-        } catch (IOException | SQLException e){
+        } catch (SQLException e){
             e.printStackTrace();
         } finally {
             closeConnection(resultSet, preparedStatement, connection);
@@ -167,7 +167,7 @@ public class PickBookDAOImpl extends General implements PickBookDAO {
                 preparedStatement.executeUpdate();
             }
 
-        } catch (IOException | SQLException e){
+        } catch (SQLException e){
             e.printStackTrace();
         } finally {
             closeConnection(preparedStatement, connection);
@@ -186,7 +186,7 @@ public class PickBookDAOImpl extends General implements PickBookDAO {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.executeUpdate();
 
-        } catch (IOException | SQLException e){
+        } catch (SQLException e){
             e.printStackTrace();
         } finally {
             closeConnection(preparedStatement, connection);
@@ -226,7 +226,7 @@ public class PickBookDAOImpl extends General implements PickBookDAO {
             }
 
 
-        } catch (IOException | SQLException e){
+        } catch (SQLException e){
             e.printStackTrace();
         } finally {
             closeConnection(resultSet, preparedStatement, connection);

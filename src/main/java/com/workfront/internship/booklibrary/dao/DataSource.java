@@ -1,6 +1,5 @@
 package com.workfront.internship.booklibrary.dao;
 
-import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -26,9 +25,13 @@ public class DataSource {
         ds.getConnection();
     }
 
-    public static DataSource getInstance() throws IOException, SQLException {
+    public static DataSource getInstance() {
         if (datasource == null) {
-            datasource = new DataSource();
+            try {
+                datasource = new DataSource();
+            } catch (Exception ex) {
+                throw new RuntimeException(ex.getMessage(), ex);
+            }
         }
         return datasource;
     }

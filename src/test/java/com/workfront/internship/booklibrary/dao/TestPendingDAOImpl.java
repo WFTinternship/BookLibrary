@@ -46,8 +46,6 @@ public class TestPendingDAOImpl {
 
             preparedStatement.executeUpdate();
 
-        } catch (IOException e) {
-            e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
         }

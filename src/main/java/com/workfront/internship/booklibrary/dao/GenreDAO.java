@@ -16,4 +16,6 @@ public interface GenreDAO {
     void updateGenre(Genre genre);
 
     void deleteGenre(int id);
+
+    void deleteAll();
 }

@@ -1,5 +1,7 @@
 package com.workfront.internship.booklibrary.dao;
 
+import com.workfront.internship.booklibrary.common.Book;
+import com.workfront.internship.booklibrary.common.Genre;
 import com.workfront.internship.booklibrary.common.User;
 import com.workfront.internship.booklibrary.dao.TestUtil;
 import com.workfront.internship.booklibrary.dao.UserDAO;
@@ -24,32 +26,31 @@ import java.util.List;
 import static com.workfront.internship.booklibrary.dao.TestUtil.*;
 
 public class TestUserDAOImpl {
-    private Connection connection = null;
-    private PreparedStatement preparedStatement = null;
-    private ResultSet resultSet = null;
 
-    private UserDAO userDAO = new UserDAOImpl();
-    private List<User> userList = new ArrayList<>();
-    //private User user = null;
+    private UserDAO userDAO;
+    private User expectedUser = null;
+
+    DataSource dataSource = DataSource.getInstance();
+    //private List<User> userList = new ArrayList<>();
+
 
     @Before
-    public void setup() {
-        //create mocked user
-        User user = getRandomUser();
+    public void setup() throws Exception{
+        init();
+        expectedUser = getRandomUser();
 
-        userDAO.add(user);
-        userList.add(user);
+        userDAO.add(expectedUser);
+
     }
 
     @After
     public void tearDown() {
-        // delete all User objects created during this test deleteAllUsers()
-        //deleteAllUsers();
+        userDAO.deleteAll();
 
-        //close resources
-        closeResource(resultSet);
-        closeResource(preparedStatement);
-        closeResource(connection);
+    }
+
+    private void init() throws Exception {
+        userDAO = new UserDAOImpl(dataSource);
     }
 
     @Test
@@ -156,7 +157,7 @@ public class TestUserDAOImpl {
         user.setName("Sona");
         user.setUsername("sonamik");
 
-        // Test method updateUser()
+        // TmpTest method updateUser()
         userDAO.updateUser(user);
 
         User newUser = userDAO.getUserByID(user.getId());
@@ -169,7 +170,7 @@ public class TestUserDAOImpl {
         User user = userList.get(0);
         int id = user.getId();
 
-        // Test method deleteUser()
+        // TmpTest method deleteUser()
         userDAO.deleteUser(id);
 
         User actualUser = userDAO.getUserByID(id);
@@ -179,7 +180,7 @@ public class TestUserDAOImpl {
 
     @Test
     public void delete_all(){
-        // Test method deleteAllUsers()
+        // TmpTest method deleteAllUsers()
         userDAO.deleteAll();
 
         assertTrue(userDAO.getAllUsers().isEmpty());

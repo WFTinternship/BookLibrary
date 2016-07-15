@@ -4,6 +4,7 @@ import com.workfront.internship.booklibrary.common.Book;
 import java.util.List;
 
 public interface BookDAO {
+
     int add(Book book);
 
     Book getBookByID(int id);
@@ -15,4 +16,7 @@ public interface BookDAO {
     void updateBook(Book book);
 
     void deleteBook(int id);
+
+    void deleteAll();
+
 }

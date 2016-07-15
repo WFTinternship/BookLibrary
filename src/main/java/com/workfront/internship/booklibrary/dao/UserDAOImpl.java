@@ -11,7 +11,13 @@ import java.util.List;
 
 public class UserDAOImpl extends General implements UserDAO {
 
-    final static Logger logger = Logger.getLogger("User logger");
+    private static final Logger LOGGER = Logger.getLogger(UserDAOImpl.class);
+
+    private DataSource dataSource;
+
+    public UserDAOImpl(DataSource dataSource) throws Exception {
+        this.dataSource = dataSource;
+    }
 
     @Override
     public int add(User user) {
@@ -22,11 +28,11 @@ public class UserDAOImpl extends General implements UserDAO {
         int lastId = 0;
 
         try{
-            connection = DataSource.getInstance().getConnection();
+            connection = dataSource.getConnection();
 
             String sql = "INSERT INTO User(name, surname, username, password, address, e_mail, phone, access_privilege) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
             preparedStatement = connection.prepareStatement(sql, preparedStatement.RETURN_GENERATED_KEYS);
-            //preparedStatement.setInt(1, user.getId());
+
             preparedStatement.setString(1, user.getName());
             preparedStatement.setString(2, user.getSurname());
             preparedStatement.setString(3, user.getUsername());
@@ -43,9 +49,8 @@ public class UserDAOImpl extends General implements UserDAO {
             }
             user.setId(lastId);
 
-        } catch (IOException | SQLException e) {
-            //todo
-            logger.error("IO exception or SQL exception occurred!");
+        } catch (SQLException e) {
+            LOGGER.error("IO exception or SQL exception occurred!");
             throw new RuntimeException(e);
         } finally{
             closeConnection( preparedStatement, connection);
@@ -60,7 +65,7 @@ public class UserDAOImpl extends General implements UserDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         try{
-            connection = DataSource.getInstance().getConnection();
+            connection = dataSource.getConnection();
             String sql = "SELECT * FROM User WHERE user_id=?";
 
             preparedStatement = connection.prepareStatement(sql);
@@ -72,8 +77,8 @@ public class UserDAOImpl extends General implements UserDAO {
                 setUserDetails(rs, user);
             }
 
-        } catch (IOException | SQLException e){
-            logger.error("IO exception or SQL exception occurred!");
+        } catch (SQLException e){
+            LOGGER.error("IO exception or SQL exception occurred!");
             throw new RuntimeException(e);
         }  finally{
             closeConnection( preparedStatement, connection);
@@ -88,7 +93,7 @@ public class UserDAOImpl extends General implements UserDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         try{
-            connection = DataSource.getInstance().getConnection();
+            connection = dataSource.getConnection();
             String sql = String.format("SELECT * FROM User WHERE e_mail= '%s'", email);
 
             preparedStatement = connection.prepareStatement(sql);
@@ -99,8 +104,8 @@ public class UserDAOImpl extends General implements UserDAO {
                 setUserDetails(rs, user);
             }
 
-        } catch (IOException | SQLException e){
-            logger.error("IO exception or SQL exception occurred!");
+        } catch (SQLException e){
+            LOGGER.error("IO exception or SQL exception occurred!");
             throw new RuntimeException(e);
         } finally{
             closeConnection( preparedStatement, connection);
@@ -115,7 +120,7 @@ public class UserDAOImpl extends General implements UserDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         try{
-            connection = DataSource.getInstance().getConnection();
+            connection = dataSource.getConnection();
             String sql = String.format("SELECT * FROM User WHERE username= '%s'", userName);
 
             preparedStatement = connection.prepareStatement(sql);
@@ -126,8 +131,8 @@ public class UserDAOImpl extends General implements UserDAO {
                 setUserDetails(rs, user);
             }
 
-        } catch (IOException | SQLException e){
-            logger.error("IO exception or SQL exception occurred!");
+        } catch (SQLException e){
+            LOGGER.error("IO exception or SQL exception occurred!");
             throw new RuntimeException(e);
         }finally{
             closeConnection( preparedStatement, connection);
@@ -139,25 +144,24 @@ public class UserDAOImpl extends General implements UserDAO {
     @Override
     public List<User> getAllUsers() {
         List<User> users = null;
-        User user = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSets = null;
         try{
-            connection = DataSource.getInstance().getConnection();
+            connection = dataSource.getConnection();
             users = new ArrayList<User>();
             String sql = "SELECT * FROM User";
             preparedStatement = connection.prepareStatement(sql);
             resultSets = preparedStatement.executeQuery();
-            //ResultSetMetaData rsmd = rs.getMetaData();
+
             while (resultSets.next()) {
-                user = new User();
+                User user = new User();
                 setUserDetails(resultSets, user);
                 users.add(user);
             }
 
-        } catch (IOException | SQLException e){
-            logger.error("IO exception or SQL exception occurred!");
+        } catch (SQLException e){
+            LOGGER.error("IO exception or SQL exception occurred!");
             throw new RuntimeException(e);
         } finally {
             closeConnection(resultSets, preparedStatement, connection);
@@ -173,7 +177,7 @@ public class UserDAOImpl extends General implements UserDAO {
 
         try{
             if(user.getId()!=0) {
-                connection = DataSource.getInstance().getConnection();
+                connection = dataSource.getConnection();
                 String sql = "UPDATE User SET " +
                         "name = ?, surname = ?, username = ?, password = ?, address =?, e_mail = ?, phone =?, access_privilege = ?" +
                         " WHERE user_id=?";
@@ -193,8 +197,8 @@ public class UserDAOImpl extends General implements UserDAO {
                 preparedStatement.executeUpdate();
             }
 
-        } catch (IOException | SQLException e){
-            logger.error("IO exception or SQL exception occurred!");
+        } catch (SQLException e){
+            LOGGER.error("IO exception or SQL exception occurred!");
             throw new RuntimeException(e);
         } finally{
             closeConnection( preparedStatement, connection);
@@ -208,16 +212,15 @@ public class UserDAOImpl extends General implements UserDAO {
         PreparedStatement preparedStatement = null;
 
         try {
-            connection = DataSource.getInstance().getConnection();
+            connection = dataSource.getConnection();
 
-            //String sql ="DELETE FROM User WHERE user_id="  + id;
             String sqlUser ="DELETE FROM user WHERE user_id=?";
             preparedStatement = connection.prepareStatement(sqlUser);
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
 
-        } catch (IOException | SQLException e){
-            logger.error("IO exception or SQL exception occurred!");
+        } catch (SQLException e){
+            LOGGER.error("IO exception or SQL exception occurred!");
             throw new RuntimeException(e);
         } finally{
             closeConnection(connection);
@@ -229,14 +232,14 @@ public class UserDAOImpl extends General implements UserDAO {
         PreparedStatement preparedStatement = null;
 
         try{
-            connection = DataSource.getInstance().getConnection();
+            connection = dataSource.getConnection();
             String sql = "DELETE FROM User";
 
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.executeUpdate();
 
-        } catch (IOException | SQLException e){
-            logger.error("IO exception or SQL exception occurred!");
+        } catch (SQLException e){
+            LOGGER.error("IO exception or SQL exception occurred!");
             throw new RuntimeException(e);
         } finally{
             closeConnection( preparedStatement, connection);
@@ -250,12 +253,14 @@ public class UserDAOImpl extends General implements UserDAO {
         ResultSet resultSet = null;
 
         try{
-            connection = DataSource.getInstance().getConnection();
+            connection = dataSource.getConnection();
             userList = new ArrayList<User>();
             String sql = "SELECT * FROM user left join pick_book" +
                     "on user.user_id = pick_book.user_id" +
-                    "where pick_book.book_id =" + bookId;
+                    "where pick_book.book_id =?";
+
             preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, bookId);
             resultSet = preparedStatement.executeQuery();
 
             while(resultSet.next()){
@@ -265,8 +270,8 @@ public class UserDAOImpl extends General implements UserDAO {
             }
 
 
-        } catch (IOException | SQLException e){
-            logger.error("IO exception or SQL exception occurred!");
+        } catch (SQLException e){
+            LOGGER.error("IO exception or SQL exception occurred!");
             throw new RuntimeException(e);
         } finally {
             closeConnection(resultSet, preparedStatement, connection);
@@ -281,12 +286,13 @@ public class UserDAOImpl extends General implements UserDAO {
         ResultSet resultSet = null;
 
         try{
-            connection = DataSource.getInstance().getConnection();
+            connection = dataSource.getConnection();
             userList = new ArrayList<User>();
             String sql = "SELECT * FROM user left join pending" +
                     "on user.user_id = pending.user_id" +
-                    "where pending.book_id =" + bookId;
+                    "where pending.book_id =";
             preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, bookId);
             resultSet = preparedStatement.executeQuery();
 
             while(resultSet.next()){
@@ -295,9 +301,8 @@ public class UserDAOImpl extends General implements UserDAO {
                 userList.add(user);
             }
 
-
-        }catch (IOException | SQLException e){
-            logger.error("IO exception or SQL exception occurred!");
+        }catch (SQLException e){
+            LOGGER.error("IO exception or SQL exception occurred!");
             throw new RuntimeException(e);
         } finally {
             closeConnection(resultSet, preparedStatement, connection);

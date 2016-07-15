@@ -33,7 +33,7 @@ public class PendingDAOImpl extends General implements PendingDAO{
             }
             pending.setUserId(lastId);
 
-        } catch (IOException | SQLException e){
+        } catch (SQLException e){
             e.printStackTrace();
             //todo use log4j
         }finally {
@@ -63,7 +63,7 @@ public class PendingDAOImpl extends General implements PendingDAO{
                 pending.setPendingDate(resultSet.getTimestamp("pending_time"));
             }
 
-        } catch (IOException | SQLException e){
+        } catch (SQLException e){
             e.printStackTrace();
         }finally {
             closeConnection(resultSet, preparedStatement, connection);
@@ -101,7 +101,7 @@ public class PendingDAOImpl extends General implements PendingDAO{
             }
 
 
-        } catch (IOException | SQLException e){
+        } catch (SQLException e){
             e.printStackTrace();
         }finally {
             closeConnection(resultSet, preparedStatement, connection);
@@ -140,7 +140,7 @@ public class PendingDAOImpl extends General implements PendingDAO{
             }
 
 
-        } catch (IOException | SQLException e){
+        } catch (SQLException e){
             e.printStackTrace();
         }finally {
             closeConnection(resultSet, preparedStatement, connection);
@@ -160,7 +160,7 @@ public class PendingDAOImpl extends General implements PendingDAO{
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.executeUpdate();
 
-        } catch (IOException | SQLException e){
+        } catch (SQLException e){
             e.printStackTrace();
         } finally {
             closeConnection(preparedStatement, connection);

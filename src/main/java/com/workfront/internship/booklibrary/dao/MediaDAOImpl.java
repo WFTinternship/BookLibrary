@@ -38,7 +38,7 @@ public class MediaDAOImpl extends General implements MediaDAO{
             }
             media.setId(lastId);
 
-        } catch (IOException | SQLException e){
+        } catch (SQLException e){
             e.printStackTrace();
             //todo use log4j
         }finally {
@@ -85,7 +85,7 @@ public class MediaDAOImpl extends General implements MediaDAO{
                 //media.setBook(book);
             }
 
-        } catch (IOException | SQLException e){
+        } catch (SQLException e){
             e.printStackTrace();
         }finally {
             closeConnection(resultSet, preparedStatement, connection);
@@ -135,7 +135,7 @@ public class MediaDAOImpl extends General implements MediaDAO{
                 medias.add(media);
             }
 
-        } catch (IOException | SQLException e){
+        } catch (SQLException e){
             e.printStackTrace();
         }finally {
             closeConnection(resultSet, preparedStatement,connection);
@@ -166,7 +166,7 @@ public class MediaDAOImpl extends General implements MediaDAO{
                 preparedStatement.executeUpdate();
 
             }
-        } catch (IOException | SQLException e){
+        } catch (SQLException e){
             e.printStackTrace();
         } finally {
             closeConnection(preparedStatement, connection);
@@ -184,7 +184,7 @@ public class MediaDAOImpl extends General implements MediaDAO{
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.executeUpdate();
 
-        } catch (IOException | SQLException e){
+        } catch (SQLException e){
             e.printStackTrace();
         }finally {
             closeConnection(preparedStatement, connection);
@@ -215,7 +215,7 @@ public class MediaDAOImpl extends General implements MediaDAO{
                 mediaList.add(media);
             }
 
-        } catch (IOException | SQLException e){
+        } catch (SQLException e){
             e.printStackTrace();
         } finally {
             closeConnection(resultSet, preparedStatement, connection);
