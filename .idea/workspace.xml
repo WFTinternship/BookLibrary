@@ -2,41 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0a17644c-020e-4dea-a6a2-e4c586dd2d3e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/workfront/internship/booklibrary/dao/TestGenreDAOImpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/workfront/internship/booklibrary/dao/TestMediaDAOImpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/workfront/internship/booklibrary/dao/TestPickBookDAOImpl.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.gitignore" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Book.java" afterPath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Book.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Genre.java" afterPath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Genre.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Media.java" afterPath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Media.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Pending.java" afterPath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Pending.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/PickBook.java" afterPath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/PickBook.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/User.java" afterPath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/User.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/AuthorDAO.java" afterPath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/AuthorDAO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/AuthorDAOImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/AuthorDAOImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/BookDAOImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/BookDAOImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/DataSource.java" afterPath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/DataSource.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/GenreDAOImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/GenreDAOImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/MediaDAO.java" afterPath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/MediaDAO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/MediaDAOImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/MediaDAOImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/PendingDAO.java" afterPath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/PendingDAO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/PendingDAOImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/PendingDAOImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/PickBookDAO.java" afterPath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/PickBookDAO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/PickBookDAOImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/PickBookDAOImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/UserDAO.java" afterPath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/UserDAO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/UserDAOImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/UserDAOImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/workfront/internship/booklibrary/dao/TestAuthorDAOImpl.java" afterPath="$PROJECT_DIR$/src/test/java/com/workfront/internship/booklibrary/dao/TestAuthorDAOImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/workfront/internship/booklibrary/dao/TestBookDAOImpl.java" afterPath="$PROJECT_DIR$/src/test/java/com/workfront/internship/booklibrary/dao/TestBookDAOImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/workfront/internship/booklibrary/dao/TestPendingDAOImpl.java" afterPath="$PROJECT_DIR$/src/test/java/com/workfront/internship/booklibrary/dao/TestPendingDAOImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/workfront/internship/booklibrary/dao/TestUserDAOImpl.java" afterPath="$PROJECT_DIR$/src/test/java/com/workfront/internship/booklibrary/dao/TestUserDAOImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/workfront/internship/booklibrary/dao/TestUtil.java" afterPath="$PROJECT_DIR$/src/test/java/com/workfront/internship/booklibrary/dao/TestUtil.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_dbcp_commons_dbcp_1_2_2.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_pool_commons_pool_1_3.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_12.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__log4j_log4j_1_2_17.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__mysql_mysql_connector_java_5_1_39.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
     </list>
     <ignored path="BookLibrary.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path=".idea/dataSources.local.xml" />
     <ignored path="$PROJECT_DIR$/target/" />
+    <ignored path="C:\Users\Workfront\IdeaProjects\BookLibrary\.idea\shelf/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -46,9 +31,6 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/booklibrary$com_workfront_internship_booklibrary_dao_in_BookLibrary.coverage" NAME="com.workfront.internship.booklibrary.dao in BookLibrary Coverage Results" MODIFIED="1468810104741" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>com.workfront.internship.booklibrary.dao.*</FILTER>
-    </SUITE>
     <SUITE FILE_PATH="coverage/BookLibrary$TestUserDAOImpl.coverage" NAME="TestUserDAOImpl Coverage Results" MODIFIED="1468508500878" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.workfront.internship.booklibrary.dao.*</FILTER>
     </SUITE>
@@ -69,76 +51,61 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="TestPickBookDAOImpl.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/workfront/internship/booklibrary/dao/TestPickBookDAOImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-58">
-              <caret line="135" column="15" selection-start-line="135" selection-start-column="15" selection-end-line="135" selection-end-column="15" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TestMediaDAOImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/workfront/internship/booklibrary/dao/TestMediaDAOImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="679">
-              <caret line="136" column="0" selection-start-line="136" selection-start-column="0" selection-end-line="136" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MediaDAOImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/MediaDAOImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
-              <caret line="154" column="36" selection-start-line="154" selection-start-column="36" selection-end-line="154" selection-end-column="36" />
-              <folding>
-                <element signature="method#MediaDAOImpl#0;class#MediaDAOImpl#0" expanded="false" />
-                <element signature="method#add#0;class#MediaDAOImpl#0" expanded="false" />
-                <element signature="e#3215#3222#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PickBookDAOImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/PickBookDAOImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="439">
-              <caret line="164" column="0" selection-start-line="164" selection-start-column="0" selection-end-line="164" selection-end-column="0" />
-              <folding>
-                <element signature="method#PickBookDAOImpl#0;class#PickBookDAOImpl#0" expanded="false" />
-                <element signature="e#3631#3641#0" expanded="true" />
-                <element signature="e#7588#7598#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TestUtil.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/workfront/internship/booklibrary/dao/TestUtil.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="34" column="60" selection-start-line="33" selection-start-column="8" selection-end-line="34" selection-end-column="60" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="BookDAOImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/BookDAOImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+            <state relative-caret-position="255">
+              <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+              <folding>
+                <marker date="1468827590716" expanded="false" signature="58:369" ph="..." />
+                <marker date="1468827590716" expanded="true" signature="11553:11927" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TestBookDAOImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/workfront/internship/booklibrary/dao/TestBookDAOImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2788">
+              <caret line="164" column="0" selection-start-line="164" selection-start-column="0" selection-end-line="164" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="10" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TestUserDAOImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/workfront/internship/booklibrary/dao/TestUserDAOImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="544">
+              <caret line="36" column="4" selection-start-line="36" selection-start-column="4" selection-end-line="36" selection-end-column="4" />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <marker date="1468827704176" expanded="true" signature="6297:6838" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserDAOImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/UserDAOImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="5236">
+              <caret line="308" column="0" selection-start-line="308" selection-start-column="0" selection-end-line="308" selection-end-column="0" />
+              <folding>
+                <marker date="1468827872453" expanded="false" signature="58:107" ph="..." />
+                <marker date="1468827872453" expanded="true" signature="10442:10900" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -155,6 +122,11 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master1" />
+      </map>
+    </option>
     <option name="PUSH_TAGS">
       <GitPushTagMode>
         <option name="argument" value="--follow-tags" />
@@ -170,6 +142,11 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/src/main/java/TestConnection.java" />
+        <option value="$PROJECT_DIR$/src/main/java/JavaTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/MyTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/JUnitTestSuite.java" />
+        <option value="$PROJECT_DIR$/src/main/java/TestRunner.java" />
         <option value="$PROJECT_DIR$/src/main/java/porz/JavaTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/porz/TestConnection.java" />
         <option value="$PROJECT_DIR$/src/main/java/porz/TestRunner.java" />
@@ -186,41 +163,36 @@
         <option value="$PROJECT_DIR$/src/test/java/TestUtil.java" />
         <option value="$PROJECT_DIR$/src/test/java/TestUserDAOImpl.java" />
         <option value="$PROJECT_DIR$/src/test/java/booklibrary/dao/Test.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/workfront/internship/booklibrary/dao/TestUtil.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/General.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/UserDAO.java" />
         <option value="$PROJECT_DIR$/src/main/resources/log4j.properties" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/GenreDAO.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/BookDAO.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/workfront/internship/booklibrary/dao/TestPendingDAOImpl.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/workfront/internship/booklibrary/dao/BookDaoUnitTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/DataSource.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/workfront/internship/booklibrary/dao/TestBookDAOImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/MediaDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/MediaDAOImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Media.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/GenreDAOImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Genre.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/AuthorDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/AuthorDAOImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/User.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/UserDAOImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/PickBookDAO.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Book.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Pending.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/DataSource.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/UserDAO.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/UserDAOImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/AuthorDAOImpl.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/workfront/internship/booklibrary/dao/TestAuthorDAOImpl.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/workfront/internship/booklibrary/dao/TestUserDAOImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/GenreDAOImpl.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/workfront/internship/booklibrary/dao/TestGenreDAOImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/PickBook.java" />
-        <option value="$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/org/junit/runners/model/FrameworkMethod.class" />
-        <option value="$PROJECT_DIR$/src/test/java/com/workfront/internship/booklibrary/dao/TestBookDAOImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/BookDAOImpl.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/workfront/internship/booklibrary/dao/TestUtil.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/MediaDAOImpl.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/workfront/internship/booklibrary/dao/TestMediaDAOImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/PendingDAO.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/PendingDAOImpl.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/workfront/internship/booklibrary/dao/TestPendingDAOImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Pending.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/BookDAOImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/PickBookDAOImpl.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/workfront/internship/booklibrary/dao/TestPickBookDAOImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/PendingDAOImpl.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/workfront/internship/booklibrary/dao/TestUserDAOImpl.java" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -245,8 +217,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1382" />
-    <option name="height" value="744" />
+    <option name="width" value="1696" />
+    <option name="height" value="1026" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -308,147 +280,17 @@
         <subPane>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="booklibrary" />
+              <option name="myItemId" value="BookLibrary" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="booklibrary" />
+              <option name="myItemId" value="BookLibrary" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="BookLibrary" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="booklibrary" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BookLibrary" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dao" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="booklibrary" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BookLibrary" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="booklibrary" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BookLibrary" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="porz" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="booklibrary" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BookLibrary" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="booklibrary" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dao" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="booklibrary" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BookLibrary" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="booklibrary" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="common" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -463,25 +305,9 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="last_opened_file_path" value="$USER_HOME$/Application/mysql-connector-java-6.0.3/mysql-connector-java-6.0.3/lib" />
-    <property name="settings.editor.selected.configurable" value="preferences.customizations" />
+    <property name="settings.editor.selected.configurable" value="preferences.editor" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="prop_add_unversioned_files" value="true" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="129" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="158" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="159" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="833" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="151" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="150" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="152" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="826" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -491,8 +317,8 @@
       <recent name="C:\Users\Workfront\IdeaProjects\BookLibrary\src\test\java" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.com.workfront.internship.booklibrary.dao in BookLibrary">
-    <configuration default="false" name="TestPendingDAOImpl.getAllPendingsByBookID" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.TestUserDAOImpl.delete_all">
+    <configuration default="false" name="TestUserDAOImpl.get_user_by_email" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="com.workfront.internship.booklibrary.dao.*" />
@@ -503,8 +329,8 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="com.workfront.internship.booklibrary.dao" />
-      <option name="MAIN_CLASS_NAME" value="com.workfront.internship.booklibrary.dao.TestPendingDAOImpl" />
-      <option name="METHOD_NAME" value="getAllPendingsByBookID" />
+      <option name="MAIN_CLASS_NAME" value="com.workfront.internship.booklibrary.dao.TestUserDAOImpl" />
+      <option name="METHOD_NAME" value="get_user_by_email" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -518,7 +344,7 @@
       <patterns />
       <method />
     </configuration>
-    <configuration default="false" name="TestPendingDAOImpl.deleteAllPendings" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="TestUserDAOImpl.get_user_by_username" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="com.workfront.internship.booklibrary.dao.*" />
@@ -529,8 +355,8 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="com.workfront.internship.booklibrary.dao" />
-      <option name="MAIN_CLASS_NAME" value="com.workfront.internship.booklibrary.dao.TestPendingDAOImpl" />
-      <option name="METHOD_NAME" value="deleteAllPendings" />
+      <option name="MAIN_CLASS_NAME" value="com.workfront.internship.booklibrary.dao.TestUserDAOImpl" />
+      <option name="METHOD_NAME" value="get_user_by_username" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -544,7 +370,7 @@
       <patterns />
       <method />
     </configuration>
-    <configuration default="false" name="com.workfront.internship.booklibrary.dao in BookLibrary" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="TestUserDAOImpl.update_user" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="com.workfront.internship.booklibrary.dao.*" />
@@ -555,34 +381,8 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="com.workfront.internship.booklibrary.dao" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="package" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
-    <configuration default="false" name="TestPendingDAOImpl.getAllPendingsByUserID" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="com.workfront.internship.booklibrary.dao.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="BookLibrary" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.workfront.internship.booklibrary.dao" />
-      <option name="MAIN_CLASS_NAME" value="com.workfront.internship.booklibrary.dao.TestPendingDAOImpl" />
-      <option name="METHOD_NAME" value="getAllPendingsByUserID" />
+      <option name="MAIN_CLASS_NAME" value="com.workfront.internship.booklibrary.dao.TestUserDAOImpl" />
+      <option name="METHOD_NAME" value="update_user" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -596,7 +396,7 @@
       <patterns />
       <method />
     </configuration>
-    <configuration default="false" name="TestPickBookDAOImpl.getAllPickedBooksByUserId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="TestUserDAOImpl.delete_user_by_id" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="com.workfront.internship.booklibrary.dao.*" />
@@ -607,8 +407,34 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="com.workfront.internship.booklibrary.dao" />
-      <option name="MAIN_CLASS_NAME" value="com.workfront.internship.booklibrary.dao.TestPickBookDAOImpl" />
-      <option name="METHOD_NAME" value="getAllPickedBooksByUserId" />
+      <option name="MAIN_CLASS_NAME" value="com.workfront.internship.booklibrary.dao.TestUserDAOImpl" />
+      <option name="METHOD_NAME" value="delete_user_by_id" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="TestUserDAOImpl.delete_all" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="com.workfront.internship.booklibrary.dao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="BookLibrary" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.workfront.internship.booklibrary.dao" />
+      <option name="MAIN_CLASS_NAME" value="com.workfront.internship.booklibrary.dao.TestUserDAOImpl" />
+      <option name="METHOD_NAME" value="delete_all" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -688,6 +514,133 @@
       <envs />
       <method />
     </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="true" type="ArquillianTestNG" factoryName="">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="myFilePath" />
+      <option name="GLUE" />
+      <option name="myNameFilter" />
+      <option name="myGeneratedName" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="FlashRunConfigurationType" factoryName="Flash App">
+      <option name="BCName" value="" />
+      <option name="IOSSimulatorSdkPath" value="" />
+      <option name="adlOptions" value="" />
+      <option name="airProgramParameters" value="" />
+      <option name="appDescriptorForEmulator" value="Android" />
+      <option name="debugTransport" value="USB" />
+      <option name="debuggerSdkRaw" value="BC SDK" />
+      <option name="emulator" value="NexusOne" />
+      <option name="emulatorAdlOptions" value="" />
+      <option name="fastPackaging" value="true" />
+      <option name="fullScreenHeight" value="0" />
+      <option name="fullScreenWidth" value="0" />
+      <option name="launchUrl" value="false" />
+      <option name="launcherParameters">
+        <LauncherParameters>
+          <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
+          <option name="launcherType" value="OSDefault" />
+          <option name="newPlayerInstance" value="false" />
+          <option name="playerPath" value="FlashPlayerDebugger.exe" />
+        </LauncherParameters>
+      </option>
+      <option name="mobileRunTarget" value="Emulator" />
+      <option name="moduleName" value="" />
+      <option name="overriddenMainClass" value="" />
+      <option name="overriddenOutputFileName" value="" />
+      <option name="overrideMainClass" value="false" />
+      <option name="runTrusted" value="true" />
+      <option name="screenDpi" value="0" />
+      <option name="screenHeight" value="0" />
+      <option name="screenWidth" value="0" />
+      <option name="url" value="http://" />
+      <option name="usbDebugPort" value="7936" />
+      <method />
+    </configuration>
+    <configuration default="true" type="FlexUnitRunConfigurationType" factoryName="FlexUnit" appDescriptorForEmulator="Android" class_name="" emulatorAdlOptions="" method_name="" package_name="" scope="Class">
+      <option name="BCName" value="" />
+      <option name="launcherParameters">
+        <LauncherParameters>
+          <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
+          <option name="launcherType" value="OSDefault" />
+          <option name="newPlayerInstance" value="false" />
+          <option name="playerPath" value="FlashPlayerDebugger.exe" />
+        </LauncherParameters>
+      </option>
+      <option name="moduleName" value="" />
+      <option name="trusted" value="true" />
+      <method />
+    </configuration>
     <configuration default="true" type="GradleRunConfiguration" factoryName="Gradle">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -702,6 +655,15 @@
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails">
+      <setting name="vmparams" value="" />
+      <setting name="cmdLine" value="run-app" />
+      <setting name="passParentEnv" value="true" />
+      <setting name="launchBrowser" value="true" />
+      <setting name="depsClasspath" value="false" />
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <method />
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
@@ -767,6 +729,9 @@
       <envs />
       <method />
     </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
     <configuration default="true" type="JetRunConfigurationType" factoryName="Kotlin">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" />
@@ -798,6 +763,12 @@
       <option name="SHMEM_ADDRESS" value="javadebug" />
       <option name="HOST" value="localhost" />
       <option name="PORT" value="5005" />
+      <method />
+    </configuration>
+    <configuration default="true" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
@@ -856,20 +827,42 @@
       <listeners />
       <method />
     </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run-script" />
+      <scripts />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="osgi.bnd.run" factoryName="Run Launcher">
+      <method />
+    </configuration>
+    <configuration default="true" type="osgi.bnd.run" factoryName="Test Launcher (JUnit)">
+      <method />
+    </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="JUnit.TestPendingDAOImpl.getAllPendingsByBookID" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.TestPendingDAOImpl.deleteAllPendings" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.com.workfront.internship.booklibrary.dao in BookLibrary" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.TestPendingDAOImpl.getAllPendingsByUserID" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.TestPickBookDAOImpl.getAllPickedBooksByUserId" />
+      <item index="0" class="java.lang.String" itemvalue="JUnit.TestUserDAOImpl.get_user_by_email" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.TestUserDAOImpl.get_user_by_username" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.TestUserDAOImpl.update_user" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.TestUserDAOImpl.delete_user_by_id" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.TestUserDAOImpl.delete_all" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.com.workfront.internship.booklibrary.dao in BookLibrary" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.TestPickBookDAOImpl.getAllPickedBooksByUserId" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.TestPendingDAOImpl.getAllPendingsByUserID" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.TestPendingDAOImpl.getAllPendingsByBookID" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.TestPendingDAOImpl.deleteAllPendings" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.TestUserDAOImpl.delete_all" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.TestUserDAOImpl.delete_user_by_id" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.TestUserDAOImpl.update_user" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.TestUserDAOImpl.get_user_by_username" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.TestUserDAOImpl.get_user_by_email" />
       </list>
     </recent_temporary>
   </component>
@@ -904,7 +897,9 @@
       <workItem from="1468476443955" duration="33621000" />
       <workItem from="1468566915208" duration="3161000" />
       <workItem from="1468575721609" duration="24583000" />
-      <workItem from="1468666463406" duration="16436000" />
+      <workItem from="1468666463406" duration="16747000" />
+      <workItem from="1468823769126" duration="1744000" />
+      <workItem from="1468827316754" duration="1246000" />
     </task>
     <task id="LOCAL-00001" summary="1.07.2016 commit">
       <created>1467381628099</created>
@@ -990,43 +985,71 @@
       <option name="project" value="LOCAL" />
       <updated>1468603196765</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="shalve from Harut">
+      <created>1468824282006</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1468824282006</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Changes made to add test coverage for DAO classes.">
+      <created>1468828111597</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1468828111597</updated>
+    </task>
+    <task id="LOCAL-00015" summary="workspace file is added to gitignore">
+      <created>1468828171300</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1468828171300</updated>
+    </task>
+    <task id="LOCAL-00016" summary="workspace.xml is removed from gitignore">
+      <created>1468828391671</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1468828391671</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="TestPendingDAOImpl_deleteAllPendings - 2016.07.18 at 06h 03m 19s.xml">
-      <configuration name="TestPendingDAOImpl.deleteAllPendings" configurationId="JUnit" />
+    <history-entry file="TestBookDAOImpl_update_book - 2016.07.15 at 20h 39m 46s.xml">
+      <configuration name="TestBookDAOImpl.update_book" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestPendingDAOImpl_getAllPendingsByBookID - 2016.07.18 at 06h 09m 35s.xml">
-      <configuration name="TestPendingDAOImpl.getAllPendingsByBookID" configurationId="JUnit" />
+    <history-entry file="TestUserDAOImpl_add_user - 2016.07.16 at 15h 43m 39s.xml">
+      <configuration name="TestUserDAOImpl.add_user" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestPendingDAOImpl_getAllPendingsByBookID - 2016.07.18 at 06h 12m 14s.xml">
-      <configuration name="TestPendingDAOImpl.getAllPendingsByBookID" configurationId="JUnit" />
+    <history-entry file="TestUserDAOImpl_delete_all - 2016.07.16 at 15h 46m 23s.xml">
+      <configuration name="TestUserDAOImpl.delete_all" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestPendingDAOImpl_getAllPendingsByUserID - 2016.07.18 at 06h 17m 11s.xml">
-      <configuration name="TestPendingDAOImpl.getAllPendingsByUserID" configurationId="JUnit" />
+    <history-entry file="TestUserDAOImpl_delete_user_by_id - 2016.07.15 at 20h 30m 13s.xml">
+      <configuration name="TestUserDAOImpl.delete_user_by_id" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestPendingDAOImpl_getAllPendingsByUserID - 2016.07.18 at 06h 19m 46s.xml">
-      <configuration name="TestPendingDAOImpl.getAllPendingsByUserID" configurationId="JUnit" />
+    <history-entry file="TestUserDAOImpl_delete_user_by_id - 2016.07.16 at 15h 45m 49s.xml">
+      <configuration name="TestUserDAOImpl.delete_user_by_id" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestPickBookDAOImpl_getAllPickedBooksByUserId - 2016.07.18 at 06h 29m 47s.xml">
-      <configuration name="TestPickBookDAOImpl.getAllPickedBooksByUserId" configurationId="JUnit" />
+    <history-entry file="TestUserDAOImpl_get_user_by_email - 2016.07.16 at 15h 44m 22s.xml">
+      <configuration name="TestUserDAOImpl.get_user_by_email" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestPickBookDAOImpl_getAllPickedBooksByUserId - 2016.07.18 at 06h 30m 30s.xml">
-      <configuration name="TestPickBookDAOImpl.getAllPickedBooksByUserId" configurationId="JUnit" />
+    <history-entry file="TestUserDAOImpl_get_user_by_id - 2016.07.16 at 15h 43m 55s.xml">
+      <configuration name="TestUserDAOImpl.get_user_by_id" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="com_workfront_internship_booklibrary_dao_in_BookLibrary - 2016.07.18 at 06h 06m 40s.xml">
-      <configuration name="com.workfront.internship.booklibrary.dao in BookLibrary" configurationId="JUnit" />
+    <history-entry file="TestUserDAOImpl_get_user_by_username - 2016.07.16 at 15h 44m 36s.xml">
+      <configuration name="TestUserDAOImpl.get_user_by_username" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="com_workfront_internship_booklibrary_dao_in_BookLibrary - 2016.07.18 at 06h 07m 36s.xml">
-      <configuration name="com.workfront.internship.booklibrary.dao in BookLibrary" configurationId="JUnit" />
+    <history-entry file="TestUserDAOImpl_update_user - 2016.07.16 at 15h 44m 58s.xml">
+      <configuration name="TestUserDAOImpl.update_user" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="com_workfront_internship_booklibrary_dao_in_BookLibrary - 2016.07.18 at 06h 48m 50s.xml">
-      <configuration name="com.workfront.internship.booklibrary.dao in BookLibrary" configurationId="JUnit" />
+    <history-entry file="TestUserDAOImpl_update_user - 2016.07.16 at 15h 45m 28s.xml">
+      <configuration name="TestUserDAOImpl.update_user" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="323820000" />
+    <option name="totallyTimeSpent" value="327121000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1038,35 +1061,35 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.10483871" sideWeight="0.49633253" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5726496" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.10483871" sideWeight="0.5036675" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25299147" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22051282" sideWeight="0.4976271" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.120272316" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.531106" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32949308" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1860817" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4871795" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1809291" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294621" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.027350428" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294621" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.10138249" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32603687" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.07603686" sideWeight="0.4976271" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14975551" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13479263" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1092,22 +1115,15 @@
     <MESSAGE value="13.07.2016 commit" />
     <MESSAGE value="demo 13.07.2016 commit" />
     <MESSAGE value="14.07.2016 commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="14.07.2016 commit" />
+    <MESSAGE value="shalve from Harut" />
+    <MESSAGE value="Changes made to add test coverage for DAO classes." />
+    <MESSAGE value="workspace file is added to gitignore" />
+    <MESSAGE value="workspace.xml is removed from gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="workspace.xml is removed from gitignore" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/GenreDAOImpl.java</url>
-          <line>40</line>
-          <properties />
-          <option name="timeStamp" value="121" />
-        </line-breakpoint>
-      </breakpoints>
-      <breakpoints-dialog>
-        <breakpoints-dialog />
-      </breakpoints-dialog>
-      <option name="time" value="128" />
+      <option name="time" value="110" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1116,6 +1132,63 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/test/java/booklibrary/dao/Test.java" />
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_92/src.zip!/java/util/UUID.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="157">
+          <caret line="127" column="12" selection-start-line="127" selection-start-column="11" selection-end-line="127" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/ConnectionResources.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="4" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/General.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="10" column="39" selection-start-line="10" selection-start-column="39" selection-end-line="10" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_92/src.zip!/java/util/logging/Level.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="339" column="17" selection-start-line="339" selection-start-column="14" selection-end-line="339" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_92/src.zip!/java/util/logging/Logger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="782" column="23" selection-start-line="782" selection-start-column="23" selection-end-line="782" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_92/src.zip!/java/lang/Exception.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="52" column="11" selection-start-line="52" selection-start-column="11" selection-end-line="52" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/junit/framework/Assert.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="134">
+          <caret line="154" column="23" selection-start-line="154" selection-start-column="23" selection-end-line="154" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/org/junit/Assert.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/org/junit/internal/runners/statements/RunBefores.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
@@ -1151,10 +1224,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/org/junit/internal/runners/statements/RunAfters.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/log4j.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="1" column="30" selection-start-line="1" selection-start-column="30" selection-end-line="1" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/workfront/internship/booklibrary/dao/TestAuthorDAOImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-493">
+          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -1165,7 +1252,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore" />
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/workfront/internship/booklibrary/dao/TestUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="9" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
@@ -1175,6 +1269,30 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/TmpTest.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/BookDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/DataSource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="731">
+          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/workfront/internship/booklibrary/dao/TestPendingDAOImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="48" column="10" selection-start-line="48" selection-start-column="10" selection-end-line="48" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/workfront/internship/booklibrary/dao/BookDaoUnitTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -1185,10 +1303,80 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/org/junit/internal/runners/model/ReflectiveCallable.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/org/junit/runners/model/FrameworkMethod.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/MediaDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="16" column="21" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/MediaDAOImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="27" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
+          <folding>
+            <element signature="method#add#0;class#MediaDAOImpl#0" expanded="false" />
+            <element signature="method#getMediaByID#0;class#MediaDAOImpl#0" expanded="false" />
+            <element signature="method#updateMedia#0;class#MediaDAOImpl#0" expanded="false" />
+            <element signature="method#deleteMedia#0;class#MediaDAOImpl#0" expanded="false" />
+            <element signature="method#deleteAll#0;class#MediaDAOImpl#0" expanded="false" />
+            <element signature="method#setMediaDetails#0;class#MediaDAOImpl#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Media.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-472">
+          <caret line="5" column="29" selection-start-line="5" selection-start-column="29" selection-end-line="5" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/GenreDAOImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="145">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#add#0;class#GenreDAOImpl#0" expanded="false" />
+            <element signature="method#getGenreByID#0;class#GenreDAOImpl#0" expanded="false" />
+            <element signature="method#getGenreByGenreName#0;class#GenreDAOImpl#0" expanded="false" />
+            <element signature="method#getAllGenres#0;class#GenreDAOImpl#0" expanded="false" />
+            <element signature="method#updateGenre#0;class#GenreDAOImpl#0" expanded="false" />
+            <element signature="method#deleteGenre#0;class#GenreDAOImpl#0" expanded="false" />
+            <element signature="method#deleteAll#0;class#GenreDAOImpl#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Genre.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/GenreDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
         </state>
       </provider>
     </entry>
@@ -1196,6 +1384,31 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="14" column="15" selection-start-line="14" selection-start-column="15" selection-end-line="14" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/AuthorDAOImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="417">
+          <caret line="234" column="35" selection-start-line="234" selection-start-column="35" selection-end-line="234" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#add#0;class#AuthorDAOImpl#0" expanded="false" />
+            <element signature="method#getAuthorByID#0;class#AuthorDAOImpl#0" expanded="false" />
+            <element signature="method#getAuthorByName#0;class#AuthorDAOImpl#0" expanded="false" />
+            <element signature="method#getAllAuthors#0;class#AuthorDAOImpl#0" expanded="false" />
+            <element signature="method#getAllAuthorsByBookId#0;class#AuthorDAOImpl#0" expanded="false" />
+            <element signature="method#updateAuthor#0;class#AuthorDAOImpl#0" expanded="false" />
+            <element signature="method#deleteAuthor#0;class#AuthorDAOImpl#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/AuthorDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="23" column="11" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="11" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1207,242 +1420,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_gitignore.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/Test.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/DataSource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="16" column="31" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/UserDAO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/BookDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/AuthorDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="346">
-          <caret line="23" column="28" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/junit/framework/Assert.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1156">
-          <caret line="69" column="23" selection-start-line="69" selection-start-column="23" selection-end-line="69" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/junit/framework/TestCase.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="43" column="23" selection-start-line="43" selection-start-column="23" selection-end-line="43" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/AuthorDAOImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2630">
-          <caret line="213" column="16" selection-start-line="213" selection-start-column="16" selection-end-line="213" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/workfront/internship/booklibrary/dao/TestUserDAOImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="107" column="31" selection-start-line="107" selection-start-column="31" selection-end-line="107" selection-end-column="31" />
-          <folding>
-            <element signature="e#723#724#0" expanded="true" />
-            <element signature="e#758#759#0" expanded="true" />
-            <element signature="method#get_user_by_id#0;class#TestUserDAOImpl#0" expanded="false" />
-            <element signature="method#get_user_by_email#0;class#TestUserDAOImpl#0" expanded="false" />
-            <element signature="method#get_user_by_username#0;class#TestUserDAOImpl#0" expanded="false" />
-            <element signature="method#update_user#0;class#TestUserDAOImpl#0" expanded="false" />
-            <element signature="method#delete_user_by_id#0;class#TestUserDAOImpl#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/UserDAOImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="762">
-          <caret line="252" column="0" selection-start-line="252" selection-start-column="0" selection-end-line="252" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/workfront/internship/booklibrary/dao/TestGenreDAOImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="32">
-          <caret line="21" column="41" selection-start-line="21" selection-start-column="41" selection-end-line="21" selection-end-column="41" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#743#744#0" expanded="true" />
-            <element signature="e#779#780#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/workfront/internship/booklibrary/dao/TestAuthorDAOImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="135" column="33" selection-start-line="135" selection-start-column="4" selection-end-line="135" selection-end-column="33" />
-          <folding>
-            <element signature="e#596#597#0" expanded="true" />
-            <element signature="e#640#641#0" expanded="true" />
-            <element signature="method#add_author#0;class#TestAuthorDAOImpl#0" expanded="false" />
-            <element signature="method#get_author_by_id#0;class#TestAuthorDAOImpl#0" expanded="false" />
-            <element signature="method#get_author_by_name#0;class#TestAuthorDAOImpl#0" expanded="false" />
-            <element signature="method#get_all_authors#0;class#TestAuthorDAOImpl#0" expanded="false" />
-            <element signature="method#update_author#0;class#TestAuthorDAOImpl#0" expanded="false" />
-            <element signature="method#delete_author_by_id#0;class#TestAuthorDAOImpl#0" expanded="false" />
-            <element signature="method#delete_all_authors#0;class#TestAuthorDAOImpl#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Media.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/PickBook.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding>
-            <element signature="method#setId#0;class#PickBook#0" expanded="false" />
-            <element signature="method#setBook#0;class#PickBook#0" expanded="false" />
-            <element signature="method#setUser#0;class#PickBook#0" expanded="false" />
-            <element signature="method#setPickingDate#0;class#PickBook#0" expanded="false" />
-            <element signature="method#setReturnDate#0;class#PickBook#0" expanded="false" />
-            <element signature="method#toString#0;class#PickBook#0" expanded="false" />
-            <element signature="method#equals#0;class#PickBook#0" expanded="false" />
-            <element signature="method#hashCode#0;class#PickBook#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Pending.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="54" column="5" selection-start-line="54" selection-start-column="5" selection-end-line="54" selection-end-column="5" />
-          <folding>
-            <element signature="method#setId#0;class#Pending#0" expanded="false" />
-            <element signature="method#setUser#0;class#Pending#0" expanded="false" />
-            <element signature="method#setBook#0;class#Pending#0" expanded="false" />
-            <element signature="method#setPendingDate#0;class#Pending#0" expanded="false" />
-            <element signature="method#toString#0;class#Pending#0" expanded="false" />
-            <element signature="method#equals#0;class#Pending#0" expanded="false" />
-            <element signature="method#hashCode#0;class#Pending#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/org/junit/runners/model/FrameworkMethod.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1392">
-          <caret line="102" column="0" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Book.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="55" column="19" selection-start-line="55" selection-start-column="19" selection-end-line="55" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/MediaDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="14" column="21" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/workfront/internship/booklibrary/dao/TestBookDAOImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="143" column="28" selection-start-line="143" selection-start-column="28" selection-end-line="143" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/GenreDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/org/junit/internal/runners/model/ReflectiveCallable.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="117">
-          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/org/junit/internal/runners/statements/RunAfters.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/GenreDAOImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/porz/Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_92/src.zip!/java/sql/Timestamp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3">
-          <caret line="71" column="13" selection-start-line="71" selection-start-column="13" selection-end-line="71" selection-end-column="13" />
-          <folding />
+        <state relative-caret-position="323">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1454,103 +1435,116 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/BookDAOImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/PickBook.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+        <state relative-caret-position="602">
+          <caret line="91" column="78" selection-start-line="91" selection-start-column="78" selection-end-line="91" selection-end-column="78" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/General.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Book.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        <state relative-caret-position="-323">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/common/Pending.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="636">
+          <caret line="73" column="78" selection-start-line="73" selection-start-column="78" selection-end-line="73" selection-end-column="78" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/PendingDAO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
-          <caret line="12" column="18" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
+        <state relative-caret-position="255">
+          <caret line="16" column="12" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/workfront/internship/booklibrary/dao/TestPendingDAOImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/PickBookDAOImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="131" column="36" selection-start-line="131" selection-start-column="36" selection-end-line="131" selection-end-column="36" />
+        <state relative-caret-position="-350">
+          <caret line="204" column="12" selection-start-line="204" selection-start-column="12" selection-end-line="204" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#add#0;class#PickBookDAOImpl#0" expanded="false" />
+            <element signature="method#deletePickedBook#0;class#PickBookDAOImpl#0" expanded="false" />
+            <element signature="method#updatePickedBook#0;class#PickBookDAOImpl#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/PendingDAOImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-7">
-          <caret line="134" column="46" selection-start-line="131" selection-start-column="25" selection-end-line="134" selection-end-column="46" />
-          <folding>
-            <element signature="method#PendingDAOImpl#0;class#PendingDAOImpl#0" expanded="false" />
-            <element signature="e#3322#3331#0" expanded="true" />
-            <element signature="e#4601#4610#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/MediaDAOImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="154" column="36" selection-start-line="154" selection-start-column="36" selection-end-line="154" selection-end-column="36" />
-          <folding>
-            <element signature="method#MediaDAOImpl#0;class#MediaDAOImpl#0" expanded="false" />
-            <element signature="method#add#0;class#MediaDAOImpl#0" expanded="false" />
-            <element signature="e#3215#3222#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/workfront/internship/booklibrary/dao/TestMediaDAOImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="679">
-          <caret line="136" column="0" selection-start-line="136" selection-start-column="0" selection-end-line="136" selection-end-column="0" />
+        <state relative-caret-position="2142">
+          <caret line="156" column="57" selection-start-line="156" selection-start-column="57" selection-end-line="156" selection-end-column="57" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#add#0;class#PendingDAOImpl#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/workfront/internship/booklibrary/dao/TestUtil.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/BookDAOImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="34" column="60" selection-start-line="33" selection-start-column="8" selection-end-line="34" selection-end-column="60" />
+        <state relative-caret-position="255">
+          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <marker date="1468827590716" expanded="false" signature="58:369" ph="..." />
+            <marker date="1468827590716" expanded="true" signature="11553:11927" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/PickBookDAOImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/workfront/internship/booklibrary/dao/UserDAOImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="439">
+        <state relative-caret-position="5236">
+          <caret line="308" column="0" selection-start-line="308" selection-start-column="0" selection-end-line="308" selection-end-column="0" />
+          <folding>
+            <marker date="1468827872453" expanded="false" signature="58:107" ph="..." />
+            <marker date="1468827872453" expanded="true" signature="10442:10900" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/workfront/internship/booklibrary/dao/TestUserDAOImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="36" column="4" selection-start-line="36" selection-start-column="4" selection-end-line="36" selection-end-column="4" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <marker date="1468827704176" expanded="true" signature="6297:6838" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/workfront/internship/booklibrary/dao/TestBookDAOImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2788">
           <caret line="164" column="0" selection-start-line="164" selection-start-column="0" selection-end-line="164" selection-end-column="0" />
-          <folding>
-            <element signature="method#PickBookDAOImpl#0;class#PickBookDAOImpl#0" expanded="false" />
-            <element signature="e#3631#3641#0" expanded="true" />
-            <element signature="e#7588#7598#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/workfront/internship/booklibrary/dao/TestPickBookDAOImpl.java">
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-58">
-          <caret line="135" column="15" selection-start-line="135" selection-start-column="15" selection-end-line="135" selection-end-column="15" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="119">
+          <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="10" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1594,7 +1588,7 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
-          <last-edited>1.8</last-edited>
+          <last-edited>1.7</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
