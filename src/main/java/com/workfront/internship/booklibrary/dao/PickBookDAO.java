@@ -15,4 +15,6 @@ public interface PickBookDAO {
     void updatePickedBook(PickBook pickedBook);
 
     void deletePickedBook(int id);
+
+    void deleteAllPickedBooks();
 }

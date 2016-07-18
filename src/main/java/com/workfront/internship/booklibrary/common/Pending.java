@@ -4,8 +4,8 @@ import java.util.Date;
 
 public class Pending {
     private int id;
-    private int userId;
-    private int bookId;
+    private User user;
+    private Book book;
     private Date pendingDate;
 
     public int getId() {
@@ -17,21 +17,21 @@ public class Pending {
         return this;
     }
 
-    public int getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public Pending setUserId(int userId) {
-        this.userId = userId;
+    public Pending setUser(User user) {
+        this.user = user;
         return this;
     }
 
-    public int getBookId() {
-        return bookId;
+    public Book getBook() {
+        return book;
     }
 
-    public Pending setBookId(int bookId) {
-        this.bookId = bookId;
+    public Pending setBook(Book book) {
+        this.book = book;
         return this;
     }
 
@@ -48,8 +48,8 @@ public class Pending {
     public String toString() {
         return "Pending{" +
                 "pending_id=" + id +
-                ", user_id='" + userId + '\'' +
-                ", book_id='" + bookId + '\'' +
+                ", user_id='" + getUser().getId() + '\'' +
+                ", book_id='" + getBook().getId() + '\'' +
                 ", pendingTime='" + pendingDate + '\'' +
                 '}';
     }
@@ -62,16 +62,16 @@ public class Pending {
         Pending pending = (Pending) obj;
 
         if (getId() != pending.getId()) return false;
-        if (getUserId() != pending.getUserId()) return false;
-        if (getBookId() != pending.getBookId()) return false;
+        if (getUser() != null ? !getUser().equals(pending.getUser()) : pending.getUser() != null) return false;
+        if (getBook() != null ? !getBook().equals(pending.getBook()) : pending.getBook() != null) return false;
         return (getPendingDate() != null ? !getPendingDate().equals(pending.getPendingDate()) : pending.getPendingDate() != null);
     }
 
     @Override
     public int hashCode() {
         int result = getId();
-        result = 31 * result + getUserId();
-        result = 31 * result + getBookId();
+        result = 31 * result + (getUser() != null ? getUser().hashCode() : 0);
+        result = 31 * result + (getBook() != null ? getBook().hashCode() : 0);
         result = 31 * result + (getPendingDate() != null ? getPendingDate().hashCode() : 0);
 
         return result;

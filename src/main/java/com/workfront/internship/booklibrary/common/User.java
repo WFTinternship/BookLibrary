@@ -2,9 +2,7 @@ package com.workfront.internship.booklibrary.common;
 
 import java.util.List;
 
-
 public class User {
-    //void builder(){};
 
     private int id;
     private String name;

@@ -13,4 +13,6 @@ public interface MediaDAO {
     void updateMedia(Media media);
 
     void deleteMedia(int id);
+
+    void deleteAll();
 }

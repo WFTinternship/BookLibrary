@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;
 
-
 public class BookDAOImpl extends General implements BookDAO {
     private static final Logger LOGGER = Logger.getLogger(BookDAOImpl.class);
 
@@ -38,7 +37,7 @@ public class BookDAOImpl extends General implements BookDAO {
 
             preparedStatement.setString(1, book.getISBN());
             preparedStatement.setString(2, book.getTitle());
-            preparedStatement.setInt(3,book.getGenre().getId());
+            preparedStatement.setInt(3, book.getGenre().getId());
             preparedStatement.setInt(4, book.getVolume());
             preparedStatement.setString(5, book.getBookAbstract());
             preparedStatement.setString(6, book.getLanguage());
@@ -55,7 +54,7 @@ public class BookDAOImpl extends General implements BookDAO {
             book.setId(lastId);
 
         } catch (SQLException e){
-            LOGGER.error("IO exception or SQL exception occurred!");
+            LOGGER.error("SQL exception occurred!");
             throw new RuntimeException(e);
         } finally {
             closeConnection(preparedStatement, connection);
@@ -87,12 +86,12 @@ public class BookDAOImpl extends General implements BookDAO {
 
                 setBookDetails(resultSet, book);
 
-                genre.setId(resultSet.getInt(4)).setGenre(resultSet.getString("genre"));
+                genre.setId(resultSet.getInt("genre_id")).setGenre(resultSet.getString("genre"));
                 book.setGenre(genre);
             }
 
         } catch (SQLException e){
-            LOGGER.error("IO exception or SQL exception occurred!");
+            LOGGER.error("SQL exception occurred!");
             throw new RuntimeException(e);
         } finally {
             closeConnection(resultSet, preparedStatement, connection);
@@ -130,7 +129,7 @@ public class BookDAOImpl extends General implements BookDAO {
             }
 
         } catch (SQLException e){
-            LOGGER.error("IO exception or SQL exception occurred!");
+            LOGGER.error("SQL exception occurred!");
             throw new RuntimeException(e);
         } finally {
             closeConnection(resultSet, preparedStatement, connection);
@@ -165,7 +164,7 @@ public class BookDAOImpl extends General implements BookDAO {
             }
 
         } catch (SQLException e){
-            LOGGER.error("IO exception or SQL exception occurred!");
+            LOGGER.error("SQL exception occurred!");
             throw new RuntimeException(e);
         } finally {
             closeConnection(resultSet, preparedStatement, connection);
@@ -205,7 +204,7 @@ public class BookDAOImpl extends General implements BookDAO {
 
             }
         } catch (SQLException e){
-            LOGGER.error("IO exception or SQL exception occurred!");
+            LOGGER.error("SQL exception occurred!");
             throw new RuntimeException(e);
         } finally {
             closeConnection(preparedStatement, connection);
@@ -226,89 +225,11 @@ public class BookDAOImpl extends General implements BookDAO {
             preparedStatement.executeUpdate();
 
         } catch (SQLException e){
-            LOGGER.error("IO exception or SQL exception occurred!");
+            LOGGER.error("SQL exception occurred!");
             throw new RuntimeException(e);
         } finally {
             closeConnection(preparedStatement, connection);
         }
-    }
-
-    public List<Book> getAllBooksByAuthorId(int authorId){
-        List<Book> bookList = null;
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-
-        try{
-            connection = dataSource.getConnection();
-            bookList = new ArrayList<Book>();
-            String sql = "select * from book left join book_author" +
-                    "on book.book_id = book_author.book_id" +
-                    "where book_author.author_id=?";
-
-            preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, authorId);
-            resultSet = preparedStatement.executeQuery();
-
-            while(resultSet.next()){
-                Book book = new Book();
-                Genre genre = new Genre();
-                genre = genreDAO.getGenreByID(resultSet.getInt(4));
-
-                setBookDetails(resultSet, book);
-                book.setGenre(genre);
-
-                bookList.add(book);
-            }
-
-
-        } catch (SQLException e){
-            LOGGER.error("IO exception or SQL exception occurred!");
-            throw new RuntimeException(e);
-        } finally {
-            closeConnection(resultSet, preparedStatement, connection);
-        }
-
-        return bookList;
-    }
-
-    public List<Book> getAllBooksByGenreId(int genreId){
-        List<Book> bookList = null;
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-
-        try{
-            connection = dataSource.getConnection();
-            bookList = new ArrayList<Book>();
-            String sql = "select * from book left join genre" +
-                    "on book.genre_id = genre.genre_id" +
-                    "where book.genre_id= ?";
-
-            preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, genreId);
-            resultSet = preparedStatement.executeQuery();
-
-            while(resultSet.next()){
-                Book book = new Book();
-                Genre genre = new Genre();
-                genre = genreDAO.getGenreByID(resultSet.getInt(4));
-
-                setBookDetails(resultSet, book);
-                book.setGenre(genre);
-
-                bookList.add(book);
-            }
-
-
-        } catch (SQLException e){
-            LOGGER.error("IO exception or SQL exception occurred!");
-            throw new RuntimeException(e);
-        } finally {
-            closeConnection(resultSet, preparedStatement, connection);
-        }
-
-        return bookList;
     }
 
     @Override
@@ -324,7 +245,7 @@ public class BookDAOImpl extends General implements BookDAO {
             preparedStatement.executeUpdate();
 
         } catch (SQLException e){
-            LOGGER.error("IO exception or SQL exception occurred!");
+            LOGGER.error("SQL exception occurred!");
             throw new RuntimeException(e);
         } finally{
             closeConnection( preparedStatement, connection);
@@ -335,7 +256,6 @@ public class BookDAOImpl extends General implements BookDAO {
         book.setId(rs.getInt("book_id"));
         book.setISBN(rs.getString("ISBN"));
         book.setTitle(rs.getString("title"));
-        //book.setGenre(genre);
         book.setVolume(rs.getInt("volume"));
         book.setBookAbstract(rs.getString("abstract"));
         book.setLanguage(rs.getString("language"));

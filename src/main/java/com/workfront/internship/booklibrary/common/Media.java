@@ -4,8 +4,7 @@ public class Media {
     private int id;
     private String mediaLink;
     private String mediaType;
-    //private Book book;
-    private int bookId;
+    private Book book;
 
     public int getId() {
         return id;
@@ -34,12 +33,12 @@ public class Media {
         return this;
     }
 
-    public int getBookId() {
-        return bookId;
+    public Book getBook(){
+        return book;
     }
 
-    public Media setBookId(int bookId) {
-        this.bookId = bookId;
+    public Media setBook(Book book){
+        this.book = book;
         return this;
     }
 
@@ -49,7 +48,7 @@ public class Media {
                 "media_id=" + id +
                 ", mediaLink='" + mediaLink + '\'' +
                 ", mediaType='" + mediaType + '\'' +
-                ", book_id='" + bookId + '\'' +
+                ", book_id='" + getBook().getId() + '\'' +
                 '}';
     }
 
@@ -64,7 +63,7 @@ public class Media {
         if (getLink() != null ? !getLink().equals(media.getLink()) : media.getLink() != null) return false;
         if (getType() != null ? !getType().equals(media.getType()) : media.getType() != null) return false;
 
-        return (getBookId() != media.getBookId());
+        return (getBook() != null ? !getBook().equals(media.getBook()) : media.getBook() != null);
 
     }
 
@@ -73,7 +72,7 @@ public class Media {
         int result = getId();
         result = 31 * result + (getLink() != null ? getLink().hashCode() : 0);
         result = 31 * result + (getType() != null ? getType().hashCode() : 0);
-        result = 31 * result + getBookId();
+        result = 31 * result + (getBook() != null ? getBook().hashCode() : 0);
 
         return result;
     }

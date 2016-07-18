@@ -6,8 +6,9 @@ public class Book {
     private int bookId;
     private String ISBN;
     private String title;
+
     private Genre genre;
-    //private int genreId;
+
     private int volume;
     private String bookAbstract;
     private String language;
@@ -47,17 +48,6 @@ public class Book {
         this.title = title;
         return this;
     }
-
-    /**
-    public Genre getGenre() {
-        return genre;
-    }
-
-    public Book setGenre(Genre genre) {
-        this.genre = genre;
-        return this;
-    }
-     */
 
     public Genre getGenre() {
         return genre;

@@ -1,10 +1,7 @@
 package com.workfront.internship.booklibrary.dao;
 
-import com.workfront.internship.booklibrary.common.Book;
 import com.workfront.internship.booklibrary.common.Genre;
 
-import java.beans.PropertyVetoException;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,7 +11,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 public class GenreDAOImpl extends General implements GenreDAO {
-    private static final Logger logger = Logger.getLogger(GenreDAOImpl.class);
+    private static final Logger LOGGER = Logger.getLogger(GenreDAOImpl.class);
 
     private DataSource dataSource;
 
@@ -26,7 +23,7 @@ public class GenreDAOImpl extends General implements GenreDAO {
     public int add(Genre genre) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
+        ResultSet resultSet;
         int lastId = 0;
 
         try{
@@ -34,7 +31,6 @@ public class GenreDAOImpl extends General implements GenreDAO {
             String sql = "INSERT INTO Genre(genre) VALUES(?)";
             preparedStatement = connection.prepareStatement(sql, preparedStatement.RETURN_GENERATED_KEYS);
 
-            //preparedStatement.setInt(1, genre.getId());
             preparedStatement.setString(1, genre.getGenre());
 
             preparedStatement.executeUpdate();
@@ -45,7 +41,7 @@ public class GenreDAOImpl extends General implements GenreDAO {
             genre.setId(lastId);
 
         } catch (SQLException e){
-            logger.error("IO exception or SQL exception occurred!");
+            LOGGER.error("SQL exception occurred!");
             throw new RuntimeException(e);
         } finally {
             closeConnection(preparedStatement, connection);
@@ -62,23 +58,24 @@ public class GenreDAOImpl extends General implements GenreDAO {
 
         try{
             connection = dataSource.getConnection();
-            genre = new Genre();
-            String sql = "SELECT FROM Genre WHERE genre_id=?";
+
+            String sql = "SELECT * FROM Genre WHERE genre_id=?";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();
 
             while(resultSet.next()){
+                genre = new Genre();
                 genre.setId(resultSet.getInt(1));
                 genre.setGenre(resultSet.getString(2));
             }
 
         } catch (SQLException e){
-            e.printStackTrace();
+            LOGGER.error("SQL exception occurred!");
+            throw new RuntimeException(e);
         }finally {
             closeConnection(resultSet, preparedStatement, connection);
         }
-
         return genre;
     }
 
@@ -91,18 +88,21 @@ public class GenreDAOImpl extends General implements GenreDAO {
 
         try{
             connection = dataSource.getConnection();
-            genre = new Genre();
-            String sql = "SELECT FROM Genre WHERE genre=" + genreName;
+
+            String sql = "SELECT * FROM Genre WHERE genre=?";
             preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, genreName);
             resultSet = preparedStatement.executeQuery();
 
             while(resultSet.next()){
+                genre = new Genre();
                 genre.setId(resultSet.getInt(1));
                 genre.setGenre(resultSet.getString(2));
             }
 
         } catch (SQLException e){
-            e.printStackTrace();
+            LOGGER.error("SQL exception occurred!");
+            throw new RuntimeException(e);
         }finally {
             closeConnection(resultSet, preparedStatement, connection);
         }
@@ -134,7 +134,8 @@ public class GenreDAOImpl extends General implements GenreDAO {
             }
 
         } catch (SQLException e){
-            e.printStackTrace();
+            LOGGER.error("SQL exception occurred!");
+            throw new RuntimeException(e);
         }finally {
             closeConnection(resultSet, preparedStatement, connection);
         }
@@ -144,26 +145,26 @@ public class GenreDAOImpl extends General implements GenreDAO {
 
     @Override
     public void updateGenre(Genre genre) {
-        Book book = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
         try{
             if(genre.getId() != 0){
                 connection = dataSource.getConnection();
-                String sql = "UPDATE Genre SET " +
-                        "genre=?" +
-                        " WHERE genre_id=" + genre.getId();
+                String sql = "UPDATE Genre SET genre=?" +
+                        " WHERE genre_id=?";
 
                 preparedStatement = connection.prepareStatement(sql);
 
                 preparedStatement.setString(1, genre.getGenre());
+                preparedStatement.setInt(2, genre.getId());
 
                 preparedStatement.executeUpdate();
 
             }
         } catch (SQLException e){
-            e.printStackTrace();
+            LOGGER.error("SQL exception occurred!");
+            throw new RuntimeException(e);
         }finally {
             closeConnection(preparedStatement, connection);
         }
@@ -176,13 +177,15 @@ public class GenreDAOImpl extends General implements GenreDAO {
 
         try{
             connection = dataSource.getConnection();
-            String sql = "DELETE FROM Gener WHERE book_id=" + id;
+            String sql = "DELETE FROM Genre WHERE genre_id=?";
 
             preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
 
         } catch (SQLException e){
-            e.printStackTrace();
+            LOGGER.error("SQL exception occurred!");
+            throw new RuntimeException(e);
         }finally {
             closeConnection(preparedStatement, connection);
         }
@@ -201,7 +204,7 @@ public class GenreDAOImpl extends General implements GenreDAO {
             preparedStatement.executeUpdate();
 
         } catch (SQLException e){
-            logger.error("IO exception or SQL exception occurred!");
+            LOGGER.error("SQL exception occurred!");
             throw new RuntimeException(e);
         } finally{
             closeConnection( preparedStatement, connection);

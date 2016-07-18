@@ -1,12 +1,8 @@
 package com.workfront.internship.booklibrary.common;
 
-import java.util.List;
-
 public class Genre {
     private int id;
     private String genre;
-    private List<Book> books;
-
 
     public int getId() {
         return id;

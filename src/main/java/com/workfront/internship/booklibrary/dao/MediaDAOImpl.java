@@ -4,32 +4,42 @@ import com.workfront.internship.booklibrary.common.Book;
 import com.workfront.internship.booklibrary.common.Genre;
 import com.workfront.internship.booklibrary.common.Media;
 
-import java.beans.PropertyVetoException;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.log4j.Logger;
 
 
 public class MediaDAOImpl extends General implements MediaDAO{
+
+    private static final Logger LOGGER = Logger.getLogger(BookDAOImpl.class);
+
+    private DataSource dataSource;
+    private BookDAO bookDAO;
+
+    public MediaDAOImpl(DataSource dataSource) throws Exception {
+        this.dataSource = dataSource;
+        this.bookDAO = new BookDAOImpl(dataSource);
+    }
+
+    @Override
     public int add(Media media) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
+        ResultSet resultSet;
         int lastId = 0;
 
         try{
-            connection = DataSource.getInstance().getConnection();
+            connection = dataSource.getConnection();
             String sql = "INSERT INTO Media(media, media_type, book_id) VALUES(?, ?, ?)";
             preparedStatement = connection.prepareStatement(sql, preparedStatement.RETURN_GENERATED_KEYS);
 
-            //preparedStatement.setInt(1,media.getMediaId());
             preparedStatement.setString(1, media.getLink());
             preparedStatement.setString(2, media.getType());
-            preparedStatement.setInt(3, media.getBookId());
+            preparedStatement.setInt(3, media.getBook().getId());
 
             preparedStatement.executeUpdate();
             resultSet = preparedStatement.getGeneratedKeys();
@@ -39,14 +49,15 @@ public class MediaDAOImpl extends General implements MediaDAO{
             media.setId(lastId);
 
         } catch (SQLException e){
-            e.printStackTrace();
-            //todo use log4j
+            LOGGER.error("SQL exception occurred!");
+            throw new RuntimeException(e);
         }finally {
             closeConnection(preparedStatement, connection);
         }
         return media.getId();
     }
 
+    @Override
     public Media getMediaByID(int id) {
         Media media = null;
         Connection connection = null;
@@ -54,35 +65,18 @@ public class MediaDAOImpl extends General implements MediaDAO{
         ResultSet resultSet = null;
 
         try{
-            connection = DataSource.getInstance().getConnection();
-            media = new Media();
-            Book book = new Book();
-            Genre genre = new Genre();
-            String sql = "SELECT * FROM Media LEFT JOIN Book " +
-                    "ON Media.book_id = Book.book_id " +
-                    "where Media.book_id = " + id;
+            connection = dataSource.getConnection();
+
+            String sql = "SELECT * FROM Media inner join Book ON Media.book_id = Book.book_id inner join Genre" +
+                    " ON Book.genre_id = Genre.genre_id where Media.media_id = ?";
 
             preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();
 
             while(resultSet.next()){
-                media.setId(resultSet.getInt("media_id"));
-                media.setLink(resultSet.getString("media"));
-                media.setType(resultSet.getString("media_type"));
-                book.setId(resultSet.getInt("book_id"));
-                book.setISBN(resultSet.getString("ISBN"));
-                book.setTitle(resultSet.getString("title"));
-                genre.setId(resultSet.getInt("genre_id"));
-                book.setVolume(resultSet.getInt("volume"));
-                book.setBookAbstract(resultSet.getString("abstract"));
-                book.setLanguage(resultSet.getString("language"));
-                book.setCount(resultSet.getInt("count"));
-                book.setEditionYear(resultSet.getString("edition_year"));
-                book.setPages(resultSet.getInt("pages"));
-                book.setCountryOfEdition(resultSet.getString("country_of_edition"));
-
-                //book.setGenre(genre);
-                //media.setBook(book);
+                media = new Media();
+                setMediaDetails(resultSet, media);
             }
 
         } catch (SQLException e){
@@ -94,133 +88,124 @@ public class MediaDAOImpl extends General implements MediaDAO{
         return media;
     }
 
+    @Override
     public List<Media> getAllMedia() {
-        List<Media> medias = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
         try{
-            connection = DataSource.getInstance().getConnection();
-            medias = new ArrayList<Media>();
-            String sql = "SELECT * FROM Media LEFT JOIN Book " +
-                    "ON Media.book_id = Book.book_id";
+            connection = dataSource.getConnection();
+            List<Media> mediaList = new ArrayList<Media>();
+            String sql = "SELECT * FROM Media LEFT JOIN Book ON Media.book_id = Book.book_id " +
+                    "inner join Genre ON Book.genre_id = Genre.genre_id";
 
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
 
             while(resultSet.next()){
                 Media media = new Media();
-                Book book = new Book();
-                Genre genre = new Genre();
 
-                media.setId(resultSet.getInt("media_id"));
-                media.setLink(resultSet.getString("media"));
-                media.setType(resultSet.getString("media_type"));
-                book.setId(resultSet.getInt("book_id"));
-                book.setISBN(resultSet.getString("ISBN"));
-                book.setTitle(resultSet.getString("title"));
-                genre.setId(resultSet.getInt("genre_id"));
-                book.setVolume(resultSet.getInt("volume"));
-                book.setBookAbstract(resultSet.getString("abstract"));
-                book.setLanguage(resultSet.getString("language"));
-                book.setCount(resultSet.getInt("count"));
-                book.setEditionYear(resultSet.getString("edition_year"));
-                book.setPages(resultSet.getInt("pages"));
-                book.setCountryOfEdition(resultSet.getString("country_of_edition"));
+                setMediaDetails(resultSet, media);
 
-                //book.setGenre(genre);
-                //media.setBook(book);
-
-                medias.add(media);
+                mediaList.add(media);
             }
+            return mediaList;
 
         } catch (SQLException e){
-            e.printStackTrace();
-        }finally {
+            LOGGER.error("SQL exception occurred!");
+            throw new RuntimeException(e);
+        } finally {
             closeConnection(resultSet, preparedStatement,connection);
         }
 
-
-        return null;
     }
 
+    @Override
     public void updateMedia(Media media) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
         try{
             if(media.getId() != 0){
-                connection = DataSource.getInstance().getConnection();
+                connection = dataSource.getConnection();
                 String sql = "UPDATE Media SET " +
-                        "media_id=?, media=?, media_type=?, book_id=?" +
-                        " WHERE media_id=" + media.getId();
+                        "media=?, media_type=?, book_id=?" +
+                        " WHERE media_id=?";
 
                 preparedStatement = connection.prepareStatement(sql);
 
-                preparedStatement.setInt(1, media.getId());
-                preparedStatement.setString(2, media.getLink());
-                preparedStatement.setString(3, media.getType());
-                preparedStatement.setInt(4, media.getBookId());
+                preparedStatement.setString(1, media.getLink());
+                preparedStatement.setString(2, media.getType());
+                preparedStatement.setInt(3, media.getBook().getId());
+                preparedStatement.setInt(4, media.getId());
 
                 preparedStatement.executeUpdate();
 
             }
         } catch (SQLException e){
-            e.printStackTrace();
+            LOGGER.error("SQL exception occurred!");
+            throw new RuntimeException(e);
         } finally {
             closeConnection(preparedStatement, connection);
         }
     }
 
+    @Override
     public void deleteMedia(int id) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
         try{
-            connection = DataSource.getInstance().getConnection();
-            String sql = "DELETE FROM Media WHERE media_id=" + id;
+            connection = dataSource.getConnection();
+            String sql = "DELETE FROM Media WHERE media_id=?";
 
             preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
 
         } catch (SQLException e){
-            e.printStackTrace();
+            LOGGER.error("SQL exception occurred!");
+            throw new RuntimeException(e);
         }finally {
             closeConnection(preparedStatement, connection);
         }
     }
 
-    public List<Media> getAllMediaByBookId(int bookId){
-        List<Media> mediaList = null;
+    @Override
+    public void deleteAll(){
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
 
         try{
-            connection = DataSource.getInstance().getConnection();
-            mediaList = new ArrayList<Media>();
-            String sql = "SELECT * FROM media where media.book_id = " + bookId;
+            connection = dataSource.getConnection();
+            String sql = "DELETE FROM Media";
+
             preparedStatement = connection.prepareStatement(sql);
-            resultSet = preparedStatement.executeQuery();
-
-            while(resultSet.next()){
-                Media media = new Media();
-
-                media.setId(resultSet.getInt("media_id"));
-                media.setLink(resultSet.getString("media"));
-                media.setType(resultSet.getString("media_type"));
-                media.setBookId(resultSet.getInt("book_id"));
-
-                mediaList.add(media);
-            }
+            preparedStatement.executeUpdate();
 
         } catch (SQLException e){
-            e.printStackTrace();
-        } finally {
-            closeConnection(resultSet, preparedStatement, connection);
+            LOGGER.error("SQL exception occurred!");
+            throw new RuntimeException(e);
+        } finally{
+            closeConnection( preparedStatement, connection);
         }
+    }
 
-        return mediaList;
+    private void setMediaDetails(ResultSet resultSet, Media media) throws SQLException {
+        Book book = new Book();
+        Genre genre = new Genre();
+
+        media.setId(resultSet.getInt("media_id"));
+        media.setLink(resultSet.getString("media"));
+        media.setType(resultSet.getString("media_type"));
+        genre.setId(resultSet.getInt("genre_id")).setGenre(resultSet.getString("genre"));
+
+        book.setId(resultSet.getInt("book_id")).setISBN(resultSet.getString("ISBN")).setTitle(resultSet.getString("title"));
+        book.setGenre(genre).setVolume(resultSet.getInt("volume")).setBookAbstract(resultSet.getString("abstract"));
+        book.setLanguage(resultSet.getString("language")).setCount(resultSet.getInt("count"));
+        book.setEditionYear(resultSet.getString("edition_year")).setPages(resultSet.getInt("pages"));
+        book.setCountryOfEdition(resultSet.getString("country_of_edition"));
+        media.setBook(book);
     }
 }

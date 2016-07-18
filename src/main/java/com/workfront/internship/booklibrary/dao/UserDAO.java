@@ -19,6 +19,10 @@ public interface UserDAO {
     //get all data fields of all the users in the database
     List<User> getAllUsers();
 
+//    List<User> getAllUsersByPickedBookId(int bookId);
+
+//    List<User> getAllUsersByPendingBookId(int bookId);
+
     //update all fields in a row
     void updateUser(User user);
 

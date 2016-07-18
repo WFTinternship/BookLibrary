@@ -1,26 +1,15 @@
 package com.workfront.internship.booklibrary.dao;
 
-import com.workfront.internship.booklibrary.common.Book;
-import com.workfront.internship.booklibrary.common.Genre;
-import com.workfront.internship.booklibrary.common.User;
-import com.workfront.internship.booklibrary.dao.TestUtil;
-import com.workfront.internship.booklibrary.dao.UserDAO;
-import com.workfront.internship.booklibrary.dao.UserDAOImpl;
+import com.workfront.internship.booklibrary.common.*;
 
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-
 import static junit.framework.Assert.assertNull;
 import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertNotNull;
 import static junit.framework.TestCase.assertTrue;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import static com.workfront.internship.booklibrary.dao.TestUtil.*;
@@ -28,25 +17,19 @@ import static com.workfront.internship.booklibrary.dao.TestUtil.*;
 public class TestUserDAOImpl {
 
     private UserDAO userDAO;
+
     private User expectedUser = null;
 
     DataSource dataSource = DataSource.getInstance();
-    //private List<User> userList = new ArrayList<>();
-
 
     @Before
     public void setup() throws Exception{
         init();
-        expectedUser = getRandomUser();
-
-        userDAO.add(expectedUser);
-
     }
 
     @After
     public void tearDown() {
         userDAO.deleteAll();
-
     }
 
     private void init() throws Exception {
@@ -55,162 +38,116 @@ public class TestUserDAOImpl {
 
     @Test
     public void add_user(){
-        User user = getRandomUser();
-        assertEquals(0, user.getId());
+        expectedUser = getRandomUser();
 
         //test method add(user)
-        userDAO.add(user);
+        int id = userDAO.add(expectedUser);
 
-        userList.add(user);
+        assertTrue(id > 0);
 
-        assertNotNull(user);
-        assertTrue(user.getId() > 0);
-
-        User actualUser = userDAO.getUserByID(user.getId());
-
-        checkAssertions(user, actualUser);
+        User actualUser = userDAO.getUserByID(id);
+        checkAssertions(expectedUser, actualUser);
     }
 
     @Test
     public void get_user_by_id(){
-        User user = userList.get(0);
-        System.out.println(user.toString());
-        //userDAO.add(user);
-        //userList.add(user);
+        expectedUser = getRandomUser();
+        int id = userDAO.add(expectedUser);
 
-        //test method getUserById
-        User actualUser = userDAO.getUserByID(user.getId());
-        System.out.println(actualUser.toString());
+        //test method getUserById()
+        User actualUser = userDAO.getUserByID(id);
 
-        checkAssertions(user, actualUser);
+        checkAssertions(expectedUser, actualUser);
     }
 
     @Test
     public void get_user_by_email(){
-        User user = userList.get(0);
+        expectedUser = getRandomUser();
+        userDAO.add(expectedUser);
 
         //test method getUserByeMail
-        User actualUser = userDAO.getUserByeMail(user.geteMail());
+        User actualUser = userDAO.getUserByeMail(expectedUser.geteMail());
 
-        checkAssertions(user, actualUser);
+        checkAssertions(expectedUser, actualUser);
     }
 
     @Test
     public void get_user_by_username(){
-        User user = userList.get(0);
+        expectedUser = getRandomUser();
+        userDAO.add(expectedUser);
 
         //test method getUserByUsername
-        User actualUser = userDAO.getUserByUsername(user.getUsername());
+        User actualUser = userDAO.getUserByUsername(expectedUser.getUsername());
 
-        checkAssertions(user, actualUser);
+        checkAssertions(expectedUser, actualUser);
     }
 
     @Test
     public void get_all_users(){
         userDAO.deleteAll();
-        deleteAllUsers();
-        List<User> users = null;
+
+        List<User> expectedUserList = new ArrayList<>();
+        List<User> actualUserList = new ArrayList<>();
         int userCount = 2;
-        User user;
+
         for(int i = 0; i < userCount; i++){
-            user = getRandomUser();
+            User user = getRandomUser();
             userDAO.add(user);
-            userList.add(user);
+            expectedUserList.add(user);
         }
 
         //test method getAllUsers()
-        users = userDAO.getAllUsers();
+        actualUserList = userDAO.getAllUsers();
 
-        assertEquals(userList.size(), users.size());
+        assertEquals(expectedUserList.size(), actualUserList.size());
         for(int i = 0; i < userCount; i++){
-            checkAssertions(userList.get(i), users.get(i));
+            checkAssertions(expectedUserList.get(i), actualUserList.get(i));
         }
+
+        expectedUserList.clear();
+        actualUserList.clear();
     }
-
-  /**  @Test // TODO: 7/14/2016
-    public void get_all_users_by_pickedBookId(){
-        userDAO.deleteAll();
-        deleteAllUsers();
-        List<User> users = null;
-        int userCount = 2;
-        User user;
-        for(int i = 0; i < userCount; i++){
-            user = getRandomUser();
-            userDAO.add(user);
-            userList.add(user);
-        }
-
-        users = userDAO.getAllUsersByPickedBookId(1);
-        assertEquals(userList.size(), users.size());
-        for(int i = 0; i < userCount; i++){
-            checkAssertions(userList.get(i), users.get(i));
-        }
-    }*/
-
-  /**  @Test // TODO: 7/14/2016
-    public void get_all_users_by_pendingBookId(){} */
 
     @Test
     public void update_user(){
-        User user = userList.get(0);
+        expectedUser = getRandomUser();
+        int id = userDAO.add(expectedUser);
 
-        user.setName("Sona");
-        user.setUsername("sonamik");
+        expectedUser.setName("Sona");
+        expectedUser.setUsername("sonamik");
 
-        // TmpTest method updateUser()
-        userDAO.updateUser(user);
+        // Test method updateUser()
+        userDAO.updateUser(expectedUser);
 
-        User newUser = userDAO.getUserByID(user.getId());
-
-        checkAssertions(user, newUser);
+        User actualUser = userDAO.getUserByID(id);
+        checkAssertions(expectedUser, actualUser);
     }
 
     @Test
     public void delete_user_by_id(){
-        User user = userList.get(0);
-        int id = user.getId();
+        userDAO.deleteAll();
+
+        expectedUser = getRandomUser();
+        int id = userDAO.add(expectedUser);
 
         // TmpTest method deleteUser()
         userDAO.deleteUser(id);
 
         User actualUser = userDAO.getUserByID(id);
-
         assertNull(actualUser);
     }
 
     @Test
     public void delete_all(){
-        // TmpTest method deleteAllUsers()
+        expectedUser = getRandomUser();
+        userDAO.add(expectedUser);
+
+        // Test method deleteAllUsers()
         userDAO.deleteAll();
 
         assertTrue(userDAO.getAllUsers().isEmpty());
     }
 
-
-
-
-
-    private boolean deleteAllUsers(){
-        for(User user : userList){
-            userDAO.deleteUser(user.getId());
-        }
-        userList.clear();
-        return userList.isEmpty();
-    }
-
-    private User getRandomUser(){
-        User user = new User();
-        user.setName("name");
-        user.setSurname("surname");
-        user.setUsername("username" + uuid());
-        user.setPassword("password");
-        user.setAddress("address");
-        user.seteMail("sona" + uuid() + "@yahoo.com");
-        user.setPhone("phone number");
-        user.setAccessPrivilege("user");
-
-        return user;
-    }
 
     private void checkAssertions(User user, User actualUser){
         assertEquals(user.getName(), actualUser.getName());

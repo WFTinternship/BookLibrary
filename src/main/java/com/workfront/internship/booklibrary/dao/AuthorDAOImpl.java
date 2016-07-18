@@ -2,17 +2,24 @@ package com.workfront.internship.booklibrary.dao;
 
 import com.workfront.internship.booklibrary.common.Author;
 
-import java.beans.PropertyVetoException;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.log4j.Logger;
 
 public class AuthorDAOImpl extends General implements AuthorDAO {
+    private static final Logger LOGGER = Logger.getLogger(BookDAOImpl.class);
 
+    private DataSource dataSource;
+
+    public AuthorDAOImpl(DataSource dataSource) throws Exception {
+        this.dataSource = dataSource;
+    }
+
+    @Override
     public int add(Author author) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -20,7 +27,7 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
         int lastId = 0;
 
         try{
-            connection = DataSource.getInstance().getConnection();
+            connection = dataSource.getConnection();
 
             String sql = "INSERT INTO Author(name, surname, email, web_page, biography) VALUES(?, ?, ?, ?, ?)";
 
@@ -40,37 +47,35 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
             author.setId(lastId);
 
         } catch (SQLException e){
-            e.printStackTrace();
-            //todo use log4j
+            LOGGER.error("SQL exception occurred!");
+            throw new RuntimeException(e);
         } finally{
             closeConnection( preparedStatement, connection);
         }
         return author.getId();
     }
 
+    @Override
     public Author getAuthorByID(int id) {
         Author author = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
         try{
-            connection = DataSource.getInstance().getConnection();
-            String sql = "SELECT * FROM Author WHERE author_id=" + id;
+            connection = dataSource.getConnection();
+            String sql = "SELECT * FROM Author WHERE author_id=?";
             preparedStatement = connection.prepareStatement(sql);
-            ResultSet rs = preparedStatement.executeQuery();
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-            while(rs.next()){
+            while(resultSet.next()){
                 author = new Author();
-                author.setId(rs.getInt(1));
-                author.setName(rs.getString(2));
-                author.setSurname(rs.getString(3));
-                author.seteMail(rs.getString(4));
-                author.setWebPage(rs.getString(5));
-                author.setBiography(rs.getString(6));
+                setAuthorDetails(resultSet, author);
             }
 
         } catch (SQLException e){
-            e.printStackTrace();
+            LOGGER.error("SQL exception occurred!");
+            throw new RuntimeException(e);
         } finally{
             closeConnection(preparedStatement, connection);
         }
@@ -78,30 +83,28 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
         return author;
     }
 
+    @Override
     public Author getAuthorByName(String name){
-        Author author = new Author();
+        Author author = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
         try{
-            connection = DataSource.getInstance().getConnection();
-            String sql = String.format("SELECT * FROM author WHERE name = '%s'", name);
+            connection = dataSource.getConnection();
+            String sql = "SELECT * FROM author WHERE name =?";
             preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, name);
             resultSet = preparedStatement.executeQuery();
 
             while(resultSet.next()){
                 author = new Author();
-                author.setId(resultSet.getInt(1));
-                author.setName(resultSet.getString(2));
-                author.setSurname(resultSet.getString(3));
-                author.seteMail(resultSet.getString(4));
-                author.setWebPage(resultSet.getString(5));
-                author.setBiography(resultSet.getString(6));
+                setAuthorDetails(resultSet, author);
             }
 
         } catch (SQLException e){
-            e.printStackTrace();
+            LOGGER.error("SQL exception occurred!");
+            throw new RuntimeException(e);
         } finally{
             closeConnection(resultSet, preparedStatement, connection);
         }
@@ -109,6 +112,7 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
         return author;
     }
 
+    @Override
     public List<Author> getAllAuthors() {
         List<Author> authors = null;
         Connection connection = null;
@@ -116,7 +120,7 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
         ResultSet resultSet = null;
 
         try{
-            connection = DataSource.getInstance().getConnection();
+            connection = dataSource.getConnection();
             authors = new ArrayList<Author>();
             String sql = "SELECT * FROM Author";
             preparedStatement = connection.prepareStatement(sql);
@@ -124,19 +128,14 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
 
             while (resultSet.next()){
                 Author author = new Author();
-
-                author.setId(resultSet.getInt(1));
-                author.setName(resultSet.getString(2));
-                author.setSurname(resultSet.getString(3));
-                author.seteMail(resultSet.getString(4));
-                author.setWebPage(resultSet.getString(5));
-                author.setBiography(resultSet.getString(6));
+                setAuthorDetails(resultSet, author);
 
                 authors.add(author);
             }
 
         } catch (SQLException e){
-            e.printStackTrace();
+            LOGGER.error("SQL exception occurred!");
+            throw new RuntimeException(e);
         } finally {
             closeConnection(resultSet, preparedStatement, connection);
         }
@@ -151,31 +150,27 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
         ResultSet resultSet = null;
 
         try{
-            connection = DataSource.getInstance().getConnection();
+            connection = dataSource.getConnection();
             authorList = new ArrayList<Author>();
-            String sql = "SELECT * FROM book_author" +
-                    "where book_author.author_id=?";
+            String sql = "SELECT * FROM author left join book_author" +
+                    "on author.author_id = book_author.author_id" +
+                    "where book_author.book_id=?";
 
-            preparedStatement.setInt(1, bookId);
             preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, bookId);
             resultSet = preparedStatement.executeQuery();
 
             while(resultSet.next()){
                 Author author = new Author();
-
-                author.setId(resultSet.getInt("author_id"));
-                author.setName(resultSet.getString("name"));
-                author.setSurname(resultSet.getString("surname"));
-                author.seteMail(resultSet.getString("email"));
-                author.setWebPage(resultSet.getString("web_page"));
-                author.setBiography(resultSet.getString("biography"));
+                setAuthorDetails(resultSet, author);
 
                 authorList.add(author);
             }
 
 
         } catch (SQLException e){
-            e.printStackTrace();
+            LOGGER.error("SQL exception occurred!");
+            throw new RuntimeException(e);
         } finally {
             closeConnection(resultSet, preparedStatement, connection);
         }
@@ -183,17 +178,18 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
         return authorList;
     }
 
+    @Override
     public void updateAuthor(Author author) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
         try{
             if(author.getId() != 0){
-                connection = DataSource.getInstance().getConnection();
+                connection = dataSource.getConnection();
                 String sql = "UPDATE Author SET " +
                         "name = ?, surname = ?, email = ?, web_page = ?, biography = ? " +
                         "WHERE author_id = ?";
-                preparedStatement.setInt(1, author.getId());
+
                 preparedStatement = connection.prepareStatement(sql);
 
                 preparedStatement.setString(1, author.getName());
@@ -201,34 +197,67 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
                 preparedStatement.setString(3, author.geteMail());
                 preparedStatement.setString(4, author.getWebPage());
                 preparedStatement.setString(5, author.getBiography());
+                preparedStatement.setInt(6, author.getId());
 
                 preparedStatement.executeUpdate();
             }
 
         } catch (SQLException e){
-            e.printStackTrace();
+            LOGGER.error("SQL exception occurred!");
+            throw new RuntimeException(e);
         } finally {
             closeConnection(preparedStatement, connection);
         }
-
     }
 
+    @Override
     public void deleteAuthor(int id) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
         try{
-            connection = DataSource.getInstance().getConnection();
+            connection = dataSource.getConnection();
             String sql = "DELETE FROM Author WHERE author_id = ?";
-            preparedStatement.setInt(1, id);
+
             preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
 
         } catch (SQLException e){
-            e.printStackTrace();
+            LOGGER.error("SQL exception occurred!");
+            throw new RuntimeException(e);
         } finally {
             closeConnection(preparedStatement, connection);
         }
+    }
+
+    @Override
+    public void deleteAllAuthors() {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        try{
+            connection = dataSource.getConnection();
+            String sql = "DELETE FROM Author";
+
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            LOGGER.error("SQL exception occurred!");
+            throw new RuntimeException(e);
+        } finally {
+            closeConnection(preparedStatement, connection);
+        }
+    }
+
+    private void setAuthorDetails(ResultSet rs, Author author) throws SQLException {
+        author.setId(rs.getInt("author_id"));
+        author.setName(rs.getString("name"));
+        author.setSurname(rs.getString("surname"));
+        author.seteMail(rs.getString("email"));
+        author.setWebPage(rs.getString("web_page"));
+        author.setBiography(rs.getString("biography"));
     }
 
 }

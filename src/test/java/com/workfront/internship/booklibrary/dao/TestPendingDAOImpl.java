@@ -1,190 +1,169 @@
 package com.workfront.internship.booklibrary.dao;
 
-import com.workfront.internship.booklibrary.common.Pending;
-import com.workfront.internship.booklibrary.dao.DataSource;
-import com.workfront.internship.booklibrary.dao.General;
-import com.workfront.internship.booklibrary.dao.PendingDAO;
-import com.workfront.internship.booklibrary.dao.PendingDAOImpl;
+import com.workfront.internship.booklibrary.common.*;
+
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.beans.PropertyVetoException;
-import java.io.IOException;
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static junit.framework.TestCase.assertNull;
 import static org.junit.Assert.*;
+import static com.workfront.internship.booklibrary.dao.TestUtil.*;
 
 
 public class TestPendingDAOImpl {
-    Pending pending = null;
-    Connection connection = null;
-    PreparedStatement preparedStatement = null;
-    ResultSet resultSet = null;
+    private PendingDAO pendingDAO;
+    private UserDAO userDAO;
+    private BookDAO bookDAO;
+    private GenreDAO genreDAO;
+
+    private Pending expectedPending = null;
+    private User expectedUser = null;
+    private Book expectedBook = null;
+
+    private DataSource dataSource = DataSource.getInstance();
 
     @Before
-    public void setUp(){
-        try{
-            connection = DataSource.getInstance().getConnection();
-            pending = new Pending();
-            pending.setId(4);
-            pending.setUserId(3);
-            pending.setBookId(2);
-            pending.setPendingDate(Timestamp.valueOf("2016-08-12 01:02:03"));
+    public void setup() throws Exception {
+        init();
+        expectedUser = getRandomUser();
+        userDAO.add(expectedUser);
 
-            String sql;
-            sql = "INSERT INTO Pending VALUES(?, ?, ?, ?)";
-            preparedStatement = connection.prepareStatement(sql);
+        Genre expectedGenre = getRandomGenre();
+        genreDAO.add(expectedGenre);
 
-            preparedStatement.setInt(1, pending.getId());
-            preparedStatement.setInt(2, pending.getUserId());
-            preparedStatement.setInt(3, pending.getBookId());
-            preparedStatement.setTimestamp(4, new Timestamp(pending.getPendingDate().getTime()));
-
-            preparedStatement.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        expectedBook = getRandomBook(expectedGenre);
+        bookDAO.add(expectedBook);
 
     }
 
     @After
-    public void tearDown(){
-        try{
-            if (preparedStatement != null) preparedStatement.close();
-            if (connection != null) connection.close();
-            if (resultSet != null) resultSet.close();
-        }catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public void tearDown() {
+        pendingDAO.deleteAllPendings();
+        bookDAO.deleteAll();
+        genreDAO.deleteAll();
+        userDAO.deleteAll();
     }
 
+    private void init() throws Exception {
+        pendingDAO = new PendingDAOImpl(dataSource);
+        userDAO = new UserDAOImpl(dataSource);
+        bookDAO = new BookDAOImpl(dataSource);
+        genreDAO = new GenreDAOImpl(dataSource);
+    }
 
 
     @Test
-    public void TestCreatePending() {
-        PendingDAO pendingDao = new PendingDAOImpl();
-        Pending actualPending = pendingDao.getPendingByID(pending.getId());
+    public void add() {
+
+        expectedPending = getRandomPending(expectedUser, expectedBook);
+
+        //Test method add()
+        int id = pendingDAO.add(expectedPending);
 
 
-        assertNotNull(actualPending);
-        assertEquals(pending.getId(), actualPending.getId());
-        assertEquals(pending.getUserId(), actualPending.getUserId());
-        assertEquals(pending.getBookId(), actualPending.getBookId());
-        assertEquals(pending.getPendingDate(), actualPending.getPendingDate());
+        assertNotNull(expectedPending);
+
+        Pending actualPending = pendingDAO.getPendingByID(id);
+        checkAssertions(expectedPending, actualPending);
 
     }
-
-
-/**
-    @Test
-    public Pending getPendingByID(int id) {
-        Pending pending = null;
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-
-        try{
-            connection = DataSource.getInstance().getConnection();
-            pending = new Pending();
-            String sql;
-            sql = "select * from pending where pending.pending_id =" + pending.getPendingId();
-
-            preparedStatement = connection.prepareStatement(sql);
-            resultSet = preparedStatement.executeQuery();
-
-            while(resultSet.next()){
-                pending.setPendingId(resultSet.getInt("pending_id"));
-                pending.setUserId(resultSet.getInt("user_id"));
-                pending.setBookId(resultSet.getInt("book_id"));
-                pending.setPendingDate(resultSet.getTimestamp("pending_time"));
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
-            e.printStackTrace();
-        }finally {
-            closeConnection(resultSet, preparedStatement, connection);
-        }
-        return pending;
-    }
-
-
 
     @Test
-    public List<Pending> getAllPendingsByBookID(int bookid){
-        List<Pending> pendingList = null;
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
+    public void getPendingByID(){
+        expectedPending = getRandomPending(expectedUser, expectedBook);
+        int id = pendingDAO.add(expectedPending);
+        assertNotNull(expectedPending);
 
-        try{
-            connection = DataSource.getInstance().getConnection();
-            pendingList = new ArrayList<Pending>();
-            String sql;
-            sql = "select * from pending left join book" +
-                    "on pending.book_id = book.book_id" +
-                    "where pending.book_id =" + bookid;
-
-            preparedStatement = connection.prepareStatement(sql);
-            resultSet = preparedStatement.executeQuery();
-
-            while(resultSet.next()){
-                Pending pending = new Pending();
-
-                pending.setPendingId(resultSet.getInt("pending_id"));
-                pending.setUserId(resultSet.getInt("user_id"));
-                pending.setBookId(resultSet.getInt("book_id"));
-                pending.setPendingDate(resultSet.getTimestamp("pending_time"));
-
-                pendingList.add(pending);
-            }
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
-            e.printStackTrace();
-        }finally {
-            closeConnection(resultSet, preparedStatement, connection);
-        }
-
-        return pendingList;
+        //Test method getPendingByID()
+        Pending actualPending = pendingDAO.getPendingByID(id);
+        checkAssertions(expectedPending, actualPending);
     }
 
+    @Test
+    public void getAllPendingsByBookID(){
+        pendingDAO.deleteAllPendings();
+        List<Pending> expectedPendingList = new ArrayList<>();
+        List<Pending> actualPendingList = new ArrayList<>();
+        int count = 2;
+
+        for(int i = 0; i < count; i++) {
+            expectedPending = getRandomPending(expectedUser, expectedBook);
+            pendingDAO.add(expectedPending);
+            assertNotNull(expectedPending);
+            expectedPendingList.add(expectedPending);
+        }
+
+        //Test method getAllPBookID()
+        actualPendingList = pendingDAO.getAllPendingsByBookID(expectedBook.getId());
+
+        for(int i = 0; i < count; i++){
+            checkAssertions(expectedPendingList.get(i), actualPendingList.get(i));
+        }
+
+        expectedPendingList.clear();
+        actualPendingList.clear();
+    }
+
+    @Test
+    public void getAllPendingsByUserID() {
+        pendingDAO.deleteAllPendings();
+        List<Pending> expectedPendingList = new ArrayList<>();
+        List<Pending> actualPendingList = new ArrayList<>();
+        int count = 2;
+
+        for(int i = 0; i < count; i++) {
+            expectedPending = getRandomPending(expectedUser, expectedBook);
+            pendingDAO.add(expectedPending);
+            assertNotNull(expectedPending);
+            expectedPendingList.add(expectedPending);
+        }
+
+        //Test method getAllPBookID()
+        actualPendingList = pendingDAO.getAllPendingsByUserID(expectedUser.getId());
+
+        for(int i = 0; i < count; i++){
+            checkAssertions(expectedPendingList.get(i), actualPendingList.get(i));
+        }
+
+        expectedPendingList.clear();
+        actualPendingList.clear();
+    }
 
 
     @Test
-    public void deletePending(int id) {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
+    public void deletePending(){
+        expectedPending = getRandomPending(expectedUser, expectedBook);
+        int id = pendingDAO.add(expectedPending);
 
-        try{
-            connection = DataSource.getInstance().getConnection();
-            String sql;
-            sql = "DELETE * FROM Pending where pending_id=" + id;
+        //Test method deletePickedBook()
+        pendingDAO.deletePending(id);
 
-            preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.executeUpdate();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
-            e.printStackTrace();
-        } finally {
-            closeConnection(preparedStatement, connection);
-        }
+        Pending actualPending = pendingDAO.getPendingByID(id);
+        assertNull(actualPending);
     }
-    */
+
+    @Test
+    public void deleteAllPendings(){
+        pendingDAO.deleteAllPendings();
+        expectedPending = getRandomPending(expectedUser, expectedBook);
+        int id = pendingDAO.add(expectedPending);
+
+        //Test method deleteAllPickedBooks()
+        pendingDAO.deleteAllPendings();
+
+        Pending actualPending = pendingDAO.getPendingByID(id);
+        assertNull(actualPending);
+    }
+
+
+    private void checkAssertions(Pending expectedPending, Pending actualPending){
+        assertEquals(expectedPending.getId(), actualPending.getId());
+        assertEquals(expectedPending.getUser(), actualPending.getUser());
+        assertEquals(expectedPending.getBook(), actualPending.getBook());
+        assertEquals(expectedPending.getPendingDate(), actualPending.getPendingDate());
+    }
 }

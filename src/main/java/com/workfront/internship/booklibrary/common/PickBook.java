@@ -5,8 +5,10 @@ import java.util.Date;
 
 public class PickBook {
     private int id;
-    private int bookId;
-    private int userId;
+
+    private Book book;
+    private User user;
+
     private Date pickingDate;
     private Date returnDate;
 
@@ -19,21 +21,21 @@ public class PickBook {
         return this;
     }
 
-    public int getBookId() {
-        return bookId;
+    public Book getBook() {
+        return book;
     }
 
-    public PickBook setBookId(int bookId) {
-        this.bookId = bookId;
+    public PickBook setBook(Book book) {
+        this.book = book;
         return this;
     }
 
-    public int getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public PickBook setUserId(int userId) {
-        this.userId = userId;
+    public PickBook setUser(User user) {
+        this.user = user;
         return this;
     }
 
@@ -59,8 +61,8 @@ public class PickBook {
     public String toString() {
         return "PickBook{" +
                 "pickBook_id=" + id +
-                ", book_id='" + bookId + '\'' +
-                ", user_id='" + userId + '\'' +
+                ", book_id='" + getBook().getId() + '\'' +
+                ", user_id='" + getUser().getId() + '\'' +
                 ", pickingDate='" + pickingDate + '\'' +
                 ", returnDate='" + returnDate + '\'' +
                 '}';
@@ -74,8 +76,8 @@ public class PickBook {
         PickBook pickBook = (PickBook) obj;
 
         if (getId() != pickBook.getId()) return false;
-        if (getBookId() != pickBook.getBookId()) return false;
-        if (getUserId() != pickBook.getUserId()) return false;
+        if (getBook() != null ? !getBook().equals(pickBook.getBook()) : pickBook.getBook() != null) return false;
+        if (getUser() != null ? !getUser().equals(pickBook.getUser()) : pickBook.getUser() != null) return false;
         if (getPickingDate() != null ? !getPickingDate().equals(pickBook.getPickingDate()) : pickBook.getPickingDate() != null) return false;
         return (getPickingDate() != null ? !getPickingDate().equals(pickBook.getPickingDate()) : pickBook.getPickingDate() != null);
     }
@@ -83,8 +85,8 @@ public class PickBook {
     @Override
     public int hashCode() {
         int result = getId();
-        result = 31 * result + getBookId();
-        result = 31 * result + getUserId();
+        result = 31 * result + (getBook() != null ? getBook().hashCode() : 0);
+        result = 31 * result + (getUser() != null ? getUser().hashCode() : 0);
         result = 31 * result + (getPickingDate() != null ? getPickingDate().hashCode() : 0);
         result = 31 * result + (getPickingDate() != null ? getPickingDate().hashCode() : 0);
         result = 31 * result + (getReturnDate() != null ? getReturnDate().hashCode() : 0);

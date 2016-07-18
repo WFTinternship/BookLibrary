@@ -1,12 +1,11 @@
 package com.workfront.internship.booklibrary.dao;
 
 import com.workfront.internship.booklibrary.common.User;
-import org.apache.log4j.Logger;
 
-import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.log4j.Logger;
 
 
 public class UserDAOImpl extends General implements UserDAO {
@@ -24,7 +23,6 @@ public class UserDAOImpl extends General implements UserDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-
         int lastId = 0;
 
         try{
@@ -50,13 +48,12 @@ public class UserDAOImpl extends General implements UserDAO {
             user.setId(lastId);
 
         } catch (SQLException e) {
-            LOGGER.error("IO exception or SQL exception occurred!");
+            LOGGER.error("SQL exception occurred!");
             throw new RuntimeException(e);
         } finally{
             closeConnection( preparedStatement, connection);
         }
         return user.getId();
-
     }
 
     @Override
@@ -64,21 +61,22 @@ public class UserDAOImpl extends General implements UserDAO {
         User user = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         try{
             connection = dataSource.getConnection();
             String sql = "SELECT * FROM User WHERE user_id=?";
 
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, id);
-            ResultSet rs = preparedStatement.executeQuery();
+            resultSet = preparedStatement.executeQuery();
 
-            while(rs.next()){
+            while(resultSet.next()){
                 user = new User();
-                setUserDetails(rs, user);
+                setUserDetails(resultSet, user);
             }
 
         } catch (SQLException e){
-            LOGGER.error("IO exception or SQL exception occurred!");
+            LOGGER.error("SQL exception occurred!");
             throw new RuntimeException(e);
         }  finally{
             closeConnection( preparedStatement, connection);
@@ -92,25 +90,27 @@ public class UserDAOImpl extends General implements UserDAO {
         User user = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
         try{
             connection = dataSource.getConnection();
-            String sql = String.format("SELECT * FROM User WHERE e_mail= '%s'", email);
+            String sql = "SELECT * FROM User WHERE e_mail=?";
 
             preparedStatement = connection.prepareStatement(sql);
-            ResultSet rs = preparedStatement.executeQuery();
+            preparedStatement.setString(1, email);
+            resultSet = preparedStatement.executeQuery();
 
-            while(rs.next()){
+            while(resultSet.next()){
                 user = new User();
-                setUserDetails(rs, user);
+                setUserDetails(resultSet, user);
             }
 
         } catch (SQLException e){
-            LOGGER.error("IO exception or SQL exception occurred!");
+            LOGGER.error("SQL exception occurred!");
             throw new RuntimeException(e);
         } finally{
             closeConnection( preparedStatement, connection);
         }
-
         return user;
     }
 
@@ -119,25 +119,27 @@ public class UserDAOImpl extends General implements UserDAO {
         User user = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
         try{
             connection = dataSource.getConnection();
-            String sql = String.format("SELECT * FROM User WHERE username= '%s'", userName);
+            String sql = "SELECT * FROM User WHERE username=?";
 
             preparedStatement = connection.prepareStatement(sql);
-            ResultSet rs = preparedStatement.executeQuery();
+            preparedStatement.setString(1, userName);
+            resultSet = preparedStatement.executeQuery();
 
-            while(rs.next()){
+            while(resultSet.next()){
                 user = new User();
-                setUserDetails(rs, user);
+                setUserDetails(resultSet, user);
             }
 
         } catch (SQLException e){
-            LOGGER.error("IO exception or SQL exception occurred!");
+            LOGGER.error("SQL exception occurred!");
             throw new RuntimeException(e);
         }finally{
             closeConnection( preparedStatement, connection);
         }
-
         return user;
     }
 
@@ -146,25 +148,26 @@ public class UserDAOImpl extends General implements UserDAO {
         List<User> users = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        ResultSet resultSets = null;
+        ResultSet resultSet = null;
+
         try{
             connection = dataSource.getConnection();
             users = new ArrayList<User>();
             String sql = "SELECT * FROM User";
             preparedStatement = connection.prepareStatement(sql);
-            resultSets = preparedStatement.executeQuery();
+            resultSet = preparedStatement.executeQuery();
 
-            while (resultSets.next()) {
+            while (resultSet.next()) {
                 User user = new User();
-                setUserDetails(resultSets, user);
+                setUserDetails(resultSet, user);
                 users.add(user);
             }
 
         } catch (SQLException e){
-            LOGGER.error("IO exception or SQL exception occurred!");
+            LOGGER.error("SQL exception occurred!");
             throw new RuntimeException(e);
         } finally {
-            closeConnection(resultSets, preparedStatement, connection);
+            closeConnection(resultSet, preparedStatement, connection);
         }
 
         return users;
@@ -198,7 +201,7 @@ public class UserDAOImpl extends General implements UserDAO {
             }
 
         } catch (SQLException e){
-            LOGGER.error("IO exception or SQL exception occurred!");
+            LOGGER.error("SQL exception occurred!");
             throw new RuntimeException(e);
         } finally{
             closeConnection( preparedStatement, connection);
@@ -220,13 +223,14 @@ public class UserDAOImpl extends General implements UserDAO {
             preparedStatement.executeUpdate();
 
         } catch (SQLException e){
-            LOGGER.error("IO exception or SQL exception occurred!");
+            LOGGER.error("SQL exception occurred!");
             throw new RuntimeException(e);
         } finally{
             closeConnection(connection);
         }
     }
 
+    @Override
     public void deleteAll(){
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -239,77 +243,14 @@ public class UserDAOImpl extends General implements UserDAO {
             preparedStatement.executeUpdate();
 
         } catch (SQLException e){
-            LOGGER.error("IO exception or SQL exception occurred!");
+            LOGGER.error("SQL exception occurred!");
             throw new RuntimeException(e);
         } finally{
-            closeConnection( preparedStatement, connection);
+            closeConnection(preparedStatement, connection);
         }
     }
 
-    public List<User> getAllUsersByPickedBookId(int bookId){
-        List<User> userList = null;
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
 
-        try{
-            connection = dataSource.getConnection();
-            userList = new ArrayList<User>();
-            String sql = "SELECT * FROM user left join pick_book" +
-                    "on user.user_id = pick_book.user_id" +
-                    "where pick_book.book_id =?";
-
-            preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, bookId);
-            resultSet = preparedStatement.executeQuery();
-
-            while(resultSet.next()){
-                User user = new User();
-                setUserDetails(resultSet, user);
-                userList.add(user);
-            }
-
-
-        } catch (SQLException e){
-            LOGGER.error("IO exception or SQL exception occurred!");
-            throw new RuntimeException(e);
-        } finally {
-            closeConnection(resultSet, preparedStatement, connection);
-        }
-        return userList;
-    }
-
-    public List<User> getAllUsersByPendingBookId(int bookId){
-        List<User> userList = null;
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-
-        try{
-            connection = dataSource.getConnection();
-            userList = new ArrayList<User>();
-            String sql = "SELECT * FROM user left join pending" +
-                    "on user.user_id = pending.user_id" +
-                    "where pending.book_id =";
-            preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, bookId);
-            resultSet = preparedStatement.executeQuery();
-
-            while(resultSet.next()){
-                User user = new User();
-                setUserDetails(resultSet, user);
-                userList.add(user);
-            }
-
-        }catch (SQLException e){
-            LOGGER.error("IO exception or SQL exception occurred!");
-            throw new RuntimeException(e);
-        } finally {
-            closeConnection(resultSet, preparedStatement, connection);
-        }
-
-        return userList;
-    }
 
     private void setUserDetails(ResultSet rs, User user) throws SQLException {
         user.setId(rs.getInt("user_id"));

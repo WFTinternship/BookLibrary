@@ -10,7 +10,11 @@ public interface PendingDAO {
 
     List<Pending> getAllPendingsByBookID(int id);
 
+    List<Pending> getAllPendingsByUserID(int id);
+
     //void updatePending(Pending pending);
 
     void deletePending(int id);
+
+    void deleteAllPendings();
 }
