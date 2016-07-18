@@ -59,7 +59,7 @@ public class GenreDAOImpl extends General implements GenreDAO {
         try{
             connection = dataSource.getConnection();
 
-            String sql = "SELECT * FROM Genre WHERE genre_id=?";
+            String sql = "SELECT FROM Genre WHERE genre_id=?";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();
@@ -89,7 +89,7 @@ public class GenreDAOImpl extends General implements GenreDAO {
         try{
             connection = dataSource.getConnection();
 
-            String sql = "SELECT * FROM Genre WHERE genre=?";
+            String sql = "SELECT FROM Genre WHERE genre=?";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, genreName);
             resultSet = preparedStatement.executeQuery();
@@ -177,7 +177,7 @@ public class GenreDAOImpl extends General implements GenreDAO {
 
         try{
             connection = dataSource.getConnection();
-            String sql = "DELETE FROM Genre WHERE genre_id=?";
+            String sql = "DELETE FROM Gener WHERE book_id=?";
 
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, id);

@@ -1,7 +1,6 @@
 package com.workfront.internship.booklibrary.dao;
 
 import com.workfront.internship.booklibrary.common.Book;
-import com.workfront.internship.booklibrary.common.Genre;
 import com.workfront.internship.booklibrary.common.Media;
 
 import java.sql.Connection;
@@ -67,8 +66,9 @@ public class MediaDAOImpl extends General implements MediaDAO{
         try{
             connection = dataSource.getConnection();
 
-            String sql = "SELECT * FROM Media inner join Book ON Media.book_id = Book.book_id inner join Genre" +
-                    " ON Book.genre_id = Genre.genre_id where Media.media_id = ?";
+            String sql = "SELECT * FROM Media LEFT JOIN Book " +
+                    "ON Media.book_id = Book.book_id " +
+                    "where Media.book_id = ?";
 
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, id);
@@ -76,7 +76,12 @@ public class MediaDAOImpl extends General implements MediaDAO{
 
             while(resultSet.next()){
                 media = new Media();
+                Book book = new Book();
+
                 setMediaDetails(resultSet, media);
+
+                book.setId(resultSet.getInt(4)).setTitle(resultSet.getString("title"));
+                media.setBook(book);
             }
 
         } catch (SQLException e){
@@ -90,23 +95,26 @@ public class MediaDAOImpl extends General implements MediaDAO{
 
     @Override
     public List<Media> getAllMedia() {
+        List<Media> mediaList = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
         try{
             connection = dataSource.getConnection();
-            List<Media> mediaList = new ArrayList<Media>();
-            String sql = "SELECT * FROM Media LEFT JOIN Book ON Media.book_id = Book.book_id " +
-                    "inner join Genre ON Book.genre_id = Genre.genre_id";
+            mediaList = new ArrayList<Media>();
+            String sql = "SELECT * FROM Media LEFT JOIN Book " +
+                    "ON Media.book_id = Book.book_id";
 
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
 
             while(resultSet.next()){
                 Media media = new Media();
+                Book book = new Book();
 
                 setMediaDetails(resultSet, media);
+                media.setBook(book);
 
                 mediaList.add(media);
             }
@@ -118,7 +126,7 @@ public class MediaDAOImpl extends General implements MediaDAO{
         } finally {
             closeConnection(resultSet, preparedStatement,connection);
         }
-
+        return null;
     }
 
     @Override
@@ -179,6 +187,40 @@ public class MediaDAOImpl extends General implements MediaDAO{
 
         try{
             connection = dataSource.getConnection();
+            mediaList = new ArrayList<Media>();
+            String sql = "SELECT * FROM media left join book on media.book_id = book.book_id where media.book_id =?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, bookId);
+            resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next()){
+                Media media = new Media();
+                Book book = new Book();
+                book = bookDAO.getBookByID(resultSet.getInt(4));
+
+                setMediaDetails(resultSet, media);
+                media.setBook(book);
+
+                mediaList.add(media);
+            }
+
+        } catch (SQLException e){
+            LOGGER.error("SQL exception occurred!");
+            throw new RuntimeException(e);
+        } finally {
+            closeConnection(resultSet, preparedStatement, connection);
+        }
+
+        return mediaList;
+    }
+
+    @Override
+    public void deleteAll(){
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        try{
+            connection = dataSource.getConnection();
             String sql = "DELETE FROM Media";
 
             preparedStatement = connection.prepareStatement(sql);
@@ -193,19 +235,8 @@ public class MediaDAOImpl extends General implements MediaDAO{
     }
 
     private void setMediaDetails(ResultSet resultSet, Media media) throws SQLException {
-        Book book = new Book();
-        Genre genre = new Genre();
-
         media.setId(resultSet.getInt("media_id"));
         media.setLink(resultSet.getString("media"));
         media.setType(resultSet.getString("media_type"));
-        genre.setId(resultSet.getInt("genre_id")).setGenre(resultSet.getString("genre"));
-
-        book.setId(resultSet.getInt("book_id")).setISBN(resultSet.getString("ISBN")).setTitle(resultSet.getString("title"));
-        book.setGenre(genre).setVolume(resultSet.getInt("volume")).setBookAbstract(resultSet.getString("abstract"));
-        book.setLanguage(resultSet.getString("language")).setCount(resultSet.getInt("count"));
-        book.setEditionYear(resultSet.getString("edition_year")).setPages(resultSet.getInt("pages"));
-        book.setCountryOfEdition(resultSet.getString("country_of_edition"));
-        media.setBook(book);
     }
 }

@@ -1,6 +1,9 @@
 package com.workfront.internship.booklibrary.dao;
 
 import com.workfront.internship.booklibrary.common.*;
+import com.workfront.internship.booklibrary.dao.TestUtil;
+import com.workfront.internship.booklibrary.dao.UserDAO;
+import com.workfront.internship.booklibrary.dao.UserDAOImpl;
 
 import org.junit.After;
 import org.junit.Before;
@@ -17,14 +20,28 @@ import static com.workfront.internship.booklibrary.dao.TestUtil.*;
 public class TestUserDAOImpl {
 
     private UserDAO userDAO;
+    private PickBookDAO pickBookDAO;
+    private PendingDAO pendingDAO;
+    private UserDAOImpl userDAOImpl;
 
     private User expectedUser = null;
+    private PickBook expectedPickBook = null;
+    private Pending expectedPending = null;
 
     DataSource dataSource = DataSource.getInstance();
 
     @Before
     public void setup() throws Exception{
         init();
+        expectedUser = getRandomUser();
+        userDAO.add(expectedUser);
+
+ //       expectedPickBook = getRandomPickBook();
+        pickBookDAO.add(expectedPickBook);
+
+ //       expectedPending = getRandomPending();
+        pendingDAO.add(expectedPending);
+
     }
 
     @After
@@ -38,32 +55,36 @@ public class TestUserDAOImpl {
 
     @Test
     public void add_user(){
-        expectedUser = getRandomUser();
+        User expectedUser = getRandomUser();
+        assertEquals(0, expectedUser.getId());
 
         //test method add(user)
-        int id = userDAO.add(expectedUser);
+        userDAO.add(expectedUser);
 
-        assertTrue(id > 0);
+        assertNotNull(expectedUser);
+        assertTrue(expectedUser.getId() > 0);
 
-        User actualUser = userDAO.getUserByID(id);
+        User actualUser = userDAO.getUserByID(expectedUser.getId());
+
         checkAssertions(expectedUser, actualUser);
     }
 
     @Test
     public void get_user_by_id(){
-        expectedUser = getRandomUser();
-        int id = userDAO.add(expectedUser);
 
-        //test method getUserById()
-        User actualUser = userDAO.getUserByID(id);
+        User expectedUser = this.expectedUser;
+
+        //test method getUserById
+        User actualUser = userDAO.getUserByID(expectedUser.getId());
+        System.out.println(actualUser.toString());
 
         checkAssertions(expectedUser, actualUser);
     }
 
     @Test
     public void get_user_by_email(){
-        expectedUser = getRandomUser();
-        userDAO.add(expectedUser);
+
+        User expectedUser = this.expectedUser;
 
         //test method getUserByeMail
         User actualUser = userDAO.getUserByeMail(expectedUser.geteMail());
@@ -73,8 +94,8 @@ public class TestUserDAOImpl {
 
     @Test
     public void get_user_by_username(){
-        expectedUser = getRandomUser();
-        userDAO.add(expectedUser);
+
+        User expectedUser = this.expectedUser;
 
         //test method getUserByUsername
         User actualUser = userDAO.getUserByUsername(expectedUser.getUsername());
@@ -93,7 +114,7 @@ public class TestUserDAOImpl {
         for(int i = 0; i < userCount; i++){
             User user = getRandomUser();
             userDAO.add(user);
-            expectedUserList.add(user);
+
         }
 
         //test method getAllUsers()
@@ -104,22 +125,44 @@ public class TestUserDAOImpl {
             checkAssertions(expectedUserList.get(i), actualUserList.get(i));
         }
 
-        expectedUserList.clear();
-        actualUserList.clear();
+/**    @Test // TODO: 7/14/2016
+    public void get_all_users_by_pickedBookId(){
+        userDAO.deleteAll();
+
+        List<User> users = null;
+        int userCount = 2;
+        User user;
+        for(int i = 0; i < userCount; i++){
+            user = getRandomUser();
+            userDAO.add(user);
+
+        }
+
+        users = userDAO.getAllUsersByPickedBookId(1);
+        assertEquals(userList.size(), users.size());
+        for(int i = 0; i < userCount; i++){
+            checkAssertions(userList.get(i), users.get(i));
+        }
     }
+*/
+
+  /**  @Test // TODO: 7/14/2016
+    public void get_all_users_by_pendingBookId(){} */
 
     @Test
     public void update_user(){
-        expectedUser = getRandomUser();
-        int id = userDAO.add(expectedUser);
+        userDAO.deleteAll();
+        User expectedUser = getRandomUser();
+        userDAO.add(expectedUser);
 
         expectedUser.setName("Sona");
         expectedUser.setUsername("sonamik");
 
-        // Test method updateUser()
+        // TmpTest method updateUser()
         userDAO.updateUser(expectedUser);
 
-        User actualUser = userDAO.getUserByID(id);
+        User actualUser = userDAO.getUserByID(expectedUser.getId());
+
         checkAssertions(expectedUser, actualUser);
     }
 
@@ -127,8 +170,9 @@ public class TestUserDAOImpl {
     public void delete_user_by_id(){
         userDAO.deleteAll();
 
-        expectedUser = getRandomUser();
-        int id = userDAO.add(expectedUser);
+        User expectedUser = getRandomUser();
+        userDAO.add(expectedUser);
+        int id = expectedUser.getId();
 
         // TmpTest method deleteUser()
         userDAO.deleteUser(id);
@@ -148,6 +192,52 @@ public class TestUserDAOImpl {
         assertTrue(userDAO.getAllUsers().isEmpty());
     }
 
+
+
+
+    private User getRandomUser(){
+        User user = new User();
+        user.setName("name");
+        user.setSurname("surname");
+        user.setUsername("username" + uuid());
+        user.setPassword("password");
+        user.setAddress("address");
+        user.seteMail("sona" + uuid() + "@yahoo.com");
+        user.setPhone("phone number");
+        user.setAccessPrivilege("user");
+
+        return user;
+    }
+
+    private Book getRandomBook(Genre genre) {
+        Book book = new Book();
+
+        book.setISBN("0123456789");
+        book.setTitle("New Book" + uuid());
+        book.setGenre(genre);
+        book.setVolume(1);
+        book.setBookAbstract("BookAbstract");
+        book.setLanguage("English");
+        book.setCount(4);
+        book.setEditionYear("2015");
+        book.setPages(100);
+        book.setCountryOfEdition("Armenia");
+
+        return book;
+    }
+
+    private Genre getRandomGenre(){
+        Genre genre = new Genre();
+        genre.setGenre("education" + uuid());
+        return genre;
+    }
+
+/**    private PickBook getRandomPickBook(){
+        PickBook pickBook = new PickBook();
+    }
+
+    private Pending getRandomPending(){}
+ */
 
     private void checkAssertions(User user, User actualUser){
         assertEquals(user.getName(), actualUser.getName());

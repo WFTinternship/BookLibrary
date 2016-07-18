@@ -1,6 +1,8 @@
 package com.workfront.internship.booklibrary.dao;
 
-import com.workfront.internship.booklibrary.common.*;
+import com.workfront.internship.booklibrary.common.Book;
+import com.workfront.internship.booklibrary.common.PickBook;
+import com.workfront.internship.booklibrary.common.User;
 
 import java.sql.*;
 import java.text.DateFormat;
@@ -49,13 +51,35 @@ public class PickBookDAOImpl extends General implements PickBookDAO {
             }
             pickedBook.setId(lastId);
 
+/**            String sqlBook = "UPDATE book SET count=? WHERE book_id=?";
+            preparedStatementUpdateBookCount = connection.prepareStatement(sqlBook);
+            book.setId(pickedBook.getId());
+            preparedStatementUpdateBookCount.setInt(1, (book.getCount()-1));
+            preparedStatementUpdateBookCount.setInt(2, book.getId());
+
+            if(book.getCount()>0){
+                preparedStatement.executeUpdate();
+                preparedStatementUpdateBookCount.executeUpdate();
+                connection.commit();
+            }
+            else{
+                connection.rollback();
+            }
+ */
+
         } catch (SQLException e){
             LOGGER.error("SQL exception occurred!");
             throw new RuntimeException(e);
         }finally {
             closeConnection(preparedStatement, connection);
+/**            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+ */
         }
-        return pickedBook.getId();
+        return pickedBook.getId(); //todo
     }
 
     @Override
@@ -68,10 +92,7 @@ public class PickBookDAOImpl extends General implements PickBookDAO {
         try{
             connection = dataSource.getConnection();
 
-            String sql = "SELECT * FROM Pick_Book inner join User ON Pick_Book.user_id = User.user_id" +
-                    " inner join Book ON Pick_Book.book_id = Book.book_id inner join Genre " +
-                    " ON Book.genre_id = Genre.genre_id" +
-                    " where Pick_Book.pick_id = ?";
+            String sql = "select * from Pick_Book where Pick_Book.pick_id =?";
 
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, id);
@@ -79,8 +100,15 @@ public class PickBookDAOImpl extends General implements PickBookDAO {
 
             while(resultSet.next()){
                 pickedBook = new PickBook();
+                Book book = new Book();
+                User user = new User();
 
                 setPickBookDetails(resultSet, pickedBook);
+
+                book.setId(resultSet.getInt("book_id"));
+                user.setId(resultSet.getInt("user_id"));
+                pickedBook.setBook(book);
+                pickedBook.setUser(user);
             }
 
         } catch (SQLException e){
@@ -94,13 +122,15 @@ public class PickBookDAOImpl extends General implements PickBookDAO {
 
     @Override
     public List<PickBook> getAllPickedBooks() {
+        List<PickBook> pickedBookList = null;
+
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
         try{
             connection = dataSource.getConnection();
-            List<PickBook> pickedBookList = new ArrayList<PickBook>();
+            pickedBookList = new ArrayList<PickBook>();
 
             String sql = "SELECT * FROM pick_book INNER JOIN User ON Pick_Book.user_id = User.user_id " +
                     "INNER JOIN Book on Pick_Book.book_id = Book.book_id " +
@@ -111,8 +141,15 @@ public class PickBookDAOImpl extends General implements PickBookDAO {
 
             while(resultSet.next()){
                 PickBook pickedBook = new PickBook();
+                Book book = new Book();
+                User user = new User();
 
                 setPickBookDetails(resultSet, pickedBook);
+
+                book.setId(resultSet.getInt("book_id"));
+                user.setId(resultSet.getInt("user_id"));
+                pickedBook.setBook(book);
+                pickedBook.setUser(user);
 
                 pickedBookList.add(pickedBook);
             }
@@ -146,10 +183,8 @@ public class PickBookDAOImpl extends General implements PickBookDAO {
 
                 preparedStatement.setInt(1, pickedBook.getBook().getId());
                 preparedStatement.setInt(2, pickedBook.getUser().getId());
-
-//                preparedStatement.setDate(3, sqlDate.valueOf(date)));
-//                preparedStatement.setDate(4, pickedBook.getReturnDate());
-
+                //preparedStatement.setDate(3, pickedBook.getPickingDate()); // TODO
+                //preparedStatement.setDate(4, pickedBook.getReturnDate()); // TODO
                 preparedStatement.setInt(5, pickedBook.getId());
 
                 preparedStatement.executeUpdate();
@@ -171,7 +206,7 @@ public class PickBookDAOImpl extends General implements PickBookDAO {
 
         try{
             connection = dataSource.getConnection();
-            String sql = "DELETE FROM Pick_Book where pick_id=?";
+            String sql = "DELETE * FROM Pick_Book where pick_id=?";
 
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1,id);
@@ -207,13 +242,14 @@ public class PickBookDAOImpl extends General implements PickBookDAO {
 
     @Override
     public List<PickBook> getAllPickedBooksByUserId(int userId) {
+        List<PickBook> pickedBookList = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
         try{
             connection = dataSource.getConnection();
-            List<PickBook> pickedBookList = new ArrayList<PickBook>();
+            pickedBookList = new ArrayList<PickBook>();
 
             String sql = "SELECT * FROM Pick_Book INNER JOIN User ON Pick_Book.user_id = User.user_id " +
                     "INNer JOIN Book ON Pick_Book.book_id = Book.book_id INNER JOIN Genre " +
@@ -226,8 +262,15 @@ public class PickBookDAOImpl extends General implements PickBookDAO {
 
             while(resultSet.next()){
                 PickBook pickedBook = new PickBook();
+                Book book = new Book();
+                User user = new User();
 
                 setPickBookDetails(resultSet, pickedBook);
+
+                book.setId(resultSet.getInt("book_id"));
+                user.setId(resultSet.getInt("user_id"));
+                pickedBook.setBook(book);
+                pickedBook.setUser(user);
 
                 pickedBookList.add(pickedBook);
             }
@@ -265,5 +308,11 @@ public class PickBookDAOImpl extends General implements PickBookDAO {
 
         pickBook.setBook(book);
         pickBook.setUser(user);
+    }
+
+    private void setPickBookDetails(ResultSet rs, PickBook pickBook) throws SQLException {
+        pickBook.setId(rs.getInt("pick_id"));
+        pickBook.setPickingDate(rs.getTimestamp("picking_date"));
+        pickBook.setReturnDate(rs.getTimestamp("return_date"));
     }
 }

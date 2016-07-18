@@ -9,6 +9,9 @@ public class PickBook {
     private Book book;
     private User user;
 
+//    private int bookId;
+//    private int userId;
+
     private Date pickingDate;
     private Date returnDate;
 

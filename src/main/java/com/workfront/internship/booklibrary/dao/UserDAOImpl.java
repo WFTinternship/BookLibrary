@@ -251,6 +251,64 @@ public class UserDAOImpl extends General implements UserDAO {
     }
 
 
+        try{
+            connection = dataSource.getConnection();
+            userList = new ArrayList<User>();
+            String sql = "SELECT * FROM user left join pick_book" +
+                    "on user.user_id = pick_book.user_id" +
+                    "where pick_book.book_id =?";
+
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, bookId);
+            resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next()){
+                User user = new User();
+                setUserDetails(resultSet, user);
+                userList.add(user);
+            }
+
+
+        } catch (SQLException e){
+            LOGGER.error("SQL exception occurred!");
+            throw new RuntimeException(e);
+        } finally {
+            closeConnection(resultSet, preparedStatement, connection);
+        }
+        return userList;
+    }
+
+    public List<User> getAllUsersByPendingBookId(int bookId){
+        List<User> userList = null;
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try{
+            connection = dataSource.getConnection();
+            userList = new ArrayList<User>();
+            String sql = "SELECT * FROM user left join pending" +
+                    "on user.user_id = pending.user_id" +
+                    "where pending.book_id =?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, bookId);
+            resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next()){
+                User user = new User();
+                setUserDetails(resultSet, user);
+                userList.add(user);
+            }
+
+        }catch (SQLException e){
+            LOGGER.error("SQL exception occurred!");
+            throw new RuntimeException(e);
+        } finally {
+            closeConnection(resultSet, preparedStatement, connection);
+        }
+
+        return userList;
+    }
 
     private void setUserDetails(ResultSet rs, User user) throws SQLException {
         user.setId(rs.getInt("user_id"));
