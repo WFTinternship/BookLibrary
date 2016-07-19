@@ -49,9 +49,9 @@ public class BookDaoUnitTest {
         bookDAO.add(new Book());
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void getBookByID_dbError() {
-
+        bookDAO.getBookByID(5);
     }
 
     // endregion
