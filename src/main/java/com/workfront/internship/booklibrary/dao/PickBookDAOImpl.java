@@ -53,6 +53,7 @@ public class PickBookDAOImpl extends General implements PickBookDAO {
 
             connection.commit();
 
+
         } catch (SQLException e){
             try {
                 connection.rollback();

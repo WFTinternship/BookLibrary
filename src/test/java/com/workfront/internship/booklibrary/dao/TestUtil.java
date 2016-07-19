@@ -75,7 +75,7 @@ public class TestUtil {
         book.setVolume(1);
         book.setBookAbstract("BookAbstract");
         book.setLanguage("English");
-        book.setCount(4);
+        book.setCount(0);
         book.setEditionYear("2015");
         book.setPages(100);
         book.setCountryOfEdition("Armenia");
