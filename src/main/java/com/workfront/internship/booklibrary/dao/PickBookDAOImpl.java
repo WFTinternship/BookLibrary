@@ -32,7 +32,9 @@ public class PickBookDAOImpl extends General implements PickBookDAO {
 
         try{
             connection = dataSource.getConnection();
-            //connection.setAutoCommit(false);
+            connection.setAutoCommit(false);
+
+            bookDAO.updateBook(connection, pickedBook.getBook());
 
             String sql = "INSERT INTO Pick_Book(book_id, user_id, picking_date, return_date) VALUES(?, ?, ?, ?)";
             preparedStatement = connection.prepareStatement(sql, preparedStatement.RETURN_GENERATED_KEYS);
@@ -43,16 +45,25 @@ public class PickBookDAOImpl extends General implements PickBookDAO {
             preparedStatement.setTimestamp(4, new Timestamp(pickedBook.getReturnDate().getTime()));
 
             preparedStatement.executeUpdate();
-            resultSet =preparedStatement.getGeneratedKeys();
+            resultSet = preparedStatement.getGeneratedKeys();
             if(resultSet.next()){
                 lastId = resultSet.getInt(1);
             }
             pickedBook.setId(lastId);
 
+            connection.commit();
+
         } catch (SQLException e){
+            try {
+                connection.rollback();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
             LOGGER.error("SQL exception occurred!");
             throw new RuntimeException(e);
-        }finally {
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
             closeConnection(preparedStatement, connection);
         }
         return pickedBook.getId();

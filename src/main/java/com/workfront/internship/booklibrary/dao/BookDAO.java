@@ -1,6 +1,8 @@
 package com.workfront.internship.booklibrary.dao;
 
 import com.workfront.internship.booklibrary.common.Book;
+
+import java.sql.Connection;
 import java.util.List;
 
 public interface BookDAO {
@@ -14,6 +16,8 @@ public interface BookDAO {
     List<Book> getAllBooks();
 
     void updateBook(Book book);
+
+    void updateBook(Connection connection, Book book);
 
     void deleteBook(int id);
 

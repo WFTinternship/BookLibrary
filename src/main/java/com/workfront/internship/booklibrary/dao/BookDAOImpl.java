@@ -212,6 +212,12 @@ public class BookDAOImpl extends General implements BookDAO {
     }
 
     @Override
+    public void updateBook(Connection connection, Book book){
+        PreparedStatement preparedStatement = null;
+        updateBook(book);
+    }
+
+    @Override
     public void deleteBook(int id) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;

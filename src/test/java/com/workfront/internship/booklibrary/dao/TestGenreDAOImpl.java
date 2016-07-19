@@ -91,7 +91,6 @@ public class TestGenreDAOImpl {
 
         expectedGenreList.clear();
         actualGenreList.clear();
-
     }
 
     @Test

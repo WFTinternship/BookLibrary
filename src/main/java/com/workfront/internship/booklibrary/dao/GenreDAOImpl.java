@@ -127,8 +127,8 @@ public class GenreDAOImpl extends General implements GenreDAO {
             while(resultSet.next()){
                 Genre genre = new Genre();
 
-                genre.setId(resultSet.getInt(1));
-                genre.setGenre(resultSet.getString(2));
+                genre.setId(resultSet.getInt("genre_id"));
+                genre.setGenre(resultSet.getString("genre"));
 
                 genres.add(genre);
             }
