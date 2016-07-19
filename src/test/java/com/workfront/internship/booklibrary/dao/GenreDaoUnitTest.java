@@ -1,6 +1,8 @@
 package com.workfront.internship.booklibrary.dao;
 
+
 import com.workfront.internship.booklibrary.common.Book;
+import com.workfront.internship.booklibrary.common.Genre;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,14 +17,8 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-/**
- * Unit test for BookDAO class
- */
-public class BookDaoUnitTest {
+public class GenreDaoUnitTest {
     DataSource dataSource;
-    BookDAO realBookDAO;
-
-    BookDAO bookDAO;
     GenreDAO genreDAO;
 
     @SuppressWarnings("unchecked")
@@ -35,8 +31,6 @@ public class BookDaoUnitTest {
         when(connection.prepareStatement(any(String.class))).thenThrow(SQLException.class);
         when(connection.prepareStatement(any(String.class), eq(PreparedStatement.RETURN_GENERATED_KEYS))).thenThrow(SQLException.class);
 
-        realBookDAO = new BookDAOImpl(DataSource.getInstance());
-        bookDAO = new BookDAOImpl(dataSource);
         genreDAO = new GenreDAOImpl(dataSource);
     }
 
@@ -45,55 +39,33 @@ public class BookDaoUnitTest {
 
     }
 
-    // region <TEST CASES>
-
     @Test(expected = RuntimeException.class)
     public void add_dbError() {
-        bookDAO.add(new Book());
+        genreDAO.add(new Genre());
     }
 
     @Test(expected = RuntimeException.class)
-    public void getBookByID_dbError() {
-        bookDAO.getBookByID(5);
+    public void getGenreByID_dbError() {
+        genreDAO.getGenreByID(5);
     }
 
     @Test(expected = RuntimeException.class)
-    public void getBookByTitle_dbError(){
-        bookDAO.getBookByTitle("Java");
+    public void getGenreByName_dbError(){
+        genreDAO.getGenreByGenreName("Java");
     }
 
     @Test(expected = RuntimeException.class)
-    public void getAllBooks_dbError(){
-        bookDAO.getAllBooks();
+    public void getAllGenres_dbError(){
+        genreDAO.getAllGenres();
     }
 
     @Test(expected = RuntimeException.class)
-    public void updateBook_dbErrorID0(){
-        bookDAO.updateBook(new Book());
-        PreparedStatement preparedStatement = null;
-        Connection connection = null;
-        verify(((BookDAOImpl)bookDAO)).closeConnection(Mockito.eq(preparedStatement), Mockito.eq(connection));
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void updateBook_dbErrorID1(){
-        Book realBook = realBookDAO.getBookByID(212);
-        bookDAO.updateBook(realBook);
-        PreparedStatement preparedStatement = null;
-        Connection connection = null;
-        verify(((BookDAOImpl)bookDAO)).closeConnection(Mockito.eq(preparedStatement), Mockito.eq(connection));
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void deleteBook_dbError(){
-        bookDAO.deleteBook(3);
+    public void deleteGenre_dbError(){
+        genreDAO.deleteGenre(3);
     }
 
     @Test(expected = RuntimeException.class)
     public void deleteAll_dbError(){
-        bookDAO.deleteAll();
+        genreDAO.deleteAll();
     }
-
-    // endregion
-
 }

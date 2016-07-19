@@ -32,7 +32,7 @@ public class TestAuthorDAOImpl {
 
 
     @Test
-    public void add_author(){
+    public void add(){
         expectedAuthor = getRandomAuthor();
 
         // test method add()
@@ -45,7 +45,7 @@ public class TestAuthorDAOImpl {
     }
 
     @Test
-    public void get_author_by_id() {
+    public void getAuthorByID() {
         expectedAuthor = getRandomAuthor();
         int id = authorDAO.add(expectedAuthor);
 
@@ -56,7 +56,7 @@ public class TestAuthorDAOImpl {
     }
 
     @Test
-    public void get_author_by_name() {
+    public void getAuthorByName() {
         expectedAuthor = getRandomAuthor();
         authorDAO.add(expectedAuthor);
 
@@ -67,7 +67,7 @@ public class TestAuthorDAOImpl {
     }
 
     @Test
-    public void get_all_authors(){
+    public void getAllAuthors(){
         authorDAO.deleteAllAuthors();
 
         List<Author> expectedAuthorList = new ArrayList<>();
@@ -93,7 +93,7 @@ public class TestAuthorDAOImpl {
     }
 
     @Test
-    public void update_author(){
+    public void updateAuthor(){
         expectedAuthor = getRandomAuthor();
         int id = authorDAO.add(expectedAuthor);
 
@@ -108,7 +108,7 @@ public class TestAuthorDAOImpl {
     }
 
     @Test
-    public void delete_author_by_id(){
+    public void deleteAuthorByID(){
         authorDAO.deleteAllAuthors();
 
         expectedAuthor = getRandomAuthor();
@@ -122,7 +122,7 @@ public class TestAuthorDAOImpl {
     }
 
     @Test
-    public void delete_all_authors(){
+    public void deleteAllAuthors(){
         expectedAuthor = getRandomAuthor();
         authorDAO.add(expectedAuthor);
 

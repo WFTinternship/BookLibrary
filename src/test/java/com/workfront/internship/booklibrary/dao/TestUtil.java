@@ -86,7 +86,7 @@ public class TestUtil {
     public static Media getRandomMedia(Book book){
         Media media = new Media();
 
-        media.setLink("GO_TO_MEDIA");
+        media.setLink("GO_TO_MEDIA" + uuid());
         media.setType("photo");
         media.setBook(book);
 

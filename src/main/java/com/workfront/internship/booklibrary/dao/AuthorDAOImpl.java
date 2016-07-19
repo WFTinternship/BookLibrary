@@ -238,7 +238,7 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
 
         try{
             connection = dataSource.getConnection();
-            String sql = "DLETE FROM Author";
+            String sql = "DELETE FROM Author";
 
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.executeUpdate();

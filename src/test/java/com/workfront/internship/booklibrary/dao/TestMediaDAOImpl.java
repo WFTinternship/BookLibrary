@@ -135,6 +135,27 @@ public class TestMediaDAOImpl {
         assertTrue(mediaDAO.getAllMedia().isEmpty());
     }
 
+    @Test(expected = RuntimeException.class)
+    public void add_duplicateEntry(){
+        Media media = getRandomMedia(expectedBook);
+        mediaDAO.add(media);
+        Media duplicateMedia = getRandomMedia(expectedBook);
+        duplicateMedia.setLink(media.getLink());
+        mediaDAO.add(duplicateMedia);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void update_duplicateEntry(){
+        Media media = getRandomMedia(expectedBook);
+        Media duplicateMedia = media;
+        mediaDAO.add(media);
+        duplicateMedia.setLink("NewLink");
+        mediaDAO.add(duplicateMedia);
+
+        duplicateMedia.setLink(media.getLink());
+        mediaDAO.add(duplicateMedia);
+    }
+
 
     private void checkAssertions(Media expectedMedia, Media actualMedia){
         assertEquals(expectedMedia.getLink(), actualMedia.getLink());

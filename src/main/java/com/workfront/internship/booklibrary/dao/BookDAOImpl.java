@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;
 
-
 public class BookDAOImpl extends General implements BookDAO {
     private static final Logger LOGGER = Logger.getLogger(BookDAOImpl.class);
 
@@ -231,84 +230,6 @@ public class BookDAOImpl extends General implements BookDAO {
         } finally {
             closeConnection(preparedStatement, connection);
         }
-    }
-
-    public List<Book> getAllBooksByAuthorId(int authorId){
-        List<Book> bookList = null;
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-
-        try{
-            connection = dataSource.getConnection();
-            bookList = new ArrayList<Book>();
-            String sql = "select * from book left join book_author" +
-                    "on book.book_id = book_author.book_id" +
-                    "where book_author.author_id=?";
-
-            preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, authorId);
-            resultSet = preparedStatement.executeQuery();
-
-            while(resultSet.next()){
-                Book book = new Book();
-                Genre genre = new Genre();
-                genre = genreDAO.getGenreByID(resultSet.getInt(4));
-
-                setBookDetails(resultSet, book);
-                book.setGenre(genre);
-
-                bookList.add(book);
-            }
-
-
-        } catch (SQLException e){
-            LOGGER.error("SQL exception occurred!");
-            throw new RuntimeException(e);
-        } finally {
-            closeConnection(resultSet, preparedStatement, connection);
-        }
-
-        return bookList;
-    }
-
-    public List<Book> getAllBooksByGenreId(int genreId){
-        List<Book> bookList = null;
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-
-        try{
-            connection = dataSource.getConnection();
-            bookList = new ArrayList<Book>();
-            String sql = "select * from book left join genre" +
-                    "on book.genre_id = genre.genre_id" +
-                    "where book.genre_id= ?";
-
-            preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, genreId);
-            resultSet = preparedStatement.executeQuery();
-
-            while(resultSet.next()){
-                Book book = new Book();
-                Genre genre = new Genre();
-                genre = genreDAO.getGenreByID(resultSet.getInt(4));
-
-                setBookDetails(resultSet, book);
-                book.setGenre(genre);
-
-                bookList.add(book);
-            }
-
-
-        } catch (SQLException e){
-            LOGGER.error("SQL exception occurred!");
-            throw new RuntimeException(e);
-        } finally {
-            closeConnection(resultSet, preparedStatement, connection);
-        }
-
-        return bookList;
     }
 
     @Override

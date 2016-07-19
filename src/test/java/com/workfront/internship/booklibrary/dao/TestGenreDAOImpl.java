@@ -34,7 +34,7 @@ public class TestGenreDAOImpl {
 
 
     @Test
-    public void add_genre(){
+    public void addGenre(){
         expectedGenre = getRandomGenre();
 
         //Test method add()
@@ -46,7 +46,7 @@ public class TestGenreDAOImpl {
     }
 
     @Test
-    public void get_genre_by_id(){
+    public void getGenreByID(){
         expectedGenre = getRandomGenre();
         int id = genreDAO.add(expectedGenre);
 
@@ -57,7 +57,7 @@ public class TestGenreDAOImpl {
     }
 
     @Test
-    public void get_genre_by_genre_name(){
+    public void getGenreByGenreName(){
         expectedGenre = getRandomGenre();
         genreDAO.add(expectedGenre);
 
@@ -68,7 +68,7 @@ public class TestGenreDAOImpl {
     }
 
     @Test
-    public void get_all_genres(){
+    public void getAllGenres(){
         genreDAO.deleteAll();
 
         List<Genre> expectedGenreList = new ArrayList<>();
@@ -95,7 +95,7 @@ public class TestGenreDAOImpl {
     }
 
     @Test
-    public void update_genre(){
+    public void updateGenre(){
         expectedGenre = getRandomGenre();
         int id = genreDAO.add(expectedGenre);
 
@@ -109,7 +109,7 @@ public class TestGenreDAOImpl {
     }
 
     @Test
-    public void delete_genre_by_id(){
+    public void deleteGenreByID(){
         genreDAO.deleteAll();
 
         expectedGenre = getRandomGenre();
@@ -123,7 +123,7 @@ public class TestGenreDAOImpl {
     }
 
     @Test
-    public void delete_all_genres(){
+    public void deleteAllGenres(){
         expectedGenre = getRandomGenre();
         genreDAO.add(expectedGenre);
 
@@ -133,7 +133,26 @@ public class TestGenreDAOImpl {
         assertTrue(genreDAO.getAllGenres().isEmpty());
     }
 
+    @Test(expected = RuntimeException.class)
+    public void addDuplcateEntry(){
+        Genre genre = getRandomGenre();
+        genreDAO.add(genre);
+        Genre duplicateGenre = getRandomGenre();
+        duplicateGenre.setGenre(genre.getGenre());
+        genreDAO.add(duplicateGenre);
+    }
 
+    @Test(expected = RuntimeException.class)
+    public void update_duplicateEntry(){
+        Genre genre = getRandomGenre();
+        Genre duplicateGenre = genre;
+        genreDAO.add(genre);
+        duplicateGenre.setGenre("NewGenre");
+        genreDAO.add(duplicateGenre);
+
+        duplicateGenre.setGenre(genre.getGenre());
+        genreDAO.add(duplicateGenre);
+    }
 
 
     private void checkAssertions(Genre expectedGenre, Genre actualGenre){

@@ -1,5 +1,6 @@
 package com.workfront.internship.booklibrary.dao;
 
+import com.workfront.internship.booklibrary.common.Author;
 import com.workfront.internship.booklibrary.common.Book;
 import org.junit.After;
 import org.junit.Before;
@@ -12,18 +13,15 @@ import java.sql.SQLException;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
  * Unit test for BookDAO class
  */
-public class BookDaoUnitTest {
+public class AuthorDaoUnitTest {
     DataSource dataSource;
-    BookDAO realBookDAO;
 
-    BookDAO bookDAO;
-    GenreDAO genreDAO;
+    AuthorDAO authorDAO;
 
     @SuppressWarnings("unchecked")
     @Before
@@ -35,9 +33,7 @@ public class BookDaoUnitTest {
         when(connection.prepareStatement(any(String.class))).thenThrow(SQLException.class);
         when(connection.prepareStatement(any(String.class), eq(PreparedStatement.RETURN_GENERATED_KEYS))).thenThrow(SQLException.class);
 
-        realBookDAO = new BookDAOImpl(DataSource.getInstance());
-        bookDAO = new BookDAOImpl(dataSource);
-        genreDAO = new GenreDAOImpl(dataSource);
+        authorDAO = new AuthorDAOImpl(dataSource);
     }
 
     @After
@@ -49,51 +45,34 @@ public class BookDaoUnitTest {
 
     @Test(expected = RuntimeException.class)
     public void add_dbError() {
-        bookDAO.add(new Book());
+        authorDAO.add(new Author());
     }
 
     @Test(expected = RuntimeException.class)
     public void getBookByID_dbError() {
-        bookDAO.getBookByID(5);
+        authorDAO.getAuthorByID(5);
     }
 
     @Test(expected = RuntimeException.class)
-    public void getBookByTitle_dbError(){
-        bookDAO.getBookByTitle("Java");
+    public void getAuthorByName_dbError(){
+        authorDAO.getAuthorByName("MyName");
     }
 
     @Test(expected = RuntimeException.class)
-    public void getAllBooks_dbError(){
-        bookDAO.getAllBooks();
+    public void getAllAuthors_dbError(){
+        authorDAO.getAllAuthors();
     }
 
     @Test(expected = RuntimeException.class)
-    public void updateBook_dbErrorID0(){
-        bookDAO.updateBook(new Book());
-        PreparedStatement preparedStatement = null;
-        Connection connection = null;
-        verify(((BookDAOImpl)bookDAO)).closeConnection(Mockito.eq(preparedStatement), Mockito.eq(connection));
+    public void deleteAuthor_dbError(){
+        authorDAO.deleteAuthor(5);
     }
 
     @Test(expected = RuntimeException.class)
-    public void updateBook_dbErrorID1(){
-        Book realBook = realBookDAO.getBookByID(212);
-        bookDAO.updateBook(realBook);
-        PreparedStatement preparedStatement = null;
-        Connection connection = null;
-        verify(((BookDAOImpl)bookDAO)).closeConnection(Mockito.eq(preparedStatement), Mockito.eq(connection));
+    public void deleteAllAuthors_dbError(){
+        authorDAO.deleteAllAuthors();
     }
 
-    @Test(expected = RuntimeException.class)
-    public void deleteBook_dbError(){
-        bookDAO.deleteBook(3);
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void deleteAll_dbError(){
-        bookDAO.deleteAll();
-    }
 
     // endregion
-
 }

@@ -146,6 +146,28 @@ public class TestBookDAOImpl {
         assertTrue(bookDAO.getAllBooks().isEmpty());
     }
 
+    @Test (expected = RuntimeException.class)
+    public void add_duplicateEntry(){
+        Book book = getRandomBook(expectedGenre);
+        bookDAO.add(book);
+        Book duplicateBook = getRandomBook(expectedGenre);
+        duplicateBook.setTitle(book.getTitle());
+        bookDAO.add(duplicateBook);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void update_duplicateEntry() {
+        Book book = getRandomBook(expectedGenre);
+        Book duplicateBook = book;
+        bookDAO.add(book);
+
+        duplicateBook.setTitle("NewTitle");
+        bookDAO.add(duplicateBook);
+
+        duplicateBook.setTitle(book.getTitle());
+        bookDAO.add(duplicateBook);
+    }
+
 
     private void checkAssertions(Book expectedBook, Book actualBook){
         assertEquals(expectedBook.getISBN(), actualBook.getISBN());

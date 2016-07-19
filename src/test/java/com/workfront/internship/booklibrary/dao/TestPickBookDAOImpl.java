@@ -133,12 +133,12 @@ public class TestPickBookDAOImpl {
         actualPickedBookList.clear();
     }
 
-/**       @Test
+       @Test
     public void updatePickedBook(){
         expectedPickBook = getRandomPickBook(expectedBook, expectedUser);
         int id = pickBookDAO.add(expectedPickBook);
 
-        expectedPickBook.setReturnDate(Timestamp.valueOf("2016:07:20 01:02:03"));
+        expectedPickBook.setReturnDate(Timestamp.valueOf("2016-07-20 01:02:03"));
 
         //Test method updatePickedBook()
         pickBookDAO.updatePickedBook(expectedPickBook);
@@ -146,7 +146,7 @@ public class TestPickBookDAOImpl {
         PickBook actualPickedBook = pickBookDAO.getPickedBookByID(id);
         checkAssertions(expectedPickBook, actualPickedBook);
     }
- */
+
 
     @Test
     public void deletePickedBook(){
