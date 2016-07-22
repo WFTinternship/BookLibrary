@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.workfront.internship.booklibrary.common.MediaType;
 import org.apache.log4j.Logger;
 
 
@@ -19,10 +21,12 @@ public class MediaDAOImpl extends General implements MediaDAO{
 
     private DataSource dataSource;
     private BookDAO bookDAO;
+    private MediaTypeDAO mediaTypeDAO;
 
     public MediaDAOImpl(DataSource dataSource) throws Exception {
         this.dataSource = dataSource;
         this.bookDAO = new BookDAOImpl(dataSource);
+        this.mediaTypeDAO = new MediaTypeDAOImpl(dataSource);
     }
 
     @Override
@@ -34,11 +38,11 @@ public class MediaDAOImpl extends General implements MediaDAO{
 
         try{
             connection = dataSource.getConnection();
-            String sql = "INSERT INTO Media(media, media_type, book_id) VALUES(?, ?, ?)";
+            String sql = "INSERT INTO Media(media, media_type_id, book_id) VALUES(?, ?, ?)";
             preparedStatement = connection.prepareStatement(sql, preparedStatement.RETURN_GENERATED_KEYS);
 
             preparedStatement.setString(1, media.getLink());
-            preparedStatement.setString(2, media.getType());
+            preparedStatement.setInt(2, media.getType().getId());
             preparedStatement.setInt(3, media.getBook().getId());
 
             preparedStatement.executeUpdate();
@@ -67,7 +71,8 @@ public class MediaDAOImpl extends General implements MediaDAO{
         try{
             connection = dataSource.getConnection();
 
-            String sql = "SELECT * FROM Media inner join Book ON Media.book_id = Book.book_id inner join Genre" +
+            String sql = "SELECT * FROM Media LEFT JOIN media_type ON media.media_type_id = media_type.mediaType_id" +
+                    " inner join Book ON Media.book_id = Book.book_id inner join Genre" +
                     " ON Book.genre_id = Genre.genre_id where Media.media_id = ?";
 
             preparedStatement = connection.prepareStatement(sql);
@@ -97,7 +102,8 @@ public class MediaDAOImpl extends General implements MediaDAO{
         try{
             connection = dataSource.getConnection();
             List<Media> mediaList = new ArrayList<Media>();
-            String sql = "SELECT * FROM Media LEFT JOIN Book ON Media.book_id = Book.book_id " +
+            String sql = "SELECT * FROM Media LEFT JOIN media_type ON media.media_type_id = media_type.mediaType_id" +
+                    " LEFT JOIN Book ON Media.book_id = Book.book_id " +
                     "inner join Genre ON Book.genre_id = Genre.genre_id";
 
             preparedStatement = connection.prepareStatement(sql);
@@ -130,13 +136,13 @@ public class MediaDAOImpl extends General implements MediaDAO{
             if(media.getId() != 0){
                 connection = dataSource.getConnection();
                 String sql = "UPDATE Media SET " +
-                        "media=?, media_type=?, book_id=?" +
+                        "media=?, media_type_id=?, book_id=?" +
                         " WHERE media_id=?";
 
                 preparedStatement = connection.prepareStatement(sql);
 
                 preparedStatement.setString(1, media.getLink());
-                preparedStatement.setString(2, media.getType());
+                preparedStatement.setInt(2, media.getType().getId());
                 preparedStatement.setInt(3, media.getBook().getId());
                 preparedStatement.setInt(4, media.getId());
 
@@ -195,10 +201,11 @@ public class MediaDAOImpl extends General implements MediaDAO{
     private void setMediaDetails(ResultSet resultSet, Media media) throws SQLException {
         Book book = new Book();
         Genre genre = new Genre();
+        MediaType mediaType = new MediaType();
 
         media.setId(resultSet.getInt("media_id"));
         media.setLink(resultSet.getString("media"));
-        media.setType(resultSet.getString("media_type"));
+        mediaType.setId(resultSet.getInt("mediaType_id")).setType(resultSet.getString("media_type"));
         genre.setId(resultSet.getInt("genre_id")).setGenre(resultSet.getString("genre"));
 
         book.setId(resultSet.getInt("book_id")).setISBN(resultSet.getString("ISBN")).setTitle(resultSet.getString("title"));
@@ -207,5 +214,6 @@ public class MediaDAOImpl extends General implements MediaDAO{
         book.setEditionYear(resultSet.getString("edition_year")).setPages(resultSet.getInt("pages"));
         book.setCountryOfEdition(resultSet.getString("country_of_edition"));
         media.setBook(book);
+        media.setType(mediaType);
     }
 }

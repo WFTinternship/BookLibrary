@@ -3,7 +3,7 @@ package com.workfront.internship.booklibrary.common;
 public class Media {
     private int id;
     private String mediaLink;
-    private String mediaType;
+    private MediaType mediaType;
     private Book book;
 
     public int getId() {
@@ -24,11 +24,11 @@ public class Media {
         return this;
     }
 
-    public String getType() {
+    public MediaType getType() {
         return mediaType;
     }
 
-    public Media setType(String mediaType) {
+    public Media setType(MediaType mediaType) {
         this.mediaType = mediaType;
         return this;
     }
@@ -45,9 +45,9 @@ public class Media {
     @Override
     public String toString() {
         return "Media{" +
-                "media_id=" + id +
+                "media_id=" + getId() +
                 ", mediaLink='" + mediaLink + '\'' +
-                ", mediaType='" + mediaType + '\'' +
+                ", mediaType='" + getType().getId() + '\'' +
                 ", book_id='" + getBook().getId() + '\'' +
                 '}';
     }

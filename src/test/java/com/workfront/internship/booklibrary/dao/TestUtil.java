@@ -83,14 +83,21 @@ public class TestUtil {
         return book;
     }
 
-    public static Media getRandomMedia(Book book){
+    public static Media getRandomMedia(MediaType mediaType, Book book){
         Media media = new Media();
 
         media.setLink("GO_TO_MEDIA" + uuid());
-        media.setType("photo");
+        media.setType(mediaType);
         media.setBook(book);
 
         return media;
+    }
+
+    public static MediaType getRandomMediaType(){
+        MediaType mediaType = new MediaType();
+
+        mediaType.setType("Java" + uuid());
+        return mediaType;
     }
 
     public static Author getRandomAuthor() {

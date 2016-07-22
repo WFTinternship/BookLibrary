@@ -47,10 +47,14 @@ public class UserDAOImpl extends General implements UserDAO {
             }
             user.setId(lastId);
 
+        } catch(SQLIntegrityConstraintViolationException e){
+            LOGGER.error("Duplicate entry exception!");
+            throw new RuntimeException(e);
         } catch (SQLException e) {
             LOGGER.error("SQL exception occurred!");
             throw new RuntimeException(e);
-        } finally{
+        }
+        finally{
             closeConnection( preparedStatement, connection);
         }
         return user.getId();

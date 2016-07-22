@@ -4,6 +4,7 @@ package com.workfront.internship.booklibrary.dao;
 import com.workfront.internship.booklibrary.common.Book;
 import com.workfront.internship.booklibrary.common.Genre;
 import com.workfront.internship.booklibrary.common.Media;
+import com.workfront.internship.booklibrary.common.MediaType;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,10 +19,12 @@ import static junit.framework.TestCase.assertTrue;
 
 public class TestMediaDAOImpl {
     private MediaDAO mediaDAO;
+    private MediaTypeDAO mediaTypeDAO;
     private BookDAO bookDAO;
     private GenreDAO genreDAO;
 
     private Media expectedMedia = null;
+    private MediaType expectedMediaType = null;
     private Book expectedBook = null;
     private Genre expectedGenre = null;
 
@@ -30,6 +33,9 @@ public class TestMediaDAOImpl {
     @Before
     public void setup() throws Exception {
         init();
+        expectedMediaType = getRandomMediaType();
+        expectedMediaType.setId(mediaTypeDAO.add(expectedMediaType));
+
         expectedGenre = getRandomGenre();
         expectedGenre.setId(genreDAO.add(expectedGenre));
 
@@ -40,12 +46,14 @@ public class TestMediaDAOImpl {
     @After
     public void tearDown(){
         mediaDAO.deleteAll();
+        mediaTypeDAO.deleteAll();
         bookDAO.deleteAll();
         genreDAO.deleteAll();
     }
 
     private void init() throws Exception {
         mediaDAO = new MediaDAOImpl(dataSource);
+        mediaTypeDAO = new MediaTypeDAOImpl(dataSource);
         bookDAO = new BookDAOImpl(dataSource);
         genreDAO = new GenreDAOImpl(dataSource);
     }
@@ -53,7 +61,7 @@ public class TestMediaDAOImpl {
 
     @Test
     public void add(){
-        expectedMedia = getRandomMedia(expectedBook);
+        expectedMedia = getRandomMedia(expectedMediaType, expectedBook);
 
         //Test method add()
         int mediaId = mediaDAO.add(expectedMedia);
@@ -64,7 +72,7 @@ public class TestMediaDAOImpl {
 
     @Test
     public void getMediaByID(){
-        expectedMedia = getRandomMedia(expectedBook);
+        expectedMedia = getRandomMedia(expectedMediaType, expectedBook);
         int mediaId = mediaDAO.add(expectedMedia);
 
         //Test method getMediaByID
@@ -81,7 +89,7 @@ public class TestMediaDAOImpl {
         int mediaCount = 2;
 
         for(int i = 0; i < mediaCount; i++){
-            Media media = getRandomMedia(expectedBook);
+            Media media = getRandomMedia(expectedMediaType, expectedBook);
             mediaDAO.add(media);
             expectedMediaList.add(media);
         }
@@ -100,10 +108,10 @@ public class TestMediaDAOImpl {
 
     @Test
     public void updateMedia(){
-        expectedMedia = getRandomMedia(expectedBook);
+        expectedMedia = getRandomMedia(expectedMediaType, expectedBook);
         int id = mediaDAO.add(expectedMedia);
 
-        expectedMedia.setType("video");
+        expectedMedia.setLink("LinkToVideo");
 
         //Test method updateMedia()
         mediaDAO.updateMedia(expectedMedia);
@@ -114,7 +122,7 @@ public class TestMediaDAOImpl {
 
     @Test
     public void deleteMedia(){
-        expectedMedia = getRandomMedia(expectedBook);
+        expectedMedia = getRandomMedia(expectedMediaType, expectedBook);
         int id = mediaDAO.add(expectedMedia);
 
         //Test method deleteMedia()
@@ -126,7 +134,7 @@ public class TestMediaDAOImpl {
 
     @Test
     public void deleteAll(){
-        expectedMedia = getRandomMedia(expectedBook);
+        expectedMedia = getRandomMedia(expectedMediaType, expectedBook);
         mediaDAO.add(expectedMedia);
 
         //Test method deleteAll()
@@ -137,16 +145,16 @@ public class TestMediaDAOImpl {
 
     @Test(expected = RuntimeException.class)
     public void add_duplicateEntry(){
-        Media media = getRandomMedia(expectedBook);
+        Media media = getRandomMedia(expectedMediaType, expectedBook);
         mediaDAO.add(media);
-        Media duplicateMedia = getRandomMedia(expectedBook);
+        Media duplicateMedia = getRandomMedia(expectedMediaType, expectedBook);
         duplicateMedia.setLink(media.getLink());
         mediaDAO.add(duplicateMedia);
     }
 
     @Test(expected = RuntimeException.class)
     public void update_duplicateEntry(){
-        Media media = getRandomMedia(expectedBook);
+        Media media = getRandomMedia(expectedMediaType, expectedBook);
         Media duplicateMedia = media;
         mediaDAO.add(media);
         duplicateMedia.setLink("NewLink");
