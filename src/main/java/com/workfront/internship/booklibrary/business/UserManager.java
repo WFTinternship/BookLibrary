@@ -11,9 +11,9 @@ public interface UserManager {
     int registration(User user);
 
     //logging into existing user account
-    boolean loginWithUsername(String username, String password);
+    User loginWithUsername(String username, String password);
 
-    boolean loginWithEMail(String email, String password);
+    User loginWithEMail(String email, String password);
 
     //find user by id
     User findUserByID(int id);

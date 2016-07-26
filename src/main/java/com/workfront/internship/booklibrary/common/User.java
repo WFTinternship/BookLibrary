@@ -13,6 +13,7 @@ public class User {
     private String eMail;
     private String phone;
     private String accessPrivilege;
+    private boolean confirmationStatus;
 
     private List<Pending> pendingList;
     private List<PickBook> pickBookList;
@@ -99,6 +100,15 @@ public class User {
         return this;
     }
 
+    public boolean getConfirmationStatus() {
+        return confirmationStatus;
+    }
+
+    public User setConfirmationStatus(boolean confirmationStatus) {
+        this.confirmationStatus = confirmationStatus;
+        return this;
+    }
+
 
     @Override
     public String toString() {
@@ -112,6 +122,7 @@ public class User {
                 ", eMail='" + eMail + '\'' +
                 ", phone='" + phone + '\'' +
                 ", accessPrivilege='" + accessPrivilege + '\'' +
+                ", confirmationStatus='" + confirmationStatus + '\'' +
                 '}';
     }
 
@@ -132,6 +143,7 @@ public class User {
         if (getAddress() != null ? !getAddress().equals(user.getAddress()) : user.getAddress() != null) return false;
         if (geteMail() != null ? !geteMail().equals(user.geteMail()) : user.geteMail() != null) return false;
         if (getPhone() != null ? !getPhone().equals(user.getPhone()) : user.getPhone() != null) return false;
+        if (getConfirmationStatus() != user.getConfirmationStatus()) return false;
         return getAccessPrivilege() != null ? getAccessPrivilege().equals(user.getAccessPrivilege()) : user.getAccessPrivilege() == null;
 
     }

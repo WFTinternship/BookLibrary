@@ -43,25 +43,25 @@ public class UserManagerImpl implements UserManager {
     }
 
     @Override
-    public boolean loginWithUsername(String username, String password) {
+    public User loginWithUsername(String username, String password) {
         User user = userDAO.getUserByUsername(username);
-        if(user != null){
-            if(user.getPassword() == getHashedPassword(password)){
-                return true;
+        if(user != null) {
+            if (user.getPassword() == getHashedPassword(password)) {
+                return user;
             }
         }
-        return false;
+        return null;
     }
 
     @Override
-    public boolean loginWithEMail(String email, String password) {
+    public User loginWithEMail(String email, String password) {
         User user = userDAO.getUserByeMail(email);
         if(user != null){
             if(user.getPassword() == getHashedPassword(password)){
-                return true;
+                return user;
             }
         }
-        return false;
+        return null;
     }
 
     @Override
@@ -120,7 +120,7 @@ public class UserManagerImpl implements UserManager {
 
     private String getHashedPassword(String password){
         return hashString(password, "SHA-1");
-    } //todo implement method body and use in registration() method
+    }
 
     private String hashString(String message, String algorithm) {
         try {

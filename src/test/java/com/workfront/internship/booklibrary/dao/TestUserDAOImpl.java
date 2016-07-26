@@ -210,5 +210,6 @@ public class TestUserDAOImpl {
         assertEquals(user.geteMail(), actualUser.geteMail());
         assertEquals(user.getPhone(), actualUser.getPhone());
         assertEquals(user.getAccessPrivilege(), actualUser.getAccessPrivilege());
+        assertEquals(user.getConfirmationStatus(), actualUser.getConfirmationStatus());
     }
 }
