@@ -2,18 +2,21 @@ package com.workfront.internship.booklibrary.business;
 
 import com.workfront.internship.booklibrary.common.User;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+
 /**
  * Created by ${Sona} on 7/21/2016.
  */
 public interface UserManager {
 
     //registering a user first time and returning its id
-    int registration(User user);
+    int registration(User user) throws UnsupportedEncodingException, NoSuchAlgorithmException;
 
     //logging into existing user account
-    User loginWithUsername(String username, String password);
+    User loginWithUsername(String username, String password) throws UnsupportedEncodingException, NoSuchAlgorithmException;
 
-    User loginWithEMail(String email, String password);
+    User loginWithEMail(String email, String password) throws UnsupportedEncodingException, NoSuchAlgorithmException;
 
     //find user by id
     User findUserByID(int id);
@@ -29,4 +32,6 @@ public interface UserManager {
 
     //delete user account
     boolean deleteAccount(User user);
+
+    String getHashedPassword(String password) throws UnsupportedEncodingException, NoSuchAlgorithmException;
 }

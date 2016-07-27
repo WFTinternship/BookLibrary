@@ -35,7 +35,7 @@ public class UserManagerImpl implements UserManager {
      * @return user id or 0 if registration failed.
      */
     @Override
-    public int registration(User user) {
+    public int registration(User user) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         if(user != null) {
             if (emailFormatValidator(user.geteMail())) {
                 if (user.getUsername() != null && user.geteMail() != null &&
@@ -47,16 +47,15 @@ public class UserManagerImpl implements UserManager {
                     return user.getId();
                 }
             }
-
         }
         return 0;
     }
 
     @Override
-    public User loginWithUsername(String username, String password) {
+    public User loginWithUsername(String username, String password) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         User user = userDAO.getUserByUsername(username);
         if(user != null) {
-            if (user.getPassword() == getHashedPassword(password)) {
+            if (user.getPassword().equals(getHashedPassword(password))) {
                 return user;
             }
         }
@@ -64,10 +63,10 @@ public class UserManagerImpl implements UserManager {
     }
 
     @Override
-    public User loginWithEMail(String email, String password) {
+    public User loginWithEMail(String email, String password) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         User user = userDAO.getUserByeMail(email);
         if(user != null){
-            if(user.getPassword() == getHashedPassword(password)){
+            if(user.getPassword().equals(getHashedPassword(password))){
                 return user;
             }
         }
@@ -76,7 +75,7 @@ public class UserManagerImpl implements UserManager {
 
     @Override
     public User findUserByID(int id) {
-        if(id < 0){
+        if(id < 1){
             throw new IllegalArgumentException("Wrong id is entered.");
         }
         User user = userDAO.getUserByID(id);
@@ -128,19 +127,16 @@ public class UserManagerImpl implements UserManager {
         }
     }
 
-    private String getHashedPassword(String password){
+
+    public String getHashedPassword(String password) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         return hashString(password, "SHA-256");
     }
 
-    private String hashString(String message, String algorithm) {
-        try {
-            MessageDigest digest = MessageDigest.getInstance(algorithm);
-            byte[] hashedBytes = digest.digest(message.getBytes("UTF-8"));
+    private String hashString(String message, String algorithm) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+        MessageDigest digest = MessageDigest.getInstance(algorithm);
+        byte[] hashedBytes = digest.digest(message.getBytes("UTF-8"));
 
-            return convertByteArrayToHexString(hashedBytes);
-        } catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
-            throw new RuntimeException("Could not generate hash from String", ex);
-        }
+        return convertByteArrayToHexString(hashedBytes);
     }
 
     private String convertByteArrayToHexString(byte[] arrayBytes) {
