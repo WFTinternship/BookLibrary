@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 
-public class General {
+abstract public class General {
     protected void closeConnection(Connection c){
         closeConnection(null, null, c);
     }

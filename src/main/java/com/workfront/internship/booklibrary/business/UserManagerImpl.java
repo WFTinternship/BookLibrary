@@ -1,9 +1,11 @@
 package com.workfront.internship.booklibrary.business;
 
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
 import com.workfront.internship.booklibrary.common.User;
 import com.workfront.internship.booklibrary.dao.DataSource;
 import com.workfront.internship.booklibrary.dao.UserDAO;
 import com.workfront.internship.booklibrary.dao.UserDAOImpl;
+import org.mockito.InjectMocks;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -17,11 +19,10 @@ public class UserManagerImpl implements UserManager {
     private UserDAO userDAO;
     private DataSource dataSource;
 
-    private Pattern pattern;
-    private Matcher matcher;
-
     private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
                 + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+
+    private static final Pattern pattern = Pattern.compile(EMAIL_PATTERN);
 
     public UserManagerImpl(DataSource dataSource) throws Exception {
         this.dataSource = dataSource;
@@ -38,9 +39,7 @@ public class UserManagerImpl implements UserManager {
     public int registration(User user) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         if(user != null) {
             if (emailFormatValidator(user.geteMail())) {
-                if (user.getUsername() != null && user.geteMail() != null &&
-                        user.getName() != null && user.getSurname() != null && user.getPassword() != null &&
-                        user.getAddress() != null && user.getPhone() != null && user.getAccessPrivilege() != null) {
+                if (userValidation(user)) {
                     user.setPassword(getHashedPassword(user.getPassword()));
                     userDAO.add(user);
                     // todo send message to user's email asking to confirm the registration
@@ -76,7 +75,7 @@ public class UserManagerImpl implements UserManager {
     @Override
     public User findUserByID(int id) {
         if(id < 1){
-            throw new IllegalArgumentException("Wrong id is entered.");
+            throw new IllegalArgumentException("Invalid id is entered.");
         }
         User user = userDAO.getUserByID(id);
         if(user != null) {
@@ -112,19 +111,27 @@ public class UserManagerImpl implements UserManager {
 
     @Override
     public User update(User user) {
-        userDAO.updateUser(user);
-        return user;
+        if(user != null) {
+            if(userValidation(user)) {
+                userDAO.updateUser(user);
+                return user;
+            }
+        }
+        return null;
     }
 
     @Override
     public boolean deleteAccount(User user) {
-        int id = user.getId();
-        userDAO.deleteUser(id);
-        if(userDAO.getUserByID(id) == null){
-            return true;
-        }else {
-            return false;
+        if(user != null) {
+            int id = user.getId();
+            userDAO.deleteUser(id);
+            if (userDAO.getUserByID(id) == null) {
+                return true;
+            } else {
+                return false;
+            }
         }
+        return true;
     }
 
 
@@ -148,9 +155,14 @@ public class UserManagerImpl implements UserManager {
     }
 
     private boolean emailFormatValidator(String email){
-        pattern = Pattern.compile(EMAIL_PATTERN);
-        matcher = pattern.matcher(email);
+        Matcher matcher = pattern.matcher(email);
         return matcher.matches();
+    }
+
+    private boolean userValidation(User user){
+        return user.getUsername() != null && user.geteMail() != null && emailFormatValidator(user.geteMail()) &&
+                user.getName() != null && user.getSurname() != null && user.getPassword() != null &&
+                user.getAddress() != null && user.getPhone() != null && user.getAccessPrivilege() != null;
     }
 
 

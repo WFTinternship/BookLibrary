@@ -122,7 +122,7 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
         try{
             connection = dataSource.getConnection();
             authors = new ArrayList<Author>();
-            String sql = "SELECT * FROM Author";
+            String sql = "SELECT * FROM Author ORDER BY name, surname";
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
 

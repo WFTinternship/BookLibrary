@@ -82,7 +82,7 @@ public class UserDAOImpl extends General implements UserDAO {
 
         } catch (SQLException e){
             LOGGER.error("SQL exception occurred!");
-            throw new RuntimeException(e);
+            throw new RuntimeException("SQL exception occurred!", e);
         }  finally{
             closeConnection( preparedStatement, connection);
         }
@@ -158,7 +158,7 @@ public class UserDAOImpl extends General implements UserDAO {
         try{
             connection = dataSource.getConnection();
             users = new ArrayList<User>();
-            String sql = "SELECT * FROM User";
+            String sql = "SELECT * FROM User ORDER BY name, surname";
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
 
@@ -212,7 +212,6 @@ public class UserDAOImpl extends General implements UserDAO {
         } finally{
             closeConnection( preparedStatement, connection);
         }
-
     }
 
     @Override
@@ -256,8 +255,6 @@ public class UserDAOImpl extends General implements UserDAO {
         }
     }
 
-
-
     private void setUserDetails(ResultSet rs, User user) throws SQLException {
         user.setId(rs.getInt("user_id"));
         user.setName(rs.getString("name"));
@@ -269,6 +266,5 @@ public class UserDAOImpl extends General implements UserDAO {
         user.setPhone(rs.getString("phone"));
         user.setAccessPrivilege(rs.getString("access_privilege"));
         user.setConfirmationStatus(rs.getBoolean("confirmation_status"));
-
     }
 }
