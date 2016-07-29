@@ -1,8 +1,8 @@
-package com.workfront.internship.booklibrary.dao;
+package com.workfront.internship.booklibrary.business;
 
-import com.workfront.internship.booklibrary.business.UserManager;
-import com.workfront.internship.booklibrary.business.UserManagerImpl;
 import com.workfront.internship.booklibrary.common.User;
+import com.workfront.internship.booklibrary.dao.DataSource;
+import com.workfront.internship.booklibrary.dao.TestUtil;
 import com.workfront.internship.booklibrary.dao.UserDAO;
 import com.workfront.internship.booklibrary.dao.UserDAOImpl;
 
@@ -11,13 +11,9 @@ import org.mockito.Mockito;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
 import static junit.framework.TestCase.*;
 import static org.mockito.Matchers.*;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import org.mockito.internal.util.reflection.Whitebox;
@@ -33,26 +29,15 @@ public class UserManagerUnitTest {
     private UserDAO userDAO;
     private UserManager userManager;
 
-    @BeforeClass
-    public static void setUpClass(){
-//        testUser = new User();
-//        testUser = TestUtil.getRandomUser();
-    }
-
-    @AfterClass
-    public static void tearDownClass(){
-
-    }
-
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        dataSource = Mockito.mock(DataSource.class);
-
-        Connection connection = Mockito.mock(Connection.class);
-        when(dataSource.getConnection()).thenReturn(connection);
-
-        userDAO = new UserDAOImpl(dataSource);
+//        dataSource = Mockito.mock(DataSource.class);
+//
+//        Connection connection = Mockito.mock(Connection.class);
+//        when(dataSource.getConnection()).thenReturn(connection);
+//
+//        userDAO = new UserDAOImpl(dataSource);
         userManager = new UserManagerImpl(dataSource);
 
         userDAO = Mockito.mock(UserDAOImpl.class);
@@ -64,7 +49,8 @@ public class UserManagerUnitTest {
 
     @After
     public void tearDown(){
-//        userDAO.deleteAll();
+        testUser = null;
+        userDAO = null;
     }
 
 
@@ -313,36 +299,38 @@ public class UserManagerUnitTest {
         //test
         Mockito.verify(userDAO, Mockito.never()).updateUser(testUser);
 
-        //assertTrue("user details are updated", usertid < 1);
+        //assertTrue("user details are updated", userid < 1);
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void deleteAccount_nullUser(){
         boolean b;
         //test
-        b = userManager.deleteAccount(null);
+        b = userManager.deleteAccount(0);
 
         assertEquals("user is not null", true, b);
     }
 
     @Test
-    public void deleteAccount_nonNullUser(){
+    public void deleteAccount_successOn_nonNullUser(){
+        testUser.setId(2);
         boolean b;
 
         //Test
-        b = userManager.deleteAccount(testUser);
+        b = userManager.deleteAccount(testUser.getId());
 
         assertEquals("null user", true, b);
     }
 
     @Test
     public void deleteAccount_cannotDeleteNonNullUser(){
+        testUser.setId(3);
         User user = TestUtil.getRandomUser();
         when(userDAO.getUserByID(anyInt())).thenReturn(user);
 
         boolean b;
         //test
-        b = userManager.deleteAccount(testUser);
+        b = userManager.deleteAccount(testUser.getId());
 
         assertEquals(false, b);
     }
@@ -385,14 +373,6 @@ public class UserManagerUnitTest {
         //method under test
         String actualPassword = testUser.getPassword();
         assertEquals("Unable to hash password", actualPassword, expectedPassword);
-    }
-*/
-
-
-
-/**    @Test(expected = OperationFailedException.class)
-    public void addAccount_InvalidUser(){
-        // TODO: 7/27/16 implement
     }
 */
 

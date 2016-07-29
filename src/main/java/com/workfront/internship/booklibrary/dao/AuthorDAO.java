@@ -22,4 +22,6 @@ public interface AuthorDAO {
     void deleteAuthor(int id);
 
     void deleteAllAuthors();
+
+    boolean isExist(int id);
 }

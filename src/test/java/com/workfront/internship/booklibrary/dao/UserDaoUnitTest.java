@@ -16,7 +16,7 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class UserDaoInitTest {
+public class UserDaoUnitTest {
     DataSource dataSource;
     UserDAO userDAO;
 

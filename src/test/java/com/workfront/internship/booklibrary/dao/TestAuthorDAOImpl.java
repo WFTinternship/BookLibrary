@@ -2,6 +2,9 @@ package com.workfront.internship.booklibrary.dao;
 
 import com.workfront.internship.booklibrary.common.Author;
 
+import com.workfront.internship.booklibrary.common.Book;
+import com.workfront.internship.booklibrary.common.Genre;
+import com.workfront.internship.booklibrary.common.Pending;
 import org.junit.*;
 import org.junit.Test;
 
@@ -10,10 +13,17 @@ import java.util.List;
 
 import static com.workfront.internship.booklibrary.dao.TestUtil.*;
 import static junit.framework.TestCase.*;
+import static org.junit.Assert.assertNotNull;
 
 public class TestAuthorDAOImpl {
     private AuthorDAO authorDAO;
     private Author expectedAuthor = null;
+
+    private BookDAO bookDAO;
+    private Book testBook = null;
+
+    private GenreDAO genreDAO;
+    private Genre testGenre = null;
     DataSource dataSource = DataSource.getInstance();
 
     @Before
@@ -24,10 +34,14 @@ public class TestAuthorDAOImpl {
     @After
     public void tearDown() {
         authorDAO.deleteAllAuthors();
+        bookDAO.deleteAll();
+        genreDAO.deleteAll();
     }
 
     private void init() throws Exception {
         authorDAO = new AuthorDAOImpl(dataSource);
+        bookDAO = new BookDAOImpl(dataSource);
+        genreDAO = new GenreDAOImpl(dataSource);
     }
 
 

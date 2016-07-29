@@ -121,17 +121,17 @@ public class UserManagerImpl implements UserManager {
     }
 
     @Override
-    public boolean deleteAccount(User user) {
-        if(user != null) {
-            int id = user.getId();
+    public boolean deleteAccount(int id) {
+        if(id < 1){
+            throw new IllegalArgumentException("Invalid id is entered");
+        }
+        if(id > 0){
             userDAO.deleteUser(id);
-            if (userDAO.getUserByID(id) == null) {
+            if(userDAO.getUserByID(id) == null){
                 return true;
-            } else {
-                return false;
             }
         }
-        return true;
+        return false;
     }
 
 

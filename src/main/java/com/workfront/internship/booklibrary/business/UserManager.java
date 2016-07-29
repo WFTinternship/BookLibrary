@@ -31,7 +31,7 @@ public interface UserManager {
     User update(User user);
 
     //delete user account
-    boolean deleteAccount(User user);
+    boolean deleteAccount(int id);
 
     String getHashedPassword(String password) throws UnsupportedEncodingException, NoSuchAlgorithmException;
 }

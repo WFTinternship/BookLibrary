@@ -1,5 +1,6 @@
 package com.workfront.internship.booklibrary.business;
 
+import com.workfront.internship.booklibrary.common.Author;
 import com.workfront.internship.booklibrary.common.Book;
 import java.util.List;
 
@@ -8,7 +9,7 @@ import java.util.List;
  */
 public interface BookManager {
 
-    int add(Book book);
+    int add(Book book, Author author);
 
     //find by id
     Book findBookByID(int id);

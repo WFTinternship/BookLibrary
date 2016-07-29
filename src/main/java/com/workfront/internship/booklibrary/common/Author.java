@@ -10,6 +10,7 @@ public class Author {
     private String webPage;
     private String biography;
     private List<Book> books;
+    private Book book;
 
 
     public int getId() {
@@ -112,5 +113,13 @@ public class Author {
         result = 31 * result + (getWebPage() != null ? getWebPage().hashCode() : 0);
         result = 31 * result + (getBiography() != null ? getBiography().hashCode() : 0);
         return result;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
     }
 }

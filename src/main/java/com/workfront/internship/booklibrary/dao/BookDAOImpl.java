@@ -1,5 +1,6 @@
 package com.workfront.internship.booklibrary.dao;
 
+import com.workfront.internship.booklibrary.common.Author;
 import com.workfront.internship.booklibrary.common.Book;
 import com.workfront.internship.booklibrary.common.Genre;
 
@@ -30,8 +31,8 @@ public class BookDAOImpl extends General implements BookDAO {
         int lastId = 0;
 
         try{
-
             connection = dataSource.getConnection();
+
             String sql = "INSERT INTO Book(ISBN, title, genre_id, volume, abstract, language, count, edition_year, pages, country_of_edition) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             preparedStatement = connection.prepareStatement(sql, preparedStatement.RETURN_GENERATED_KEYS);
 

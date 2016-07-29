@@ -1,9 +1,8 @@
 package com.workfront.internship.booklibrary.business;
 
+import com.workfront.internship.booklibrary.common.Author;
 import com.workfront.internship.booklibrary.common.Book;
-import com.workfront.internship.booklibrary.dao.BookDAO;
-import com.workfront.internship.booklibrary.dao.BookDAOImpl;
-import com.workfront.internship.booklibrary.dao.DataSource;
+import com.workfront.internship.booklibrary.dao.*;
 
 import java.util.List;
 
@@ -13,19 +12,31 @@ import java.util.List;
 public class BookManagerImpl implements BookManager{
 
     private BookDAO bookDAO;
+    private AuthorManager authorManager;
     private DataSource dataSource;
 
     public BookManagerImpl(DataSource dataSource) throws Exception {
         this.dataSource = dataSource;
         bookDAO = new BookDAOImpl(dataSource);
+        authorManager = new AuthorManagerImpl(dataSource);
     }
 
     @Override
-    public int add(Book book) {
-        if(bookValidator(book)){
-            bookDAO.add(book);
-            return book.getId();
+    public int add(Book book, Author author) {
+/**        if(author == null){
+            throw new IllegalArgumentException("Duplicate entry is not allowed");
         }
+
+        if(!authorMO.isExist(author.getId())){
+            authorDAO.add()
+        }
+        if(author.getId() > 0){
+            if(bookValidator(book)){
+                bookDAO.add(book);
+                return book.getId();
+            }
+        }
+ */
         return 0;
     }
 
