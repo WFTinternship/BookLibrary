@@ -23,8 +23,6 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
 //        this.bookDAO = new BookDAOImpl(dataSource);
     }
 
-    public AuthorDAOImpl(DataSource dataSource, Book book) {}
-
     @Override
     public int add(Author author) {
         Connection connection = null;
@@ -57,6 +55,48 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
             throw new RuntimeException(e);
         } finally{
             closeConnection( preparedStatement, connection);
+        }
+        return author.getId();
+    }
+
+
+    private int add(Connection connection, Author author){
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        int lastId = 0;
+
+        try {
+            String sql = "INSERT INTO Author(name, surname, email, web_page, biography) VALUES(?, ?, ?, ?, ?)";
+
+            preparedStatement = connection.prepareStatement(sql, preparedStatement.RETURN_GENERATED_KEYS);
+
+            preparedStatement.setString(1, author.getName());
+            preparedStatement.setString(2, author.getSurname());
+            preparedStatement.setString(3, author.geteMail());
+            preparedStatement.setString(4, author.getWebPage());
+            preparedStatement.setString(5, author.getBiography());
+
+            preparedStatement.executeUpdate();
+            resultSet = preparedStatement.getGeneratedKeys();
+            if (resultSet.next()) {
+                lastId = resultSet.getInt(1);
+            }
+            author.setId(lastId);
+        }catch (SQLException e){
+            LOGGER.error("SQL exception occurred!");
+            throw new RuntimeException(e);
+        } finally{
+            try{
+                if(preparedStatement != null) preparedStatement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }finally {
+                if(resultSet != null) try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return author.getId();
     }
@@ -147,9 +187,9 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
         return authors;
     }
 
- /**
+    @Override
     public List<Author> getAllAuthorsByBookId(int bookId){
-//        List<Author> authorList = null;
+
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -157,7 +197,7 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
         try{
             connection = dataSource.getConnection();
             List<Author> authorList = new ArrayList<>();
-//            authorList = new ArrayList<Author>();
+
             String sql = "SELECT * FROM book_author where book_author.book_id=?";
 
             preparedStatement = connection.prepareStatement(sql);
@@ -165,17 +205,10 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
             resultSet = preparedStatement.executeQuery();
 
             while(resultSet.next()){
-//                Author author = new Author();
-//                setAuthorDetails(resultSet, author);
-                int id = resultSet.getInt("author_id");
-                Author author = getAuthorByID(id);
+                int authorId = resultSet.getInt("author_id");
 
-//                author.setId(resultSet.getInt("author_id"));
-//                author.setName(resultSet.getString("name"));
-//                author.setSurname(resultSet.getString("surname"));
-//                author.seteMail(resultSet.getString("email"));
-//                author.setWebPage(resultSet.getString("web_page"));
-//                author.setBiography(resultSet.getString("biography"));
+                Author author = getAuthorByID(authorId);
+//                setAuthorDetails(resultSet, author);
 
                 authorList.add(author);
             }
@@ -187,7 +220,40 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
             closeConnection(resultSet, preparedStatement, connection);
         }
     }
-  */
+
+
+    private void updateAuthor(Connection connection, Author author){
+        PreparedStatement preparedStatement = null;
+        try{
+            if(author.getId() != 0){
+                String sql = "UPDATE Author SET " +
+                        "name = ?, surname = ?, email = ?, web_page = ?, biography = ? " +
+                        "WHERE author_id = ?";
+
+                preparedStatement = connection.prepareStatement(sql);
+
+                preparedStatement.setString(1, author.getName());
+                preparedStatement.setString(2, author.getSurname());
+                preparedStatement.setString(3, author.geteMail());
+                preparedStatement.setString(4, author.getWebPage());
+                preparedStatement.setString(5, author.getBiography());
+                preparedStatement.setInt(6, author.getId());
+
+                preparedStatement.executeUpdate();
+            }
+
+        } catch (SQLException e){
+            LOGGER.error("SQL exception occurred!");
+            throw new RuntimeException(e);
+        } finally {
+            try{
+                if(preparedStatement != null) preparedStatement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            //closeConnection(preparedStatement, connection);
+        }
+    }
 
     @Override
     public void updateAuthor(Author author) {
@@ -218,6 +284,16 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
             throw new RuntimeException(e);
         } finally {
             closeConnection(preparedStatement, connection);
+        }
+    }
+
+    @Override
+    public void checkAndUpdateAuthor(Connection connection, Author author) {
+        if(getAuthorByID(author.getId()) != null){
+            updateAuthor(connection, author);
+        }
+        else {
+            add(connection, author);
         }
     }
 
@@ -264,27 +340,8 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
 
     @Override
     public boolean isExist(int id) {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-
-        try{
-            connection = dataSource.getConnection();
-            String sql = "SELECT * FROM author WHERE id =?";
-            preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, id);
-            resultSet = preparedStatement.executeQuery();
-
-            if(resultSet.next()){
-                return true;
-            }
-        } catch (SQLException e){
-            LOGGER.error("SQL exception occurred!");
-            throw new RuntimeException(e);
-        } finally{
-            closeConnection(resultSet, preparedStatement, connection);
-        }
-        return false;
+        if(getAuthorByID(id) != null) return true;
+        return  false;
     }
 
     private void setAuthorDetails(ResultSet rs, Author author) throws SQLException {

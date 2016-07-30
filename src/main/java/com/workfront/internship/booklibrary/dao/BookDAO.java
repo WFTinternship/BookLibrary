@@ -7,7 +7,7 @@ import java.sql.Connection;
 import java.util.List;
 
 public interface BookDAO {
-
+    
     int add(Book book);
 
     Book getBookByID(int id);
@@ -24,4 +24,7 @@ public interface BookDAO {
 
     void deleteAll();
 
+    boolean isExist(int id);
+
+    void addAuthorToBook(int bookID, int authorID);
 }

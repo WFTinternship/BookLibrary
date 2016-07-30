@@ -1,13 +1,9 @@
 package com.workfront.internship.booklibrary.dao;
 
-import com.workfront.internship.booklibrary.common.Author;
 import com.workfront.internship.booklibrary.common.Book;
 import com.workfront.internship.booklibrary.common.Genre;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;
@@ -17,22 +13,22 @@ public class BookDAOImpl extends General implements BookDAO {
 
     private DataSource dataSource;
     private GenreDAO genreDAO;
+    private AuthorDAO authorDAO;
 
     public BookDAOImpl(DataSource dataSource) throws Exception {
         this.dataSource = dataSource;
         this.genreDAO = new GenreDAOImpl(dataSource);
+        this.authorDAO = new AuthorDAOImpl(dataSource);
     }
 
     @Override
     public int add(Book book) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        ResultSet resultSet;
+        ResultSet resultSet = null;
         int lastId = 0;
-
         try{
             connection = dataSource.getConnection();
-
             String sql = "INSERT INTO Book(ISBN, title, genre_id, volume, abstract, language, count, edition_year, pages, country_of_edition) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             preparedStatement = connection.prepareStatement(sql, preparedStatement.RETURN_GENERATED_KEYS);
 
@@ -53,14 +49,34 @@ public class BookDAOImpl extends General implements BookDAO {
                 lastId = resultSet.getInt(1);
             }
             book.setId(lastId);
+        }catch (SQLException e){
+            LOGGER.error("SQL exception occurred!");
+            throw new RuntimeException(e);
+        } finally {
+            closeConnection(resultSet, preparedStatement, connection);
+        }
+        return book.getId();
+    }
 
-        } catch (SQLException e){
+    @Override
+    public void addAuthorToBook(int bookID, int authorID) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        try{
+            connection = dataSource.getConnection();
+            String sqlCrossTable = "INSERT INTO book_author(book_id, author_id) VALUES(?, ?)";
+            preparedStatement = connection.prepareStatement(sqlCrossTable);
+
+            preparedStatement.setInt(1, bookID);
+            preparedStatement.setInt(2, authorID);
+            preparedStatement.executeUpdate();
+
+        }catch (SQLException e){
             LOGGER.error("SQL exception occurred!");
             throw new RuntimeException(e);
         } finally {
             closeConnection(preparedStatement, connection);
         }
-        return book.getId();
     }
 
     @Override
@@ -257,6 +273,14 @@ public class BookDAOImpl extends General implements BookDAO {
         } finally{
             closeConnection( preparedStatement, connection);
         }
+    }
+
+    @Override
+    public boolean isExist(int id) {
+        if(getBookByID(id) != null) {
+            return true;
+        }
+        return false;
     }
 
     private void setBookDetails(ResultSet rs, Book book) throws SQLException {

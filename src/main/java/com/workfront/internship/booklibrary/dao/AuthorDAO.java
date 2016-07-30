@@ -1,6 +1,8 @@
 package com.workfront.internship.booklibrary.dao;
 
 import com.workfront.internship.booklibrary.common.Author;
+
+import java.sql.Connection;
 import java.util.List;
 
 public interface AuthorDAO {
@@ -16,8 +18,12 @@ public interface AuthorDAO {
     //get all data fields of all the authors in the database
     List<Author> getAllAuthors();
 
+    List<Author> getAllAuthorsByBookId(int bookId);
+
     //update all fields in a row
     void updateAuthor(Author author);
+
+    void checkAndUpdateAuthor(Connection connection, Author author);
 
     void deleteAuthor(int id);
 

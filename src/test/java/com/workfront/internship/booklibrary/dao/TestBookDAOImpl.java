@@ -1,5 +1,6 @@
 package com.workfront.internship.booklibrary.dao;
 
+import com.workfront.internship.booklibrary.common.Author;
 import com.workfront.internship.booklibrary.common.Book;
 import com.workfront.internship.booklibrary.common.Genre;
 
@@ -21,6 +22,7 @@ public class TestBookDAOImpl {
 
     private BookDAO bookDAO;
     private GenreDAO genreDAO;
+    private AuthorDAO authorDAO;
 
     private Book expectedBook = null;
     private Genre expectedGenre = null;
@@ -58,6 +60,22 @@ public class TestBookDAOImpl {
 
         Book actualBook = bookDAO.getBookByID(bookId);
         checkAssertions(expectedBook, actualBook);
+    }
+
+    @Test
+    public void addAuthorToBook() throws Exception {
+        authorDAO = new AuthorDAOImpl(dataSource);
+        Author author = getRandomAuthor();
+        authorDAO.add(author);
+        expectedBook = getRandomBook(expectedGenre);
+        bookDAO.add(expectedBook);
+
+        //test
+        bookDAO.addAuthorToBook(expectedBook.getId(), author.getId());
+        assertNotNull(expectedBook);
+        assertNotNull(author);
+
+        authorDAO.deleteAllAuthors();
     }
 
     @Test
