@@ -7,7 +7,7 @@ import java.sql.Connection;
 import java.util.List;
 
 public interface BookDAO {
-    
+
     int add(Book book);
 
     Book getBookByID(int id);

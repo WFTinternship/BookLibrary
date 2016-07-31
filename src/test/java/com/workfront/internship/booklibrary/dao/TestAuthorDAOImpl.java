@@ -116,6 +116,8 @@ public class TestAuthorDAOImpl {
         testGenre = getRandomGenre();
         genreDAO.add(testGenre);
 
+        Author testAuthor = getRandomAuthor();
+        authorDAO.add(testAuthor);
         Book book = getRandomBook(testGenre);
         bookDAO.add(book);
 
@@ -130,6 +132,8 @@ public class TestAuthorDAOImpl {
         List<Author> authorList = new ArrayList<>();
         //test
         authorList = authorDAO.getAllAuthorsByBookId(book.getId());
+
+//        assertNull(authorList);
 
         checkAssertions(author1, authorList.get(0));
         checkAssertions(author2, authorList.get(1));

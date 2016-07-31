@@ -189,38 +189,33 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
 
     @Override
     public List<Author> getAllAuthorsByBookId(int bookId){
-
+        List<Author> authorList = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
         try{
             connection = dataSource.getConnection();
-            List<Author> authorList = new ArrayList<>();
-
             String sql = "SELECT * FROM book_author where book_author.book_id=?";
 
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, bookId);
             resultSet = preparedStatement.executeQuery();
-
             while(resultSet.next()){
+                authorList = new ArrayList<>();
                 int authorId = resultSet.getInt("author_id");
 
                 Author author = getAuthorByID(authorId);
-//                setAuthorDetails(resultSet, author);
-
                 authorList.add(author);
             }
-            return authorList;
         } catch (SQLException e){
             LOGGER.error("SQL exception occurred!");
             throw new RuntimeException(e);
         } finally {
             closeConnection(resultSet, preparedStatement, connection);
         }
+        return authorList;
     }
-
 
     private void updateAuthor(Connection connection, Author author){
         PreparedStatement preparedStatement = null;

@@ -85,6 +85,6 @@ public class GenreManagerImpl implements GenreManager{
     }
 
     private boolean genreValidator(Genre genre){
-        return genre.getGenre() != null;
+        return genre != null && genre.getGenre() != null;
     }
 }

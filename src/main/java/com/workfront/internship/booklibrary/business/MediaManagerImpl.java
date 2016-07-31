@@ -78,6 +78,6 @@ public class MediaManagerImpl implements MediaManager{
     }
 
     private boolean mediaValidator(Media media){
-        return media.getLink() != null && media.getType() != null && media.getBook() != null;
+        return media != null && media.getLink() != null && media.getType() != null && media.getBook() != null;
     }
 }

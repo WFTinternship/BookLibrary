@@ -29,6 +29,8 @@ public class BookDAOImpl extends General implements BookDAO {
         int lastId = 0;
         try{
             connection = dataSource.getConnection();
+            connection.setAutoCommit(false);
+
             String sql = "INSERT INTO Book(ISBN, title, genre_id, volume, abstract, language, count, edition_year, pages, country_of_edition) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             preparedStatement = connection.prepareStatement(sql, preparedStatement.RETURN_GENERATED_KEYS);
 
@@ -49,13 +51,25 @@ public class BookDAOImpl extends General implements BookDAO {
                 lastId = resultSet.getInt(1);
             }
             book.setId(lastId);
+
+            if(authorDAO.getAllAuthorsByBookId(book.getId()) != null) {
+                connection.commit();
+            } else {
+                connection.rollback();
+            }
+            return book.getId();
         }catch (SQLException e){
+            try {
+                connection.rollback();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
             LOGGER.error("SQL exception occurred!");
             throw new RuntimeException(e);
         } finally {
             closeConnection(resultSet, preparedStatement, connection);
         }
-        return book.getId();
+        //return book.getId();
     }
 
     @Override
@@ -191,13 +205,14 @@ public class BookDAOImpl extends General implements BookDAO {
     }
 
     @Override
-    public void updateBook(Book book) {
-        Connection connection = null;
+    public void updateBook(Connection connection, Book book) {
         PreparedStatement preparedStatement = null;
 
         try{
             if(book.getId() != 0){
-                connection = dataSource.getConnection();
+                if(connection== null){
+                    connection = dataSource.getConnection();
+                }
                 String sql = "UPDATE Book SET " +
                         "ISBN=?, title=?, genre_id=?, volume=?, abstract=?, language=?, count=?, edition_year=?, pages=?, country_of_edition=?" +
                         " WHERE book_id=?";
@@ -229,9 +244,9 @@ public class BookDAOImpl extends General implements BookDAO {
     }
 
     @Override
-    public void updateBook(Connection connection, Book book){
-        PreparedStatement preparedStatement = null;
-        updateBook(book);
+    public void updateBook(Book book){
+
+        updateBook(null, book);
     }
 
     @Override
@@ -294,6 +309,7 @@ public class BookDAOImpl extends General implements BookDAO {
         book.setEditionYear(rs.getString("edition_year"));
         book.setPages(rs.getInt("pages"));
         book.setCountryOfEdition(rs.getString("country_of_edition"));
+
     }
 
 }

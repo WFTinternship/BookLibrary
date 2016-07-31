@@ -76,6 +76,6 @@ public class MediaTypeManagerImpl implements MediaTypeManager{
     }
 
     private boolean mediaTypeValidator(MediaType mediaType){
-        return mediaType.getType() != null;
+        return mediaType != null && mediaType.getType() != null;
     }
 }
