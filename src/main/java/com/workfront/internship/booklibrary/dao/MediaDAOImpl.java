@@ -1,8 +1,6 @@
 package com.workfront.internship.booklibrary.dao;
 
-import com.workfront.internship.booklibrary.common.Book;
-import com.workfront.internship.booklibrary.common.Genre;
-import com.workfront.internship.booklibrary.common.Media;
+import com.workfront.internship.booklibrary.common.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +9,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.workfront.internship.booklibrary.common.MediaType;
 import org.apache.log4j.Logger;
 
 
@@ -126,6 +123,76 @@ public class MediaDAOImpl extends General implements MediaDAO{
         }
 
     }
+   ///////////////////////////////////////////////////////////////////////////////////////////////
+    @Override
+    public List<Media> getAllMediaByBook(int bookId){
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try{
+            connection = dataSource.getConnection();
+            List<Media> mediaList = new ArrayList<Media>();
+
+            String sql = "SELECT * FROM media inner join book " +
+                    " ON media.book_id = Book.book_id inner join Genre " +
+                    " ON Book.genre_id = Genre.genre_id " +
+                    "where media.book_id=?";
+
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, bookId);
+            resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next()){
+                Media media = new Media();
+
+                setMediaDetails(resultSet, media);
+
+                mediaList.add(media);
+            }
+            return mediaList;
+        }catch (SQLException e){
+            LOGGER.error("SQL exception occurred!");
+            throw new RuntimeException(e);
+        }finally {
+            closeConnection(resultSet, preparedStatement, connection);
+        }
+    }
+
+    @Override
+    public List<Media>  getAllMediaByMediaType(int mediaTypeId) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try{
+            connection = dataSource.getConnection();
+            List<Media> mediaList = new ArrayList<Media>();
+
+            String sql = "SELECT * FROM media inner join media_type On media.media_type_id = media_type.mediaType_id" + //User ON pending.user_id = User.user_id" +
+                    " inner join book ON media.book_id = Book.book_id inner join Genre " +
+                    " ON Book.genre_id = Genre.genre_id " +
+                    " where media_type.mediaType_id=?";
+
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, mediaTypeId);
+            resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next()){
+                Media media = new Media();
+
+                setMediaDetails(resultSet, media);
+
+                mediaList.add(media);
+            }
+            return mediaList;
+        }catch (SQLException e){
+            LOGGER.error("SQL exception occurred!");
+            throw new RuntimeException(e);
+        }finally {
+            closeConnection(resultSet, preparedStatement, connection);
+        }
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////
 
     @Override
     public void updateMedia(Media media) {

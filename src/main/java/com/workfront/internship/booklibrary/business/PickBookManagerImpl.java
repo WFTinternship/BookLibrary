@@ -89,7 +89,7 @@ public class PickBookManagerImpl implements PickBookManager{
     }
 
     private boolean pickBookValidator(PickBook pickBook){
-        return pickBook.getBook() != null && pickBook.getUser()!= null &&
+        return pickBook != null && pickBook.getBook() != null && pickBook.getUser()!= null &&
                 pickBook.getPickingDate() != null && pickBook.getReturnDate() != null;
     }
 }

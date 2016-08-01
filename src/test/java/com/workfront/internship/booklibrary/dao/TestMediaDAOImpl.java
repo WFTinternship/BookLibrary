@@ -1,10 +1,7 @@
 package com.workfront.internship.booklibrary.dao;
 
 
-import com.workfront.internship.booklibrary.common.Book;
-import com.workfront.internship.booklibrary.common.Genre;
-import com.workfront.internship.booklibrary.common.Media;
-import com.workfront.internship.booklibrary.common.MediaType;
+import com.workfront.internship.booklibrary.common.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,6 +13,7 @@ import static com.workfront.internship.booklibrary.dao.TestUtil.*;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNull;
 import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertNotNull;
 
 public class TestMediaDAOImpl {
     private MediaDAO mediaDAO;
@@ -99,6 +97,31 @@ public class TestMediaDAOImpl {
 
         assertEquals(expectedMediaList.size(), actualMediaList.size());
         for(int i = 0; i < mediaCount; i++){
+            checkAssertions(expectedMediaList.get(i), actualMediaList.get(i));
+        }
+
+        expectedMediaList.clear();
+        actualMediaList.clear();
+    }
+
+    @Test
+    public void getAllMediaByBook() {
+        mediaTypeDAO.deleteAll();
+        List<Media> expectedMediaList = new ArrayList<>();
+        List<Media> actualMediaList = new ArrayList<>();
+        int count = 2;
+
+        for(int i = 0; i < count; i++) {
+            expectedMedia = getRandomMedia(expectedMediaType, expectedBook);
+            mediaDAO.add(expectedMedia);
+            assertNotNull(expectedMedia);
+            expectedMediaList.add(expectedMedia);
+        }
+
+        //Test method getAllPBookID()
+        actualMediaList = mediaDAO.getAllMediaByBook(expectedBook.getId());
+
+        for(int i = 0; i < count; i++){
             checkAssertions(expectedMediaList.get(i), actualMediaList.get(i));
         }
 

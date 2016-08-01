@@ -10,6 +10,10 @@ public interface MediaDAO {
 
     List<Media> getAllMedia();
 
+    List<Media> getAllMediaByBook(int bookId);
+
+    List<Media>  getAllMediaByMediaType(int mediaTypeId);
+
     void updateMedia(Media media);
 
     void deleteMedia(int id);

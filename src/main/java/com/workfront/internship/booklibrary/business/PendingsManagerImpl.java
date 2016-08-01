@@ -86,6 +86,6 @@ public class PendingsManagerImpl implements PendingsManager{
     }
 
     private boolean pendingsValidator(Pending pending){
-        return pending.getUser() != null && pending.getBook() != null && pending.getPendingDate() != null;
+        return pending != null && pending.getUser() != null && pending.getBook() != null && pending.getPendingDate() != null;
     }
 }
