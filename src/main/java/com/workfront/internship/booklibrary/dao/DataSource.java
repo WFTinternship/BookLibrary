@@ -15,7 +15,7 @@ public class DataSource {
         ds = new BasicDataSource();
         ds.setDriverClassName("com.mysql.jdbc.Driver");
         ds.setUsername("root");
-        ds.setPassword("sonadb"); //mydb
+        ds.setPassword("mydb"); //sonadb
         ds.setUrl("jdbc:mysql://localhost/book_library");
 
         // the settings below are optional -- dbcp can work with defaults

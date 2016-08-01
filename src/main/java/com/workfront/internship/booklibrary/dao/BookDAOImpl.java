@@ -29,7 +29,7 @@ public class BookDAOImpl extends General implements BookDAO {
         int lastId = 0;
         try{
             connection = dataSource.getConnection();
-            connection.setAutoCommit(false);
+//            connection.setAutoCommit(false);
 
             String sql = "INSERT INTO Book(ISBN, title, genre_id, volume, abstract, language, count, edition_year, pages, country_of_edition) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             preparedStatement = connection.prepareStatement(sql, preparedStatement.RETURN_GENERATED_KEYS);
@@ -52,18 +52,18 @@ public class BookDAOImpl extends General implements BookDAO {
             }
             book.setId(lastId);
 
-            if(authorDAO.getAllAuthorsByBookId(book.getId()) != null) {
-                connection.commit();
-            } else {
-                connection.rollback();
-            }
+//            if(authorDAO.getAllAuthorsByBookId(book.getId()) != null) {
+//                connection.commit();
+//            } else {
+//                connection.rollback();
+//            }
             return book.getId();
         }catch (SQLException e){
-            try {
-                connection.rollback();
-            } catch (SQLException e1) {
-                e1.printStackTrace();
-            }
+//            try {
+//                connection.rollback();
+//            } catch (SQLException e1) {
+//                e1.printStackTrace();
+//            }
             LOGGER.error("SQL exception occurred!");
             throw new RuntimeException(e);
         } finally {
@@ -217,7 +217,6 @@ public class BookDAOImpl extends General implements BookDAO {
                         "ISBN=?, title=?, genre_id=?, volume=?, abstract=?, language=?, count=?, edition_year=?, pages=?, country_of_edition=?" +
                         " WHERE book_id=?";
 
-
                 preparedStatement = connection.prepareStatement(sql);
 
                 preparedStatement.setString(1, book.getISBN());
@@ -233,7 +232,6 @@ public class BookDAOImpl extends General implements BookDAO {
                 preparedStatement.setInt(11, book.getId());
 
                 preparedStatement.executeUpdate();
-
             }
         } catch (SQLException e){
             LOGGER.error("SQL exception occurred!");
@@ -245,7 +243,6 @@ public class BookDAOImpl extends General implements BookDAO {
 
     @Override
     public void updateBook(Book book){
-
         updateBook(null, book);
     }
 

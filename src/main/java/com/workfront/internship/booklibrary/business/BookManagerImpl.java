@@ -12,32 +12,42 @@ import java.util.List;
 public class BookManagerImpl implements BookManager{
 
     private BookDAO bookDAO;
+    private AuthorDAO authorDAO;
     private AuthorManager authorManager;
     private DataSource dataSource;
 
     public BookManagerImpl(DataSource dataSource) throws Exception {
         this.dataSource = dataSource;
         bookDAO = new BookDAOImpl(dataSource);
+        authorDAO = new AuthorDAOImpl(dataSource);
         authorManager = new AuthorManagerImpl(dataSource);
     }
 
     @Override
-    public int add(Book book, Author author) {
-/**        if(author == null){
-            throw new IllegalArgumentException("Duplicate entry is not allowed");
-        }
-
-        if(!authorMO.isExist(author.getId())){
-            authorDAO.add()
-        }
-        if(author.getId() > 0){
-            if(bookValidator(book)){
-                bookDAO.add(book);
-                return book.getId();
-            }
-        }
- */
-        return 0;
+    public int add(Book book, List<Author> authorList) throws Exception {
+//        if(authorList.isEmpty()) {
+//            throw new Exception("Trying to add a book without mentioning its author/s.");
+//        }
+//        if(!bookValidator(book) | book.getId()>0) {
+//            throw new Exception("Trying to add a book with invalid parameter/s.");
+//        }
+//        if(!authorList.isEmpty()){
+//            for(Author author : authorList){
+//                if(!bookDAO.contains(author.getId())) { //todo in BookDAO add a method contains(int authorId) which gets info from book_author table
+//                    bookDAO.addAuthorToBook(book.getId(), author.getId());
+//                }else if(!book.getAuthors().get(author.getId()).equals(author)) {
+//                    authorDAO.checkAndUpdateAuthor(dataSource.getConnection(), author); //todo correct the method in authorDAO
+//                }
+//            }
+//        }
+//        book.setAuthors(authorList);
+//
+//        if(bookValidator(book)){
+//            bookDAO.add(book);
+//            return book.getId();
+//        }
+//        else return 0;
+        return 0; //delete this row
     }
 
     @Override
