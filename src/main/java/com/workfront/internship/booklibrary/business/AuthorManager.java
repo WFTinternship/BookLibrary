@@ -16,7 +16,7 @@ public interface AuthorManager {
 
     List<Author> viewAllAuthors();
 
-    List<Author> viewAllAuthorsByBook(int id);
+ //   List<Author> viewAllAuthorsByBook(int id);
 
     Author update(Author author);
 

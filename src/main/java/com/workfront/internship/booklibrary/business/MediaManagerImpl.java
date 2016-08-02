@@ -49,10 +49,10 @@ public class MediaManagerImpl implements MediaManager{
         return null;
     }
 
-    @Override
-    public List<Media> viewAllMediaByMediaType(int id) {
-        return null;
-    } // todo add DAO method
+//    @Override
+//    public List<Media> viewAllMediaByMediaType(int id) {
+//        return null;
+//    } // todo add DAO method
 
     @Override
     public Media update(Media media) {

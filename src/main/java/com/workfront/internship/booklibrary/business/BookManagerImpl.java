@@ -28,7 +28,7 @@ public class BookManagerImpl implements BookManager{
 //        if(authorList.isEmpty()) {
 //            throw new Exception("Trying to add a book without mentioning its author/s.");
 //        }
-//        if(!bookValidator(book) | book.getId()>0) {
+//        if(!bookValidator(book)) {
 //            throw new Exception("Trying to add a book with invalid parameter/s.");
 //        }
 //        if(!authorList.isEmpty()){
@@ -47,8 +47,10 @@ public class BookManagerImpl implements BookManager{
 //            return book.getId();
 //        }
 //        else return 0;
-        return 0; //delete this row
+        return 0;
     }
+
+    //todo implement checkAndUpdate() method in BookDAO and here, and call it from add()
 
     @Override
     public Book findBookByID(int id) {
@@ -83,16 +85,16 @@ public class BookManagerImpl implements BookManager{
         return null;
     }
 
-    @Override
-    public List<Book> viewAllBooksByAuthor(int id) {
-
-        return null;
-    }//todo add DAO method
-
-    @Override
-    public List<Book> viewAllBooksByGenre(int id) {
-        return null;
-    } // todo add DAO method
+//    @Override
+//    public List<Book> viewAllBooksByAuthor(int id) {
+//
+//        return null;
+//    }//todo add DAO method
+//
+//    @Override
+//    public List<Book> viewAllBooksByGenre(int id) {
+//        return null;
+//    } // todo add DAO method
 
     @Override
     public Book update(Book book) {

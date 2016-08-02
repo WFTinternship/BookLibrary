@@ -21,9 +21,9 @@ public interface BookManager {
     List<Book> viewAll();
 
     //get book list ordered by author name, surname
-    List<Book> viewAllBooksByAuthor(int id);
-
-    List<Book> viewAllBooksByGenre(int id);
+//    List<Book> viewAllBooksByAuthor(int id);
+//
+//    List<Book> viewAllBooksByGenre(int id);
 
     //update book info
     Book update(Book book);

@@ -13,7 +13,7 @@ public interface MediaManager {
 
     List<Media> viewAllMedia();
 
-    List<Media> viewAllMediaByMediaType(int id);
+//    List<Media> viewAllMediaByMediaType(int id);
 
     Media update(Media media);
 

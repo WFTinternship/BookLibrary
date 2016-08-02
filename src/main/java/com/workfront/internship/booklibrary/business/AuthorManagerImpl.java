@@ -69,11 +69,11 @@ public class AuthorManagerImpl implements AuthorManager{
         return null;
     }
 
-    @Override
-    public List<Author> viewAllAuthorsByBook(int id) {
-
-        return null;
-    } //todo add DAO method
+//    @Override
+//    public List<Author> viewAllAuthorsByBook(int id) {
+//
+//        return null;
+//    } //todo add DAO method
 
     @Override
     public Author update(Author author) {
