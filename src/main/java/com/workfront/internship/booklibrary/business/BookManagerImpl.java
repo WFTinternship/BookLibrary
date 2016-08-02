@@ -28,7 +28,7 @@ public class BookManagerImpl implements BookManager{
 //        if(authorList.isEmpty()) {
 //            throw new Exception("Trying to add a book without mentioning its author/s.");
 //        }
-//        if(!bookValidator(book)) {
+//        if(!isValidBook(book)) {
 //            throw new Exception("Trying to add a book with invalid parameter/s.");
 //        }
 //        if(!authorList.isEmpty()){
@@ -42,7 +42,7 @@ public class BookManagerImpl implements BookManager{
 //        }
 //        book.setAuthors(authorList);
 //
-//        if(bookValidator(book)){
+//        if(isValidBook(book)){
 //            bookDAO.add(book);
 //            return book.getId();
 //        }
@@ -58,9 +58,10 @@ public class BookManagerImpl implements BookManager{
             throw new IllegalArgumentException("Invalid id is entered");
         }
         Book book = bookDAO.getBookByID(id);
-        if(bookValidator(book)){
+        if(isValidBook(book)){
             return book;
         }
+
         return null;
     }
 
@@ -70,7 +71,7 @@ public class BookManagerImpl implements BookManager{
             throw new IllegalArgumentException("Invalid title is entered");
         }
         Book book = bookDAO.getBookByTitle(title);
-        if (bookValidator(book)){
+        if (isValidBook(book)){
             return book;
         }
         return null;
@@ -98,7 +99,7 @@ public class BookManagerImpl implements BookManager{
 
     @Override
     public Book update(Book book) {
-        if(bookValidator(book)){
+        if(isValidBook(book)){
             bookDAO.updateBook(book);
             return book;
         }
@@ -119,7 +120,7 @@ public class BookManagerImpl implements BookManager{
         return false;
     }
 
-    private boolean bookValidator(Book book){
+    private boolean isValidBook(Book book){
         return book != null && book.getTitle() != null && book.getGenre()!= null && book.getBookAbstract() != null &&
                 book.getLanguage() != null && book.getCount() > 0 && book.getEditionYear() != null && book.getPages() > 1 &&
                 book.getCountryOfEdition() != null;

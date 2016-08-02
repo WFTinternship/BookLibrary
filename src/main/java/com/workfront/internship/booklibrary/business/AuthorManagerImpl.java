@@ -29,7 +29,7 @@ public class AuthorManagerImpl implements AuthorManager{
 
     @Override
     public int uploadAuthorInfo(Author author) {
-        if(authorValidation(author)) {
+        if(isValidAuthor(author)) {
             authorDAO.add(author);
             return author.getId();
         }
@@ -42,7 +42,7 @@ public class AuthorManagerImpl implements AuthorManager{
             throw new IllegalArgumentException("Invalid id is entered.");
         }
         Author author = authorDAO.getAuthorByID(id);
-        if(authorValidation(author)){
+        if(isValidAuthor(author)){
             return author;
         }
         return null;
@@ -54,7 +54,7 @@ public class AuthorManagerImpl implements AuthorManager{
             throw new IllegalArgumentException("No username is entered");
         }
         Author author = authorDAO.getAuthorByName(name);
-        if(authorValidation(author)){
+        if(isValidAuthor(author)){
             return author;
         }
         return null;
@@ -77,7 +77,7 @@ public class AuthorManagerImpl implements AuthorManager{
 
     @Override
     public Author update(Author author) {
-        if(authorValidation(author)){
+        if(isValidAuthor(author)){
             authorDAO.updateAuthor(author);
             return author;
         }
@@ -98,13 +98,13 @@ public class AuthorManagerImpl implements AuthorManager{
         return false;
     }
 
-    private boolean emailFormatValidator(String email){
+    private boolean isValidEmail(String email){
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
     }
 
-    private boolean authorValidation(Author author){
+    private boolean isValidAuthor(Author author){
         return author != null && author.getName() != null && author.getSurname() != null &&
-                (author.geteMail() != null && emailFormatValidator(author.geteMail()));
+                (author.geteMail() != null && isValidEmail(author.geteMail()));
     }
 }

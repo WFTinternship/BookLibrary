@@ -38,8 +38,8 @@ public class UserManagerImpl implements UserManager {
     @Override
     public int registration(User user) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         if(user != null) {
-            if (emailFormatValidator(user.geteMail())) {
-                if (userValidation(user)) {
+            if (isValidEmail(user.geteMail())) {
+                if (isValidUser(user)) {
                     user.setPassword(getHashedPassword(user.getPassword()));
                     userDAO.add(user);
                     // todo send message to user's email asking to confirm the registration
@@ -112,7 +112,7 @@ public class UserManagerImpl implements UserManager {
     @Override
     public User update(User user) {
         if(user != null) {
-            if(userValidation(user)) {
+            if(isValidUser(user)) {
                 userDAO.updateUser(user);
                 return user;
             }
@@ -154,13 +154,13 @@ public class UserManagerImpl implements UserManager {
         return stringBuffer.toString();
     }
 
-    private boolean emailFormatValidator(String email){
+    private boolean isValidEmail(String email){
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
     }
 
-    private boolean userValidation(User user){
-        return user.getUsername() != null && user.geteMail() != null && emailFormatValidator(user.geteMail()) &&
+    private boolean isValidUser(User user){
+        return user.getUsername() != null && user.geteMail() != null && isValidEmail(user.geteMail()) &&
                 user.getName() != null && user.getSurname() != null && user.getPassword() != null &&
                 user.getAddress() != null && user.getPhone() != null && user.getAccessPrivilege() != null;
     }
