@@ -36,7 +36,7 @@ public class UserManagerImpl implements UserManager {
      * @return user id or 0 if registration failed.
      */
     @Override
-    public int registration(User user) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+    public int register(User user) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         if(user != null) {
             if (isValidEmail(user.geteMail())) {
                 if (isValidUser(user)) {

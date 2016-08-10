@@ -43,7 +43,7 @@ public class UserManagerIntegrationTest {
     @Test
     public void registration() throws UnsupportedEncodingException, NoSuchAlgorithmException {
         //test
-        userManager.registration(testUser);
+        userManager.register(testUser);
 
         User actualUser = userManager.findUserByID(testUser.getId());
         assertNotNull(actualUser);
@@ -53,7 +53,7 @@ public class UserManagerIntegrationTest {
     @Test
     public void loginWithUsername() throws UnsupportedEncodingException, NoSuchAlgorithmException {
         String pass = testUser.getPassword();
-        userManager.registration(testUser);
+        userManager.register(testUser);
 
         //test
         User actualUser = userManager.loginWithUsername(testUser.getUsername(), pass);

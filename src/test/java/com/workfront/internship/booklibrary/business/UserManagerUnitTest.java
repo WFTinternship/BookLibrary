@@ -58,7 +58,7 @@ public class UserManagerUnitTest {
     public void registration_ValidUser_EncryptedPassword() throws UnsupportedEncodingException, NoSuchAlgorithmException {
         String expectedPassword = userManager.getHashedPassword(testUser.getPassword());
 
-        userManager.registration(testUser);
+        userManager.register(testUser);
 
         //method under test
         String actualPassword = testUser.getPassword();
@@ -69,7 +69,7 @@ public class UserManagerUnitTest {
     public void registration_nullUser() throws UnsupportedEncodingException, NoSuchAlgorithmException {
         int id;
         //test
-        id = userManager.registration(null);
+        id = userManager.register(null);
 
         assertEquals("Checking if returned id is 0", 0, id);
 
@@ -81,7 +81,7 @@ public class UserManagerUnitTest {
         testUser.setId(5);
 
         //test
-        id = userManager.registration(testUser);
+        id = userManager.register(testUser);
 
         //test
         Mockito.verify(userDAO).add(testUser);
@@ -95,7 +95,7 @@ public class UserManagerUnitTest {
         testUser.seteMail("bla");
 
         //test
-        id = userManager.registration(testUser);
+        id = userManager.register(testUser);
 
         //test
 //        Mockito.verifyZeroInteractions(userDAO);

@@ -11,18 +11,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.security.NoSuchAlgorithmException;
 
-
 /**
- * Created by ${Sona} on 8/9/2016.
+ * Created by ${Sona} on 8/10/2016.
  */
-public class LoginServlet extends HttpServlet{
+public class RegistrationServlet extends HttpServlet{
     private UserManager userManager;
     private DataSource dataSource;
 
-    public LoginServlet() throws Exception {
+    public RegistrationServlet() throws Exception {
         super();
         dataSource = DataSource.getInstance();
         userManager = new UserManagerImpl(dataSource);
@@ -31,18 +29,27 @@ public class LoginServlet extends HttpServlet{
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String username=request.getParameter("username/email");
+
+
+        String name=request.getParameter("name");
+        String surname=request.getParameter("surname");
+        String email=request.getParameter("e-mail");
+        String address=request.getParameter("address");
+        String phone=request.getParameter("phone");
+        String username=request.getParameter("username");
         String password=request.getParameter("password");
+        String accessPrivilege=request.getParameter("access-privilege");
+
+        User user = new User().setName(name).setSurname(surname).setUsername(username).setPassword(password).setAddress(address).seteMail(email).setPhone(phone).setAccessPrivilege(accessPrivilege);
 
         try {
-            User user = userManager.loginWithUsername(username, password);
+            int id = userManager.register(user);
             request.setAttribute("user", user);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
 
-        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/jsp/User.jsp");
-
+        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/jsp/MainPage.jsp");
         dispatcher.forward(request, response);
     }
 }

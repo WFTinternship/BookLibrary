@@ -121,31 +121,30 @@ public class UserDAOImpl extends General implements UserDAO {
 
     @Override
     public User getUserByUsername(String userName) {
-        User user = null;
+      //  User user = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
         try{
             connection = dataSource.getConnection();
-            String sql = "SELECT * FROM User WHERE username=?";
+            String sql = "SELECT * FROM user WHERE username=?";
 
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, userName);
             resultSet = preparedStatement.executeQuery();
-
+            User user = new User();
             while(resultSet.next()){
-                user = new User();
+
                 setUserDetails(resultSet, user);
             }
-
+            return user;
         } catch (SQLException e){
             LOGGER.error("SQL exception occurred!");
             throw new RuntimeException(e);
         }finally{
             closeConnection( preparedStatement, connection);
         }
-        return user;
     }
 
     @Override

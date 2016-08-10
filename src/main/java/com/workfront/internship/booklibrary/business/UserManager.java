@@ -11,7 +11,7 @@ import java.security.NoSuchAlgorithmException;
 public interface UserManager {
 
     //registering a user first time and returning its id
-    int registration(User user) throws UnsupportedEncodingException, NoSuchAlgorithmException;
+    int register(User user) throws UnsupportedEncodingException, NoSuchAlgorithmException;
 
     //logging into existing user account
     User loginWithUsername(String username, String password) throws UnsupportedEncodingException, NoSuchAlgorithmException;
