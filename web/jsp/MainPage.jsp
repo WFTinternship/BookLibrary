@@ -39,11 +39,14 @@
     <br/>
 
     <div class="floating_media">
-        <img src="/image/download1.jpg" alt="changing images" style="position: absolute; top: 0; /*left: 100px;*/">
-        <img src="/image/download2.jpg" alt="changing images" style="position: absolute; top: 0; left: 200px;">
-        <img src="/image/download3.jpg" alt="changing images" style="position: absolute; top: 0; left: 400px;">
-        <img src="/image/download4.jpg" alt="changing images" style="position: absolute; top: 0; left: 600px;">
-        <img src="/image/download5.jpg" alt="changing images" style="position: absolute; top: 0; left: 800px;">
+        <ul style="list-style-type: none;">
+            <li><img src="/image/download1.jpg" alt="changing images" style="position: absolute; top: 0; /*left: 100px;*/"></li>
+            <li><img src="/image/download2.jpg" alt="changing images" style="position: absolute; top: 0; left: 200px;"></li>
+            <li><img src="/image/download3.jpg" alt="changing images" style="position: absolute; top: 0; left: 400px;"></li>
+            <li><img src="/image/download4.jpg" alt="changing images" style="position: absolute; top: 0; left: 600px;"></li>
+            <li><img src="/image/download5.jpg" alt="changing images" style="position: absolute; top: 0; left: 800px;"></li>
+        </ul>
+
     </div>
 
     <br/>
