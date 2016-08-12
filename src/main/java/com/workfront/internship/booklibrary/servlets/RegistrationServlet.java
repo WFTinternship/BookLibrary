@@ -29,8 +29,6 @@ public class RegistrationServlet extends HttpServlet{
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-
-
         String name=request.getParameter("name");
         String surname=request.getParameter("surname");
         String email=request.getParameter("e-mail");
@@ -49,7 +47,9 @@ public class RegistrationServlet extends HttpServlet{
             e.printStackTrace();
         }
 
-        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/jsp/MainPage.jsp");
-        dispatcher.forward(request, response);
+//        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/jsp/MainPage.jsp");
+//        dispatcher.forward(request, response);
+
+        response.sendRedirect("/jsp/User.jsp");
     }
 }

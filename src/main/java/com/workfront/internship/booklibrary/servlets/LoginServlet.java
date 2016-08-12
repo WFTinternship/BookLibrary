@@ -41,8 +41,9 @@ public class LoginServlet extends HttpServlet{
             e.printStackTrace();
         }
 
-        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/jsp/User.jsp");
+//        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/jsp/User.jsp");
+//        dispatcher.forward(request, response);
 
-        dispatcher.forward(request, response);
+        response.sendRedirect("/jsp/User.jsp");
     }
 }

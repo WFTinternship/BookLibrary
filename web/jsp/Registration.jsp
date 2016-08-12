@@ -13,7 +13,7 @@
 </head>
 <body style="background-color: #ffffcc">
 <div class="registration">
-    <form method="post" action="/MainPage">
+    <form method="post" action="/Registration">
         <fieldset>
             <legend>Create account</legend>
             name<br/>
@@ -40,7 +40,7 @@
 
 <br/>
 <div class="buttons" style="position:absolute; bottom:10px;">
-    <a href="/jsp/MainPage.jsp"><button type="button">home</button></a>
+    <a href="/index.jsp"><button type="button">home</button></a>
     <button type="button">contacts</button>
 </div>
 </body>

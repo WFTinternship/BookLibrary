@@ -15,7 +15,7 @@
 
 <body style="background-color: #ffffcc">
 <div class="signin">
-<form method="post" action="/User">
+<form method="post" action="/SignIn">
     username/email:<br/>
     <input type="text" name="username/email"><br/>
     <br/>password:<br/>
@@ -27,7 +27,7 @@
 
 <br/>
 <div class="buttons" style="position:absolute; bottom:10px;">
-    <a href="/jsp/MainPage.jsp"><button type="button">home</button></a>
+    <a href="/index.jsp"><button type="button">home</button></a>
     <button type="button">contacts</button>
 </div>
 </body>
