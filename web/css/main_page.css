@@ -1,0 +1,119 @@
+#logo{
+	width:150px;
+	height:150px;
+	float:left;
+	border-radius: 50%;
+}
+
+#headerText{
+	font-size: 30px;
+	background-color:#ffffcc;
+	color: #009999;
+	text-align:center;
+	padding: 30px;
+}
+
+.buttons{
+	float: left;
+}
+
+.buttons button{
+	background-color: #006080;
+	color: white;
+	border: none;
+	border-radius: 10px;
+	width: 150px;
+	height: 30px;
+}
+
+.buttons button:hover{
+	background-color: #0086b3;
+}
+
+.floating_media{
+	float: left;
+	position: relative;
+	width: 200px;
+	height: 200px;
+	overflow: hidden;
+}
+
+
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: transparent;
+}
+
+li {
+	float: left;
+}
+
+li a, .dropbtn {
+	display: inline-block;
+	color: black;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+}
+
+li a:hover, .book-genres:hover .dropbtn {
+	background-color: #d5e8ff;
+}
+
+li.book-genres {
+	display: inline-block;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #f9f9f9;
+	min-width: 160px;
+	box-shadow: 0px 5px 20px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+	text-align: left;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.book-genres:hover .dropdown-content {
+	display: block;
+}
+
+#dialogue {
+	display: none;
+	position: absolute;
+	bottom: 50px;
+	left: 40%;
+	margin-left: 0px;
+	width: 300px;
+	padding: 10px;
+	background: -moz-linear-gradient(#80dfff, #e6f9ff);
+	background: -webkit-linear-gradient(#80dfff, #e6f9ff);
+	background: -o-linear-gradient(#80dfff, #e6f9ff);
+}
+
+
+/*#id1 {*/
+	/*clear: both;*/
+/*}*/
+
+.dialogueContainer:hover #dialogue {
+	display: block;
+}
+
+#WF {
+	font-family: Arial, Helvetica, sans-serif;
+	color: white;
+	font-style: italic;
+}
+
