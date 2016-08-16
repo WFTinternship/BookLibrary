@@ -35,7 +35,7 @@ public class MediaDAOImpl extends General implements MediaDAO{
 
         try{
             connection = dataSource.getConnection();
-            String sql = "INSERT INTO Media(media, media_type_id, book_id) VALUES(?, ?, ?)";
+            String sql = "INSERT INTO media(media, media_type_id, book_id) VALUES(?, ?, ?)";
             preparedStatement = connection.prepareStatement(sql, preparedStatement.RETURN_GENERATED_KEYS);
 
             preparedStatement.setString(1, media.getLink());

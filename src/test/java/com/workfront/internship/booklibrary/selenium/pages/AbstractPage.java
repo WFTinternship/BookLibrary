@@ -15,7 +15,8 @@ public class AbstractPage {
 
     static public void init () {
         webDriver = new ChromeDriver();
-        webDriver.get("http://localhost:8080/jsp/MainPage.jsp");
+//        webDriver.get("http://localhost:8080/index.jsp");
+        webDriver.get("http://localhost:8080");
     }
 
     public WebDriver getWebDriver() {

@@ -1,0 +1,24 @@
+.registration{
+    background-color: #ffffe6;
+}
+
+.buttons button, select{
+    background-color: #006080;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    width: 150px;
+    height: 30px;
+}
+
+body {
+    padding: 30px 30px;
+    font: 13px/100% Verdana, sans-serif;
+    overflow: hidden;
+    text-align: center;
+}
+
+form { text-align: left;
+    display: inline-block;
+    padding: 20px; width: auto;
+}

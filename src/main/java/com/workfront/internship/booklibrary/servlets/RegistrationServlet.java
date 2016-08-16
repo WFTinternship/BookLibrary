@@ -47,7 +47,7 @@ public class RegistrationServlet extends HttpServlet{
             e.printStackTrace();
         }
 
-//        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/jsp/MainPage.jsp");
+//        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/index.jsp");
 //        dispatcher.forward(request, response);
 
         response.sendRedirect("/jsp/User.jsp");

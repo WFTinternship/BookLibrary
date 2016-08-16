@@ -35,8 +35,8 @@ public class LoginTest extends AbstractPage{
     @Test
     public void login_success() throws InterruptedException {
         homePage.clickLogin();
-        login.typeUsername("miklilit");
-        login.typePassword("lilitpass");
+        login.typeUsername("sonamikayelyan");
+        login.typePassword("sonapass");
         login.clickSignin();
 
         assertTrue("user-page window is not opened", getWebDriver().getCurrentUrl().equals("http://localhost:8080/jsp/User.jsp"));

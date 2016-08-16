@@ -104,7 +104,7 @@ public class TestMediaDAOImpl {
         actualMediaList.clear();
     }
 
-    @Test
+/**    @Test
     public void getAllMediaByBook() {
         mediaTypeDAO.deleteAll();
         List<Media> expectedMediaList = new ArrayList<>();
@@ -128,6 +128,7 @@ public class TestMediaDAOImpl {
         expectedMediaList.clear();
         actualMediaList.clear();
     }
+ */
 
     @Test
     public void updateMedia(){
