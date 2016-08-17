@@ -6,11 +6,12 @@
 }
 
 #headerText{
-	font-size: 30px;
-	background-color:#ffffcc;
+	font-size: 20px;
+	/*background-color:#ffffcc;*/
+	background: -webkit-linear-gradient(#ffffcc, #ffffe6);
 	color: #009999;
 	text-align:center;
-	padding: 30px;
+	padding: 20px;
 }
 
 .buttons{
@@ -57,6 +58,14 @@ li a, .dropbtn {
 	text-align: center;
 	padding: 14px 16px;
 	text-decoration: none;
+}
+
+.dropbtn {
+	/*top: 50px;*/
+
+
+	right: 40%;
+	margin-right: 0px;
 }
 
 li a:hover, .book-genres:hover .dropbtn {
@@ -117,3 +126,51 @@ li.book-genres {
 	font-style: italic;
 }
 
+
+#searchHeader{
+	background-color:#c3dfef;
+}
+#newSearch{
+	/*display: inline-block;*/
+	float:right;
+	padding:20px;
+}
+.textInput{
+	margin: 0;
+	padding: 5px 15px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:14px;
+	border:1px solid #0076a3; border-right:0px;
+	border-top-left-radius: 5px 5px;
+	border-bottom-left-radius: 5px 5px;
+}
+.searchButton {
+	margin: 0;
+	padding: 5px 15px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:14px;
+	outline: none;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	color: #ffffff;
+	border: solid 1px #0076a3; border-right:0px;
+	background: #0095cd;
+	background: -webkit-gradient(linear, left top, left bottom, from(#00adee), to(#0078a5));
+	background: -moz-linear-gradient(top,  #00adee,  #0078a5);
+	border-top-right-radius: 5px 5px;
+	border-bottom-right-radius: 5px 5px;
+}
+.searchButton:hover {
+	text-decoration: none;
+	background: #007ead;
+	background: -webkit-gradient(linear, left top, left bottom, from(#0095cc), to(#00678e));
+	background: -moz-linear-gradient(top,  #0095cc,  #00678e);
+}
+/* Fixes submit button height problem in Firefox */
+.searchButton::-moz-focus-inner {
+	border: 0;
+}
+.clear{
+	clear:both;
+}

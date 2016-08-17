@@ -45,6 +45,13 @@
 
     end of comment-->
 
+    <div id="searchHeader">
+      <form id="newSearch" method="get" action="#">
+        <input type="text" class="textInput" name="q" size="21" maxlength="250" autofocus autocomplete="on" autocapitalize="off" aria-autocomplete="list" aria-expanded="false"><input type="submit" value="search" class="searchButton">
+      </form>
+      <div class="clear"></div>
+    </div>
+
 
     <div class="main-functions" style="float:right;"><br/>
       <%GenreManager genreManager = new GenreManagerImpl(DataSource.getInstance());
@@ -58,7 +65,7 @@
         <li class="book-genres" >
           <%--style="display: inline-block"--%>
           <a href="#" class="dropbtn">Books</a>
-          <div class="dropdown-content" >
+          <div class="dropdown-content">
             <%--style="text-decoration: none; "--%>
             <%for(int i= 0; i < genreList.size(); i++){
             %>
@@ -66,10 +73,12 @@
             <%}%>
           </div>
         </li>
-        <li ><a class="search" href="#search">Search</a></li>
+
+        <%--<li ><a class="search" href="#search">Search</a></li>--%>
           <%--style="display: inline-block"--%>
       </ul>
     </div>
+
 
     <%--<div class="buttons" style="float: right"><br/>--%>
       <%--<button type="button">home</button>--%>
@@ -117,6 +126,7 @@
           <p>Address: Armenia, 0001, Yerevan<br/>Hyusisayin Ave., 1 Building, Office 14<br/>(Kentron adm. district)<br/>phone: +374-60-619828</p>
           <p id="WF">Workfront Armenia</p>
         </div>
+          <div class="clear"></div>
       </div>
     </div>
 
