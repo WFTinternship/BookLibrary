@@ -24,16 +24,6 @@ public class BookManagerImpl implements BookManager{
     @Autowired
     private AuthorManager authorManager;
 
-    @Autowired
-    private DataSource dataSource;
-
-    public BookManagerImpl(DataSource dataSource) throws Exception {
-        this.dataSource = dataSource;
-        bookDAO = new BookDAOImpl(dataSource);
-        authorDAO = new AuthorDAOImpl(dataSource);
-        authorManager = new AuthorManagerImpl(dataSource);
-    }
-
     @Override
     public int add(Book book, List<Author> authorList) throws Exception {
 //        if(authorList.isEmpty()) {

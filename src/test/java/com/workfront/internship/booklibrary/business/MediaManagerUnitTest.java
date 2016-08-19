@@ -1,5 +1,6 @@
 package com.workfront.internship.booklibrary.business;
 
+import com.workfront.internship.booklibrary.LegacyDataSource;
 import com.workfront.internship.booklibrary.common.Book;
 import com.workfront.internship.booklibrary.common.Genre;
 import com.workfront.internship.booklibrary.common.Media;
@@ -24,7 +25,7 @@ import static org.mockito.Mockito.when;
  * Created by Sona Mikayelyan on 7/31/2016.
  */
 public class MediaManagerUnitTest {
-    DataSource dataSource;
+    LegacyDataSource dataSource;
     private Media testMedia;
 
     private MediaType testMediaType;
@@ -37,7 +38,7 @@ public class MediaManagerUnitTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        mediaManager = new MediaManagerImpl(dataSource);
+        mediaManager = new MediaManagerImpl();
 
         mediaDAO = Mockito.mock(MediaDAOImpl.class);
         Whitebox.setInternalState(mediaManager, "mediaDAO", mediaDAO);

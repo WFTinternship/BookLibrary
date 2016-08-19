@@ -1,12 +1,13 @@
 package com.workfront.internship.booklibrary.dao;
 
+import com.workfront.internship.booklibrary.LegacyDataSource;
 import com.workfront.internship.booklibrary.common.Author;
 
 import com.workfront.internship.booklibrary.common.Book;
 import com.workfront.internship.booklibrary.common.Genre;
-import com.workfront.internship.booklibrary.common.Pending;
 import org.junit.*;
 import org.junit.Test;
+import org.mockito.internal.util.reflection.Whitebox;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,7 @@ public class TestAuthorDAOImpl {
 
     private GenreDAO genreDAO;
     private Genre testGenre = null;
-    DataSource dataSource = DataSource.getInstance();
+    LegacyDataSource dataSource = LegacyDataSource.getInstance();
 
     @Before
     public void setup() throws Exception {
@@ -40,9 +41,10 @@ public class TestAuthorDAOImpl {
     }
 
     private void init() throws Exception {
-        authorDAO = new AuthorDAOImpl(dataSource);
-        bookDAO = new BookDAOImpl(dataSource);
-        genreDAO = new GenreDAOImpl(dataSource);
+        Whitebox.setInternalState(authorDAO, "dataSource", dataSource);
+        authorDAO = new AuthorDAOImpl();
+        bookDAO = new BookDAOImpl();
+        genreDAO = new GenreDAOImpl();
     }
 
 

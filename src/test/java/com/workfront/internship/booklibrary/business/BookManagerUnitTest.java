@@ -1,9 +1,8 @@
 package com.workfront.internship.booklibrary.business;
 
+import com.workfront.internship.booklibrary.LegacyDataSource;
 import com.workfront.internship.booklibrary.common.Book;
 import com.workfront.internship.booklibrary.common.Genre;
-import com.workfront.internship.booklibrary.common.Media;
-import com.workfront.internship.booklibrary.common.MediaType;
 import com.workfront.internship.booklibrary.dao.*;
 import org.junit.After;
 import org.junit.Before;
@@ -23,7 +22,7 @@ import static org.mockito.Mockito.when;
  * Created by Sona Mikayelyan on 8/1/2016.
  */
 public class BookManagerUnitTest {
-    DataSource dataSource;
+    LegacyDataSource dataSource;
     private Book testBook;
     private Genre testGenre;
 
@@ -35,7 +34,8 @@ public class BookManagerUnitTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        bookManager = new BookManagerImpl(dataSource);
+        Whitebox.setInternalState(bookDAO, "dataSource", dataSource);
+        bookManager = new BookManagerImpl();
 
         bookDAO = Mockito.mock(BookDAOImpl.class);
         Whitebox.setInternalState(bookManager, "bookDAO", bookDAO);

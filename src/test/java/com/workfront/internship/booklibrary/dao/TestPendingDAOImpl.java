@@ -1,10 +1,12 @@
 package com.workfront.internship.booklibrary.dao;
 
+import com.workfront.internship.booklibrary.LegacyDataSource;
 import com.workfront.internship.booklibrary.common.*;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.internal.util.reflection.Whitebox;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +26,7 @@ public class TestPendingDAOImpl {
     private User expectedUser = null;
     private Book expectedBook = null;
 
-    private DataSource dataSource = DataSource.getInstance();
+    private LegacyDataSource dataSource = LegacyDataSource.getInstance();
 
     @Before
     public void setup() throws Exception {
@@ -49,10 +51,11 @@ public class TestPendingDAOImpl {
     }
 
     private void init() throws Exception {
-        pendingDAO = new PendingDAOImpl(dataSource);
-        userDAO = new UserDAOImpl(dataSource);
-        bookDAO = new BookDAOImpl(dataSource);
-        genreDAO = new GenreDAOImpl(dataSource);
+        Whitebox.setInternalState(pendingDAO, "dataSource", dataSource);
+        pendingDAO = new PendingDAOImpl();
+        userDAO = new UserDAOImpl();
+        bookDAO = new BookDAOImpl();
+        genreDAO = new GenreDAOImpl();
     }
 
 

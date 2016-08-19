@@ -1,5 +1,6 @@
 package com.workfront.internship.booklibrary.business;
 
+import com.workfront.internship.booklibrary.LegacyDataSource;
 import com.workfront.internship.booklibrary.common.*;
 import com.workfront.internship.booklibrary.dao.*;
 import org.junit.After;
@@ -22,7 +23,7 @@ import static org.mockito.Mockito.when;
  * Created by ${Sona} on 8/1/2016.
  */
 public class PendingsManagerUnitTest {
-    DataSource dataSource;
+    LegacyDataSource dataSource;
     private Pending testPending;
 
     private Genre testGenre;
@@ -35,7 +36,7 @@ public class PendingsManagerUnitTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        pendingsManager = new PendingsManagerImpl(dataSource);
+        pendingsManager = new PendingsManagerImpl();
 
         pendingDAO = Mockito.mock(PendingDAOImpl.class);
         Whitebox.setInternalState(pendingsManager, "pendingDAO", pendingDAO);

@@ -1,5 +1,6 @@
 package com.workfront.internship.booklibrary.dao;
 
+import com.workfront.internship.booklibrary.LegacyDataSource;
 import com.workfront.internship.booklibrary.common.Genre;
 import org.junit.After;
 import org.junit.Before;
@@ -16,7 +17,7 @@ import static junit.framework.TestCase.assertTrue;
 public class TestGenreDAOImpl {
     private GenreDAO genreDAO;
     private Genre expectedGenre = null;
-    DataSource dataSource = DataSource.getInstance();
+    LegacyDataSource dataSource = LegacyDataSource.getInstance();
 
     @Before
     public void setup() throws Exception {
@@ -29,7 +30,7 @@ public class TestGenreDAOImpl {
     }
 
     private void init() throws Exception {
-        genreDAO = new GenreDAOImpl(dataSource);
+        genreDAO = new GenreDAOImpl();
     }
 
 

@@ -1,17 +1,15 @@
 package com.workfront.internship.booklibrary.servlets;
 
 import com.workfront.internship.booklibrary.business.UserManager;
-import com.workfront.internship.booklibrary.business.UserManagerImpl;
 import com.workfront.internship.booklibrary.common.User;
-import com.workfront.internship.booklibrary.dao.DataSource;
 import com.workfront.internship.booklibrary.spring.BookLibraryApplication;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 

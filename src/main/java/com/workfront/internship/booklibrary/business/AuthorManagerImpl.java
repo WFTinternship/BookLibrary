@@ -3,7 +3,6 @@ package com.workfront.internship.booklibrary.business;
 import com.workfront.internship.booklibrary.common.Author;
 import com.workfront.internship.booklibrary.dao.AuthorDAO;
 import com.workfront.internship.booklibrary.dao.AuthorDAOImpl;
-import com.workfront.internship.booklibrary.dao.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,18 +20,10 @@ public class AuthorManagerImpl implements AuthorManager{
     @Autowired
     private AuthorDAO authorDAO;
 
-    @Autowired
-    private DataSource dataSource;
-
     private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
             + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
     private static final Pattern pattern = Pattern.compile(EMAIL_PATTERN);
-
-    public AuthorManagerImpl(DataSource dataSource) throws Exception {
-        this.dataSource = dataSource;
-        authorDAO = new AuthorDAOImpl(dataSource);
-    }
 
     @Override
     public int uploadAuthorInfo(Author author) {

@@ -1,10 +1,11 @@
 package com.workfront.internship.booklibrary.business;
 
+import com.workfront.internship.booklibrary.LegacyDataSource;
 import com.workfront.internship.booklibrary.common.*;
 import com.workfront.internship.booklibrary.dao.*;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
+import org.mockito.internal.util.reflection.Whitebox;
 
 import static com.workfront.internship.booklibrary.dao.TestUtil.*;
 import static junit.framework.TestCase.assertNotNull;
@@ -24,7 +25,7 @@ public class MediaManagerIntegrationTest {
     private Genre testGenre;
     private Book testBook;
 
-    DataSource dataSource = DataSource.getInstance();
+    LegacyDataSource dataSource = LegacyDataSource.getInstance();
     MediaDAO mediaDAO;
     MediaTypeDAO mediaTypeDAO;
     GenreDAO genreDAO;
@@ -32,17 +33,18 @@ public class MediaManagerIntegrationTest {
 
     @Before
     public void setup() throws Exception {
-        mediaManager = new MediaManagerImpl(dataSource);
-        mediaTypeManager = new MediaTypeManagerImpl(dataSource);
-        genreManager = new GenreManagerImpl(dataSource);
-        bookManager = new BookManagerImpl(dataSource);
+        Whitebox.setInternalState(mediaDAO, "dataSource", dataSource);
+        mediaManager = new MediaManagerImpl();
+        mediaTypeManager = new MediaTypeManagerImpl();
+        genreManager = new GenreManagerImpl();
+        bookManager = new BookManagerImpl();
 
         testGenre = getRandomGenre();
         testBook = getRandomBook(testGenre);
         testMediaType = getRandomMediaType();
 
         testMedia = getRandomMedia(testMediaType, testBook);
-        mediaDAO = new MediaDAOImpl(dataSource);
+        mediaDAO = new MediaDAOImpl();
     }
 
     @After

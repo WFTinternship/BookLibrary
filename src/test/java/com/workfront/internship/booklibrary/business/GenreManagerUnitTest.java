@@ -1,5 +1,6 @@
 package com.workfront.internship.booklibrary.business;
 
+import com.workfront.internship.booklibrary.LegacyDataSource;
 import com.workfront.internship.booklibrary.common.Genre;
 import com.workfront.internship.booklibrary.dao.*;
 import org.junit.After;
@@ -20,7 +21,7 @@ import static org.mockito.Mockito.when;
  * Created by Sona Mikayelyan on 7/31/2016.
  */
 public class GenreManagerUnitTest {
-    DataSource dataSource;
+    LegacyDataSource dataSource;
     private Genre testGenre;
 
     private GenreDAO genreDAO;
@@ -29,7 +30,7 @@ public class GenreManagerUnitTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        genreManager = new GenreManagerImpl(dataSource);
+        genreManager = new GenreManagerImpl();
 
         genreDAO = Mockito.mock(GenreDAOImpl.class);
         Whitebox.setInternalState(genreManager, "genreDAO", genreDAO);

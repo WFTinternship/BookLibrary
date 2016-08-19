@@ -1,8 +1,7 @@
 package com.workfront.internship.booklibrary.business;
 
+import com.workfront.internship.booklibrary.LegacyDataSource;
 import com.workfront.internship.booklibrary.common.Author;
-import com.workfront.internship.booklibrary.common.Media;
-import com.workfront.internship.booklibrary.common.User;
 import com.workfront.internship.booklibrary.dao.*;
 import org.junit.After;
 import org.junit.Before;
@@ -22,7 +21,7 @@ import static org.mockito.Mockito.when;
  * Created by ${Sona} on 7/29/2016.
  */
 public class AuthorManagerUnitTest {
-    DataSource dataSource;
+    LegacyDataSource dataSource;
     private Author testAuthor;
 
     private AuthorDAO authorDAO;
@@ -31,7 +30,7 @@ public class AuthorManagerUnitTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        authorManager = new AuthorManagerImpl(dataSource);
+        authorManager = new AuthorManagerImpl();
 
         authorDAO = Mockito.mock(AuthorDAOImpl.class);
         Whitebox.setInternalState(authorManager, "authorDAO", authorDAO);

@@ -1,10 +1,12 @@
 package com.workfront.internship.booklibrary.dao;
 
 
+import com.workfront.internship.booklibrary.LegacyDataSource;
 import com.workfront.internship.booklibrary.common.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.internal.util.reflection.Whitebox;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +28,7 @@ public class TestMediaDAOImpl {
     private Book expectedBook = null;
     private Genre expectedGenre = null;
 
-    DataSource dataSource = DataSource.getInstance();
+    LegacyDataSource dataSource = LegacyDataSource.getInstance();
 
     @Before
     public void setup() throws Exception {
@@ -50,10 +52,11 @@ public class TestMediaDAOImpl {
     }
 
     private void init() throws Exception {
-        mediaDAO = new MediaDAOImpl(dataSource);
-        mediaTypeDAO = new MediaTypeDAOImpl(dataSource);
-        bookDAO = new BookDAOImpl(dataSource);
-        genreDAO = new GenreDAOImpl(dataSource);
+        Whitebox.setInternalState(mediaDAO, "dataSource", dataSource);
+        mediaDAO = new MediaDAOImpl();
+        mediaTypeDAO = new MediaTypeDAOImpl();
+        bookDAO = new BookDAOImpl();
+        genreDAO = new GenreDAOImpl();
     }
 
 

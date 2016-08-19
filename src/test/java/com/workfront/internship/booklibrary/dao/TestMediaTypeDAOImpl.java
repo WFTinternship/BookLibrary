@@ -1,15 +1,15 @@
 package com.workfront.internship.booklibrary.dao;
 
-import com.workfront.internship.booklibrary.common.Author;
+import com.workfront.internship.booklibrary.LegacyDataSource;
 import com.workfront.internship.booklibrary.common.MediaType;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.internal.util.reflection.Whitebox;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.workfront.internship.booklibrary.dao.TestUtil.getRandomAuthor;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNull;
 import static junit.framework.TestCase.assertTrue;
@@ -19,7 +19,7 @@ import static com.workfront.internship.booklibrary.dao.TestUtil.*;
  * Created by ${Sona} on 7/22/2016.
  */
 public class TestMediaTypeDAOImpl {
-    DataSource dataSource = DataSource.getInstance();
+    LegacyDataSource dataSource = LegacyDataSource.getInstance();
     private MediaTypeDAO mediaTypeDAO;
     private MediaType expectedMediaType = null;
 
@@ -34,7 +34,8 @@ public class TestMediaTypeDAOImpl {
     }
 
     private void init() throws Exception {
-        mediaTypeDAO = new MediaTypeDAOImpl(dataSource);
+        mediaTypeDAO = new MediaTypeDAOImpl();
+        Whitebox.setInternalState(mediaTypeDAO, "dataSource", dataSource);
     }
 
     @Test

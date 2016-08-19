@@ -1,11 +1,11 @@
 package com.workfront.internship.booklibrary.dao;
 
-import com.workfront.internship.booklibrary.common.Media;
 import com.workfront.internship.booklibrary.common.MediaType;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +19,6 @@ public class MediaTypeDAOImpl extends General implements MediaTypeDAO {
 
     @Autowired
     private DataSource dataSource;
-
-    public MediaTypeDAOImpl(DataSource dataSource){
-        this.dataSource = dataSource;
-    }
 
     @Override
     public int add(MediaType mediaType) {

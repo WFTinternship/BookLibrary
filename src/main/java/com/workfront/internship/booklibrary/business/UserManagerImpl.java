@@ -1,11 +1,7 @@
 package com.workfront.internship.booklibrary.business;
 
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
 import com.workfront.internship.booklibrary.common.User;
-import com.workfront.internship.booklibrary.dao.DataSource;
 import com.workfront.internship.booklibrary.dao.UserDAO;
-import com.workfront.internship.booklibrary.dao.UserDAOImpl;
-import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,18 +19,10 @@ public class UserManagerImpl implements UserManager {
     @Autowired
     private UserDAO userDAO;
 
-    @Autowired
-    private DataSource dataSource;
-
     private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
                 + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
     private static final Pattern pattern = Pattern.compile(EMAIL_PATTERN);
-
-    public UserManagerImpl(DataSource dataSource) throws Exception {
-        this.dataSource = dataSource;
-        this.userDAO = new UserDAOImpl(dataSource);
-    }
 
     /**
      * Registering a new user. All mandatory fields are checked to be filled.

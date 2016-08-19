@@ -1,6 +1,5 @@
 <%@ page import="com.workfront.internship.booklibrary.business.GenreManager" %>
 <%@ page import="com.workfront.internship.booklibrary.business.GenreManagerImpl" %>
-<%@ page import="com.workfront.internship.booklibrary.dao.DataSource" %>
 <%@ page import="com.workfront.internship.booklibrary.common.Genre" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -54,7 +53,7 @@
 
 
     <div class="main-functions" style="float:right;"><br/>
-      <%GenreManager genreManager = new GenreManagerImpl(DataSource.getInstance());
+      <%GenreManager genreManager = new GenreManagerImpl();
       List<Genre> genreList = genreManager.viewAll();%>
       <ul>
         <%--style="list-style-type: none;"--%>

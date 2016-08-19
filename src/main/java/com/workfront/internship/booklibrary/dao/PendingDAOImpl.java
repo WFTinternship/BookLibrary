@@ -10,6 +10,8 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.sql.DataSource;
+
 @Component
 public class PendingDAOImpl extends General implements PendingDAO{
     private static final Logger LOGGER = Logger.getLogger(BookDAOImpl.class);
@@ -22,12 +24,6 @@ public class PendingDAOImpl extends General implements PendingDAO{
 
     @Autowired
     private UserDAO userDAO;
-
-    public PendingDAOImpl(DataSource dataSource) throws Exception {
-        this.dataSource = dataSource;
-        this.bookDAO = new BookDAOImpl(dataSource);
-        this.userDAO = new UserDAOImpl(dataSource);
-    }
 
     public int add(Pending pending) {
         Connection connection = null;

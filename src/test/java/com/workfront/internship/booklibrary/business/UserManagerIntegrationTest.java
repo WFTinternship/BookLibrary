@@ -1,17 +1,15 @@
 package com.workfront.internship.booklibrary.business;
 
-import com.workfront.internship.booklibrary.business.UserManager;
-import com.workfront.internship.booklibrary.business.UserManagerImpl;
 import com.workfront.internship.booklibrary.common.User;
-import com.workfront.internship.booklibrary.dao.DataSource;
+import com.workfront.internship.booklibrary.LegacyDataSource;
 import com.workfront.internship.booklibrary.dao.UserDAO;
 import com.workfront.internship.booklibrary.dao.UserDAOImpl;
 import org.junit.*;
+import org.mockito.internal.util.reflection.Whitebox;
 
-import java.io.IOException;
+import javax.sql.DataSource;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
-import java.sql.SQLException;
 
 import static com.workfront.internship.booklibrary.dao.TestUtil.*;
 import static junit.framework.TestCase.assertEquals;
@@ -24,14 +22,15 @@ public class UserManagerIntegrationTest {
 
     private static UserManager userManager;
     private User testUser;
-    DataSource dataSource = DataSource.getInstance();
+    LegacyDataSource dataSource = LegacyDataSource.getInstance();
     UserDAO userDAO;
 
     @Before
     public void setup() throws Exception {
-        userManager = new UserManagerImpl(dataSource);
+        userManager = new UserManagerImpl();
+        Whitebox.setInternalState(userDAO, "dataSource", dataSource);
         testUser = getRandomUser();
-        userDAO = new UserDAOImpl(dataSource);
+        userDAO = new UserDAOImpl();
     }
 
     @After

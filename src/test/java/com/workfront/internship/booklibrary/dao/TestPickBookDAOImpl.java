@@ -1,16 +1,8 @@
 package com.workfront.internship.booklibrary.dao;
 
+import com.workfront.internship.booklibrary.LegacyDataSource;
 import com.workfront.internship.booklibrary.common.*;
-import junit.framework.TestCase;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.workfront.internship.booklibrary.dao.TestUtil.*;
 import static junit.framework.TestCase.assertNull;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
@@ -26,7 +18,7 @@ public class TestPickBookDAOImpl {
     private User expectedUser = null;
     private Book expectedBook = null;
 
-    private DataSource dataSource = DataSource.getInstance();
+    private LegacyDataSource dataSource = LegacyDataSource.getInstance();
 /**
     @Before
     public void setup() throws Exception {
@@ -51,10 +43,11 @@ public class TestPickBookDAOImpl {
     }
 
     private void init() throws Exception {
-        pickBookDAO = new PickBookDAOImpl(dataSource);
-        userDAO = new UserDAOImpl(dataSource);
-        bookDAO = new BookDAOImpl(dataSource);
-        genreDAO = new GenreDAOImpl(dataSource);
+        Whitebox.setInternalState(pickBookDAO, "dataSource", dataSource);
+        pickBookDAO = new PickBookDAOImpl();
+        userDAO = new UserDAOImpl();
+        bookDAO = new BookDAOImpl();
+        genreDAO = new GenreDAOImpl();
     }
 
 

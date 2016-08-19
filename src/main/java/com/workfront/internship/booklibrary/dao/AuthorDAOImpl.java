@@ -9,10 +9,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.workfront.internship.booklibrary.common.Book;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import javax.sql.DataSource;
 
 @Component
 public class AuthorDAOImpl extends General implements AuthorDAO {
@@ -20,12 +21,13 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
 
     @Autowired
     private DataSource dataSource;
-//    private BookDAO bookDAO;
 
-    public AuthorDAOImpl(DataSource dataSource) throws Exception {
+/*
+    public AuthorDAOImpl(LegacyDataSource dataSource) throws Exception {
         this.dataSource = dataSource;
 //        this.bookDAO = new BookDAOImpl(dataSource);
     }
+*/
 
     @Override
     public int add(Author author) {

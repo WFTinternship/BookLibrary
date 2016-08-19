@@ -3,13 +3,13 @@ package com.workfront.internship.booklibrary.dao;
 import com.workfront.internship.booklibrary.common.*;
 
 import java.sql.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import javax.sql.DataSource;
 
 @Component
 public class PickBookDAOImpl extends General implements PickBookDAO {
@@ -24,12 +24,6 @@ public class PickBookDAOImpl extends General implements PickBookDAO {
 
     @Autowired
     private UserDAO userDAO;
-
-    public PickBookDAOImpl(DataSource dataSource) throws Exception {
-        this.dataSource = dataSource;
-        this.bookDAO = new BookDAOImpl(dataSource);
-        this.userDAO = new UserDAOImpl(dataSource);
-    }
 
     @Override
     public int add(PickBook pickedBook) {

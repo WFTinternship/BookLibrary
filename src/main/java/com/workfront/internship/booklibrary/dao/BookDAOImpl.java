@@ -10,6 +10,8 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.sql.DataSource;
+
 @Component
 public class BookDAOImpl extends General implements BookDAO {
     private static final Logger LOGGER = Logger.getLogger(BookDAOImpl.class);
@@ -22,12 +24,6 @@ public class BookDAOImpl extends General implements BookDAO {
 
     @Autowired
     private AuthorDAO authorDAO;
-
-    public BookDAOImpl(DataSource dataSource) throws Exception {
-        this.dataSource = dataSource;
-        this.genreDAO = new GenreDAOImpl(dataSource);
-        this.authorDAO = new AuthorDAOImpl(dataSource);
-    }
 
     @Override
     public int add(Book book) {

@@ -13,6 +13,8 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.sql.DataSource;
+
 @Component
 public class MediaDAOImpl extends General implements MediaDAO{
 
@@ -26,12 +28,6 @@ public class MediaDAOImpl extends General implements MediaDAO{
 
     @Autowired
     private MediaTypeDAO mediaTypeDAO;
-
-    public MediaDAOImpl(DataSource dataSource) throws Exception {
-        this.dataSource = dataSource;
-        this.bookDAO = new BookDAOImpl(dataSource);
-        this.mediaTypeDAO = new MediaTypeDAOImpl(dataSource);
-    }
 
     @Override
     public int add(Media media) {

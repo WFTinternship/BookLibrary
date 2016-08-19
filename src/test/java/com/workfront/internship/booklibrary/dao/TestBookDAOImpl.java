@@ -1,5 +1,6 @@
 package com.workfront.internship.booklibrary.dao;
 
+import com.workfront.internship.booklibrary.LegacyDataSource;
 import com.workfront.internship.booklibrary.common.Author;
 import com.workfront.internship.booklibrary.common.Book;
 import com.workfront.internship.booklibrary.common.Genre;
@@ -27,7 +28,7 @@ public class TestBookDAOImpl {
     private Book expectedBook = null;
     private Genre expectedGenre = null;
 
-    DataSource dataSource = DataSource.getInstance();
+    LegacyDataSource dataSource = LegacyDataSource.getInstance();
 
     @Before
     public void setup() throws Exception {
@@ -43,8 +44,8 @@ public class TestBookDAOImpl {
     }
 
     private void init() throws Exception {
-        bookDAO = new BookDAOImpl(dataSource);
-        genreDAO = new GenreDAOImpl(dataSource);
+        bookDAO = new BookDAOImpl();
+        genreDAO = new GenreDAOImpl();
     }
 
     // region <TEST CASES>
@@ -64,7 +65,7 @@ public class TestBookDAOImpl {
 
     @Test
     public void addAuthorToBook() throws Exception {
-        authorDAO = new AuthorDAOImpl(dataSource);
+        authorDAO = new AuthorDAOImpl();
         Author author = getRandomAuthor();
         authorDAO.add(author);
         expectedBook = getRandomBook(expectedGenre);

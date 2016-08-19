@@ -1,10 +1,12 @@
 package com.workfront.internship.booklibrary.dao;
 
+import com.workfront.internship.booklibrary.LegacyDataSource;
 import com.workfront.internship.booklibrary.common.Book;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.mockito.internal.util.reflection.Whitebox;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,7 +21,7 @@ import static org.mockito.Mockito.when;
  * Unit test for BookDAO class
  */
 public class BookDaoUnitTest {
-    DataSource dataSource;
+    LegacyDataSource dataSource;
     BookDAO realBookDAO;
 
     BookDAO bookDAO;
@@ -28,16 +30,17 @@ public class BookDaoUnitTest {
     @SuppressWarnings("unchecked")
     @Before
     public void beforeTest() throws Exception {
-        dataSource = Mockito.mock(DataSource.class);
+        dataSource = Mockito.mock(LegacyDataSource.class);
 
         Connection connection = Mockito.mock(Connection.class);
         when(dataSource.getConnection()).thenReturn(connection);
         when(connection.prepareStatement(any(String.class))).thenThrow(SQLException.class);
         when(connection.prepareStatement(any(String.class), eq(PreparedStatement.RETURN_GENERATED_KEYS))).thenThrow(SQLException.class);
 
-        realBookDAO = new BookDAOImpl(DataSource.getInstance());
-        bookDAO = new BookDAOImpl(dataSource);
-        genreDAO = new GenreDAOImpl(dataSource);
+        Whitebox.setInternalState(bookDAO, "dataSource", dataSource);
+        realBookDAO = new BookDAOImpl();
+        bookDAO = new BookDAOImpl();
+        genreDAO = new GenreDAOImpl();
     }
 
     @After

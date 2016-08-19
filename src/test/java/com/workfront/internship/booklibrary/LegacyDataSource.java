@@ -1,19 +1,20 @@
-package com.workfront.internship.booklibrary.dao;
+package com.workfront.internship.booklibrary;
 
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Properties;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.stereotype.Component;
 
+import javax.sql.DataSource;
+
 @Component
-public class DataSource {
-    private static DataSource datasource;
+public class LegacyDataSource {
+    private static LegacyDataSource datasource;
     private BasicDataSource ds;
 
-    private DataSource() throws IOException, SQLException {
+    private LegacyDataSource() throws IOException, SQLException {
         ds = new BasicDataSource();
         ds.setDriverClassName("com.mysql.jdbc.Driver");
         ds.setUsername("root");
@@ -28,10 +29,10 @@ public class DataSource {
         ds.getConnection();
     }
 
-    public static DataSource getInstance() {
+    public static LegacyDataSource getInstance() {
         if (datasource == null) {
             try {
-                datasource = new DataSource();
+                datasource = new LegacyDataSource();
             } catch (Exception ex) {
                 throw new RuntimeException(ex.getMessage(), ex);
             }
@@ -42,5 +43,6 @@ public class DataSource {
     public Connection getConnection() throws SQLException {
         return this.ds.getConnection();
     }
+
 } //todo get connection from ConnectionResources.properties file
 

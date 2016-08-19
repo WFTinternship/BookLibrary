@@ -1,10 +1,12 @@
 package com.workfront.internship.booklibrary.dao;
 
+import com.workfront.internship.booklibrary.LegacyDataSource;
 import com.workfront.internship.booklibrary.common.*;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.internal.util.reflection.Whitebox;
 
 import static junit.framework.Assert.assertNull;
 import static junit.framework.TestCase.assertEquals;
@@ -20,7 +22,7 @@ public class TestUserDAOImpl {
 
     private User expectedUser = null;
 
-    DataSource dataSource = DataSource.getInstance();
+    LegacyDataSource dataSource = LegacyDataSource.getInstance();
 
     @Before
     public void setup() throws Exception{
@@ -33,7 +35,8 @@ public class TestUserDAOImpl {
     }
 
     private void init() throws Exception {
-        userDAO = new UserDAOImpl(dataSource);
+        userDAO = new UserDAOImpl();
+        Whitebox.setInternalState(userDAO, "dataSource", dataSource);
     }
 
     @Test

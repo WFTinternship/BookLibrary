@@ -1,5 +1,6 @@
 package com.workfront.internship.booklibrary.business;
 
+import com.workfront.internship.booklibrary.LegacyDataSource;
 import com.workfront.internship.booklibrary.common.*;
 import com.workfront.internship.booklibrary.dao.*;
 import org.junit.After;
@@ -27,7 +28,7 @@ import static org.mockito.Mockito.when;
  * Created by ${Sona} on 8/1/2016.
  */
 public class PickBookManagerUnitTest {
-    DataSource dataSource;
+    LegacyDataSource dataSource;
     private PickBook testPickBook;
 
     private Genre testGenre;
@@ -40,7 +41,7 @@ public class PickBookManagerUnitTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        pickBookManager = new PickBookManagerImpl(dataSource);
+        pickBookManager = new PickBookManagerImpl();
 
         pickBookDAO = Mockito.mock(PickBookDAOImpl.class);
         Whitebox.setInternalState(pickBookManager, "pickBookDAO", pickBookDAO);

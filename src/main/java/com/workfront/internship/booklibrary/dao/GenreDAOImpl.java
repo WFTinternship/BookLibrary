@@ -12,16 +12,14 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.sql.DataSource;
+
 @Component
 public class GenreDAOImpl extends General implements GenreDAO {
     private static final Logger LOGGER = Logger.getLogger(GenreDAOImpl.class);
 
     @Autowired
     private DataSource dataSource;
-
-    public GenreDAOImpl(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
 
     @Override
     public int add(Genre genre) {

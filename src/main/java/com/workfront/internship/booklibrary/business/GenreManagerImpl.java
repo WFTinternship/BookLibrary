@@ -1,7 +1,6 @@
 package com.workfront.internship.booklibrary.business;
 
 import com.workfront.internship.booklibrary.common.Genre;
-import com.workfront.internship.booklibrary.dao.DataSource;
 import com.workfront.internship.booklibrary.dao.GenreDAO;
 import com.workfront.internship.booklibrary.dao.GenreDAOImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,14 +18,6 @@ public class GenreManagerImpl implements GenreManager{
 
     @Addressing
     private GenreDAO genreDAO;
-
-    @Autowired
-    private DataSource dataSource;
-
-    public GenreManagerImpl(DataSource dataSource){
-        this.dataSource = dataSource;
-        genreDAO = new GenreDAOImpl(dataSource);
-    }
 
     @Override
     public int add(Genre genre) {

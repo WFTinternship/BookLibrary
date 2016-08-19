@@ -1,7 +1,6 @@
 package com.workfront.internship.booklibrary.business;
 
 import com.workfront.internship.booklibrary.common.PickBook;
-import com.workfront.internship.booklibrary.dao.DataSource;
 import com.workfront.internship.booklibrary.dao.PickBookDAO;
 import com.workfront.internship.booklibrary.dao.PickBookDAOImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,14 +16,6 @@ import java.util.List;
 public class PickBookManagerImpl implements PickBookManager{
     @Autowired
     private PickBookDAO pickBookDAO;
-
-    @Autowired
-    private DataSource dataSource;
-
-    public PickBookManagerImpl(DataSource dataSource) throws Exception {
-        this.dataSource = dataSource;
-        pickBookDAO = new PickBookDAOImpl(dataSource);
-    }
 
     @Override
     public int add(PickBook pickBook) {

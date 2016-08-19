@@ -1,7 +1,7 @@
 package com.workfront.internship.booklibrary.business;
 
 import com.workfront.internship.booklibrary.common.User;
-import com.workfront.internship.booklibrary.dao.DataSource;
+import com.workfront.internship.booklibrary.LegacyDataSource;
 import com.workfront.internship.booklibrary.dao.TestUtil;
 import com.workfront.internship.booklibrary.dao.UserDAO;
 import com.workfront.internship.booklibrary.dao.UserDAOImpl;
@@ -23,7 +23,7 @@ import org.mockito.internal.util.reflection.Whitebox;
  * Created by ${Sona} on 7/27/2016.
  */
 public class UserManagerUnitTest {
-    DataSource dataSource;
+    LegacyDataSource dataSource;
     private User testUser;
 
     private UserDAO userDAO;
@@ -38,8 +38,8 @@ public class UserManagerUnitTest {
 //        when(dataSource.getConnection()).thenReturn(connection);
 //
 //        userDAO = new UserDAOImpl(dataSource);
-        userManager = new UserManagerImpl(dataSource);
-
+        userManager = new UserManagerImpl();
+        Whitebox.setInternalState(userManager, "dataSource", dataSource);
         userDAO = Mockito.mock(UserDAOImpl.class);
         Whitebox.setInternalState(userManager, "userDAO", userDAO);
 

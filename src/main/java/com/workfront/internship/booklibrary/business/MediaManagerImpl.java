@@ -1,7 +1,6 @@
 package com.workfront.internship.booklibrary.business;
 
 import com.workfront.internship.booklibrary.common.Media;
-import com.workfront.internship.booklibrary.dao.DataSource;
 import com.workfront.internship.booklibrary.dao.MediaDAO;
 import com.workfront.internship.booklibrary.dao.MediaDAOImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +17,6 @@ public class MediaManagerImpl implements MediaManager{
 
     @Autowired
     private MediaDAO mediaDAO;
-
-    @Autowired
-    private DataSource dataSource;
-
-    public MediaManagerImpl(DataSource dataSource) throws Exception{
-        this.dataSource = dataSource;
-        mediaDAO = new MediaDAOImpl(dataSource);
-    }
 
     @Override
     public int add(Media media) {

@@ -1,6 +1,6 @@
 package com.workfront.internship.booklibrary.business;
 
-import com.workfront.internship.booklibrary.common.Genre;
+import com.workfront.internship.booklibrary.LegacyDataSource;
 import com.workfront.internship.booklibrary.common.MediaType;
 import com.workfront.internship.booklibrary.dao.*;
 import org.junit.After;
@@ -9,7 +9,6 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.mockito.internal.util.reflection.Whitebox;
 
-import java.awt.*;
 import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
@@ -22,7 +21,7 @@ import static org.mockito.Mockito.when;
  * Created by Sona Mikayelyan on 7/31/2016.
  */
 public class MediaTypeManagerUnitTest {
-    DataSource dataSource;
+    LegacyDataSource dataSource;
     private MediaType testMediaType;
 
     private MediaTypeDAO mediaTypeDAO;
@@ -31,7 +30,7 @@ public class MediaTypeManagerUnitTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        mediaTypeManager = new MediaTypeManagerImpl(dataSource);
+        mediaTypeManager = new MediaTypeManagerImpl();
 
         mediaTypeDAO = Mockito.mock(MediaTypeDAOImpl.class);
         Whitebox.setInternalState(mediaTypeManager, "mediaTypeDAO", mediaTypeDAO);

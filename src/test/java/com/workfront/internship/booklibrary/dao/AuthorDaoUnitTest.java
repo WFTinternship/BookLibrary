@@ -1,7 +1,7 @@
 package com.workfront.internship.booklibrary.dao;
 
+import com.workfront.internship.booklibrary.LegacyDataSource;
 import com.workfront.internship.booklibrary.common.Author;
-import com.workfront.internship.booklibrary.common.Book;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,21 +19,21 @@ import static org.mockito.Mockito.when;
  * Unit test for BookDAO class
  */
 public class AuthorDaoUnitTest {
-    DataSource dataSource;
+    LegacyDataSource dataSource;
 
     AuthorDAO authorDAO;
 
     @SuppressWarnings("unchecked")
     @Before
     public void beforeTest() throws Exception {
-        dataSource = Mockito.mock(DataSource.class);
+        dataSource = Mockito.mock(LegacyDataSource.class);
 
         Connection connection = Mockito.mock(Connection.class);
         when(dataSource.getConnection()).thenReturn(connection);
         when(connection.prepareStatement(any(String.class))).thenThrow(SQLException.class);
         when(connection.prepareStatement(any(String.class), eq(PreparedStatement.RETURN_GENERATED_KEYS))).thenThrow(SQLException.class);
 
-        authorDAO = new AuthorDAOImpl(dataSource);
+        authorDAO = new AuthorDAOImpl();
     }
 
     @After

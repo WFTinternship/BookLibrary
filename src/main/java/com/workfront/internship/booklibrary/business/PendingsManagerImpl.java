@@ -1,7 +1,6 @@
 package com.workfront.internship.booklibrary.business;
 
 import com.workfront.internship.booklibrary.common.Pending;
-import com.workfront.internship.booklibrary.dao.DataSource;
 import com.workfront.internship.booklibrary.dao.PendingDAO;
 import com.workfront.internship.booklibrary.dao.PendingDAOImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +17,6 @@ public class PendingsManagerImpl implements PendingsManager{
 
     @Autowired
     private PendingDAO pendingDAO;
-
-    @Autowired
-    private DataSource dataSource;
-
-    public PendingsManagerImpl(DataSource dataSource) throws Exception {
-        this.dataSource = dataSource;
-        pendingDAO = new PendingDAOImpl(dataSource);
-    }
 
     @Override
     public int add(Pending pending) {
