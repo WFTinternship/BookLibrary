@@ -3,17 +3,28 @@ package com.workfront.internship.booklibrary.business;
 import com.workfront.internship.booklibrary.common.Author;
 import com.workfront.internship.booklibrary.common.Book;
 import com.workfront.internship.booklibrary.dao.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /**
  * Created by ${Sona} on 7/21/2016.
  */
+
+@Component
 public class BookManagerImpl implements BookManager{
 
+    @Autowired
     private BookDAO bookDAO;
+
+    @Autowired
     private AuthorDAO authorDAO;
+
+    @Autowired
     private AuthorManager authorManager;
+
+    @Autowired
     private DataSource dataSource;
 
     public BookManagerImpl(DataSource dataSource) throws Exception {

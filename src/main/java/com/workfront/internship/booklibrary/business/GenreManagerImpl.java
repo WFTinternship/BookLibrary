@@ -4,14 +4,23 @@ import com.workfront.internship.booklibrary.common.Genre;
 import com.workfront.internship.booklibrary.dao.DataSource;
 import com.workfront.internship.booklibrary.dao.GenreDAO;
 import com.workfront.internship.booklibrary.dao.GenreDAOImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import javax.xml.ws.soap.Addressing;
 import java.util.List;
 
 /**
  * Created by ${Sona} on 7/21/2016.
  */
+
+@Component
 public class GenreManagerImpl implements GenreManager{
+
+    @Addressing
     private GenreDAO genreDAO;
+
+    @Autowired
     private DataSource dataSource;
 
     public GenreManagerImpl(DataSource dataSource){

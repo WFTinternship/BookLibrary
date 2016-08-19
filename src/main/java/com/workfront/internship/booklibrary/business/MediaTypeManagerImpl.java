@@ -5,14 +5,22 @@ import com.workfront.internship.booklibrary.common.PickBook;
 import com.workfront.internship.booklibrary.dao.DataSource;
 import com.workfront.internship.booklibrary.dao.MediaTypeDAO;
 import com.workfront.internship.booklibrary.dao.MediaTypeDAOImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /**
  * Created by ${Sona} on 7/28/2016.
  */
+
+@Component
 public class MediaTypeManagerImpl implements MediaTypeManager{
+
+    @Autowired
     private MediaTypeDAO mediaTypeDAO;
+
+    @Autowired
     private DataSource dataSource;
 
     public MediaTypeManagerImpl(DataSource dataSource)throws Exception {

@@ -7,12 +7,20 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class BookDAOImpl extends General implements BookDAO {
     private static final Logger LOGGER = Logger.getLogger(BookDAOImpl.class);
 
+    @Autowired
     private DataSource dataSource;
+
+    @Autowired
     private GenreDAO genreDAO;
+
+    @Autowired
     private AuthorDAO authorDAO;
 
     public BookDAOImpl(DataSource dataSource) throws Exception {

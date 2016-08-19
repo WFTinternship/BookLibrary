@@ -4,14 +4,22 @@ import com.workfront.internship.booklibrary.common.Pending;
 import com.workfront.internship.booklibrary.dao.DataSource;
 import com.workfront.internship.booklibrary.dao.PendingDAO;
 import com.workfront.internship.booklibrary.dao.PendingDAOImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /**
  * Created by ${Sona} on 7/21/2016.
  */
+
+@Component
 public class PendingsManagerImpl implements PendingsManager{
+
+    @Autowired
     private PendingDAO pendingDAO;
+
+    @Autowired
     private DataSource dataSource;
 
     public PendingsManagerImpl(DataSource dataSource) throws Exception {

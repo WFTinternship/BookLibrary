@@ -7,12 +7,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PendingDAOImpl extends General implements PendingDAO{
     private static final Logger LOGGER = Logger.getLogger(BookDAOImpl.class);
 
+    @Autowired
     private DataSource dataSource;
+
+    @Autowired
     private BookDAO bookDAO;
+
+    @Autowired
     private UserDAO userDAO;
 
     public PendingDAOImpl(DataSource dataSource) throws Exception {

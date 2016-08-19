@@ -9,10 +9,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class GenreDAOImpl extends General implements GenreDAO {
     private static final Logger LOGGER = Logger.getLogger(GenreDAOImpl.class);
 
+    @Autowired
     private DataSource dataSource;
 
     public GenreDAOImpl(DataSource dataSource) {

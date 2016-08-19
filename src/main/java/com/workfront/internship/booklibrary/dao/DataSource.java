@@ -6,7 +6,9 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 import org.apache.commons.dbcp.BasicDataSource;
+import org.springframework.stereotype.Component;
 
+@Component
 public class DataSource {
     private static DataSource datasource;
     private BasicDataSource ds;

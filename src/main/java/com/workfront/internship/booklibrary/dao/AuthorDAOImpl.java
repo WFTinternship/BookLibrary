@@ -11,10 +11,14 @@ import java.util.List;
 
 import com.workfront.internship.booklibrary.common.Book;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AuthorDAOImpl extends General implements AuthorDAO {
     private static final Logger LOGGER = Logger.getLogger(BookDAOImpl.class);
 
+    @Autowired
     private DataSource dataSource;
 //    private BookDAO bookDAO;
 

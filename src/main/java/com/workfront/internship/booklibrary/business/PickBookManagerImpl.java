@@ -4,14 +4,21 @@ import com.workfront.internship.booklibrary.common.PickBook;
 import com.workfront.internship.booklibrary.dao.DataSource;
 import com.workfront.internship.booklibrary.dao.PickBookDAO;
 import com.workfront.internship.booklibrary.dao.PickBookDAOImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /**
  * Created by ${Sona} on 7/21/2016.
  */
+
+@Component
 public class PickBookManagerImpl implements PickBookManager{
+    @Autowired
     private PickBookDAO pickBookDAO;
+
+    @Autowired
     private DataSource dataSource;
 
     public PickBookManagerImpl(DataSource dataSource) throws Exception {

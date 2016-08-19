@@ -24,5 +24,9 @@
         <url-pattern>/Registration</url-pattern>
     </servlet-mapping>
 
+    <listener>
+        <listener-class>com.workfront.internship.booklibrary.spring.SpringContextListener</listener-class>
+    </listener>
+
 
 </web-app>

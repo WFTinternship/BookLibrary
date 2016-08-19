@@ -6,13 +6,20 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-
+@Component
 public class UserDAOImpl extends General implements UserDAO {
 
     private static final Logger LOGGER = Logger.getLogger(UserDAOImpl.class);
 
+    @Autowired
     private DataSource dataSource;
+
+    public UserDAOImpl() {
+
+    }
 
     public UserDAOImpl(DataSource dataSource) throws Exception {
         this.dataSource = dataSource;

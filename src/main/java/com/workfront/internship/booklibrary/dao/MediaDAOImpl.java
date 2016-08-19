@@ -10,14 +10,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-
+@Component
 public class MediaDAOImpl extends General implements MediaDAO{
 
     private static final Logger LOGGER = Logger.getLogger(BookDAOImpl.class);
 
+    @Autowired
     private DataSource dataSource;
+
+    @Autowired
     private BookDAO bookDAO;
+
+    @Autowired
     private MediaTypeDAO mediaTypeDAO;
 
     public MediaDAOImpl(DataSource dataSource) throws Exception {

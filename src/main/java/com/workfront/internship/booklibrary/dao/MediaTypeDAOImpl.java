@@ -3,6 +3,8 @@ package com.workfront.internship.booklibrary.dao;
 import com.workfront.internship.booklibrary.common.Media;
 import com.workfront.internship.booklibrary.common.MediaType;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,9 +13,11 @@ import java.util.List;
 /**
  * Created by ${Sona} on 7/22/2016.
  */
+@Component
 public class MediaTypeDAOImpl extends General implements MediaTypeDAO {
     private static final Logger LOGGER = Logger.getLogger(GenreDAOImpl.class);
 
+    @Autowired
     private DataSource dataSource;
 
     public MediaTypeDAOImpl(DataSource dataSource){

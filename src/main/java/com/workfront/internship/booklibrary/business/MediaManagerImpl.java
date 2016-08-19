@@ -4,14 +4,22 @@ import com.workfront.internship.booklibrary.common.Media;
 import com.workfront.internship.booklibrary.dao.DataSource;
 import com.workfront.internship.booklibrary.dao.MediaDAO;
 import com.workfront.internship.booklibrary.dao.MediaDAOImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /**
  * Created by ${Sona} on 7/21/2016.
  */
+
+@Component
 public class MediaManagerImpl implements MediaManager{
+
+    @Autowired
     private MediaDAO mediaDAO;
+
+    @Autowired
     private DataSource dataSource;
 
     public MediaManagerImpl(DataSource dataSource) throws Exception{
