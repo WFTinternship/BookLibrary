@@ -2,6 +2,7 @@
 <%@ page import="com.workfront.internship.booklibrary.business.GenreManagerImpl" %>
 <%@ page import="com.workfront.internship.booklibrary.common.Genre" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.workfront.internship.booklibrary.common.Author" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
   <head>
@@ -17,33 +18,6 @@
       <h1>Welcome to Workfront<br/>Book Library</h1>
     </div>
 
-<!-- comment
-    <div class="buttons" style="float: right"><br/>
-      <button type="button">home</button>
-
-      <div class="bookDropdown">
-        <button type="button">books</button>
-
-        <%--<%--%>
-          <%--GenreManager genreManager = new GenreManagerImpl(DataSource.getInstance());--%>
-          <%--List<Genre> genreList = genreManager.viewAll();--%>
-          <%--for(int i= 0; i < genreList.size(); i++){--%>
-        <%--%>--%>
-        <%--<div id="bookGenreList">--%>
-          <%--<a href="#"><%genreList.get(i).getGenre();%></a>--%>
-        <%--</div>--%>
-        <%--<%}%>--%>
-
-
-      </div>
-      <br/>
-    </div>
-    <button type="button">authors</button>
-    <button type="button">search</button>
-    <br/>
-
-    end of comment-->
-
     <div id="searchHeader">
       <form id="newSearch" method="get" action="#">
         <input type="text" class="textInput" name="q" size="21" maxlength="250" autofocus autocomplete="on" autocapitalize="off" aria-autocomplete="list" aria-expanded="false"><input type="submit" value="search" class="searchButton">
@@ -53,39 +27,38 @@
 
 
     <div class="main-functions" style="float:right;"><br/>
-      <%GenreManager genreManager = new GenreManagerImpl();
-      List<Genre> genreList = genreManager.viewAll();%>
+
       <ul>
-        <%--style="list-style-type: none;"--%>
-        <li ><a class="home" href="/index.jsp">Home</a></li>
-          <%--style="display: inline-block"--%>
-        <li ><a class="authorList" href="#authors">Authors</a></li>
-          <%--style="display: inline-block"--%>
-        <li class="book-genres" >
-          <%--style="display: inline-block"--%>
+
+        <li><a class="home" href="/index.jsp">Home</a></li>
+
+        <li class="authorList">
+          <a href="#" class="dropbtn">Authors</a>
+            <div class="dropdown-content">
+                <%
+                    List<Author> authors = (List<Author>)request.getAttribute("authors");
+                    for(Author author : authors){
+                %>
+                <a href="#"><%out.print(author.getName() + " " + author.getSurname());%></a>
+                <%}%>
+            </div>
+        </li>
+
+        <li class="book-genres">
           <a href="#" class="dropbtn">Books</a>
           <div class="dropdown-content">
-            <%--style="text-decoration: none; "--%>
-            <%for(int i= 0; i < genreList.size(); i++){
+            <%
+              List<Genre> genres = (List<Genre>)request.getAttribute("genres");
+              for(Genre genre : genres){
             %>
-              <a href="#"><%out.print(genreList.get(i).getGenre());%></a>
+              <a href="#"><%out.print(genre.getGenre());%></a>
             <%}%>
           </div>
         </li>
 
-        <%--<li ><a class="search" href="#search">Search</a></li>--%>
-          <%--style="display: inline-block"--%>
       </ul>
     </div>
 
-
-    <%--<div class="buttons" style="float: right"><br/>--%>
-      <%--<button type="button">home</button>--%>
-      <%--<button type="button">books</button>--%>
-      <%--<button type="button">authors</button>--%>
-      <%--<button type="button">search</button>--%>
-      <%--<br/>--%>
-    <%--</div>--%>
 
     <br/>
 

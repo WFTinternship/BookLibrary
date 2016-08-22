@@ -13,6 +13,11 @@
         <servlet-class>com.workfront.internship.booklibrary.servlets.RegistrationServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>MainPageServlet</servlet-name>
+        <servlet-class>com.workfront.internship.booklibrary.servlets.MainPageServlet</servlet-class>
+    </servlet>
+
 
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -22,6 +27,12 @@
     <servlet-mapping>
         <servlet-name>RegistrationServlet</servlet-name>
         <url-pattern>/Registration</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>MainPageServlet</servlet-name>
+        <url-pattern>/index.jsp</url-pattern>
+
     </servlet-mapping>
 
     <listener>

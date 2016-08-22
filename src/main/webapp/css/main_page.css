@@ -15,7 +15,9 @@
 }
 
 .buttons{
-	float: left;
+	/*display: inline-block;*/
+	display: inline;
+	/*float: left;*/
 }
 
 .buttons button{
@@ -95,6 +97,10 @@ li.book-genres {
 .dropdown-content a:hover {background-color: #f1f1f1}
 
 .book-genres:hover .dropdown-content {
+	display: block;
+}
+
+.authorList:hover .dropdown-content {
 	display: block;
 }
 

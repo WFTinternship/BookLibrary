@@ -16,7 +16,7 @@ import java.util.List;
 @Component
 public class GenreManagerImpl implements GenreManager{
 
-    @Addressing
+    @Autowired
     private GenreDAO genreDAO;
 
     @Override
