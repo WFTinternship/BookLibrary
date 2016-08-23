@@ -46,12 +46,17 @@ public class RegistrationServlet extends HttpServlet{
 
         User user = new User().setName(name).setSurname(surname).setUsername(username).setPassword(password).setAddress(address).seteMail(email).setPhone(phone).setAccessPrivilege(accessPrivilege);
 
+        int id = 0;
         try {
-            int id = userManager.register(user);
-            request.setAttribute("user", user);
+            id = userManager.register(user);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
+        if(id == 0){
+            String errorString = "User with this e-mail already exists";
+            response.sendRedirect("/jsp/Registration.jsp");
+        }
+        request.setAttribute("user", user);
 
 //        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/index.jsp");
 //        dispatcher.forward(request, response);

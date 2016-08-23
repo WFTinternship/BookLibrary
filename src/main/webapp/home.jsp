@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.workfront.internship.booklibrary.business.GenreManager" %>
 <%@ page import="com.workfront.internship.booklibrary.business.GenreManagerImpl" %>
 <%@ page import="com.workfront.internship.booklibrary.common.Genre" %>
@@ -7,11 +8,11 @@
 <html>
   <head>
     <title>Main page</title>
-    <link rel="stylesheet" type="text/css" href="/css/main_page.css">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/main_page.css"/>">
   </head>
   <body>
     <a href="https://www.workfront.com/" target="_blank">
-      <img src="/image/workfront_lazure.png" id="logo" alt="Workfront logo" title="go to Workfront homepage" align="left" style="border-radius: 50%;">
+      <img src="/resources/image/workfront_lazure.png" id="logo" alt="Workfront logo" title="go to Workfront homepage" align="left" style="border-radius: 50%;">
     </a>
 
     <div id="headerText">
@@ -65,19 +66,19 @@
     <br/>
     <br/> <br/> <br/> <br/> <br/> <br/>
     <div style="float: right" class="buttons">
-      <a href="/jsp/SignIn.jsp" ><button name="sign-in">sign-in</button></a><br/>
-      <br/><a href="/jsp/Registration.jsp"><button style="background-color: #eff5f5; color: #0086b3; border: none; border-radius: 10px; width: 150px; height: 30px;" name="register">register</button></a>
+      <a href="/SignIn" ><button name="sign-in">sign-in</button></a><br/>
+      <br/><a href="/Registration.jsp"><button style="background-color: #eff5f5; color: #0086b3; border: none; border-radius: 10px; width: 150px; height: 30px;" name="register">register</button></a>
     </div>
 
     <br/>
 
     <div class="floating_media">
       <ul style="list-style-type: none;">
-        <li><img src="/image/download1.jpg" alt="changing images" style="position: absolute; top: 0; /*left: 100px;*/"></li>
-        <li><img src="/image/download2.jpg" alt="changing images" style="position: absolute; top: 0; left: 200px;"></li>
-        <li><img src="/image/download3.jpg" alt="changing images" style="position: absolute; top: 0; left: 400px;"></li>
-        <li><img src="/image/download4.jpg" alt="changing images" style="position: absolute; top: 0; left: 600px;"></li>
-        <li><img src="/image/download5.jpg" alt="changing images" style="position: absolute; top: 0; left: 800px;"></li>
+        <li><img src="/resources/image/download1.jpg" alt="changing images" style="position: absolute; top: 0; /*left: 100px;*/"></li>
+        <li><img src="/resources/image/download2.jpg" alt="changing images" style="position: absolute; top: 0; left: 200px;"></li>
+        <li><img src="/resources/image/download3.jpg" alt="changing images" style="position: absolute; top: 0; left: 400px;"></li>
+        <li><img src="/resources/image/download4.jpg" alt="changing images" style="position: absolute; top: 0; left: 600px;"></li>
+        <li><img src="/resources/image/download5.jpg" alt="changing images" style="position: absolute; top: 0; left: 800px;"></li>
       </ul>
 
     </div>

@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>Registration</title>
-    <link rel="stylesheet" type="text/css" href="/css/registration.css">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/registration.css"/>">
 </head>
 <body style="background-color: #ffffcc">
 <div class="registration">

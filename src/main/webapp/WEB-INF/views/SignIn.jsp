@@ -1,16 +1,15 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
-  Created by IntelliJ IDEA.
-  User: Workfront
+  Created by Sona
   Date: 8/9/2016
   Time: 4:17 PM
-  To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Sign-in Page</title>
-    <link rel="stylesheet" type="text/css" href="/css/sign_in.css">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/sign-in.css"/>">
 </head>
 
 <body style="background-color: #ffffcc">

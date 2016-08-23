@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>Error Page</title>
-    <link rel="stylesheet" type="text/css" href="/css/error_page.css">
+    <link rel="stylesheet" type="text/css" href="/css/error_page.css" href="<c:url value="/resources/css/main_page.css"/>">
 </head>
 <body>
     <div class="error_page">
