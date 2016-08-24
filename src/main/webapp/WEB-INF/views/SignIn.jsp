@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>Sign-in Page</title>
-    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/sign-in.css"/>">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/sign_in.css"/>">
 </head>
 
 <body style="background-color: #ffffcc">
@@ -25,9 +25,17 @@
 </div>
 
 <br/>
-<div class="buttons" style="position:absolute; bottom:10px;">
-    <a href="/index.jsp"><button type="button">home</button></a>
-    <button type="button">contacts</button>
+<div class="buttons" style="position:absolute; bottom:10px; display: inline;">
+    <a href="/"><button id="home" type="button">home</button></a>
+
+    <div class="dialogueContainer">
+        <button id="contacts" type="button">contacts</button>
+        <div id="dialogue" title="Basic dialogue">
+            <p>Address: Armenia, 0001, Yerevan<br/>Hyusisayin Ave., 1 Building, Office 14<br/>(Kentron adm. district)<br/>phone: +374-60-619828</p>
+            <p id="WF">Workfront Armenia</p>
+        </div>
+        <div class="clear"></div>
+    </div>
 </div>
 </body>
 

@@ -3,6 +3,25 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
+
+
+    <servlet>
+        <servlet-name>dispatcherServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>dispatcherServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+
+    <listener>
+        <listener-class>com.workfront.internship.booklibrary.spring.SpringContextListener</listener-class>
+    </listener>
+
+
     <!--<servlet>-->
         <!--<servlet-name>LoginServlet</servlet-name>-->
         <!--<servlet-class>com.workfront.internship.booklibrary.servlets.LoginServlet</servlet-class>-->
@@ -32,23 +51,5 @@
     <!--<servlet-name>MainPageServlet</servlet-name>-->
     <!--<url-pattern>/index.jsp</url-pattern>-->
     <!--</servlet-mapping>-->
-
-
-    <servlet>
-        <servlet-name>dispatcherServlet</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>dispatcherServlet</servlet-name>
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>
-
-
-    <listener>
-        <listener-class>com.workfront.internship.booklibrary.spring.SpringContextListener</listener-class>
-    </listener>
-
 
 </web-app>

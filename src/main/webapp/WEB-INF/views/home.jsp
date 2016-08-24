@@ -11,13 +11,57 @@
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/main_page.css"/>">
   </head>
   <body>
-    <a href="https://www.workfront.com/" target="_blank">
-      <img src="/resources/image/workfront_lazure.png" id="logo" alt="Workfront logo" title="go to Workfront homepage" align="left" style="border-radius: 50%;">
-    </a>
+    <div id="header">
+      <a href="https://www.workfront.com/" target="_blank">
+        <img src="/resources/image/workfront_lazure.png" id="logo" alt="Workfront logo" title="go to Workfront homepage" align="left" style="border-radius: 50%;">
+      </a>
 
-    <div id="headerText">
-      <h1>Welcome to Workfront<br/>Book Library</h1>
+      <div id="headerText">
+        <h1>Welcome to Workfront<br/>Book Library</h1>
+      </div>
+
+      <%----%>
+
+      <a href="#openModal" class="hi">sign in</a>
+
+      <div id="openModal" class="modalDialog">
+        <div>   <a href="#close" title="Close" class="close">X</a>
+
+          <div class="signin">
+            <form method="post" action="/SignIn">
+              username/email:<br/>
+              <input type="text" name="username/email"><br/>
+              <br/>password:<br/>
+              <input type="password" name="password"><br/>
+              <br/><input type="submit" value= "sign in"><br/>
+
+            </form>
+          </div>
+
+          <br/> <br/> <br/>
+
+          <form>
+            <ul>
+              <li><p>Don't have an account?</p></li>
+              <li><a href="/register" style="background-color: #eff5f5; color: #0086b3; border: none; border-radius: 10px; width: 150px; height: 30px;" name="register">register</a>
+              </li>
+              <br/><li><a href="/">cancel</a></li>
+            </ul>
+          </form>
+
+
+        </div>
+      </div>
+
+      <%----%>
+
+
+
+      <%--<ul><li><a href="/login" id="login">sign-in</a></li></ul>--%>
     </div>
+
+
+
 
     <div id="searchHeader">
       <form id="newSearch" method="get" action="#">
@@ -27,11 +71,13 @@
     </div>
 
 
+
+
     <div class="main-functions" style="float:right;"><br/>
 
       <ul>
 
-        <li><a class="home" href="/index.jsp">Home</a></li>
+        <li><a class="home" href="/">Home</a></li>
 
         <li class="authorList">
           <a href="#" class="dropbtn">Authors</a>
@@ -65,10 +111,6 @@
 
     <br/>
     <br/> <br/> <br/> <br/> <br/> <br/>
-    <div style="float: right" class="buttons">
-      <a href="/SignIn" ><button name="sign-in">sign-in</button></a><br/>
-      <br/><a href="/Registration.jsp"><button style="background-color: #eff5f5; color: #0086b3; border: none; border-radius: 10px; width: 150px; height: 30px;" name="register">register</button></a>
-    </div>
 
     <br/>
 
@@ -86,11 +128,9 @@
     <br/>
 
 
-      <%--<div class="dialogueContainer">--%>
-
 
     <div class="buttons" style="position:absolute; bottom:10px; display: inline;">
-          <a href="/index.jsp"><button id="home" type="button">home</button></a>
+          <a href="/"><button id="home" type="button">home</button></a>
           <%--&nbsp;--%>
 
         <div class="dialogueContainer">

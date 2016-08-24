@@ -45,6 +45,11 @@ public class ApplicationController {
         return "home";
     }
 
+    @RequestMapping("/login")
+    public String getSigninPage(){
+
+        return "SignIn";
+    }
     @RequestMapping("/SignIn")
     public String simpleRequest(Model model, HttpServletRequest request){
         String username=request.getParameter("username/email");
@@ -62,6 +67,11 @@ public class ApplicationController {
 
         model.addAttribute("user", user);
         return "User";
+    }
+
+    @RequestMapping("/register")
+    public String getRegistration(){
+        return "Registration";
     }
 
     @RequestMapping("/Registration")
