@@ -23,7 +23,6 @@ import static org.mockito.Mockito.when;
  * Created by ${Sona} on 8/1/2016.
  */
 public class PendingsManagerUnitTest {
-    LegacyDataSource dataSource;
     private Pending testPending;
 
     private Genre testGenre;
@@ -46,7 +45,6 @@ public class PendingsManagerUnitTest {
 
         testUser = getRandomUser();
 
-        testPending = new Pending();
         testPending = getRandomPending(testUser, testBook);
     }
 

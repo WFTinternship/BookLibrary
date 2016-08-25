@@ -37,7 +37,6 @@ public class UserManagerImpl implements UserManager {
                 if (isValidUser(user)) {
                     user.setPassword(getHashedPassword(user.getPassword()));
                     userDAO.add(user);
-                    // todo send message to user's email asking to confirm the registration
                     return user.getId();
                 }
             }

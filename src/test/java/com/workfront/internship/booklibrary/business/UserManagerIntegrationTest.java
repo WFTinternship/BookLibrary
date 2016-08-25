@@ -5,7 +5,11 @@ import com.workfront.internship.booklibrary.LegacyDataSource;
 import com.workfront.internship.booklibrary.dao.UserDAO;
 import com.workfront.internship.booklibrary.dao.UserDAOImpl;
 import org.junit.*;
+import org.junit.runner.RunWith;
 import org.mockito.internal.util.reflection.Whitebox;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.sql.DataSource;
 import java.io.UnsupportedEncodingException;
@@ -18,25 +22,23 @@ import static junit.framework.TestCase.assertNotNull;
 /**
  * Created by ${Sona} on 7/29/2016.
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = ManagerTestConfig.class)
 public class UserManagerIntegrationTest {
 
-    private static UserManager userManager;
+    @Autowired
+    private UserManager userManager;
+
     private User testUser;
-    LegacyDataSource dataSource = LegacyDataSource.getInstance();
-    UserDAO userDAO;
 
     @Before
     public void setup() throws Exception {
-        userManager = new UserManagerImpl();
-        Whitebox.setInternalState(userDAO, "dataSource", dataSource);
         testUser = getRandomUser();
-        userDAO = new UserDAOImpl();
     }
 
     @After
     public void tearDown(){
-        testUser = null;
-        userDAO.deleteAll();
+        userManager.deleteAccount(testUser.getId());
     }
 
     @Test

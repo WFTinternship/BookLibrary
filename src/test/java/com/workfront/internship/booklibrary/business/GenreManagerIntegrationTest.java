@@ -6,7 +6,11 @@ import com.workfront.internship.booklibrary.dao.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.internal.util.reflection.Whitebox;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static com.workfront.internship.booklibrary.dao.TestUtil.getRandomGenre;
 import static junit.framework.TestCase.assertNotNull;
@@ -14,24 +18,22 @@ import static junit.framework.TestCase.assertNotNull;
 /**
  * Created by Sona Mikayelyan on 7/31/2016.
  */
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = ManagerTestConfig.class)
 public class GenreManagerIntegrationTest {
-    private static GenreManager genreManager;
+    @Autowired
+    private GenreManager genreManager;
     private Genre testGenre;
-    LegacyDataSource dataSource = LegacyDataSource.getInstance();
-    GenreDAO genreDAO;
 
     @Before
     public void setup() throws Exception {
-        Whitebox.setInternalState(genreDAO, "dataSource", dataSource);
-        genreManager = new GenreManagerImpl();
         testGenre = getRandomGenre();
-        genreDAO = new GenreDAOImpl();
     }
 
     @After
     public void tearDown(){
-        testGenre = null;
-        genreDAO.deleteAll();
+        genreManager.delete(testGenre.getId());
     }
 
     @Test

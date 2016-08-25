@@ -12,18 +12,20 @@ import org.mockito.Mockito;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 
+import static com.workfront.internship.booklibrary.dao.TestUtil.getRandomUser;
 import static junit.framework.TestCase.*;
 import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.when;
 
 import org.mockito.internal.util.reflection.Whitebox;
+import org.springframework.stereotype.Component;
 
 
 /**
  * Created by ${Sona} on 7/27/2016.
  */
+@Component
 public class UserManagerUnitTest {
-    LegacyDataSource dataSource;
     private User testUser;
 
     private UserDAO userDAO;
@@ -32,19 +34,11 @@ public class UserManagerUnitTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-//        dataSource = Mockito.mock(DataSource.class);
-//
-//        Connection connection = Mockito.mock(Connection.class);
-//        when(dataSource.getConnection()).thenReturn(connection);
-//
-//        userDAO = new UserDAOImpl(dataSource);
         userManager = new UserManagerImpl();
-        Whitebox.setInternalState(userManager, "dataSource", dataSource);
         userDAO = Mockito.mock(UserDAOImpl.class);
         Whitebox.setInternalState(userManager, "userDAO", userDAO);
 
-        testUser = new User();
-        testUser = TestUtil.getRandomUser();
+        testUser = getRandomUser();
     }
 
     @After

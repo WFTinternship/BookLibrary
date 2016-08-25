@@ -21,47 +21,46 @@
 
 <%----%>
 
-<%--<a href="#openModal" class="hi">register</a>--%>
 
-<div id="openModal" class="modalDialog">
-    <div>   <a href="#close" title="Close" class="close">X</a>
+<%--<div id="openModal" class="modalDialog">--%>
+    <%--<div>   <a href="#close" title="Close" class="close">X</a>--%>
 
-        <div class="registration">
-            <form method="post" action="/Registration">
+        <%--<div class="registration">--%>
+            <%--<form method="post" action="/Registration">--%>
 
-                    <%--<legend>Create account</legend>--%>
-                    name<br/>
-                    <input type="text" name="name"><br/>
-                    <br/>surname<br/>
-                    <input type="text" name="surname"><br/>
-                    <br/>e-mail<br/>
-                    <input type="text" name="e-mail"><br/>
-                    <br/>address<br/>
-                    <input type="text" name="address"><br/>
-                    <br/>phone<br/>
-                    <input type="text" name="phone"><br/>
-                    <br/>username<br/>
-                    <input type="text" name="username"><br/>
-                    <br/>password<br/>
-                    <input type="password" name="password"><br/>
-                    <br/>access privilege<br/>
-                    <input type="text" name="access-privilege">
-                    <br/><input type="submit" value= "create account"><br/>
+                    <%--&lt;%&ndash;<legend>Create account</legend>&ndash;%&gt;--%>
+                    <%--name<br/>--%>
+                    <%--<input type="text" name="name"><br/>--%>
+                    <%--<br/>surname<br/>--%>
+                    <%--<input type="text" name="surname"><br/>--%>
+                    <%--<br/>e-mail<br/>--%>
+                    <%--<input type="text" name="e-mail"><br/>--%>
+                    <%--<br/>address<br/>--%>
+                    <%--<input type="text" name="address"><br/>--%>
+                    <%--<br/>phone<br/>--%>
+                    <%--<input type="text" name="phone"><br/>--%>
+                    <%--<br/>username<br/>--%>
+                    <%--<input type="text" name="username"><br/>--%>
+                    <%--<br/>password<br/>--%>
+                    <%--<input type="password" name="password"><br/>--%>
+                    <%--<br/>access privilege<br/>--%>
+                    <%--<input type="text" name="access-privilege">--%>
+                    <%--<br/><input type="submit" value= "create account"><br/>--%>
 
-            </form>
-        </div>
+            <%--</form>--%>
+        <%--</div>--%>
 
-        <br/> <br/> <br/>
-
-
-            <ul>
-                <br/><li><a href="/">cancel</a></li>
-            </ul>
+        <%--<br/> <br/> <br/>--%>
 
 
+            <%--<ul>--%>
+                <%--<br/><li><a href="/">cancel</a></li>--%>
+            <%--</ul>--%>
 
-    </div>
-</div>
+
+
+    <%--</div>--%>
+<%--</div>--%>
 
 <%----%>
 
@@ -71,36 +70,44 @@
 
 
 
-<%--<div class="registration">--%>
-    <%--<form method="post" action="/Registration">--%>
-        <%--<fieldset>--%>
-            <%--<legend>Create account</legend>--%>
-            <%--name<br/>--%>
-            <%--<input type="text" name="name"><br/>--%>
-            <%--<br/>surname<br/>--%>
-            <%--<input type="text" name="surname"><br/>--%>
-            <%--<br/>e-mail<br/>--%>
-            <%--<input type="text" name="e-mail"><br/>--%>
-            <%--<br/>address<br/>--%>
-            <%--<input type="text" name="address"><br/>--%>
-            <%--<br/>phone<br/>--%>
-            <%--<input type="text" name="phone"><br/>--%>
-            <%--<br/>username<br/>--%>
-            <%--<input type="text" name="username"><br/>--%>
-            <%--<br/>password<br/>--%>
-            <%--<input type="password" name="password"><br/>--%>
-            <%--<br/>access privilege<br/>--%>
-            <%--<input type="text" name="access-privilege">--%>
-            <%--<br/><input type="submit" value= "Submit"><br/>--%>
-        <%--</fieldset>--%>
-    <%--</form>--%>
-<%--</div>--%>
+<div class="registration">
+    <form method="post" action="/Registration">
+        <fieldset>
+            <legend>Create account</legend>
+            name<br/>
+            <input type="text" name="name"><br/>
+            <br/>surname<br/>
+            <input type="text" name="surname"><br/>
+            <br/>e-mail<br/>
+            <input type="text" name="e-mail"><br/>
+            <br/>address<br/>
+            <input type="text" name="address"><br/>
+            <br/>phone<br/>
+            <input type="text" name="phone"><br/>
+            <br/>username<br/>
+            <input type="text" name="username"><br/>
+            <br/>password<br/>
+            <input type="password" name="password"><br/>
+            <br/>access privilege<br/>
+            <input type="text" name="access-privilege">
+            <br/><input type="submit" value= "Submit"><br/>
+        </fieldset>
+    </form>
+</div>
 
 
-<%--<br/>--%>
-<%--<div class="buttons" style="position:absolute; bottom:10px;">--%>
-    <%--<a href="/index.jsp"><button type="button">home</button></a>--%>
-    <%--<button type="button">contacts</button>--%>
-<%--</div>--%>
+<br/>
+<div class="buttons" style="position:absolute; bottom:10px;">
+    <a href="/"><button type="button">home</button></a>
+
+    <div class="dialogueContainer">
+        <button id="contacts" type="button">contacts</button>
+        <div id="dialogue" title="Basic dialogue">
+            <p>Address: Armenia, 0001, Yerevan<br/>Hyusisayin Ave., 1 Building, Office 14<br/>(Kentron adm. district)<br/>phone: +374-60-619828</p>
+            <p id="WF">Workfront Armenia</p>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
 </body>
 </html>

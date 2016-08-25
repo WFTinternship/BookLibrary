@@ -218,9 +218,9 @@
 	background: white;
 	/*z-index: 99999;*/
 	opacity:0;
-	-webkit-transition: opacity 400ms ease-in;
-	-moz-transition: opacity 400ms ease-in;
-	transition: opacity 400ms ease-in;
+	-webkit-transition: opacity 0ms ease-in;
+	-moz-transition: opacity 0ms ease-in;
+	transition: opacity 0ms ease-in;
 	pointer-events: none;
 }
 .modalDialog:target {
@@ -259,6 +259,10 @@
 .close:hover {
 	background: #00d9ff;
 }
+
+
+
+
 
 #WF{
 	font-family: Arial, Helvetica, sans-serif;

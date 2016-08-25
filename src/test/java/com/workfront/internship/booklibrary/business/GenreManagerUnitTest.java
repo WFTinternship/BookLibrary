@@ -11,6 +11,7 @@ import org.mockito.internal.util.reflection.Whitebox;
 
 import java.util.List;
 
+import static com.workfront.internship.booklibrary.dao.TestUtil.getRandomGenre;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNull;
 import static junit.framework.TestCase.assertTrue;
@@ -21,7 +22,6 @@ import static org.mockito.Mockito.when;
  * Created by Sona Mikayelyan on 7/31/2016.
  */
 public class GenreManagerUnitTest {
-    LegacyDataSource dataSource;
     private Genre testGenre;
 
     private GenreDAO genreDAO;
@@ -35,8 +35,7 @@ public class GenreManagerUnitTest {
         genreDAO = Mockito.mock(GenreDAOImpl.class);
         Whitebox.setInternalState(genreManager, "genreDAO", genreDAO);
 
-        testGenre = new Genre();
-        testGenre = TestUtil.getRandomGenre();
+        testGenre = getRandomGenre();
     }
 
     @After
@@ -200,7 +199,7 @@ public class GenreManagerUnitTest {
     @Test
     public void delete_cannotDeleteNonNullGenre() {
         testGenre.setId(3);
-        Genre genre = TestUtil.getRandomGenre();
+        Genre genre = getRandomGenre();
         when(genreDAO.getGenreByID(anyInt())).thenReturn(genre);
 
         boolean b;

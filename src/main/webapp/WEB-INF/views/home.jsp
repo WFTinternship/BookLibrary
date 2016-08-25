@@ -11,7 +11,8 @@
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/main_page.css"/>">
   </head>
   <body>
-    <div id="header">
+
+  <div id="header">
       <a href="https://www.workfront.com/" target="_blank">
         <img src="/resources/image/workfront_lazure.png" id="logo" alt="Workfront logo" title="go to Workfront homepage" align="left" style="border-radius: 50%;">
       </a>
@@ -20,44 +21,11 @@
         <h1>Welcome to Workfront<br/>Book Library</h1>
       </div>
 
-      <%----%>
+      <ul>
+        <li><a href="/login" id="login">sign-in</a></li>
+        <li><a href="/register" name="register">register</a></li>
+      </ul>
 
-      <a href="#openModal" class="hi">sign in</a>
-
-      <div id="openModal" class="modalDialog">
-        <div>   <a href="#close" title="Close" class="close">X</a>
-
-          <div class="signin">
-            <form method="post" action="/SignIn">
-              username/email:<br/>
-              <input type="text" name="username/email"><br/>
-              <br/>password:<br/>
-              <input type="password" name="password"><br/>
-              <br/><input type="submit" value= "sign in"><br/>
-
-            </form>
-          </div>
-
-          <br/> <br/> <br/>
-
-          <form>
-            <ul>
-              <li><p>Don't have an account?</p></li>
-              <li><a href="/register" style="background-color: #eff5f5; color: #0086b3; border: none; border-radius: 10px; width: 150px; height: 30px;" name="register">register</a>
-              </li>
-              <br/><li><a href="/">cancel</a></li>
-            </ul>
-          </form>
-
-
-        </div>
-      </div>
-
-      <%----%>
-
-
-
-      <%--<ul><li><a href="/login" id="login">sign-in</a></li></ul>--%>
     </div>
 
 

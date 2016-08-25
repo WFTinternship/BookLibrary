@@ -8,9 +8,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.mockito.internal.util.reflection.Whitebox;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+import static com.workfront.internship.booklibrary.dao.TestUtil.getRandomAuthor;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNull;
 import static junit.framework.TestCase.assertTrue;
@@ -20,8 +22,8 @@ import static org.mockito.Mockito.when;
 /**
  * Created by ${Sona} on 7/29/2016.
  */
+
 public class AuthorManagerUnitTest {
-    LegacyDataSource dataSource;
     private Author testAuthor;
 
     private AuthorDAO authorDAO;
@@ -35,8 +37,7 @@ public class AuthorManagerUnitTest {
         authorDAO = Mockito.mock(AuthorDAOImpl.class);
         Whitebox.setInternalState(authorManager, "authorDAO", authorDAO);
 
-        testAuthor = new Author();
-        testAuthor = TestUtil.getRandomAuthor();
+        testAuthor = getRandomAuthor();
     }
 
     @After
@@ -199,7 +200,7 @@ public class AuthorManagerUnitTest {
     @Test
     public void delete_cannotDeleteNonNullAuthor() {
         testAuthor.setId(3);
-        Author author = TestUtil.getRandomAuthor();
+        Author author = getRandomAuthor();
         when(authorDAO.getAuthorByID(anyInt())).thenReturn(author);
 
         boolean b;

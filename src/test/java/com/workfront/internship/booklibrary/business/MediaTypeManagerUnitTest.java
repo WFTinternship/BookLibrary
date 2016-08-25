@@ -11,6 +11,7 @@ import org.mockito.internal.util.reflection.Whitebox;
 
 import java.util.List;
 
+import static com.workfront.internship.booklibrary.dao.TestUtil.getRandomMediaType;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNull;
 import static junit.framework.TestCase.assertTrue;
@@ -21,7 +22,6 @@ import static org.mockito.Mockito.when;
  * Created by Sona Mikayelyan on 7/31/2016.
  */
 public class MediaTypeManagerUnitTest {
-    LegacyDataSource dataSource;
     private MediaType testMediaType;
 
     private MediaTypeDAO mediaTypeDAO;
@@ -35,8 +35,7 @@ public class MediaTypeManagerUnitTest {
         mediaTypeDAO = Mockito.mock(MediaTypeDAOImpl.class);
         Whitebox.setInternalState(mediaTypeManager, "mediaTypeDAO", mediaTypeDAO);
 
-        testMediaType = new MediaType();
-        testMediaType = TestUtil.getRandomMediaType();
+        testMediaType = getRandomMediaType();
     }
 
     @After
@@ -167,7 +166,7 @@ public class MediaTypeManagerUnitTest {
     @Test
     public void delete_cannotDeleteNonNullMediaType() {
         testMediaType.setId(3);
-        MediaType mediaType = TestUtil.getRandomMediaType();
+        MediaType mediaType = getRandomMediaType();
         when(mediaTypeDAO.getMediaTypeByID(anyInt())).thenReturn(mediaType);
 
         boolean b;

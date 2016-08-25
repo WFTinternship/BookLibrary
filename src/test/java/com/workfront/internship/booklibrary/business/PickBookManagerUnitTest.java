@@ -28,7 +28,6 @@ import static org.mockito.Mockito.when;
  * Created by ${Sona} on 8/1/2016.
  */
 public class PickBookManagerUnitTest {
-    LegacyDataSource dataSource;
     private PickBook testPickBook;
 
     private Genre testGenre;
@@ -51,7 +50,6 @@ public class PickBookManagerUnitTest {
 
         testUser = getRandomUser();
 
-        testPickBook = new PickBook();
         testPickBook = getRandomPickBook(testBook, testUser);
     }
 

@@ -25,7 +25,6 @@ import static org.mockito.Mockito.when;
  * Created by Sona Mikayelyan on 7/31/2016.
  */
 public class MediaManagerUnitTest {
-    LegacyDataSource dataSource;
     private Media testMedia;
 
     private MediaType testMediaType;
@@ -48,7 +47,6 @@ public class MediaManagerUnitTest {
 
         testMediaType = getRandomMediaType();
 
-        testMedia = new Media();
         testMedia = getRandomMedia(testMediaType, testBook);
     }
 

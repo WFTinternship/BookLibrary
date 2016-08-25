@@ -22,7 +22,6 @@ import static org.mockito.Mockito.when;
  * Created by Sona Mikayelyan on 8/1/2016.
  */
 public class BookManagerUnitTest {
-    LegacyDataSource dataSource;
     private Book testBook;
     private Genre testGenre;
 
@@ -34,7 +33,6 @@ public class BookManagerUnitTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        Whitebox.setInternalState(bookDAO, "dataSource", dataSource);
         bookManager = new BookManagerImpl();
 
         bookDAO = Mockito.mock(BookDAOImpl.class);

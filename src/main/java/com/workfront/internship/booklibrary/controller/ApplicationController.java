@@ -47,7 +47,6 @@ public class ApplicationController {
 
     @RequestMapping("/login")
     public String getSigninPage(){
-
         return "SignIn";
     }
     @RequestMapping("/SignIn")

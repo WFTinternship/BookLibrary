@@ -6,7 +6,11 @@ import com.workfront.internship.booklibrary.dao.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.internal.util.reflection.Whitebox;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static com.workfront.internship.booklibrary.dao.TestUtil.getRandomMediaType;
 import static junit.framework.TestCase.assertNotNull;
@@ -14,24 +18,24 @@ import static junit.framework.TestCase.assertNotNull;
 /**
  * Created by Sona Mikayelyan on 7/31/2016.
  */
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = ManagerTestConfig.class)
 public class MediaTypeManagerIntegrationTest {
-    private static MediaTypeManager mediaTypeManager;
+
+    @Autowired
+    private MediaTypeManager mediaTypeManager;
+
     private MediaType testMediaType;
-    LegacyDataSource dataSource = LegacyDataSource.getInstance();
-    MediaTypeDAO mediaTypeDAO;
 
     @Before
     public void setup() throws Exception {
-        Whitebox.setInternalState(mediaTypeDAO, "dataSource", dataSource);
-        mediaTypeManager = new MediaTypeManagerImpl();
         testMediaType = getRandomMediaType();
-        mediaTypeDAO = new MediaTypeDAOImpl();
     }
 
     @After
     public void tearDown(){
-        testMediaType = null;
-        mediaTypeDAO.deleteAll();
+        mediaTypeManager.delete(testMediaType.getId());
     }
 
     @Test
