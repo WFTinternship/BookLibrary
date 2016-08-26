@@ -6,8 +6,12 @@ import com.workfront.internship.booklibrary.dao.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.internal.util.reflection.Whitebox;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.sql.Timestamp;
 import java.text.DateFormat;
@@ -27,7 +31,13 @@ import static org.mockito.Mockito.when;
 /**
  * Created by ${Sona} on 8/1/2016.
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = ManagerTestConfig.class)
 public class PickBookManagerUnitTest {
+    @Autowired
+    private PickBookManager pickBookManager;
+
+
     private PickBook testPickBook;
 
     private Genre testGenre;
@@ -35,12 +45,11 @@ public class PickBookManagerUnitTest {
     private User testUser;
 
     private PickBookDAO pickBookDAO;
-    private PickBookManager pickBookManager;
 
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        pickBookManager = new PickBookManagerImpl();
+//        pickBookManager = new PickBookManagerImpl();
 
         pickBookDAO = Mockito.mock(PickBookDAOImpl.class);
         Whitebox.setInternalState(pickBookManager, "pickBookDAO", pickBookDAO);

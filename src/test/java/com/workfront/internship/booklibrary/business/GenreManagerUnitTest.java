@@ -6,8 +6,12 @@ import com.workfront.internship.booklibrary.dao.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.internal.util.reflection.Whitebox;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
@@ -21,16 +25,21 @@ import static org.mockito.Mockito.when;
 /**
  * Created by Sona Mikayelyan on 7/31/2016.
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = ManagerTestConfig.class)
 public class GenreManagerUnitTest {
-    private Genre testGenre;
 
-    private GenreDAO genreDAO;
+    @Autowired
     private GenreManager genreManager;
+
+    private Genre testGenre;
+    private GenreDAO genreDAO;
+
 
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        genreManager = new GenreManagerImpl();
+//        genreManager = new GenreManagerImpl();
 
         genreDAO = Mockito.mock(GenreDAOImpl.class);
         Whitebox.setInternalState(genreManager, "genreDAO", genreDAO);

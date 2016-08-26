@@ -6,9 +6,13 @@ import com.workfront.internship.booklibrary.dao.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.internal.util.reflection.Whitebox;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
@@ -22,17 +26,21 @@ import static org.mockito.Mockito.when;
 /**
  * Created by ${Sona} on 7/29/2016.
  */
-
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = ManagerTestConfig.class)
 public class AuthorManagerUnitTest {
-    private Author testAuthor;
 
-    private AuthorDAO authorDAO;
+    @Autowired
     private AuthorManager authorManager;
+
+    private Author testAuthor;
+    private AuthorDAO authorDAO;
+
 
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        authorManager = new AuthorManagerImpl();
+//        authorManager = new AuthorManagerImpl();
 
         authorDAO = Mockito.mock(AuthorDAOImpl.class);
         Whitebox.setInternalState(authorManager, "authorDAO", authorDAO);

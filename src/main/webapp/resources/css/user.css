@@ -17,25 +17,25 @@
     background-color: #0086b3;
 }
 
-#dialogue {
-    display: none;
-    position: absolute;
-    bottom: 50px;
-    left: 40%;
-    margin-left: 0px;
-    width: 300px;
-    padding: 10px;
-    background: -moz-linear-gradient(#80dfff, #e6f9ff);
-    background: -webkit-linear-gradient(#80dfff, #e6f9ff);
-    background: -o-linear-gradient(#80dfff, #e6f9ff);
-}
+/*#dialogue {*/
+    /*display: none;*/
+    /*position: absolute;*/
+    /*bottom: 50px;*/
+    /*left: 40%;*/
+    /*margin-left: 0px;*/
+    /*width: 300px;*/
+    /*padding: 10px;*/
+    /*background: -moz-linear-gradient(#80dfff, #e6f9ff);*/
+    /*background: -webkit-linear-gradient(#80dfff, #e6f9ff);*/
+    /*background: -o-linear-gradient(#80dfff, #e6f9ff);*/
+/*}*/
 
-.dialogueContainer:hover #dialogue {
-    display: block;
-}
+/*.dialogueContainer:hover #dialogue {*/
+    /*display: block;*/
+/*}*/
 
-#WF {
-    font-family: Arial, Helvetica, sans-serif;
-    color: white;
-    font-style: italic;
-}
+/*#WF {*/
+    /*font-family: Arial, Helvetica, sans-serif;*/
+    /*color: white;*/
+    /*font-style: italic;*/
+/*}*/

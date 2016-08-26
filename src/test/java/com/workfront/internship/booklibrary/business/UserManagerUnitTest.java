@@ -7,6 +7,7 @@ import com.workfront.internship.booklibrary.dao.UserDAO;
 import com.workfront.internship.booklibrary.dao.UserDAOImpl;
 
 import org.junit.*;
+import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 
 import java.io.UnsupportedEncodingException;
@@ -18,23 +19,30 @@ import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.when;
 
 import org.mockito.internal.util.reflection.Whitebox;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 
 /**
  * Created by ${Sona} on 7/27/2016.
  */
-@Component
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = ManagerTestConfig.class)
 public class UserManagerUnitTest {
-    private User testUser;
 
-    private UserDAO userDAO;
+    @Autowired
     private UserManager userManager;
+
+    private User testUser;
+    private UserDAO userDAO;
+
 
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        userManager = new UserManagerImpl();
+//        userManager = new UserManagerImpl();
         userDAO = Mockito.mock(UserDAOImpl.class);
         Whitebox.setInternalState(userManager, "userDAO", userDAO);
 
@@ -46,7 +54,6 @@ public class UserManagerUnitTest {
         testUser = null;
         userDAO = null;
     }
-
 
     @Test
     public void registration_ValidUser_EncryptedPassword() throws UnsupportedEncodingException, NoSuchAlgorithmException {

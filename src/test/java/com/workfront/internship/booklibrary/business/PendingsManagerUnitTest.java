@@ -6,8 +6,12 @@ import com.workfront.internship.booklibrary.dao.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.internal.util.reflection.Whitebox;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +26,12 @@ import static org.mockito.Mockito.when;
 /**
  * Created by ${Sona} on 8/1/2016.
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = ManagerTestConfig.class)
 public class PendingsManagerUnitTest {
+    @Autowired
+    private PendingsManager pendingsManager;
+
     private Pending testPending;
 
     private Genre testGenre;
@@ -30,12 +39,12 @@ public class PendingsManagerUnitTest {
     private User testUser;
 
     private PendingDAO pendingDAO;
-    private PendingsManager pendingsManager;
+
 
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        pendingsManager = new PendingsManagerImpl();
+//        pendingsManager = new PendingsManagerImpl();
 
         pendingDAO = Mockito.mock(PendingDAOImpl.class);
         Whitebox.setInternalState(pendingsManager, "pendingDAO", pendingDAO);
