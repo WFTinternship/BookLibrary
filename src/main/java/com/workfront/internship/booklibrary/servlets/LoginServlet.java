@@ -47,7 +47,7 @@ public class LoginServlet extends HttpServlet{
             e.printStackTrace();
         }
 
-//      ays dzevovrequesty hishvum e, yev jsp-uminch-vor objekt new aneluc khaskana
+//      ays dzevov requesty hishvum e, yev jsp-um inch-vor objekt new aneluc khaskana
 //      RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/jsp/User.jsp");
 //        dispatcher.forward(request, response);
 
