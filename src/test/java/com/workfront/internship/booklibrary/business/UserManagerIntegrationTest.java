@@ -4,10 +4,12 @@ import com.workfront.internship.booklibrary.common.User;
 import com.workfront.internship.booklibrary.LegacyDataSource;
 import com.workfront.internship.booklibrary.dao.UserDAO;
 import com.workfront.internship.booklibrary.dao.UserDAOImpl;
+import com.workfront.internship.booklibrary.spring.DevelopmentConfig;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.mockito.internal.util.reflection.Whitebox;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -23,7 +25,8 @@ import static junit.framework.TestCase.assertNotNull;
  * Created by ${Sona} on 7/29/2016.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = ManagerTestConfig.class)
+@ContextConfiguration(classes = DevelopmentConfig.class)
+@ActiveProfiles("Development")
 public class UserManagerIntegrationTest {
 
     @Autowired
@@ -48,7 +51,6 @@ public class UserManagerIntegrationTest {
 
         User actualUser = userManager.findUserByID(testUser.getId());
         assertNotNull(actualUser);
-
     }
 
     @Test

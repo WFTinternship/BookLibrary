@@ -17,10 +17,15 @@
     </servlet-mapping>
 
 
-    <listener>
-        <listener-class>com.workfront.internship.booklibrary.spring.SpringContextListener</listener-class>
-    </listener>
+    <context-param>
+        <param-name>spring.profiles.active</param-name>
+        <param-value>Development</param-value>
+    </context-param>
 
+
+    <!--<listener>-->
+    <!--<listener-class>com.workfront.internship.booklibrary.spring.SpringContextListener</listener-class>-->
+    <!--</listener>-->
 
     <!--<servlet>-->
         <!--<servlet-name>LoginServlet</servlet-name>-->

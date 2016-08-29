@@ -18,8 +18,8 @@ import java.security.NoSuchAlgorithmException;
  * Created by ${Sona} on 8/9/2016.
  */
 public class LoginServlet extends HttpServlet{
-    private UserManager userManager;
-    private DataSource dataSource;
+//    private UserManager userManager;
+//    private DataSource dataSource;
 
 //    public LoginServlet() throws Exception {
 //        super();
@@ -27,33 +27,33 @@ public class LoginServlet extends HttpServlet{
 //        userManager = new UserManagerImpl(dataSource);
 //    }
 
-    @Override
-    public void init(ServletConfig servletConfig) throws ServletException {
-        super.init();
-        userManager = BookLibraryApplication.getApplicationContext(servletConfig.getServletContext()).getBean(UserManager.class);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        String username=request.getParameter("username/email");
-        String password=request.getParameter("password");
-
-        try {
-            User user = userManager.loginWithUsername(username, password);
-            request.setAttribute("user", user);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
+//    @Override
+//    public void init(ServletConfig servletConfig) throws ServletException {
+//        super.init();
+//        userManager = BookLibraryApplication.getApplicationContext(servletConfig.getServletContext()).getBean(UserManager.class);
+//    }
+//
+//    @Override
+//    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+//            throws ServletException, IOException {
+//
+//        String username=request.getParameter("username/email");
+//        String password=request.getParameter("password");
+//
+//        try {
+//            User user = userManager.loginWithUsername(username, password);
+//            request.setAttribute("user", user);
+//        } catch (NoSuchAlgorithmException e) {
+//            e.printStackTrace();
+//        }
 
 //      ays dzevov requesty hishvum e, yev jsp-um inch-vor objekt new aneluc khaskana
 //      RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/jsp/User.jsp");
 //        dispatcher.forward(request, response);
 
         //ays dzevov requesty korum e
-        response.sendRedirect("/jsp/User.jsp");
-    }
+//        response.sendRedirect("/jsp/User.jsp");
+//    }
 
 
 /**
