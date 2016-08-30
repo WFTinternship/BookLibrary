@@ -60,13 +60,12 @@ public class ApplicationController {
         try {
             user = userManager.loginWithUsername(username, password);
 
-        } catch (NoSuchAlgorithmException e) {
+        } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
             e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            return "ErrorPage";
         }
 
-        model.addAttribute("user", user);
+//        model.addAttribute("user", user);
         request.getSession().setAttribute("user", user);
         return "User";
     }
@@ -74,6 +73,7 @@ public class ApplicationController {
     @RequestMapping("/signout")
     public String signoutRequest(HttpServletRequest request){
         request.getSession().setAttribute("user", null);
+
         return "redirect:/";
     }
 
@@ -98,17 +98,18 @@ public class ApplicationController {
         int id = 0;
         try {
             id = userManager.register(user);
-        } catch (NoSuchAlgorithmException e) {
+        } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
             e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            return "ErrorPage";
         }
         if(id == 0){
             String errorString = "User with this e-mail already exists";
+            request.setAttribute("errorString", errorString);
             return "Registration";
         }
 
         model.addAttribute("user", user);
+        request.getSession().setAttribute("user", user);
         return "User";
     }
 
