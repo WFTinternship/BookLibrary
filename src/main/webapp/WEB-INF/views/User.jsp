@@ -15,13 +15,13 @@
 </head>
 
 <body>
-    <div>
+    <a>
         <p> <%User user = (User)request.getSession().getAttribute("user");
         out.print("hi " + user.getName());
         %></p>
 
 
-        <button type="button" ><a href="/signout">Sign out</a></button>
+        <a href="/signout"><button type="button" >Sign out</button></a>
     </div>
 
     <div class="buttons" style="position:absolute; bottom:10px; display: inline;">

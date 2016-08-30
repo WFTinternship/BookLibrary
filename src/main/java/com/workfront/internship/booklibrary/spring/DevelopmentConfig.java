@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Profile;
 import javax.sql.DataSource;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.Properties;
 
@@ -24,7 +25,8 @@ public class DevelopmentConfig {
 
         BasicDataSource dataSource = new BasicDataSource();
         Properties properties = new Properties();
-        FileInputStream fis = new FileInputStream("C:\\Users\\Workfront\\IdeaProjects\\BookLibrary\\src\\main\\resources\\ConnectionResources.properties");
+        InputStream fis = DevelopmentConfig.class.getClassLoader().getResourceAsStream("ConnectionResources.properties");
+//        FileInputStream fis = new FileInputStream("C:\\Users\\IdeaProjects\\BookLibrary\\src\\main\\resources\\ConnectionResources.properties");
         //properties.load(DevelopmentConfig.class.getClassLoader().getResourceAsStream("C:\\Users\\Workfront\\IdeaProjects\\BookLibrary\\src\\main\\resources\\ConnectionResources.properties"));
         properties.load(fis);
 
