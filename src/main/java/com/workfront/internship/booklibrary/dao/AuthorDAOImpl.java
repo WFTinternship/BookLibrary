@@ -223,7 +223,7 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
         return authorList;
     }
 
-    private void updateAuthor(Connection connection, Author author){
+    public void updateAuthor(Connection connection, Author author){
         PreparedStatement preparedStatement = null;
         try{
             if(author.getId() != 0){
@@ -258,34 +258,7 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
 
     @Override
     public void updateAuthor(Author author) {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-
-        try{
-            if(author.getId() != 0){
-                connection = dataSource.getConnection();
-                String sql = "UPDATE Author SET " +
-                        "name = ?, surname = ?, email = ?, web_page = ?, biography = ? " +
-                        "WHERE author_id = ?";
-
-                preparedStatement = connection.prepareStatement(sql);
-
-                preparedStatement.setString(1, author.getName());
-                preparedStatement.setString(2, author.getSurname());
-                preparedStatement.setString(3, author.geteMail());
-                preparedStatement.setString(4, author.getWebPage());
-                preparedStatement.setString(5, author.getBiography());
-                preparedStatement.setInt(6, author.getId());
-
-                preparedStatement.executeUpdate();
-            }
-
-        } catch (SQLException e){
-            LOGGER.error("SQL exception occurred!");
-            throw new RuntimeException(e);
-        } finally {
-            closeConnection(preparedStatement, connection);
-        }
+        updateAuthor(null, author);
     }
 
     @Override
@@ -295,6 +268,17 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
         }
         else {
             add(connection, author);
+        }
+    }
+
+    public void checkAndUpdateAuthorList(Connection connection, List<Author> authorList){
+        for(int i = 0; i < authorList.size(); i++){
+            if(getAuthorByID(authorList.get(i).getId()) != null){
+                updateAuthor(connection, authorList.get(i));
+            }
+            else{
+                add(connection, authorList.get(i));
+            }
         }
     }
 

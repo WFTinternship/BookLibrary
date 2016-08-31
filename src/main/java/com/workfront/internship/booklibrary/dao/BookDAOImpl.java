@@ -1,5 +1,6 @@
 package com.workfront.internship.booklibrary.dao;
 
+import com.workfront.internship.booklibrary.common.Author;
 import com.workfront.internship.booklibrary.common.Book;
 import com.workfront.internship.booklibrary.common.Genre;
 
@@ -26,14 +27,16 @@ public class BookDAOImpl extends General implements BookDAO {
     private AuthorDAO authorDAO;
 
     @Override
-    public int add(Book book) {
+    public int add(Book book, List<Author> authorList) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         int lastId = 0;
         try{
             connection = dataSource.getConnection();
-//            connection.setAutoCommit(false);
+            connection.setAutoCommit(false);
+
+            authorDAO.checkAndUpdateAuthorList(connection, authorList);
 
             String sql = "INSERT INTO Book(ISBN, title, genre_id, volume, abstract, language, count, edition_year, pages, country_of_edition) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             preparedStatement = connection.prepareStatement(sql, preparedStatement.RETURN_GENERATED_KEYS);
@@ -55,25 +58,24 @@ public class BookDAOImpl extends General implements BookDAO {
                 lastId = resultSet.getInt(1);
             }
             book.setId(lastId);
+            connection.commit();
 
-//            if(authorDAO.getAllAuthorsByBookId(book.getId()) != null) {
-//                connection.commit();
-//            } else {
-//                connection.rollback();
-//            }
-            return book.getId();
+//            return book.getId();
         }catch (SQLException e){
-//            try {
-//                connection.rollback();
-//            } catch (SQLException e1) {
-//                e1.printStackTrace();
-//            }
+            try {
+                connection.rollback();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
             LOGGER.error("SQL exception occurred!");
             throw new RuntimeException(e);
+        }catch (Exception e) {
+            e.printStackTrace();
         } finally {
             closeConnection(resultSet, preparedStatement, connection);
         }
-        //return book.getId();
+
+        return book.getId();
     }
 
     @Override

@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface BookDAO {
 
-    int add(Book book);
+    int add(Book book, List<Author> authorList);
 
     Book getBookByID(int id);
 

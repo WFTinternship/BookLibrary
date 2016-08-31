@@ -52,9 +52,7 @@ public class PickBookDAOImpl extends General implements PickBookDAO {
                 lastId = resultSet.getInt(1);
             }
             pickedBook.setId(lastId);
-
             connection.commit();
-
 
         } catch (SQLException e){
             try {

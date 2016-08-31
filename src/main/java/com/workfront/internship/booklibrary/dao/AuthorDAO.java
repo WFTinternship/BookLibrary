@@ -20,10 +20,14 @@ public interface AuthorDAO {
 
     List<Author> getAllAuthorsByBookId(int bookId);
 
+    void updateAuthor(Connection connection, Author author);
+
     //update all fields in a row
     void updateAuthor(Author author);
 
     void checkAndUpdateAuthor(Connection connection, Author author);
+
+    void checkAndUpdateAuthorList(Connection connection, List<Author> authorList);
 
     void deleteAuthor(int id);
 

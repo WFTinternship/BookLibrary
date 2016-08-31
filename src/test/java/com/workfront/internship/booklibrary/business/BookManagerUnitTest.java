@@ -1,6 +1,7 @@
 package com.workfront.internship.booklibrary.business;
 
 import com.workfront.internship.booklibrary.LegacyDataSource;
+import com.workfront.internship.booklibrary.common.Author;
 import com.workfront.internship.booklibrary.common.Book;
 import com.workfront.internship.booklibrary.common.Genre;
 import com.workfront.internship.booklibrary.dao.*;
@@ -32,6 +33,7 @@ public class BookManagerUnitTest {
 
     private Book testBook;
     private Genre testGenre;
+    private List<Author> authorList;
 
     private static BookDAO bookDAO;
     private GenreDAO genreDAO;
@@ -58,7 +60,7 @@ public class BookManagerUnitTest {
     @Test(expected = IllegalArgumentException.class)
     public void findBookByID_idLessThan1(){
         testBook.setId(0);
-        bookDAO.add(testBook);
+        bookDAO.add(testBook, authorList);
         int id = testBook.getId();
 
         //test
@@ -92,7 +94,7 @@ public class BookManagerUnitTest {
     @Test(expected = IllegalArgumentException.class)
     public void findBookByTitle_idLessThan1(){
         testBook.setTitle(null);
-        bookDAO.add(testBook);
+        bookDAO.add(testBook, authorList);
         String title = testBook.getTitle();
 
         //test

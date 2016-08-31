@@ -26,32 +26,14 @@ public class BookManagerImpl implements BookManager{
 
     @Override
     public int add(Book book, List<Author> authorList) throws Exception {
-//        if(authorList.isEmpty()) {
-//            throw new Exception("Trying to add a book without mentioning its author/s.");
-//        }
-//        if(!isValidBook(book)) {
-//            throw new Exception("Trying to add a book with invalid parameter/s.");
-//        }
-//        if(!authorList.isEmpty()){
-//            for(Author author : authorList){
-//                if(!bookDAO.contains(author.getId())) { //todo in BookDAO add a method contains(int authorId) which gets info from book_author table
-//                    bookDAO.addAuthorToBook(book.getId(), author.getId());
-//                }else if(!book.getAuthors().get(author.getId()).equals(author)) {
-//                    authorDAO.checkAndUpdateAuthor(dataSource.getConnection(), author); //todo correct the method in authorDAO
-//                }
-//            }
-//        }
-//        book.setAuthors(authorList);
-//
-//        if(isValidBook(book)){
-//            bookDAO.add(book);
-//            return book.getId();
-//        }
-//        else return 0;
+        if(isValidBook(book)){
+            bookDAO.add(book, authorList);
+            if(book.getId() > 0){
+                return book.getId();
+            }
+        }
         return 0;
     }
-
-    //todo implement checkAndUpdate() method in BookDAO and here, and call it from add()
 
     @Override
     public Book findBookByID(int id) {
