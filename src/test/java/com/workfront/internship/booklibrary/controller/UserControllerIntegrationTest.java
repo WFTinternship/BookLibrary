@@ -54,7 +54,7 @@ public class UserControllerIntegrationTest {
 
 //    @Test
 //    public void register(){
-//        String userPage = applicationController.registrationRequest(testModel, testRequest);
+//        String userPage = applicationController.registrationRequest(testRequest);
 //        assertEquals("Wrong page", userPage, "User");
 //    }
 }
