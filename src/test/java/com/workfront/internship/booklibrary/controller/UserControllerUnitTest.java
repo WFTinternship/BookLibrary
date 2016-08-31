@@ -1,6 +1,10 @@
 package com.workfront.internship.booklibrary.controller;
 
+import com.workfront.internship.booklibrary.business.AuthorManager;
+import com.workfront.internship.booklibrary.business.GenreManager;
 import com.workfront.internship.booklibrary.business.UserManager;
+import com.workfront.internship.booklibrary.common.Author;
+import com.workfront.internship.booklibrary.common.Genre;
 import com.workfront.internship.booklibrary.common.User;
 import org.junit.*;
 import org.mockito.internal.util.reflection.Whitebox;
@@ -13,7 +17,11 @@ import javax.servlet.http.HttpSession;
 import java.io.InvalidObjectException;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
 
+import static com.workfront.internship.booklibrary.dao.TestUtil.getRandomAuthor;
+import static com.workfront.internship.booklibrary.dao.TestUtil.getRandomGenre;
 import static com.workfront.internship.booklibrary.dao.TestUtil.getRandomUser;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.anyString;
@@ -29,7 +37,12 @@ public class UserControllerUnitTest {
     private User testUser;
     private HttpServletRequest testRequest;
     private HttpSession testSession;
-    private Model testModel;
+
+    private AuthorManager authorManager;
+    private GenreManager genreManager;
+
+    private Author testAuthor;
+    private Genre testGenre;
 
     @BeforeClass
     public static void setUpClass() {
@@ -45,22 +58,22 @@ public class UserControllerUnitTest {
     public void setUp() {
         //create test user object
         testUser = getRandomUser();
+        testAuthor = getRandomAuthor();
+        testGenre = getRandomGenre();
 
         userManager = mock(UserManager.class);
         Whitebox.setInternalState(applicationController, "userManager", userManager);
 
-//        testRequest = new MockHttpServletRequest();
-//        testRequest.addParameter("username/email", "sonamikayelyan");
-//        testRequest.addParameter("password", "sonapass");
+        authorManager = mock(AuthorManager.class);
+        genreManager = mock(GenreManager.class);
+        Whitebox.setInternalState(applicationController, "authorManager", authorManager);
+        Whitebox.setInternalState(applicationController, "genreManager", genreManager);
 
         testRequest = mock(HttpServletRequest.class);
         testSession = mock(HttpSession.class);
-        testModel = mock(Model.class);
 
-        HttpServletResponse response = mock(HttpServletResponse.class);
-
-        when(testRequest.getParameter("username/email")).thenReturn("sonamikayelyan"); // thenReturn(testUser.getUsername())
-        when(testRequest.getParameter("password")).thenReturn("sonapass");  //thenReturn(testUser.getPassword())
+        when(testRequest.getParameter("username/email")).thenReturn(testUser.getUsername());
+        when(testRequest.getParameter("password")).thenReturn(testUser.getPassword());
         when(testRequest.getSession()).thenReturn(testSession);
     }
 
@@ -72,19 +85,61 @@ public class UserControllerUnitTest {
     }
 
     @Test
-    public void login_Success() throws UnsupportedEncodingException, NoSuchAlgorithmException{
+    public void simpleRequest_Success() {
+        List<Author> authorList = new ArrayList<>();
+        authorList.add(testAuthor);
 
+        List<Genre> genreList = new ArrayList<>();
+
+        when(authorManager.viewAllAuthors()).thenReturn(authorList);
+        when(genreManager.viewAll()).thenReturn(genreList);
+
+        //testing method
+        applicationController.simpleRequest(testRequest);
+
+        verify(testSession).setAttribute("authors", authorList);
+        verify(testSession).setAttribute("genres", genreList);
+
+    }
+
+    @Test
+    public void login_Success() throws UnsupportedEncodingException, NoSuchAlgorithmException{
         when(userManager.loginWithUsername(anyString(), anyString())).thenReturn(testUser);
-        applicationController.signinRequest(testModel, testRequest);
+        String result = applicationController.signinRequest(testRequest);
         verify(testSession).setAttribute("user", testUser);
+        assertEquals(result, "User");
     }
 
     @Test
     public void login_Fail() throws UnsupportedEncodingException, NoSuchAlgorithmException {
-        doThrow(NoSuchAlgorithmException.class).when(userManager).loginWithUsername(anyString(), anyString());
-
-        applicationController.signinRequest(testModel, testRequest);
-
-        verify(testSession, never()).setAttribute(anyString(), anyString());
+        when(userManager.loginWithUsername(anyString(), anyString())).thenReturn(null);
+        String result = applicationController.signinRequest(testRequest);
+        assertEquals(result, "SignIn");
     }
+
+    @Test
+    public void signOut(){
+        String result = applicationController.signoutRequest(testRequest);
+        verify(testSession).setAttribute("user", null);
+        assertEquals(result, "redirect:/");
+    }
+
+    @Test
+    public void register_Success() throws UnsupportedEncodingException, NoSuchAlgorithmException{
+        when(userManager.register(any(User.class))).thenReturn(1);
+
+        String result = applicationController.registrationRequest(testRequest);
+        verify(testSession).setAttribute(eq("user"), any(User.class));
+        assertEquals(result, "User");
+    }
+
+    @Test
+    public void register_Fail() throws UnsupportedEncodingException, NoSuchAlgorithmException{
+        String errorString = "User with this e-mail already exists";
+        String result = applicationController.registrationRequest(testRequest);
+        verify(testRequest).setAttribute("errorString", errorString);
+
+        assertEquals(result, "Registration");
+    }
+
 }

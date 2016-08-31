@@ -75,21 +75,21 @@
         <fieldset>
             <legend>Create account</legend>
             name<br/>
-            <input type="text" name="name"><br/>
+            <input type="text" name="name" required><br/>
             <br/>surname<br/>
-            <input type="text" name="surname"><br/>
+            <input type="text" name="surname" required><br/>
             <br/>e-mail<br/>
-            <input type="text" name="e-mail"><br/>
+            <input type="text" name="e-mail" required><br/>
             <br/>address<br/>
-            <input type="text" name="address"><br/>
+            <input type="text" name="address" required><br/>
             <br/>phone<br/>
-            <input type="text" name="phone"><br/>
+            <input type="text" name="phone" required><br/>
             <br/>username<br/>
-            <input type="text" name="username"><br/>
+            <input type="text" name="username" required><br/>
             <br/>password<br/>
-            <input type="password" name="password"><br/>
+            <input type="password" name="password" required><br/>
             <br/>access privilege<br/>
-            <input type="text" name="access-privilege">
+            <input type="text" name="access-privilege" required>
             <br/><input type="submit" value= "Submit"><br/>
         </fieldset>
     </form>

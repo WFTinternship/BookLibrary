@@ -28,11 +28,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 /**
  * Created by ${Sona} on 7/27/2016.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = ManagerTestConfig.class)
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(classes = ManagerTestConfig.class)
 public class UserManagerUnitTest {
 
-    @Autowired
     private UserManager userManager;
 
     private User testUser;
@@ -42,7 +41,7 @@ public class UserManagerUnitTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-//        userManager = new UserManagerImpl();
+        userManager = new UserManagerImpl();
         userDAO = Mockito.mock(UserDAOImpl.class);
         Whitebox.setInternalState(userManager, "userDAO", userDAO);
 

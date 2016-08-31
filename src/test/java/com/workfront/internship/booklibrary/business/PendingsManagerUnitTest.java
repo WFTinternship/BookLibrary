@@ -27,10 +27,9 @@ import static org.mockito.Mockito.when;
 /**
  * Created by ${Sona} on 8/1/2016.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = ManagerTestConfig.class)
+
 public class PendingsManagerUnitTest {
-    @Autowired
+
     private PendingsManager pendingsManager;
 
     private Pending testPending;
@@ -45,7 +44,7 @@ public class PendingsManagerUnitTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-//        pendingsManager = new PendingsManagerImpl();
+        pendingsManager = new PendingsManagerImpl();
 
         pendingDAO = Mockito.mock(PendingDAOImpl.class);
         Whitebox.setInternalState(pendingsManager, "pendingDAO", pendingDAO);

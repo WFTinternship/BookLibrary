@@ -122,7 +122,7 @@ public class UserDAOImpl extends General implements UserDAO {
 
     @Override
     public User getUserByUsername(String userName) {
-      //  User user = null;
+        User user = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -134,9 +134,9 @@ public class UserDAOImpl extends General implements UserDAO {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, userName);
             resultSet = preparedStatement.executeQuery();
-            User user = new User();
-            while(resultSet.next()){
 
+            while(resultSet.next()){
+                user = new User();
                 setUserDetails(resultSet, user);
             }
             return user;

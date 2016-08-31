@@ -26,8 +26,6 @@ public class DevelopmentConfig {
         BasicDataSource dataSource = new BasicDataSource();
         Properties properties = new Properties();
         InputStream fis = DevelopmentConfig.class.getClassLoader().getResourceAsStream("ConnectionResources.properties");
-//        FileInputStream fis = new FileInputStream("C:\\Users\\IdeaProjects\\BookLibrary\\src\\main\\resources\\ConnectionResources.properties");
-        //properties.load(DevelopmentConfig.class.getClassLoader().getResourceAsStream("C:\\Users\\Workfront\\IdeaProjects\\BookLibrary\\src\\main\\resources\\ConnectionResources.properties"));
         properties.load(fis);
 
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");

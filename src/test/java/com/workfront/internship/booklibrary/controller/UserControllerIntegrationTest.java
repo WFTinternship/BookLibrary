@@ -27,14 +27,12 @@ public class UserControllerIntegrationTest {
     @Autowired
     ApplicationController applicationController;
 
-    private Model testModel;
     private HttpServletRequest testRequest;
     private HttpSession testSession;
 
     @Before
     public void setUp() {
         testRequest = mock(HttpServletRequest.class);
-        testModel = mock(Model.class);
         testSession = mock(HttpSession.class);
 
         when(testRequest.getSession()).thenReturn(testSession);
@@ -44,7 +42,7 @@ public class UserControllerIntegrationTest {
 
     @Test
     public void login() {
-        String userPage = applicationController.signinRequest(testModel, testRequest);
+        String userPage = applicationController.signinRequest(testRequest);
         assertEquals("Wrong page", userPage, "User");
     }
 

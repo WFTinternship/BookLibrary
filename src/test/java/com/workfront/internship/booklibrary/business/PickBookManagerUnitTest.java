@@ -31,10 +31,10 @@ import static org.mockito.Mockito.when;
 /**
  * Created by ${Sona} on 8/1/2016.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = ManagerTestConfig.class)
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(classes = ManagerTestConfig.class)
 public class PickBookManagerUnitTest {
-    @Autowired
+//    @Autowired
     private PickBookManager pickBookManager;
 
 
@@ -49,7 +49,7 @@ public class PickBookManagerUnitTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-//        pickBookManager = new PickBookManagerImpl();
+        pickBookManager = new PickBookManagerImpl();
 
         pickBookDAO = Mockito.mock(PickBookDAOImpl.class);
         Whitebox.setInternalState(pickBookManager, "pickBookDAO", pickBookDAO);

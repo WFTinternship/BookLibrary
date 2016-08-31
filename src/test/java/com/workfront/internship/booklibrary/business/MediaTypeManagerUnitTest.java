@@ -25,10 +25,9 @@ import static org.mockito.Mockito.when;
 /**
  * Created by Sona Mikayelyan on 7/31/2016.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = ManagerTestConfig.class)
+
 public class MediaTypeManagerUnitTest {
-    @Autowired
+
     private MediaTypeManager mediaTypeManager;
 
     private MediaType testMediaType;
@@ -38,7 +37,7 @@ public class MediaTypeManagerUnitTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-//        mediaTypeManager = new MediaTypeManagerImpl();
+        mediaTypeManager = new MediaTypeManagerImpl();
 
         mediaTypeDAO = Mockito.mock(MediaTypeDAOImpl.class);
         Whitebox.setInternalState(mediaTypeManager, "mediaTypeDAO", mediaTypeDAO);

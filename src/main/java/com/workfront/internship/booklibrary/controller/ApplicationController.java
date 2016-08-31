@@ -36,12 +36,12 @@ public class ApplicationController {
     private AuthorManager authorManager;
 
     @RequestMapping("/")
-    public String simpleRequest(Model model) {
+    public String simpleRequest(HttpServletRequest request) {
         List<Author> authorList = authorManager.viewAllAuthors();
-        model.addAttribute("authors", authorList);
+        request.getSession().setAttribute("authors", authorList);
 
         List<Genre> genreList = genreManager.viewAll();
-        model.addAttribute("genres", genreList);
+        request.getSession().setAttribute("genres", genreList);
 
         return "home";
     }
@@ -52,10 +52,11 @@ public class ApplicationController {
     }
 
     @RequestMapping("/SignIn")
-    public String signinRequest(Model model, HttpServletRequest request){
+    public String signinRequest(HttpServletRequest request){
+        User user;
+
         String username=request.getParameter("username/email");
         String password=request.getParameter("password");
-        User user = new User();
 
         try {
             user = userManager.loginWithUsername(username, password);
@@ -64,8 +65,10 @@ public class ApplicationController {
             e.printStackTrace();
             return "ErrorPage";
         }
+        if(user==null) {
+            return "SignIn";
+        }
 
-//        model.addAttribute("user", user);
         request.getSession().setAttribute("user", user);
         return "User";
     }
@@ -83,7 +86,7 @@ public class ApplicationController {
     }
 
     @RequestMapping("/Registration")
-    public String registrationRequest(Model model, HttpServletRequest request){
+    public String registrationRequest(HttpServletRequest request){
         String name=request.getParameter("name");
         String surname=request.getParameter("surname");
         String email=request.getParameter("e-mail");
@@ -108,7 +111,6 @@ public class ApplicationController {
             return "Registration";
         }
 
-        model.addAttribute("user", user);
         request.getSession().setAttribute("user", user);
         return "User";
     }

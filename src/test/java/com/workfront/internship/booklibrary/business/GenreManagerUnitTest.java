@@ -25,11 +25,9 @@ import static org.mockito.Mockito.when;
 /**
  * Created by Sona Mikayelyan on 7/31/2016.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = ManagerTestConfig.class)
+
 public class GenreManagerUnitTest {
 
-    @Autowired
     private GenreManager genreManager;
 
     private Genre testGenre;
@@ -39,7 +37,7 @@ public class GenreManagerUnitTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-//        genreManager = new GenreManagerImpl();
+        genreManager = new GenreManagerImpl();
 
         genreDAO = Mockito.mock(GenreDAOImpl.class);
         Whitebox.setInternalState(genreManager, "genreDAO", genreDAO);

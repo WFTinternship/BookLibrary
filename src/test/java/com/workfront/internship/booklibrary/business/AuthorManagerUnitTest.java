@@ -26,11 +26,9 @@ import static org.mockito.Mockito.when;
 /**
  * Created by ${Sona} on 7/29/2016.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = ManagerTestConfig.class)
+
 public class AuthorManagerUnitTest {
 
-    @Autowired
     private AuthorManager authorManager;
 
     private Author testAuthor;
@@ -40,7 +38,7 @@ public class AuthorManagerUnitTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-//        authorManager = new AuthorManagerImpl();
+        authorManager = new AuthorManagerImpl();
 
         authorDAO = Mockito.mock(AuthorDAOImpl.class);
         Whitebox.setInternalState(authorManager, "authorDAO", authorDAO);

@@ -25,10 +25,9 @@ import static org.mockito.Mockito.when;
 /**
  * Created by Sona Mikayelyan on 8/1/2016.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = ManagerTestConfig.class)
+
 public class BookManagerUnitTest {
-    @Autowired
+
     private BookManager bookManager;
 
     private Book testBook;
@@ -40,13 +39,10 @@ public class BookManagerUnitTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-//        bookManager = new BookManagerImpl();
+        bookManager = new BookManagerImpl();
 
         bookDAO = Mockito.mock(BookDAOImpl.class);
         Whitebox.setInternalState(bookManager, "bookDAO", bookDAO);
-
-//        genreDAO = Mockito.mock(GenreDAOImpl.class);
-//        Whitebox.setInternalState(genreDAO);
 
         testGenre = getRandomGenre();
         testBook = getRandomBook(testGenre);

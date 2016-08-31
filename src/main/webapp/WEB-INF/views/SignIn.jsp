@@ -16,9 +16,9 @@
 <div class="signin">
 <form method="post" action="/SignIn">
     username/email:<br/>
-    <input type="text" name="username/email"><br/>
+    <input type="text" name="username/email" required><br/>
     <br/>password:<br/>
-    <input type="password" name="password"><br/>
+    <input type="password" name="password" required><br/>
     <br/><input type="submit" value= "Submit"><br/>
 
 </form>

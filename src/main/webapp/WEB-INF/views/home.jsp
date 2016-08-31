@@ -26,6 +26,7 @@
         <li><a href="/register" name="register">register</a></li>
       </ul>
 
+
     </div>
 
 
@@ -45,13 +46,13 @@
 
       <ul>
 
-        <li><a class="home" href="/">Home</a></li>
+        <%--<li><a class="home" href="/">Home</a></li>--%>
 
         <li class="authorList">
           <a href="#" class="dropbtn">Authors</a>
             <div class="dropdown-content">
                 <%
-                    List<Author> authors = (List<Author>)request.getAttribute("authors");
+                    List<Author> authors = (List<Author>)request.getSession().getAttribute("authors");
                     for(Author author : authors){
                 %>
                 <a href="#"><%out.print(author.getName() + " " + author.getSurname());%></a>
@@ -63,7 +64,7 @@
           <a href="#" class="dropbtn">Books</a>
           <div class="dropdown-content">
             <%
-              List<Genre> genres = (List<Genre>)request.getAttribute("genres");
+              List<Genre> genres = (List<Genre>)request.getSession().getAttribute("genres");
               for(Genre genre : genres){
             %>
               <a href="#"><%out.print(genre.getGenre());%></a>
@@ -98,7 +99,7 @@
 
 
     <div class="buttons" style="position:absolute; bottom:10px; display: inline;">
-          <a href="/"><button id="home" type="button">home</button></a>
+          <%--<a href="/"><button id="home" type="button">home</button></a>--%>
           <%--&nbsp;--%>
 
         <div class="dialogueContainer">
