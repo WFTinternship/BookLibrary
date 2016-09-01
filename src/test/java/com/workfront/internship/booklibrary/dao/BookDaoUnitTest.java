@@ -1,6 +1,7 @@
 package com.workfront.internship.booklibrary.dao;
 
 import com.workfront.internship.booklibrary.LegacyDataSource;
+import com.workfront.internship.booklibrary.common.Author;
 import com.workfront.internship.booklibrary.common.Book;
 import org.junit.After;
 import org.junit.Before;
@@ -11,6 +12,7 @@ import org.mockito.internal.util.reflection.Whitebox;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
@@ -26,6 +28,7 @@ public class BookDaoUnitTest {
 
     BookDAO bookDAO;
     GenreDAO genreDAO;
+    List<Author> authorList;
 
     @SuppressWarnings("unchecked")
     @Before
@@ -52,7 +55,7 @@ public class BookDaoUnitTest {
 
     @Test(expected = RuntimeException.class)
     public void add_dbError() {
-        bookDAO.add(new Book());
+        bookDAO.add((new Book()), authorList);
     }
 
     @Test(expected = RuntimeException.class)

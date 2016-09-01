@@ -22,14 +22,10 @@
       </div>
 
       <ul>
-        <li><a href="/login" id="login">sign-in</a></li>
-        <li><a href="/register" name="register">register</a></li>
+        <li><a href="/login" id="login"  style="text-decoration: none">sign-in</a></li>
+        <li><a href="/register" name="register"  style="text-decoration: none">register</a></li>
       </ul>
-
-
     </div>
-
-
 
 
     <div id="searchHeader">
@@ -40,28 +36,22 @@
     </div>
 
 
-
-
     <div class="main-functions" style="float:right;"><br/>
-
       <ul>
-
-        <%--<li><a class="home" href="/">Home</a></li>--%>
-
         <li class="authorList">
-          <a href="#" class="dropbtn">Authors</a>
+          <a href="/author" class="dropbtn" style="text-decoration: none">Authors</a>
             <div class="dropdown-content">
                 <%
                     List<Author> authors = (List<Author>)request.getSession().getAttribute("authors");
                     for(Author author : authors){
                 %>
-                <a href="#"><%out.print(author.getName() + " " + author.getSurname());%></a>
+                <a href="/author"><%out.print(author.getName() + " " + author.getSurname());%></a>
                 <%}%>
             </div>
         </li>
 
         <li class="book-genres">
-          <a href="#" class="dropbtn">Books</a>
+          <a href="#" class="dropbtn"  style="text-decoration: none">Books</a>
           <div class="dropdown-content">
             <%
               List<Genre> genres = (List<Genre>)request.getSession().getAttribute("genres");
@@ -71,7 +61,6 @@
             <%}%>
           </div>
         </li>
-
       </ul>
     </div>
 
@@ -91,7 +80,6 @@
         <li><img src="/resources/image/download4.jpg" alt="changing images" style="position: absolute; top: 0; left: 600px;"></li>
         <li><img src="/resources/image/download5.jpg" alt="changing images" style="position: absolute; top: 0; left: 800px;"></li>
       </ul>
-
     </div>
 
     <br/>

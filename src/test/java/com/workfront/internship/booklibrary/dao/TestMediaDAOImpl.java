@@ -22,6 +22,7 @@ public class TestMediaDAOImpl {
     private MediaTypeDAO mediaTypeDAO;
     private BookDAO bookDAO;
     private GenreDAO genreDAO;
+    List<Author> authorList;
 
     private Media expectedMedia = null;
     private MediaType expectedMediaType = null;
@@ -40,7 +41,7 @@ public class TestMediaDAOImpl {
         expectedGenre.setId(genreDAO.add(expectedGenre));
 
         expectedBook = getRandomBook(expectedGenre);
-        expectedBook.setId(bookDAO.add(expectedBook));
+        expectedBook.setId(bookDAO.add(expectedBook, authorList));
     }
 
     @After

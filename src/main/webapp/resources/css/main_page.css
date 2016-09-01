@@ -62,6 +62,7 @@
 	padding: 0;
 	overflow: hidden;
 	background-color: transparent;
+	/*text-decoration: none;*/
 }
 
 .main-functions.li {
@@ -78,8 +79,6 @@
 
 .main-functions.dropbtn {
 	/*top: 50px;*/
-
-
 	right: 40%;
 	margin-right: 0px;
 }

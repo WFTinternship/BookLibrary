@@ -21,6 +21,7 @@ public class TestPendingDAOImpl {
     private UserDAO userDAO;
     private BookDAO bookDAO;
     private GenreDAO genreDAO;
+    List<Author> authorList;
 
     private Pending expectedPending = null;
     private User expectedUser = null;
@@ -38,7 +39,7 @@ public class TestPendingDAOImpl {
         genreDAO.add(expectedGenre);
 
         expectedBook = getRandomBook(expectedGenre);
-        bookDAO.add(expectedBook);
+        bookDAO.add(expectedBook, authorList);
 
     }
 

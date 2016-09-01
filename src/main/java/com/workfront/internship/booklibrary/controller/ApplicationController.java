@@ -115,6 +115,17 @@ public class ApplicationController {
         return "User";
     }
 
+//    @RequestMapping("/author")
+//    public String goToAuthorPage(HttpServletRequest request){
+////        Author author = (Author) request.getAttribute("author");
+////        request.setAttribute("name", author.getName());
+////        request.setAttribute("surname", author.getSurname());
+//
+//        return "author";
+//    }
+
+
+
 //    @RequestMapping(value = "/save", method = RequestMethod.GET)
 //    public String simpleRequest(@RequestAttribute("id") String id, Model model) {
 //        model.addAttribute("message", "Simple Message");

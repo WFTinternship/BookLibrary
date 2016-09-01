@@ -24,6 +24,7 @@ public class TestBookDAOImpl {
     private BookDAO bookDAO;
     private GenreDAO genreDAO;
     private AuthorDAO authorDAO;
+    private List<Author> authorList;
 
     private Book expectedBook = null;
     private Genre expectedGenre = null;
@@ -55,7 +56,7 @@ public class TestBookDAOImpl {
         expectedBook = getRandomBook(expectedGenre);
 
         //Test method add()
-        int bookId = bookDAO.add(expectedBook);
+        int bookId = bookDAO.add(expectedBook, authorList);
         assertNotNull(expectedGenre);
         assertNotNull(expectedBook);
 
@@ -69,7 +70,7 @@ public class TestBookDAOImpl {
         Author author = getRandomAuthor();
         authorDAO.add(author);
         expectedBook = getRandomBook(expectedGenre);
-        bookDAO.add(expectedBook);
+        bookDAO.add(expectedBook, authorList);
 
         //test
         bookDAO.addAuthorToBook(expectedBook.getId(), author.getId());
@@ -82,7 +83,7 @@ public class TestBookDAOImpl {
     @Test
     public void getBookByID (){
         expectedBook = getRandomBook(expectedGenre);
-        int bookId = bookDAO.add(expectedBook);
+        int bookId = bookDAO.add(expectedBook, authorList);
 
         //Test method getBookByID()
         Book actualBook = bookDAO.getBookByID(bookId);
@@ -93,7 +94,7 @@ public class TestBookDAOImpl {
     @Test
     public void getBookByTitle (){
         expectedBook = getRandomBook(expectedGenre);
-        bookDAO.add(expectedBook);
+        bookDAO.add(expectedBook, authorList);
 
         //TmpTest method getBookByTitle()
         Book actualBook = bookDAO.getBookByTitle(expectedBook.getTitle());
@@ -111,7 +112,7 @@ public class TestBookDAOImpl {
         int bookCount = 2;
         for(int i = 0; i < bookCount; i++){
             Book book = getRandomBook(expectedGenre);
-            bookDAO.add(book);
+            bookDAO.add(book, authorList);
             expectedBookList.add(book);
         }
 
@@ -130,7 +131,7 @@ public class TestBookDAOImpl {
     @Test
     public void updateBook(){
         expectedBook = getRandomBook(expectedGenre);
-        int bookId = bookDAO.add(expectedBook);
+        int bookId = bookDAO.add(expectedBook, authorList);
 
         expectedBook.setCountryOfEdition("US");
         expectedBook.setVolume(2);
@@ -145,7 +146,7 @@ public class TestBookDAOImpl {
     @Test
     public void deleteBook(){
         expectedBook = getRandomBook(expectedGenre);
-        int id = bookDAO.add(expectedBook);
+        int id = bookDAO.add(expectedBook, authorList);
 
         //Test method deleteBook()
         bookDAO.deleteBook(id);
@@ -157,7 +158,7 @@ public class TestBookDAOImpl {
     @Test
     public void deleteAll(){
         expectedBook = getRandomBook(expectedGenre);
-        bookDAO.add(expectedBook);
+        bookDAO.add(expectedBook, authorList);
 
         //Test method deleteAll()
         bookDAO.deleteAll();
@@ -168,23 +169,23 @@ public class TestBookDAOImpl {
     @Test (expected = RuntimeException.class)
     public void add_duplicateEntry(){
         Book book = getRandomBook(expectedGenre);
-        bookDAO.add(book);
+        bookDAO.add(book, authorList);
         Book duplicateBook = getRandomBook(expectedGenre);
         duplicateBook.setTitle(book.getTitle());
-        bookDAO.add(duplicateBook);
+        bookDAO.add(duplicateBook, authorList);
     }
 
     @Test(expected = RuntimeException.class)
     public void update_duplicateEntry() {
         Book book = getRandomBook(expectedGenre);
         Book duplicateBook = book;
-        bookDAO.add(book);
+        bookDAO.add(book, authorList);
 
         duplicateBook.setTitle("NewTitle");
-        bookDAO.add(duplicateBook);
+        bookDAO.add(duplicateBook, authorList);
 
         duplicateBook.setTitle(book.getTitle());
-        bookDAO.add(duplicateBook);
+        bookDAO.add(duplicateBook, authorList);
     }
 
 

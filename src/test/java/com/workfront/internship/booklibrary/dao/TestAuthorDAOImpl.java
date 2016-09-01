@@ -20,6 +20,7 @@ import static org.junit.Assert.assertNotNull;
 public class TestAuthorDAOImpl {
     private AuthorDAO authorDAO;
     private Author expectedAuthor = null;
+    List<Author> authorList;
 
     private BookDAO bookDAO;
     private Book testBook = null;
@@ -121,7 +122,7 @@ public class TestAuthorDAOImpl {
         Author testAuthor = getRandomAuthor();
         authorDAO.add(testAuthor);
         Book book = getRandomBook(testGenre);
-        bookDAO.add(book);
+        bookDAO.add(book, authorList);
 
         Author author1 = getRandomAuthor();
         authorDAO.add(author1);

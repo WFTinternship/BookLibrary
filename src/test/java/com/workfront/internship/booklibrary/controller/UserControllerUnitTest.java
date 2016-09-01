@@ -8,6 +8,7 @@ import com.workfront.internship.booklibrary.common.Genre;
 import com.workfront.internship.booklibrary.common.User;
 import org.junit.*;
 import org.mockito.internal.util.reflection.Whitebox;
+import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,6 +36,7 @@ public class UserControllerUnitTest {
 
     private UserManager userManager;
     private User testUser;
+
     private HttpServletRequest testRequest;
     private HttpSession testSession;
 
@@ -87,9 +89,10 @@ public class UserControllerUnitTest {
     @Test
     public void simpleRequest_Success() {
         List<Author> authorList = new ArrayList<>();
-        authorList.add(testAuthor);
+//        authorList.add(testAuthor);
 
         List<Genre> genreList = new ArrayList<>();
+//        genreList.add(testGenre);
 
         when(authorManager.viewAllAuthors()).thenReturn(authorList);
         when(genreManager.viewAll()).thenReturn(genreList);
