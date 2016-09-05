@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    <a>
+
         <p> <%User user = (User)request.getSession().getAttribute("user");
         out.print("hi " + user.getName());
         %></p>

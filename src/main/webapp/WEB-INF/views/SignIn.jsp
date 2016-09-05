@@ -19,7 +19,8 @@
     <input type="text" name="username/email" required><br/>
     <br/>password:<br/>
     <input type="password" name="password" required><br/>
-    <br/><input type="submit" value= "Submit"><br/>
+    <br/><input type="submit" value= "Submit">
+    <input type="reset" value = "cancel"><br/>
 
 </form>
 </div>

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.Filter;
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
@@ -47,7 +48,8 @@ public class ApplicationController {
     }
 
     @RequestMapping("/login")
-    public String getSigninPage(){
+    public String getSigninPage()
+    {
         return "SignIn";
     }
 
@@ -76,6 +78,7 @@ public class ApplicationController {
     @RequestMapping("/signout")
     public String signoutRequest(HttpServletRequest request){
         request.getSession().setAttribute("user", null);
+        request.getSession().invalidate();
 
         return "redirect:/";
     }
