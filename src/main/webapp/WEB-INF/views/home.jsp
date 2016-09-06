@@ -4,11 +4,13 @@
 <%@ page import="com.workfront.internship.booklibrary.common.Genre" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.workfront.internship.booklibrary.common.Author" %>
+<%@ page import="com.workfront.internship.booklibrary.common.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
   <head>
     <title>Main page</title>
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/main_page.css"/>">
+    <script src="<c:url value="/resources/js/user.js"/>"></script>
   </head>
   <body>
 
@@ -20,13 +22,22 @@
       <div id="headerText">
         <h1>Welcome to Workfront<br/>Book Library</h1>
       </div>
-
+<%if(request.getSession().getAttribute("user") == null ){%>
       <ul>
         <li><a href="/login" id="login"  style="text-decoration: none">sign-in</a></li>
         <li><a href="/register" name="register"  style="text-decoration: none">register</a></li>
       </ul>
-    </div>
 
+
+  <%}else{
+  %>
+  <ul>
+      <li><a href="/activeUser" id="activeUser"  style="text-decoration: none"><%User user = (User)request.getSession().getAttribute("user");
+          out.print(user.getName());%></a></li>
+      <li><a href="/signout" name="signout"  style="text-decoration: none">sign out</a></li>
+  </ul>
+  <%}%>
+  </div>
 
     <div id="searchHeader">
       <form id="newSearch" method="get" action="#">
