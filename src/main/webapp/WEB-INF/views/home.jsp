@@ -9,7 +9,9 @@
 <html>
   <head>
     <title>Main page</title>
-    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/main_page.css"/>">
+      <%--<meta http-equiv="Cache-Control" content="no-cache">--%>
+      <%--<META HTTP-EQUIV="Pragma" CONTENT="no-cache">--%>
+      <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/main_page.css"/>">
     <script src="<c:url value="/resources/js/user.js"/>"></script>
   </head>
   <body>

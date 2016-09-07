@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.Authenticator;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
@@ -56,6 +57,7 @@ public class ApplicationController {
         return "SignIn";
     }
 
+
     @RequestMapping("/SignIn")
     public String signinRequest(HttpServletRequest request){
         User user;
@@ -77,6 +79,7 @@ public class ApplicationController {
         request.getSession().setAttribute("user", user);
         return "User";
     }
+
 
     @RequestMapping("/signout")
     public String signoutRequest(HttpServletRequest request){
