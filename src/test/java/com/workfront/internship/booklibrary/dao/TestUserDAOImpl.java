@@ -3,10 +3,18 @@ package com.workfront.internship.booklibrary.dao;
 import com.workfront.internship.booklibrary.LegacyDataSource;
 import com.workfront.internship.booklibrary.common.*;
 
+import com.workfront.internship.booklibrary.spring.DevelopmentConfig;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.internal.util.reflection.Whitebox;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import javax.sql.DataSource;
 
 import static junit.framework.Assert.assertNull;
 import static junit.framework.TestCase.assertEquals;
@@ -15,14 +23,17 @@ import static junit.framework.TestCase.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
 import static com.workfront.internship.booklibrary.dao.TestUtil.*;
-
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = DevelopmentConfig.class)
+@ActiveProfiles("Development")
 public class TestUserDAOImpl {
 
+    @Autowired
     private UserDAO userDAO;
 
     private User expectedUser = null;
 
-    LegacyDataSource dataSource = LegacyDataSource.getInstance();
+//    LegacyDataSource dataSource = LegacyDataSource.getInstance();
 
     @Before
     public void setup() throws Exception{
@@ -35,8 +46,8 @@ public class TestUserDAOImpl {
     }
 
     private void init() throws Exception {
-        userDAO = new UserDAOImpl();
-        Whitebox.setInternalState(userDAO, "dataSource", dataSource);
+//        userDAO = new UserDAOImpl();
+//        Whitebox.setInternalState(userDAO, "dataSource", dataSource);
     }
 
     @Test

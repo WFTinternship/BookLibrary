@@ -2,24 +2,51 @@ package com.workfront.internship.booklibrary.dao;
 
 import com.workfront.internship.booklibrary.LegacyDataSource;
 import com.workfront.internship.booklibrary.common.*;
+import com.workfront.internship.booklibrary.spring.DevelopmentConfig;
+import junit.framework.TestCase;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.internal.util.reflection.Whitebox;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.workfront.internship.booklibrary.dao.TestUtil.*;
 import static junit.framework.TestCase.assertNull;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = DevelopmentConfig.class)
+@ActiveProfiles("Development")
 public class TestPickBookDAOImpl {
+    @Autowired
     private PickBookDAO pickBookDAO;
+    @Autowired
     private UserDAO userDAO;
+    @Autowired
     private BookDAO bookDAO;
+    @Autowired
     private GenreDAO genreDAO;
+    @Autowired
+    private AuthorDAO authorDAO;
 
     private PickBook expectedPickBook = null;
     private User expectedUser = null;
     private Book expectedBook = null;
+    private Author expectedAuthor = null;
 
-    private LegacyDataSource dataSource = LegacyDataSource.getInstance();
-/**
+    private List<Author> authorList = null;
+
+//    private LegacyDataSource dataSource = LegacyDataSource.getInstance();
+
     @Before
     public void setup() throws Exception {
         init();
@@ -30,7 +57,7 @@ public class TestPickBookDAOImpl {
         genreDAO.add(expectedGenre);
 
         expectedBook = getRandomBook(expectedGenre);
-        bookDAO.add(expectedBook);
+        bookDAO.add(expectedBook, authorList);
 
     }
 
@@ -43,11 +70,13 @@ public class TestPickBookDAOImpl {
     }
 
     private void init() throws Exception {
-        Whitebox.setInternalState(pickBookDAO, "dataSource", dataSource);
-        pickBookDAO = new PickBookDAOImpl();
-        userDAO = new UserDAOImpl();
-        bookDAO = new BookDAOImpl();
-        genreDAO = new GenreDAOImpl();
+        authorList = new ArrayList<>();
+        authorList.add(expectedAuthor);
+//        Whitebox.setInternalState(pickBookDAO, "dataSource", dataSource);
+//        pickBookDAO = new PickBookDAOImpl();
+//        userDAO = new UserDAOImpl();
+//        bookDAO = new BookDAOImpl();
+//        genreDAO = new GenreDAOImpl();
     }
 
 
@@ -172,5 +201,5 @@ public class TestPickBookDAOImpl {
         assertEquals(expectedPickBook.getPickingDate(), actualPickBook.getPickingDate());
         assertEquals(expectedPickBook.getReturnDate(), actualPickBook.getReturnDate());
     }
-    */
+
 }

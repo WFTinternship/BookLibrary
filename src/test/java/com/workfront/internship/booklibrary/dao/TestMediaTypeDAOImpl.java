@@ -2,10 +2,16 @@ package com.workfront.internship.booklibrary.dao;
 
 import com.workfront.internship.booklibrary.LegacyDataSource;
 import com.workfront.internship.booklibrary.common.MediaType;
+import com.workfront.internship.booklibrary.spring.DevelopmentConfig;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.internal.util.reflection.Whitebox;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +24,12 @@ import static com.workfront.internship.booklibrary.dao.TestUtil.*;
 /**
  * Created by ${Sona} on 7/22/2016.
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = DevelopmentConfig.class)
+@ActiveProfiles("Development")
 public class TestMediaTypeDAOImpl {
-    LegacyDataSource dataSource = LegacyDataSource.getInstance();
+//    LegacyDataSource dataSource = LegacyDataSource.getInstance();
+    @Autowired
     private MediaTypeDAO mediaTypeDAO;
     private MediaType expectedMediaType = null;
 
@@ -34,8 +44,8 @@ public class TestMediaTypeDAOImpl {
     }
 
     private void init() throws Exception {
-        mediaTypeDAO = new MediaTypeDAOImpl();
-        Whitebox.setInternalState(mediaTypeDAO, "dataSource", dataSource);
+//        mediaTypeDAO = new MediaTypeDAOImpl();
+//        Whitebox.setInternalState(mediaTypeDAO, "dataSource", dataSource);
     }
 
     @Test

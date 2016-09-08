@@ -3,10 +3,16 @@ package com.workfront.internship.booklibrary.dao;
 
 import com.workfront.internship.booklibrary.LegacyDataSource;
 import com.workfront.internship.booklibrary.common.*;
+import com.workfront.internship.booklibrary.spring.DevelopmentConfig;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.internal.util.reflection.Whitebox;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,11 +22,17 @@ import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNull;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertNotNull;
-
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = DevelopmentConfig.class)
+@ActiveProfiles("Development")
 public class TestMediaDAOImpl {
+    @Autowired
     private MediaDAO mediaDAO;
+    @Autowired
     private MediaTypeDAO mediaTypeDAO;
+    @Autowired
     private BookDAO bookDAO;
+    @Autowired
     private GenreDAO genreDAO;
     List<Author> authorList;
 
@@ -29,7 +41,7 @@ public class TestMediaDAOImpl {
     private Book expectedBook = null;
     private Genre expectedGenre = null;
 
-    LegacyDataSource dataSource = LegacyDataSource.getInstance();
+//    LegacyDataSource dataSource = LegacyDataSource.getInstance();
 
     @Before
     public void setup() throws Exception {
@@ -53,11 +65,11 @@ public class TestMediaDAOImpl {
     }
 
     private void init() throws Exception {
-        Whitebox.setInternalState(mediaDAO, "dataSource", dataSource);
-        mediaDAO = new MediaDAOImpl();
-        mediaTypeDAO = new MediaTypeDAOImpl();
-        bookDAO = new BookDAOImpl();
-        genreDAO = new GenreDAOImpl();
+//        Whitebox.setInternalState(mediaDAO, "dataSource", dataSource);
+//        mediaDAO = new MediaDAOImpl();
+//        mediaTypeDAO = new MediaTypeDAOImpl();
+//        bookDAO = new BookDAOImpl();
+//        genreDAO = new GenreDAOImpl();
     }
 
 

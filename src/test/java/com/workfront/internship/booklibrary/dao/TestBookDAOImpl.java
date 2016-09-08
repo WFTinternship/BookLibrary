@@ -5,9 +5,15 @@ import com.workfront.internship.booklibrary.common.Author;
 import com.workfront.internship.booklibrary.common.Book;
 import com.workfront.internship.booklibrary.common.Genre;
 
+import com.workfront.internship.booklibrary.spring.DevelopmentConfig;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,18 +24,24 @@ import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
 import static junit.framework.TestCase.assertTrue;
 
-
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = DevelopmentConfig.class)
+@ActiveProfiles("Development")
 public class TestBookDAOImpl {
 
+    @Autowired
     private BookDAO bookDAO;
+    @Autowired
     private GenreDAO genreDAO;
+    @Autowired
     private AuthorDAO authorDAO;
+
     private List<Author> authorList;
 
     private Book expectedBook = null;
     private Genre expectedGenre = null;
 
-    LegacyDataSource dataSource = LegacyDataSource.getInstance();
+//    LegacyDataSource dataSource = LegacyDataSource.getInstance();
 
     @Before
     public void setup() throws Exception {
@@ -45,8 +57,8 @@ public class TestBookDAOImpl {
     }
 
     private void init() throws Exception {
-        bookDAO = new BookDAOImpl();
-        genreDAO = new GenreDAOImpl();
+//        bookDAO = new BookDAOImpl();
+//        genreDAO = new GenreDAOImpl();
     }
 
     // region <TEST CASES>

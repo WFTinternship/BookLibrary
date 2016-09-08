@@ -2,9 +2,15 @@ package com.workfront.internship.booklibrary.dao;
 
 import com.workfront.internship.booklibrary.LegacyDataSource;
 import com.workfront.internship.booklibrary.common.Genre;
+import com.workfront.internship.booklibrary.spring.DevelopmentConfig;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,11 +19,14 @@ import static com.workfront.internship.booklibrary.dao.TestUtil.getRandomGenre;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNull;
 import static junit.framework.TestCase.assertTrue;
-
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = DevelopmentConfig.class)
+@ActiveProfiles("Development")
 public class TestGenreDAOImpl {
+    @Autowired
     private GenreDAO genreDAO;
     private Genre expectedGenre = null;
-    LegacyDataSource dataSource = LegacyDataSource.getInstance();
+//    LegacyDataSource dataSource = LegacyDataSource.getInstance();
 
     @Before
     public void setup() throws Exception {
@@ -30,7 +39,7 @@ public class TestGenreDAOImpl {
     }
 
     private void init() throws Exception {
-        genreDAO = new GenreDAOImpl();
+//        genreDAO = new GenreDAOImpl();
     }
 
 

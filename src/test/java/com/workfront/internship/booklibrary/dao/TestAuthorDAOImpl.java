@@ -5,9 +5,15 @@ import com.workfront.internship.booklibrary.common.Author;
 
 import com.workfront.internship.booklibrary.common.Book;
 import com.workfront.internship.booklibrary.common.Genre;
+import com.workfront.internship.booklibrary.spring.DevelopmentConfig;
 import org.junit.*;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.internal.util.reflection.Whitebox;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,18 +22,23 @@ import static com.workfront.internship.booklibrary.dao.TestUtil.*;
 import static junit.framework.TestCase.*;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = DevelopmentConfig.class)
+@ActiveProfiles("Development")
 public class TestAuthorDAOImpl {
+    @Autowired
     private AuthorDAO authorDAO;
     private Author expectedAuthor = null;
     List<Author> authorList;
 
+    @Autowired
     private BookDAO bookDAO;
     private Book testBook = null;
 
+    @Autowired
     private GenreDAO genreDAO;
     private Genre testGenre = null;
-    LegacyDataSource dataSource = LegacyDataSource.getInstance();
+//    LegacyDataSource dataSource = LegacyDataSource.getInstance();
 
     @Before
     public void setup() throws Exception {
@@ -42,10 +53,10 @@ public class TestAuthorDAOImpl {
     }
 
     private void init() throws Exception {
-        Whitebox.setInternalState(authorDAO, "dataSource", dataSource);
-        authorDAO = new AuthorDAOImpl();
-        bookDAO = new BookDAOImpl();
-        genreDAO = new GenreDAOImpl();
+//        Whitebox.setInternalState(authorDAO, "dataSource", dataSource);
+//        authorDAO = new AuthorDAOImpl();
+//        bookDAO = new BookDAOImpl();
+//        genreDAO = new GenreDAOImpl();
     }
 
 
