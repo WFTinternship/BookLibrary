@@ -19,15 +19,15 @@
         <p> <%User user = (User)request.getSession().getAttribute("user");
         out.print("hi " + user.getName());
         %></p>
+        <a href="/signout"><button type="button" >Sign out</button></a>
 
+        <br/><br/>
         <div id="searchHeader">
             <form id="newSearch" method="get" action="#">
                 <input type="text" class="textInput" name="q" size="21" maxlength="250" autofocus autocomplete="on" autocapitalize="off" aria-autocomplete="list" aria-expanded="false"><input type="submit" value="search" class="searchButton">
             </form>
             <div class="clear"></div>
         </div>
-
-        <a href="/signout"><button type="button" >Sign out</button></a>
 
 
     <div class="buttons" style="position:absolute; bottom:10px; display: inline;">
@@ -37,12 +37,13 @@
 
     <div>
         <form method="get" action="/showBooks">
-            <button type="button">Show all books</button>
+            <button type="button" onclick="myFunction()">Show all books</button>
         </form>
 
-        <table>
+        <table id="books" style="visibility:hidden">
             <thead>
                 <tr>
+                    <%--<th></th>--%>
                     <th>title</th>
                     <th>author</th>
                     <th>genre</th>
@@ -68,6 +69,12 @@
             </tbody>
         </table>
     </div>
+
+<script>
+    function myFunction(){
+        document.getElementById("books").style.visibility = "visible";
+    }
+</script>
 
 
 </body>

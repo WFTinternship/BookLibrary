@@ -17,6 +17,21 @@
     background-color: #0086b3;
 }
 
+#books {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#books.td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+#books.tr:nth-child(even) {
+    background-color: #dddddd;
+}
 /*#dialogue {*/
     /*display: none;*/
     /*position: absolute;*/
