@@ -35,6 +35,7 @@ public class TestMediaDAOImpl {
     @Autowired
     private GenreDAO genreDAO;
     List<Author> authorList;
+    List<Integer> authorsIdList;
 
     private Media expectedMedia = null;
     private MediaType expectedMediaType = null;
@@ -45,7 +46,7 @@ public class TestMediaDAOImpl {
 
     @Before
     public void setup() throws Exception {
-        init();
+        authorsIdList = init();
         expectedMediaType = getRandomMediaType();
         expectedMediaType.setId(mediaTypeDAO.add(expectedMediaType));
 
@@ -53,7 +54,7 @@ public class TestMediaDAOImpl {
         expectedGenre.setId(genreDAO.add(expectedGenre));
 
         expectedBook = getRandomBook(expectedGenre);
-        expectedBook.setId(bookDAO.add(expectedBook, authorList));
+        expectedBook.setId(bookDAO.add(expectedBook, authorsIdList));
     }
 
     @After
@@ -64,12 +65,12 @@ public class TestMediaDAOImpl {
         genreDAO.deleteAll();
     }
 
-    private void init() throws Exception {
-//        Whitebox.setInternalState(mediaDAO, "dataSource", dataSource);
-//        mediaDAO = new MediaDAOImpl();
-//        mediaTypeDAO = new MediaTypeDAOImpl();
-//        bookDAO = new BookDAOImpl();
-//        genreDAO = new GenreDAOImpl();
+    private List<Integer> init() throws Exception {
+        List<Integer> authorsIdList = new ArrayList<>();
+        for(int i = 0; i < authorList.size(); i++){
+            authorsIdList.add(authorList.get(i).getId());
+        }
+        return authorsIdList;
     }
 
 

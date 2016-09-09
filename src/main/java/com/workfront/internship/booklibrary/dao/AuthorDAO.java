@@ -10,6 +10,8 @@ public interface AuthorDAO {
     //insert all data fields of an author to the database
     int add(Author author);
 
+    public List<Integer> checkAndAdd(List<Author> authorList);
+
     //get all data fields of an author entry by 'author_id' field
     Author getAuthorByID(int id);
 
@@ -20,14 +22,14 @@ public interface AuthorDAO {
 
     List<Author> getAllAuthorsByBookId(int bookId);
 
-    void updateAuthor(Connection connection, Author author);
+//    void updateAuthor(Connection connection, Author author);
 
     //update all fields in a row
     void updateAuthor(Author author);
 
-    void checkAndUpdateAuthor(Connection connection, Author author);
+//    void checkAndUpdateAuthor(Connection connection, Author author);
 
-    void checkAndUpdateAuthorList(Connection connection, List<Author> authorList);
+//    void checkAndUpdateAuthorList(Connection connection, List<Author> authorList);
 
     void deleteAuthor(int id);
 

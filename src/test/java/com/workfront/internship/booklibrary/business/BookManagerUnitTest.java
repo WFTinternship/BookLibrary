@@ -34,6 +34,7 @@ public class BookManagerUnitTest {
     private Book testBook;
     private Genre testGenre;
     private List<Author> authorList;
+    private List<Integer> authorsIdList;
 
     private static BookDAO bookDAO;
     private GenreDAO genreDAO;
@@ -60,7 +61,7 @@ public class BookManagerUnitTest {
     @Test(expected = IllegalArgumentException.class)
     public void findBookByID_idLessThan1(){
         testBook.setId(0);
-        bookDAO.add(testBook, authorList);
+        bookDAO.add(testBook, authorsIdList);
         int id = testBook.getId();
 
         //test
@@ -94,7 +95,7 @@ public class BookManagerUnitTest {
     @Test(expected = IllegalArgumentException.class)
     public void findBookByTitle_idLessThan1(){
         testBook.setTitle(null);
-        bookDAO.add(testBook, authorList);
+        bookDAO.add(testBook, authorsIdList);
         String title = testBook.getTitle();
 
         //test

@@ -65,6 +65,20 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
         return author.getId();
     }
 
+    @Override
+    public List<Integer> checkAndAdd(List<Author> authorList){
+        Author author;
+        List<Integer> authorsIds = new ArrayList<>();
+        for(int i=0; i < authorList.size(); i++){
+            author = authorList.get(i);
+            if(getAuthorByID(author.getId()) == null){
+                add(author);
+            }
+            authorsIds.add(author.getId());
+        }
+        return authorsIds;
+    }
+
 
     private int add(Connection connection, Author author){
         PreparedStatement preparedStatement = null;
@@ -195,7 +209,7 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
 
     @Override
     public List<Author> getAllAuthorsByBookId(int bookId){
-        List<Author> authorList = null;
+        List<Author> authorList = new ArrayList<>();
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -208,7 +222,7 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
             preparedStatement.setInt(1, bookId);
             resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
-                authorList = new ArrayList<>();
+
                 int authorId = resultSet.getInt("author_id");
 
                 Author author = getAuthorByID(authorId);
@@ -223,9 +237,11 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
         return authorList;
     }
 
-    public void updateAuthor(Connection connection, Author author){
+    public void updateAuthor(Author author){
         PreparedStatement preparedStatement = null;
+        Connection connection = null;
         try{
+            connection = dataSource.getConnection();
             if(author.getId() != 0){
                 String sql = "UPDATE Author SET " +
                         "name = ?, surname = ?, email = ?, web_page = ?, biography = ? " +
@@ -251,33 +267,6 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
                 if(preparedStatement != null) preparedStatement.close();
             } catch (SQLException e) {
                 e.printStackTrace();
-            }
-            //closeConnection(preparedStatement, connection);
-        }
-    }
-
-    @Override
-    public void updateAuthor(Author author) {
-        updateAuthor(null, author);
-    }
-
-    @Override
-    public void checkAndUpdateAuthor(Connection connection, Author author) {
-        if(getAuthorByID(author.getId()) != null){
-            updateAuthor(connection, author);
-        }
-        else {
-            add(connection, author);
-        }
-    }
-
-    public void checkAndUpdateAuthorList(Connection connection, List<Author> authorList){
-        for(int i = 0; i < authorList.size(); i++){
-            if(getAuthorByID(authorList.get(i).getId()) != null){
-                updateAuthor(connection, authorList.get(i));
-            }
-            else{
-                add(connection, authorList.get(i));
             }
         }
     }

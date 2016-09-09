@@ -34,6 +34,7 @@ public class TestPendingDAOImpl {
     @Autowired
     private GenreDAO genreDAO;
     List<Author> authorList;
+    List<Integer> authorsIdList;
 
     private Pending expectedPending = null;
     private User expectedUser = null;
@@ -43,7 +44,7 @@ public class TestPendingDAOImpl {
 
     @Before
     public void setup() throws Exception {
-        init();
+        authorsIdList = init();
         expectedUser = getRandomUser();
         userDAO.add(expectedUser);
 
@@ -51,7 +52,7 @@ public class TestPendingDAOImpl {
         genreDAO.add(expectedGenre);
 
         expectedBook = getRandomBook(expectedGenre);
-        bookDAO.add(expectedBook, authorList);
+        bookDAO.add(expectedBook, authorsIdList);
 
     }
 
@@ -63,7 +64,12 @@ public class TestPendingDAOImpl {
         userDAO.deleteAll();
     }
 
-    private void init() throws Exception {
+    private List<Integer> init() throws Exception {
+        List<Integer> authorsIdList = new ArrayList<>();
+        for(int i = 0; i < authorList.size(); i++){
+            authorsIdList.add(authorList.get(i).getId());
+        }
+        return authorsIdList;
 //        Whitebox.setInternalState(pendingDAO, "dataSource", dataSource);
 //        pendingDAO = new PendingDAOImpl();
 //        userDAO = new UserDAOImpl();

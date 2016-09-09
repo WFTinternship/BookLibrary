@@ -18,7 +18,7 @@ public class LegacyDataSource {
         ds = new BasicDataSource();
         ds.setDriverClassName("com.mysql.jdbc.Driver");
         ds.setUsername("root");
-        ds.setPassword("mydb"); //sonadb
+        ds.setPassword("sonadb"); //mydb
         ds.setUrl("jdbc:mysql://localhost/book_library");
 
         // the settings below are optional -- dbcp can work with defaults

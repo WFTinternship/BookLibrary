@@ -44,12 +44,13 @@ public class TestPickBookDAOImpl {
     private Author expectedAuthor = null;
 
     private List<Author> authorList = null;
+    List<Integer> authorsIdList;
 
 //    private LegacyDataSource dataSource = LegacyDataSource.getInstance();
 
     @Before
     public void setup() throws Exception {
-        init();
+        authorsIdList = init();
         expectedUser = getRandomUser();
         userDAO.add(expectedUser);
 
@@ -57,7 +58,7 @@ public class TestPickBookDAOImpl {
         genreDAO.add(expectedGenre);
 
         expectedBook = getRandomBook(expectedGenre);
-        bookDAO.add(expectedBook, authorList);
+        bookDAO.add(expectedBook, authorsIdList);
 
     }
 
@@ -69,14 +70,14 @@ public class TestPickBookDAOImpl {
         userDAO.deleteAll();
     }
 
-    private void init() throws Exception {
+    private List<Integer> init() throws Exception {
         authorList = new ArrayList<>();
         authorList.add(expectedAuthor);
-//        Whitebox.setInternalState(pickBookDAO, "dataSource", dataSource);
-//        pickBookDAO = new PickBookDAOImpl();
-//        userDAO = new UserDAOImpl();
-//        bookDAO = new BookDAOImpl();
-//        genreDAO = new GenreDAOImpl();
+        List<Integer> authorsIdList = new ArrayList<>();
+        for(int i = 0; i < authorList.size(); i++){
+            authorsIdList.add(authorList.get(i).getId());
+        }
+        return authorsIdList;
     }
 
 

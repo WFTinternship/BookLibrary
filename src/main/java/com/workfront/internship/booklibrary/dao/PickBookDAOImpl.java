@@ -36,7 +36,7 @@ public class PickBookDAOImpl extends General implements PickBookDAO {
             connection = dataSource.getConnection();
             connection.setAutoCommit(false);
 
-            bookDAO.updateBook(connection, pickedBook.getBook());
+            bookDAO.updateBook(connection, pickedBook.getBook().setCount((pickedBook.getBook().getCount())-1)); // bookDAO.updateBook(connection, pickedBook.getBook());
 
             String sql = "INSERT INTO Pick_Book(book_id, user_id, picking_date, return_date) VALUES(?, ?, ?, ?)";
             preparedStatement = connection.prepareStatement(sql, preparedStatement.RETURN_GENERATED_KEYS);

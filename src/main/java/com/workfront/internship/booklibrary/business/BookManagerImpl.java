@@ -6,6 +6,7 @@ import com.workfront.internship.booklibrary.dao.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,11 +26,18 @@ public class BookManagerImpl implements BookManager{
     private AuthorManager authorManager;
 
     @Override
-    public int add(Book book, List<Author> authorList) throws Exception {
-        if(isValidBook(book)){
-            bookDAO.add(book, authorList);
-            if(book.getId() > 0){
-                return book.getId();
+    public int add(Book book, List<Integer> authorsIdList) throws Exception {
+        if(authorsIdList != null){
+            List<Author> authorList = new ArrayList<>();
+            for(int id : authorsIdList){
+                authorList.add(authorDAO.getAuthorByID(id));
+            }
+            authorDAO.checkAndAdd(authorList);
+            if(isValidBook(book)){
+                bookDAO.add(book, authorsIdList);
+                if(book.getId() > 0){
+                    return book.getId();
+                }
             }
         }
         return 0;

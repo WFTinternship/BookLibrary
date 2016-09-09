@@ -27,7 +27,7 @@ public class BookDAOImpl extends General implements BookDAO {
     private AuthorDAO authorDAO;
 
     @Override
-    public int add(Book book, List<Author> authorList) {
+    public int add(Book book, List<Integer> authorsIdList) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -36,7 +36,7 @@ public class BookDAOImpl extends General implements BookDAO {
             connection = dataSource.getConnection();
             connection.setAutoCommit(false);
 
-            authorDAO.checkAndUpdateAuthorList(connection, authorList);
+
 
             String sql = "INSERT INTO Book(ISBN, title, genre_id, volume, abstract, language, count, edition_year, pages, country_of_edition) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             preparedStatement = connection.prepareStatement(sql, preparedStatement.RETURN_GENERATED_KEYS);
@@ -58,6 +58,11 @@ public class BookDAOImpl extends General implements BookDAO {
                 lastId = resultSet.getInt(1);
             }
             book.setId(lastId);
+
+            for(int i= 0; i < authorsIdList.size(); i++){
+                addAuthorToBook(connection, book, authorsIdList.get(i));
+            }
+
             connection.commit();
 
 //            return book.getId();
@@ -78,8 +83,25 @@ public class BookDAOImpl extends General implements BookDAO {
         return book.getId();
     }
 
+    private void addAuthorToBook(Connection connection, Book book, int authorID) {
+        PreparedStatement preparedStatement = null;
+        try{
+            String sqlCrossTable = "INSERT INTO book_author(book_id, author_id) VALUES(?, ?)";
+            preparedStatement = connection.prepareStatement(sqlCrossTable);
+
+            preparedStatement.setInt(1, book.getId());
+            preparedStatement.setInt(2, authorID);
+            preparedStatement.executeUpdate();
+
+        }catch (SQLException e){
+            LOGGER.error("SQL exception occurred!");
+            closeConnection(preparedStatement, connection);
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
-    public void addAuthorToBook(int bookID, int authorID) {
+    public void addAuthorToBook(int bookId, int authorId){
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         try{
@@ -87,8 +109,8 @@ public class BookDAOImpl extends General implements BookDAO {
             String sqlCrossTable = "INSERT INTO book_author(book_id, author_id) VALUES(?, ?)";
             preparedStatement = connection.prepareStatement(sqlCrossTable);
 
-            preparedStatement.setInt(1, bookID);
-            preparedStatement.setInt(2, authorID);
+            preparedStatement.setInt(1, bookId);
+            preparedStatement.setInt(2, authorId);
             preparedStatement.executeUpdate();
 
         }catch (SQLException e){

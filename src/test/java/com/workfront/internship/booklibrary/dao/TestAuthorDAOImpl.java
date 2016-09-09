@@ -29,7 +29,8 @@ public class TestAuthorDAOImpl {
     @Autowired
     private AuthorDAO authorDAO;
     private Author expectedAuthor = null;
-    List<Author> authorList;
+//    List<Author> authorList;
+    private List<Integer> authorsIdList = new ArrayList<>();
 
     @Autowired
     private BookDAO bookDAO;
@@ -42,7 +43,10 @@ public class TestAuthorDAOImpl {
 
     @Before
     public void setup() throws Exception {
-        init();
+//        authorsIdList = init();
+        expectedAuthor = getRandomAuthor();
+        authorDAO.add(expectedAuthor);
+        authorsIdList.add(expectedAuthor.getId());
     }
 
     @After
@@ -51,14 +55,6 @@ public class TestAuthorDAOImpl {
         bookDAO.deleteAll();
         genreDAO.deleteAll();
     }
-
-    private void init() throws Exception {
-//        Whitebox.setInternalState(authorDAO, "dataSource", dataSource);
-//        authorDAO = new AuthorDAOImpl();
-//        bookDAO = new BookDAOImpl();
-//        genreDAO = new GenreDAOImpl();
-    }
-
 
     @Test
     public void add(){
@@ -123,17 +119,19 @@ public class TestAuthorDAOImpl {
 
     @Test
     public void getAllAuthorsByBookID(){
-        authorDAO.deleteAllAuthors();
         bookDAO.deleteAll();
         genreDAO.deleteAll();
+        authorDAO.deleteAllAuthors();
+        authorsIdList.clear();
 
         testGenre = getRandomGenre();
         genreDAO.add(testGenre);
 
         Author testAuthor = getRandomAuthor();
         authorDAO.add(testAuthor);
+        authorsIdList.add(testAuthor.getId());
         Book book = getRandomBook(testGenre);
-        bookDAO.add(book, authorList);
+        bookDAO.add(book, authorsIdList);
 
         Author author1 = getRandomAuthor();
         authorDAO.add(author1);
@@ -143,14 +141,16 @@ public class TestAuthorDAOImpl {
         bookDAO.addAuthorToBook(book.getId(), author1.getId());
         bookDAO.addAuthorToBook(book.getId(), author2.getId());
 
-        List<Author> authorList = new ArrayList<>();
+        List<Author> authorList;
         //test
         authorList = authorDAO.getAllAuthorsByBookId(book.getId());
 
 //        assertNull(authorList);
 
-        checkAssertions(author1, authorList.get(0));
-        checkAssertions(author2, authorList.get(1));
+        checkAssertions(testAuthor, authorList.get(0));
+        checkAssertions(author1, authorList.get(1));
+        checkAssertions(author2, authorList.get(2));
+
     }
 
     @Test

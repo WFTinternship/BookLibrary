@@ -10,6 +10,8 @@ import java.util.List;
 public interface AuthorManager {
     int uploadAuthorInfo(Author author);
 
+
+
     Author findAuthorByID(int id);
 
     Author findAuthorByName(String name);

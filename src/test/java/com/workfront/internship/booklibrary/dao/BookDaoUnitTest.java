@@ -12,6 +12,7 @@ import org.mockito.internal.util.reflection.Whitebox;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.Matchers.any;
@@ -28,7 +29,7 @@ public class BookDaoUnitTest {
 
     BookDAO bookDAO;
     GenreDAO genreDAO;
-    List<Author> authorList;
+    List<Integer> authorsIdList = new ArrayList<>();
 
     @SuppressWarnings("unchecked")
     @Before
@@ -40,8 +41,9 @@ public class BookDaoUnitTest {
         when(connection.prepareStatement(any(String.class))).thenThrow(SQLException.class);
         when(connection.prepareStatement(any(String.class), eq(PreparedStatement.RETURN_GENERATED_KEYS))).thenThrow(SQLException.class);
 
-        Whitebox.setInternalState(bookDAO, "dataSource", dataSource);
         realBookDAO = new BookDAOImpl();
+        bookDAO = new BookDAOImpl();
+        Whitebox.setInternalState(bookDAO, "dataSource", dataSource);
         bookDAO = new BookDAOImpl();
         genreDAO = new GenreDAOImpl();
     }
@@ -55,7 +57,7 @@ public class BookDaoUnitTest {
 
     @Test(expected = RuntimeException.class)
     public void add_dbError() {
-        bookDAO.add((new Book()), authorList);
+        bookDAO.add((new Book()), authorsIdList);
     }
 
     @Test(expected = RuntimeException.class)

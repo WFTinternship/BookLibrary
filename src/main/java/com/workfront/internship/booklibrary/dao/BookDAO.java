@@ -1,6 +1,5 @@
 package com.workfront.internship.booklibrary.dao;
 
-import com.workfront.internship.booklibrary.common.Author;
 import com.workfront.internship.booklibrary.common.Book;
 
 import java.sql.Connection;
@@ -8,7 +7,7 @@ import java.util.List;
 
 public interface BookDAO {
 
-    int add(Book book, List<Author> authorList);
+    int add(Book book, List<Integer> authorsIdList);
 
     Book getBookByID(int id);
 
@@ -26,5 +25,5 @@ public interface BookDAO {
 
     boolean isExist(int id);
 
-    void addAuthorToBook(int bookID, int authorID);
+    void addAuthorToBook(int bookId, int authorID);
 }
