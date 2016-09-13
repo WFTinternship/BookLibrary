@@ -39,10 +39,10 @@ public class AdministratorController {
         String biography=request.getParameter("biography:e");
 
         author.setName(name);
-        author.setSurname(name);
-        author.seteMail(name);
-        author.setWebPage(name);
-        author.setBiography(name);
+        author.setSurname(surname);
+        author.seteMail(email);
+        author.setWebPage(webPage);
+        author.setBiography(biography);
 
         authorManager.uploadAuthorInfo(author);
 
@@ -56,6 +56,7 @@ public class AdministratorController {
 
     @RequestMapping("/addBook")
     public String addBook(HttpServletRequest request){
+
         return "";
     }
 

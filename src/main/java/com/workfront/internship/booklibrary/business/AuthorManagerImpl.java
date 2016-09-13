@@ -102,7 +102,6 @@ public class AuthorManagerImpl implements AuthorManager{
     }
 
     private boolean isValidAuthor(Author author){
-        return author != null && author.getName() != null && author.getSurname() != null &&
-                (author.geteMail() != null && isValidEmail(author.geteMail()));
+        return author != null && author.getName() != null && author.getSurname() != null ;  //&&(author.geteMail() != null && isValidEmail(author.geteMail()))
     }
 }

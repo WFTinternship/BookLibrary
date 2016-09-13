@@ -57,6 +57,11 @@ public class ApplicationController {
         return "SignIn";
     }
 
+    @RequestMapping("/administrator")
+    public String getAdminPage(){
+        return "administrator";
+    }
+
 
     @RequestMapping("/SignIn")
     public String signinRequest(HttpServletRequest request){
