@@ -9,7 +9,9 @@ import java.util.List;
  */
 public interface BookManager {
 
-    int add(Book book, List<Integer> authorsIdList) throws Exception;
+    int add(Book book, List<Author> authorList) throws Exception;
+
+//    int add(Book book, List<Integer> authorsIdList) throws Exception;
 
     //find by id
     Book findBookByID(int id);

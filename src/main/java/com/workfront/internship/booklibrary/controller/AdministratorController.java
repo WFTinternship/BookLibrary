@@ -2,6 +2,8 @@ package com.workfront.internship.booklibrary.controller;
 
 import com.workfront.internship.booklibrary.business.*;
 import com.workfront.internship.booklibrary.common.Author;
+import com.workfront.internship.booklibrary.common.Book;
+import com.workfront.internship.booklibrary.common.Genre;
 import com.workfront.internship.booklibrary.common.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by ${Sona} on 9/9/2016.
@@ -51,18 +55,77 @@ public class AdministratorController {
         }
 
         request.getSession().setAttribute("author", author);
-        return "administrator";
+        return "redirect:/administrator";
     }
 
     @RequestMapping("/addBook")
     public String addBook(HttpServletRequest request){
+        Book book = new Book();
+        Genre genre = new Genre();
+        List<Genre> genreList = new ArrayList<>();
+        Author author = new Author();
+        List<Author> authorList = new ArrayList<>();
+        List<Integer> authorIds= new ArrayList<>();
 
-        return "";
+        String genreIdString = request.getParameter("genre");
+
+        int genreId = Integer.parseInt(genreIdString);
+        genre = genreManager.findGenreByID(genreId);
+     //   request.setAttribute("genre", genre);
+
+        String authorName = request.getParameter("authorName");
+        String authorSurname = request.getParameter("authorSurname");
+        author.setName(authorName);
+        author.setSurname(authorSurname);
+        authorList.add(author);
+//        authorManager.uploadAuthorInfo(author);
+
+//        for(int i = 0; i < authorList.size(); i++){
+//            authorIds.add(authorList.get(i).getId());
+//        }
+
+        String title = request.getParameter("title");
+        int volume = Integer.parseInt(request.getParameter("volume"));
+        String bookAbstract = request.getParameter("abstract");
+        String language = request.getParameter("language");
+        int bookCount = Integer.parseInt(request.getParameter("count"));
+        String editionYear = request.getParameter("editionYear");
+        int pages = Integer.parseInt(request.getParameter("pages"));
+        String countryOfEdition = request.getParameter("countryOfEdition");
+
+        book.setTitle(title);
+        book.setVolume(volume);
+        book.setBookAbstract(bookAbstract);
+        book.setLanguage(language);
+        book.setCount(bookCount);
+        book.setEditionYear(editionYear);
+        book.setPages(pages);
+        book.setCountryOfEdition(countryOfEdition);
+        book.setGenre(genre);
+
+        try{
+            bookManager.add(book, authorList);
+
+        }catch (Exception e) {
+            e.printStackTrace();
+            return "addBook";
+        }
+
+        request.setAttribute("book", book);
+        return "redirect:/administrator";
     }
 
     @RequestMapping("/addGenre")
     public String addGenre(HttpServletRequest request){
-        return "";
+        Genre genre = new Genre();
+        String genreName = request.getParameter("genre");
+        genre.setGenre(genreName);
+        genreManager.add(genre);
+        if(genre == null){
+            return "addGenre";
+        }
+        request.getSession().setAttribute("genre", genre);
+        return "redirect:/administrator";
     }
 
     @RequestMapping("/addMediaType")

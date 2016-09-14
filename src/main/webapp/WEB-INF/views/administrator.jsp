@@ -28,8 +28,9 @@
 
 <input type='button' id='addAuthor' value='add author'>
 
-<input type='button' id='addBook' value='add book'>
+<input type="button" id='addGenre' value='add genre'>
 
+<input type='button' id='addBook' value='add book'>
 
 
 <div id='addAuthorContent' class="addAuthor">
@@ -49,25 +50,39 @@
     </form>
 </div>
 
+<div id='addGenreContent' class="addGenre">
+    <form method="get" action="/addGenre">
+        genre:<br/>
+        <input type="text" name="genre" required><br/>
+        <br/><input type="submit" value="add genre">
+        <input type="reset" value="cancel"><br/>
+    </form>
+</div>
+
 <div id ='addBookContent'>
     <form method="get" action="/addBook">
         genre:<br/>
-        <input type="text" name="genreId" required><br/><br/>
+        <select id="genre" name="genre">
+            <%--<%--%>
+            <%--List<Genre> genreList = (List<Genre>)request.getAttribute("genres"); // "genres"-y ApplicationController-i /Administrator-i mijits e--%>
+            <%--if(!genreList.isEmpty()){--%>
+                <%--for(Genre genre: genreList){ %>--%>
+            <%--<option value="<%=genre.getGenre()%>"><%=genre.getGenre()%></option>--%>
+            <%--<%   }--%>
+            <%--}--%>
+            <%--%>--%>
 
-        <%--
-        http://www.w3schools.com/html/tryit.asp?filename=tryhtml_elem_datalist
-        <input list="genres" name="genreId" required>--%>
-        <%--<datalist id="genres"></datalist>--%>
-        <%--<% GenreManager genreManager=new GenreManagerImpl();--%>
-            <%--List<Genre> genreList = new ArrayList<>();--%>
-            <%--genreList = genreManager.viewAll();--%>
-            <%--for(int i = 0; i < genreList.size(); i++){--%>
-        <%--String name=genreList.get(i).getGenre();%>--%>
-        <%--<option value="name" >--%>
-            <%--<%}--%>
-        <%--%>--%>
-        <%--<br/><br/>--%>
+            <%
+                List<Genre> genreList = (List<Genre>)request.getAttribute("genres"); // "genres"-y ApplicationController-i /Administrator-i mijits e
+                if(!genreList.isEmpty()){
+                    for(Genre genre: genreList){ %>
+            <option value="<%=genre.getId()%>"><%=genre.getGenre()%></option>
+            <%   }
+            }
+            %>
+        </select>
 
+        <br/><br/>
         author name:<br/>
         <input type="text" name="authorName" required><br/><br/>
         author surname:<br/>
@@ -76,9 +91,9 @@
         title:<br/>
         <input type="text" name="title" required><br/><br/>
         volume:<br/>
-        <input type="email" name="volume"><br/><br/>
+        <input type="text" name="volume"><br/><br/>
         abstract:<br/>
-        <input type="url" name="abstract" required><br/><br/>
+        <input type="text" name="abstract" required><br/><br/>
         language:<br/>
         <input type="text" name="language" required><br/><br/>
         count:<br/>

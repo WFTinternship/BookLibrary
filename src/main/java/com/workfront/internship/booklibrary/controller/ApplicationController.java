@@ -58,7 +58,10 @@ public class ApplicationController {
     }
 
     @RequestMapping("/administrator")
-    public String getAdminPage(){
+    public String getAdminPage(HttpServletRequest request){
+        List<Genre> genreList = genreManager.viewAll();
+        request.setAttribute("genres", genreList);
+
         return "administrator";
     }
 

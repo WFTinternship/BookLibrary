@@ -10,6 +10,12 @@ jQuery(document).ready(function(){
 });
 
 jQuery(document).ready(function(){
+    jQuery('#addGenre').on('click', function(event) {
+        jQuery('#addGenreContent').toggle('show');
+    });
+});
+
+jQuery(document).ready(function(){
     jQuery('#addBook').on('click', function(event) {
         jQuery('#addBookContent').toggle('show');
     });

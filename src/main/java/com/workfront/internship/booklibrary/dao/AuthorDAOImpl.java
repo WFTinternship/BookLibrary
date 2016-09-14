@@ -71,54 +71,15 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
         List<Integer> authorsIds = new ArrayList<>();
         for(int i=0; i < authorList.size(); i++){
             author = authorList.get(i);
-            if(getAuthorByID(author.getId()) == null){
+            if(author.getId() == 0){
                 add(author);
             }
+//            if(getAuthorByID(author.getId()) == null){
+//                add(author);
+//            }
             authorsIds.add(author.getId());
         }
         return authorsIds;
-    }
-
-
-    private int add(Connection connection, Author author){
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        int lastId = 0;
-
-        try {
-            String sql = "INSERT INTO Author(name, surname, email, web_page, biography) VALUES(?, ?, ?, ?, ?)";
-
-            preparedStatement = connection.prepareStatement(sql, preparedStatement.RETURN_GENERATED_KEYS);
-
-            preparedStatement.setString(1, author.getName());
-            preparedStatement.setString(2, author.getSurname());
-            preparedStatement.setString(3, author.geteMail());
-            preparedStatement.setString(4, author.getWebPage());
-            preparedStatement.setString(5, author.getBiography());
-
-            preparedStatement.executeUpdate();
-            resultSet = preparedStatement.getGeneratedKeys();
-            if (resultSet.next()) {
-                lastId = resultSet.getInt(1);
-            }
-            author.setId(lastId);
-        }catch (SQLException e){
-            LOGGER.error("SQL exception occurred!");
-            throw new RuntimeException(e);
-        } finally{
-            try{
-                if(preparedStatement != null) preparedStatement.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }finally {
-                if(resultSet != null) try {
-                    resultSet.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return author.getId();
     }
 
     @Override

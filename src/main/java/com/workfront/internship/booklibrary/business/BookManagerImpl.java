@@ -25,14 +25,19 @@ public class BookManagerImpl implements BookManager{
     @Autowired
     private AuthorManager authorManager;
 
+
     @Override
-    public int add(Book book, List<Integer> authorsIdList) throws Exception {
-        if(authorsIdList != null){
-            List<Author> authorList = new ArrayList<>();
-            for(int id : authorsIdList){
-                authorList.add(authorDAO.getAuthorByID(id));
-            }
+    public int add(Book book, List<Author> authorList) throws Exception {
+        if(authorList != null){
+//            List<Author> authorList = new ArrayList<>();
+//            for(int id : authorsIdList){
+//                authorList.add(authorDAO.getAuthorByID(id));
+//            }
             authorDAO.checkAndAdd(authorList);
+            List<Integer> authorsIdList = new ArrayList<>();
+            for(Author author : authorList){
+                authorsIdList.add(author.getId());
+            }
             if(isValidBook(book)){
                 bookDAO.add(book, authorsIdList);
                 if(book.getId() > 0){
@@ -42,6 +47,24 @@ public class BookManagerImpl implements BookManager{
         }
         return 0;
     }
+
+//    @Override
+//    public int add(Book book, List<Integer> authorsIdList) throws Exception {
+//        if(authorsIdList != null){
+//            List<Author> authorList = new ArrayList<>();
+//            for(int id : authorsIdList){
+//                authorList.add(authorDAO.getAuthorByID(id));
+//            }
+//            authorDAO.checkAndAdd(authorList);
+//            if(isValidBook(book)){
+//                bookDAO.add(book, authorsIdList);
+//                if(book.getId() > 0){
+//                    return book.getId();
+//                }
+//            }
+//        }
+//        return 0;
+//    }
 
     @Override
     public Book findBookByID(int id) {
