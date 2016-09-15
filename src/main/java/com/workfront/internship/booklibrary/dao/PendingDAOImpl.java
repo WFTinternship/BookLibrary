@@ -219,7 +219,6 @@ public class PendingDAOImpl extends General implements PendingDAO{
         user.setUsername(resultSet.getString("username")).setPassword(resultSet.getString("password"));
         user.setAddress(resultSet.getString("address")).seteMail(resultSet.getString("e_mail"));
         user.setPhone(resultSet.getString("phone")).setAccessPrivilege(resultSet.getString("access_privilege"));
-        user.setConfirmationStatus(resultSet.getBoolean("confirmation_status"));
 
         pending.setBook(book);
         pending.setUser(user);

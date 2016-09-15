@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.IdentityHashMap;
 import java.util.List;
 
 /**
@@ -38,12 +39,17 @@ public class AdministratorController {
 
         String name=request.getParameter("name");
         String surname=request.getParameter("surname");
+        String authorBirthYearString = request.getParameter("authorBirthYear");
+        int authorBirthYear =Integer.parseInt(authorBirthYearString);
+        String authorBirthCity = request.getParameter("authorBirthCity");
         String email=request.getParameter("email");
         String webPage=request.getParameter("web-page");
         String biography=request.getParameter("biography:e");
 
         author.setName(name);
         author.setSurname(surname);
+        author.setBirthYear(authorBirthYear);
+        author.setBirthCity(authorBirthCity);
         author.seteMail(email);
         author.setWebPage(webPage);
         author.setBiography(biography);
@@ -62,30 +68,34 @@ public class AdministratorController {
     public String addBook(HttpServletRequest request){
         Book book = new Book();
         Genre genre = new Genre();
-        List<Genre> genreList = new ArrayList<>();
         Author author = new Author();
         List<Author> authorList = new ArrayList<>();
-        List<Integer> authorIds= new ArrayList<>();
 
         String genreIdString = request.getParameter("genre");
 
         int genreId = Integer.parseInt(genreIdString);
         genre = genreManager.findGenreByID(genreId);
-     //   request.setAttribute("genre", genre);
 
         String authorName = request.getParameter("authorName");
         String authorSurname = request.getParameter("authorSurname");
+        String authorBirthYearString = request.getParameter("authorBirthYear");
+        int authorBirthYear =Integer.parseInt(authorBirthYearString);
+        String authorBirthCity = request.getParameter("authorBirthCity");
+        String email=request.getParameter("email");
+        String webPage=request.getParameter("web-page");
+        String biography=request.getParameter("biography:e");
         author.setName(authorName);
         author.setSurname(authorSurname);
+        author.setBirthYear(authorBirthYear);
+        author.setBirthCity(authorBirthCity);
+        author.seteMail(email);
+        author.setWebPage(webPage);
+        author.setBiography(biography);
         authorList.add(author);
-//        authorManager.uploadAuthorInfo(author);
-
-//        for(int i = 0; i < authorList.size(); i++){
-//            authorIds.add(authorList.get(i).getId());
-//        }
 
         String title = request.getParameter("title");
-        int volume = Integer.parseInt(request.getParameter("volume"));
+        String volumeString = request.getParameter("volume");
+        int volume = getIntegerFromString(volumeString); // volumeString == null || volumeString == ""? 0 : Integer.parseInt(volumeString);
         String bookAbstract = request.getParameter("abstract");
         String language = request.getParameter("language");
         int bookCount = Integer.parseInt(request.getParameter("count"));
@@ -128,6 +138,38 @@ public class AdministratorController {
         return "redirect:/administrator";
     }
 
+    @RequestMapping("/addAuthorToBook")
+    public String addAuthorToBook(HttpServletRequest request){
+        Book book = new Book();
+        Author author = new Author();
+
+        String bookIdString = request.getParameter("book");
+        int bookId = Integer.parseInt(bookIdString);
+
+        String authorIdString = request.getParameter("author");
+        int authorId = Integer.parseInt(authorIdString);
+
+        bookManager.addAuthorToBook(bookId, authorId);
+
+        return "redirect:/administrator";
+    }
+
+    @RequestMapping("/viewAuthorsOfBook")
+    public String viewAuthorsOfBook(HttpServletRequest request){
+        Book book = new Book();
+        String bookIdString = request.getParameter("book");
+        int bookId = getIntegerFromString(bookIdString); // Integer.parseInt(bookIdString);
+
+        List<Author> authorList = authorManager.viewAllAuthorsByBook(bookId);
+        request.setAttribute("view authors", authorList);
+
+        return "administrator";
+    } //todo
+
+
+
+
+
     @RequestMapping("/addMediaType")
     public String addMediaType(HttpServletRequest request){
         return "";
@@ -136,5 +178,11 @@ public class AdministratorController {
     @RequestMapping("/addMedia")
     public String addMedia(HttpServletRequest request){
         return "";
+    }
+
+
+    private int getIntegerFromString(String str){
+        int result = str == null || str == "" ? 0 : Integer.parseInt(str);
+        return result;
     }
 }

@@ -20,3 +20,15 @@ jQuery(document).ready(function(){
         jQuery('#addBookContent').toggle('show');
     });
 });
+
+jQuery(document).ready(function(){
+    jQuery('#addAuthorToBook').on('click', function(event) {
+        jQuery('#addAuthorToBookContent').toggle('show');
+    });
+});
+
+jQuery(document).ready(function(){
+    jQuery('#viewAuthorsOfBook').on('click', function(event) {
+        jQuery('#viewBookAuthorsContent').toggle('show');
+    });
+});

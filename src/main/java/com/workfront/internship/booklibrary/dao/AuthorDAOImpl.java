@@ -39,15 +39,17 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
         try{
             connection = dataSource.getConnection();
 
-            String sql = "INSERT INTO Author(name, surname, email, web_page, biography) VALUES(?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO Author(name, surname, birth_year, birth_city, email, web_page, biography) VALUES(?, ?, ?, ?, ?, ?, ?)";
 
             preparedStatement = connection.prepareStatement(sql, preparedStatement.RETURN_GENERATED_KEYS);
 
             preparedStatement.setString(1, author.getName());
             preparedStatement.setString(2, author.getSurname());
-            preparedStatement.setString(3, author.geteMail());
-            preparedStatement.setString(4, author.getWebPage());
-            preparedStatement.setString(5, author.getBiography());
+            preparedStatement.setInt(3, author.getBirthYear());
+            preparedStatement.setString(4, author.getBirthCity());
+            preparedStatement.setString(5, author.geteMail());
+            preparedStatement.setString(6, author.getWebPage());
+            preparedStatement.setString(7, author.getBiography());
 
             preparedStatement.executeUpdate();
             resultSet = preparedStatement.getGeneratedKeys();
@@ -69,14 +71,16 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
     public List<Integer> checkAndAdd(List<Author> authorList){
         Author author;
         List<Integer> authorsIds = new ArrayList<>();
-        for(int i=0; i < authorList.size(); i++){
+
+        for(int i = 0; i < authorList.size(); i++){
             author = authorList.get(i);
-            if(author.getId() == 0){
+            Author authorDB = getAuthorByNameSurnameYearCity(author.getName(), author.getSurname(), author.getBirthYear(), author.getBirthCity());
+            if (authorDB == null){
                 add(author);
+            } else {
+                author = authorDB;
             }
-//            if(getAuthorByID(author.getId()) == null){
-//                add(author);
-//            }
+
             authorsIds.add(author.getId());
         }
         return authorsIds;
@@ -105,6 +109,38 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
             throw new RuntimeException(e);
         } finally{
             closeConnection(preparedStatement, connection);
+        }
+
+        return author;
+    }
+
+
+    private Author getAuthorByNameSurnameYearCity(String name, String surname, int birthYear, String birthCity){
+        Author author = null;
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try{
+            connection = dataSource.getConnection();
+            String sql = "SELECT * FROM author WHERE (name=? AND surname=? AND birth_year=? AND birth_city=?)";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, surname);
+            preparedStatement.setInt(3, birthYear);
+            preparedStatement.setString(4, birthCity);
+            resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next()){
+                author = new Author();
+                setAuthorDetails(resultSet, author);
+            }
+
+        } catch (SQLException e){
+            LOGGER.error("SQL exception occurred!");
+            throw new RuntimeException(e);
+        } finally{
+            closeConnection(resultSet, preparedStatement, connection);
         }
 
         return author;
@@ -283,6 +319,8 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
         author.setId(rs.getInt("author_id"));
         author.setName(rs.getString("name"));
         author.setSurname(rs.getString("surname"));
+        author.setBirthYear(rs.getInt("birth_year"));
+        author.setBirthCity(rs.getString("birth_city"));
         author.seteMail(rs.getString("email"));
         author.setWebPage(rs.getString("web_page"));
         author.setBiography(rs.getString("biography"));

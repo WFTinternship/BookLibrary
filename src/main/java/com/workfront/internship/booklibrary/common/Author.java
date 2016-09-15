@@ -6,6 +6,8 @@ public class Author {
     private int authorId;
     private String name;
     private String surname;
+    private int birthYear;
+    private String birthCity;
     private String eMail;
     private String webPage;
     private String biography;
@@ -76,6 +78,30 @@ public class Author {
         this.books = books;
     }
 
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
+    public int getBirthYear() {
+        return birthYear;
+    }
+
+    public void setBirthYear(int birthYear) {
+        this.birthYear = birthYear;
+    }
+
+    public String getBirthCity() {
+        return birthCity;
+    }
+
+    public void setBirthCity(String birthCity) {
+        this.birthCity = birthCity;
+    }
+
 
     @Override
     public String toString() {
@@ -83,6 +109,8 @@ public class Author {
                 "authorId=" + authorId +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
+                ", birthYear='" + birthYear + '\'' +
+                ", birthCity='" + birthCity + '\'' +
                 ", eMail='" + eMail + '\'' +
                 ", webPage='" + webPage + '\'' +
                 ", biography='" + biography + '\'' +
@@ -99,6 +127,8 @@ public class Author {
         if (getId() != author.getId()) return false;
         if (getName() != null ? !getName().equals(author.getName()) : author.getName() != null) return false;
         if (getSurname() != null ? !getSurname().equals(author.getSurname()) : author.getSurname() != null) return false;
+        if(getBirthYear() != author.getBirthYear()) return false;
+        if (getBirthCity() != null ? !getBirthCity().equals(author.getBirthCity()) : author.getBirthCity() != null) return false;
         if (geteMail() != null ? !geteMail().equals(author.geteMail()) : author.geteMail() != null) return false;
         if (getWebPage() != null ? !getWebPage().equals(author.getWebPage()) : author.getWebPage() != null) return false;
         return getBiography() != null ? getBiography().equals(author.getBiography()) : author.getBiography() == null;
@@ -109,17 +139,13 @@ public class Author {
         int result = getId();
         result = 31 * result + (getName() != null ? getName().hashCode() : 0);
         result = 31 * result + (getSurname() != null ? getSurname().hashCode() : 0);
+        result = 31 * result + getBirthYear();
+        result = 31 * result + (getBirthCity() != null ? getBirthCity().hashCode() : 0);
         result = 31 * result + (geteMail() != null ? geteMail().hashCode() : 0);
         result = 31 * result + (getWebPage() != null ? getWebPage().hashCode() : 0);
         result = 31 * result + (getBiography() != null ? getBiography().hashCode() : 0);
         return result;
     }
 
-    public Book getBook() {
-        return book;
-    }
 
-    public void setBook(Book book) {
-        this.book = book;
-    }
 }

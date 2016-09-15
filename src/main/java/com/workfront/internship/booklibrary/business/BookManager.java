@@ -13,6 +13,8 @@ public interface BookManager {
 
 //    int add(Book book, List<Integer> authorsIdList) throws Exception;
 
+    void addAuthorToBook(int bookId, int authorId);
+
     //find by id
     Book findBookByID(int id);
 

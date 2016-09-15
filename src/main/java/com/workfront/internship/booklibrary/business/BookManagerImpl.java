@@ -29,15 +29,7 @@ public class BookManagerImpl implements BookManager{
     @Override
     public int add(Book book, List<Author> authorList) throws Exception {
         if(authorList != null){
-//            List<Author> authorList = new ArrayList<>();
-//            for(int id : authorsIdList){
-//                authorList.add(authorDAO.getAuthorByID(id));
-//            }
-            authorDAO.checkAndAdd(authorList);
-            List<Integer> authorsIdList = new ArrayList<>();
-            for(Author author : authorList){
-                authorsIdList.add(author.getId());
-            }
+            List<Integer> authorsIdList = authorDAO.checkAndAdd(authorList);
             if(isValidBook(book)){
                 bookDAO.add(book, authorsIdList);
                 if(book.getId() > 0){
@@ -65,6 +57,16 @@ public class BookManagerImpl implements BookManager{
 //        }
 //        return 0;
 //    }
+
+    @Override
+    public void addAuthorToBook(int bookId, int authorId){
+        if(isValidBook(findBookByID(bookId)) && authorId > 0) {
+            bookDAO.addAuthorToBook(bookId, authorId);
+        }
+        else{
+            throw new RuntimeException("The author was not added to the book.");
+        }
+    }
 
     @Override
     public Book findBookByID(int id) {

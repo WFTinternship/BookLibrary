@@ -121,7 +121,6 @@ public class TestUtil {
         user.seteMail("sona" + uuid() + "@yahoo.com");
         user.setPhone("phone number");
         user.setAccessPrivilege("user");
-        user.setConfirmationStatus(true);
 
         return user;
     }

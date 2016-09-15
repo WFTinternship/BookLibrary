@@ -10,15 +10,13 @@ import java.util.List;
 public interface AuthorManager {
     int uploadAuthorInfo(Author author);
 
-
-
     Author findAuthorByID(int id);
 
     Author findAuthorByName(String name);
 
     List<Author> viewAllAuthors();
 
- //   List<Author> viewAllAuthorsByBook(int id);
+    List<Author> viewAllAuthorsByBook(int id);
 
     Author update(Author author);
 

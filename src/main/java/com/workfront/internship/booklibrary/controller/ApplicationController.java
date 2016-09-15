@@ -1,9 +1,11 @@
 package com.workfront.internship.booklibrary.controller;
 
 import com.workfront.internship.booklibrary.business.AuthorManager;
+import com.workfront.internship.booklibrary.business.BookManager;
 import com.workfront.internship.booklibrary.business.GenreManager;
 import com.workfront.internship.booklibrary.business.UserManager;
 import com.workfront.internship.booklibrary.common.Author;
+import com.workfront.internship.booklibrary.common.Book;
 import com.workfront.internship.booklibrary.common.Genre;
 import com.workfront.internship.booklibrary.common.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +42,9 @@ public class ApplicationController {
     @Autowired
     private AuthorManager authorManager;
 
+    @Autowired
+    private BookManager bookManager;
+
     @RequestMapping("/")
     public String simpleRequest(HttpServletRequest request) {
         List<Author> authorList = authorManager.viewAllAuthors();
@@ -56,15 +61,6 @@ public class ApplicationController {
     {
         return "SignIn";
     }
-
-    @RequestMapping("/administrator")
-    public String getAdminPage(HttpServletRequest request){
-        List<Genre> genreList = genreManager.viewAll();
-        request.setAttribute("genres", genreList);
-
-        return "administrator";
-    }
-
 
     @RequestMapping("/SignIn")
     public String signinRequest(HttpServletRequest request){
@@ -87,7 +83,6 @@ public class ApplicationController {
         request.getSession().setAttribute("user", user);
         return "User";
     }
-
 
     @RequestMapping("/signout")
     public String signoutRequest(HttpServletRequest request){
@@ -139,6 +134,19 @@ public class ApplicationController {
 
         request.getSession().setAttribute("user", user);
         return "User";
+    }
+
+    @RequestMapping("/administrator")
+    public String getAdminPage(HttpServletRequest request){
+        List<Genre> genreList = genreManager.viewAll();
+        List<Author> authorList = authorManager.viewAllAuthors();
+        List<Book> bookList = bookManager.viewAll();
+
+        request.setAttribute("genres", genreList);
+        request.setAttribute("authors", authorList);
+        request.setAttribute("books", bookList);
+
+        return "administrator";
     }
 
 //    @RequestMapping("/author")

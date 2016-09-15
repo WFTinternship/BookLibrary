@@ -25,9 +25,9 @@
         <h1>Welcome to Workfront<br/>Book Library</h1>
       </div>
 <%if(request.getSession().getAttribute("user") == null ){%>
-      <ul>
-        <li><a href="/login" id="login"  style="text-decoration: none">sign-in</a></li>
-        <li><a href="/register" name="register"  style="text-decoration: none">register</a></li>
+      <ul style="float: right">
+        <li style="padding: 0px 16px"><a href="/login" id="login"  style="text-decoration: none">sign-in</a></li>
+        <li style="padding: 0px 16px"><a href="/register" name="register"  style="text-decoration: none">register</a></li>
       </ul>
 
 
@@ -51,8 +51,8 @@
 
     <div class="main-functions" style="float:right;"><br/>
       <ul>
-        <li class="authorList">
-          <a href="/author" class="dropbtn" style="text-decoration: none">Authors</a>
+        <li class="authorList" style="padding: 14px 20px">
+          <a href="/author" class="dropbtn" style="text-decoration: none">authors</a>
             <div class="dropdown-content">
                 <%
                     List<Author> authors = (List<Author>)request.getSession().getAttribute("authors");
@@ -63,8 +63,8 @@
             </div>
         </li>
 
-        <li class="book-genres">
-          <a href="#" class="dropbtn"  style="text-decoration: none">Books</a>
+        <li class="book-genres" style="padding: 14px 30px">
+          <a href="#" class="dropbtn"  style="text-decoration: none">books</a>
           <div class="dropdown-content">
             <%
               List<Genre> genres = (List<Genre>)request.getSession().getAttribute("genres");

@@ -3,6 +3,8 @@
 <%@ page import="com.workfront.internship.booklibrary.common.Genre" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="com.workfront.internship.booklibrary.common.Author" %>
+<%@ page import="com.workfront.internship.booklibrary.common.Book" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -32,13 +34,21 @@
 
 <input type='button' id='addBook' value='add book'>
 
+<input type="button" id="addAuthorToBook" value="add author to book">
 
+<input type="button" id="viewBookAuthors" value="view all authors of the book">
+
+<br/><br/>
 <div id='addAuthorContent' class="addAuthor">
     <form method="get" action="/addAuthor">
         name:<br/>
         <input type="text" name="name" required><br/><br/>
         surname:<br/>
         <input type="text" name="surname" required><br/><br/>
+        author birth year:<br/>
+        <input type="text" name="authorBirthYear" required><br/><br/>
+        author birth city:<br/>
+        <input type="text" name="authorBirthCity" required><br/><br/>
         email:<br/>
         <input type="email" name="email"><br/><br/>
         webPage:<br/>
@@ -50,6 +60,7 @@
     </form>
 </div>
 
+
 <div id='addGenreContent' class="addGenre">
     <form method="get" action="/addGenre">
         genre:<br/>
@@ -59,19 +70,11 @@
     </form>
 </div>
 
+
 <div id ='addBookContent'>
     <form method="get" action="/addBook">
         genre:<br/>
         <select id="genre" name="genre">
-            <%--<%--%>
-            <%--List<Genre> genreList = (List<Genre>)request.getAttribute("genres"); // "genres"-y ApplicationController-i /Administrator-i mijits e--%>
-            <%--if(!genreList.isEmpty()){--%>
-                <%--for(Genre genre: genreList){ %>--%>
-            <%--<option value="<%=genre.getGenre()%>"><%=genre.getGenre()%></option>--%>
-            <%--<%   }--%>
-            <%--}--%>
-            <%--%>--%>
-
             <%
                 List<Genre> genreList = (List<Genre>)request.getAttribute("genres"); // "genres"-y ApplicationController-i /Administrator-i mijits e
                 if(!genreList.isEmpty()){
@@ -87,6 +90,16 @@
         <input type="text" name="authorName" required><br/><br/>
         author surname:<br/>
         <input type="text" name="authorSurname" required><br/><br/>
+        author birth year:<br/>
+        <input type="text" name="authorBirthYear" required><br/><br/>
+        author birth city:<br/>
+        <input type="text" name="authorBirthCity" required><br/><br/>
+        email:<br/>
+        <input type="email" name="email"><br/><br/>
+        webPage:<br/>
+        <input type="url" name="web-page"><br/><br/>
+        biography:<br/>
+        <input type="text" name="biography"><br/><br/>
 
         title:<br/>
         <input type="text" name="title" required><br/><br/>
@@ -112,13 +125,57 @@
 </div>
 
 
-<%--<ul>--%>
-    <%--<li><a href="addAuthor" id="addAuthor" style="text-decoration: none">add author</a></li>--%>
-    <%--<li><a href="addBook" id="addBook" style="text-decoration: none">add book</a></li>--%>
-    <%--<li><a href="addGenre" id="addGenre" style="text-decoration: none">add genre</a></li>--%>
-    <%--<li><a href="addMediaType" id="addMediaType" style="text-decoration: none">add media type</a></li>--%>
-    <%--<li><a href="addMedia" id="addMedia" style="text-decoration: none">add media</a></li>--%>
-<%--</ul>--%>
+<div id ='addAuthorToBookContent'>
+    <form method="get" action="/addAuthorToBook">
+        book:<br/>
+        <select id="book" name="book">
+            <%
+                List<Book> bookList = (List<Book>)request.getAttribute("books"); // "books"-y ApplicationController-i /Administrator-i mijits e
+                if(!bookList.isEmpty()){
+                    for(Book book : bookList){ %>
+            <option value="<%=book.getId()%>"><%=book.getTitle()%></option>
+            <%   }
+            }
+            %>
+        </select>
+
+        <br/><br/>
+        author:<br/>
+        <select id="author" name="author">
+            <%
+                List<Author> authorList = (List<Author>)request.getAttribute("authors");
+                if(!authorList.isEmpty()){
+                    for(Author author : authorList){ %>
+            <option value="<%=author.getId()%>"><%=author.getName() + "  " + author.getSurname() + ",  " + author.getBirthYear() + ",  " + author.getBirthCity()%></option>
+            <%   }
+            }
+            %>
+        </select>
+
+        <br/><input type="submit" value="add book">
+        <input type="reset" value="cancel"><br/>
+    </form>
+</div>
+
+
+<div id ='viewBookAuthorsContent'>
+    <form method="get" action="/viewAuthorsOfBook">
+        book:<br/>
+        <select id="bookAuthors" name="bookAuthors">
+            <%
+                List<Book> bookListForAuthor = (List<Book>)request.getAttribute("books"); // "books"-y ApplicationController-i /Administrator-i mijits e
+                if(!bookList.isEmpty()){
+                    for(Book book : bookList){ %>
+            <option value="<%=book.getId()%>"><%=book.getTitle()%></option>
+            <%   }
+            }
+            %>
+        </select><br/>
+
+        <br/><input type="submit" value="view authors">
+        <input type="reset" value="cancel"><br/>
+    </form>
+</div>
 
 
 </body>

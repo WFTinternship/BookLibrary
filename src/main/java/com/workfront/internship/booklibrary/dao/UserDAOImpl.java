@@ -29,7 +29,7 @@ public class UserDAOImpl extends General implements UserDAO {
         try{
             connection = dataSource.getConnection();
 
-            String sql = "INSERT INTO User(name, surname, username, password, address, e_mail, phone, access_privilege, confirmation_status) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO User(name, surname, username, password, address, e_mail, phone, access_privilege) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
             preparedStatement = connection.prepareStatement(sql, preparedStatement.RETURN_GENERATED_KEYS);
 
             preparedStatement.setString(1, user.getName());
@@ -40,7 +40,6 @@ public class UserDAOImpl extends General implements UserDAO {
             preparedStatement.setString(6, user.geteMail());
             preparedStatement.setString(7, user.getPhone());
             preparedStatement.setString(8, user.getAccessPrivilege());
-            preparedStatement.setBoolean(9, user.getConfirmationStatus());
 
             preparedStatement.executeUpdate();
             resultSet = preparedStatement.getGeneratedKeys();
@@ -187,7 +186,7 @@ public class UserDAOImpl extends General implements UserDAO {
             if(user.getId()!=0) {
                 connection = dataSource.getConnection();
                 String sql = "UPDATE User SET " +
-                        "name = ?, surname = ?, username = ?, password = ?, address =?, e_mail = ?, phone =?, access_privilege = ?, confirmation_status = ?" +
+                        "name = ?, surname = ?, username = ?, password = ?, address =?, e_mail = ?, phone =?, access_privilege = ?" +
                         " WHERE user_id=?";
 
                 preparedStatement = connection.prepareStatement(sql);
@@ -200,8 +199,7 @@ public class UserDAOImpl extends General implements UserDAO {
                 preparedStatement.setString(6, user.geteMail());
                 preparedStatement.setString(7, user.getPhone());
                 preparedStatement.setString(8, user.getAccessPrivilege());
-                preparedStatement.setBoolean(9, user.getConfirmationStatus());
-                preparedStatement.setInt(10, user.getId());
+                preparedStatement.setInt(9, user.getId());
 
                 preparedStatement.executeUpdate();
             }
@@ -265,6 +263,5 @@ public class UserDAOImpl extends General implements UserDAO {
         user.seteMail(rs.getString("e_mail"));
         user.setPhone(rs.getString("phone"));
         user.setAccessPrivilege(rs.getString("access_privilege"));
-        user.setConfirmationStatus(rs.getBoolean("confirmation_status"));
     }
 }

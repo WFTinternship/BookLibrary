@@ -6,6 +6,7 @@ import com.workfront.internship.booklibrary.dao.AuthorDAOImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -67,11 +68,13 @@ public class AuthorManagerImpl implements AuthorManager{
         return null;
     }
 
-//    @Override
-//    public List<Author> viewAllAuthorsByBook(int id) {
-//
-//        return null;
-//    } //todo add DAO method
+    @Override
+    public List<Author> viewAllAuthorsByBook(int id) {
+        List<Author> authorList = new ArrayList<>();
+        authorList = authorDAO.getAllAuthorsByBookId(id);
+
+        return authorList;
+    } //todo add DAO method
 
     @Override
     public Author update(Author author) {
