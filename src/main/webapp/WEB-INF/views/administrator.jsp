@@ -38,6 +38,11 @@
 
 <input type="button" id="viewAuthorsOfBook" value="view all authors of the book">
 
+<input type="button" id="addMediaType" value="add media type">
+
+<input type="button" id="addMediaToBook" value="add media to book">
+
+
 <br/><br/>
 <div id='addAuthorContent' class="addAuthor">
     <form method="get" action="/addAuthor">
@@ -177,11 +182,24 @@
     </form>
 </div>
 
-<script>
-    function myFunction(){
+<div id='addMediaTypeContent' class="addMediaType">
+    <form method="get" action="/addMediaType">
+        media type:<br/>
+        <input type="text" name="mediaType" required><br/>
+        <br/><input type="submit" value="add media type">
+        <input type="reset" value="cancel"><br/>
+    </form>
+</div>
 
-    }
-</script>
+<div id='addMediaToBookContent' class="addMediaToBook">
+    <form method="get" action="/addMediaToBook">
+        media:<br/>
+        <input type="text" name="media" required><br/>
+        <br/><input type="submit" value="add media">
+        <%--to book--%>
+        <input type="reset" value="cancel"><br/>
+    </form>
+</div>
 
 </body>
 </html>

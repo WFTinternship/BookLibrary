@@ -1,10 +1,7 @@
 package com.workfront.internship.booklibrary.controller;
 
 import com.workfront.internship.booklibrary.business.*;
-import com.workfront.internship.booklibrary.common.Author;
-import com.workfront.internship.booklibrary.common.Book;
-import com.workfront.internship.booklibrary.common.Genre;
-import com.workfront.internship.booklibrary.common.User;
+import com.workfront.internship.booklibrary.common.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -64,7 +61,7 @@ public class AdministratorController {
         }
 
         request.getSession().setAttribute("author", author);
-        return "administrator";
+        return "redirect:/administrator";
     }
 
     @RequestMapping("/addBook")
@@ -125,7 +122,7 @@ public class AdministratorController {
         }
 
         request.setAttribute("book", book);
-        return "administrator";
+        return "redirect:/administrator";
     }
 
     @RequestMapping("/addGenre")
@@ -154,7 +151,7 @@ public class AdministratorController {
 
         bookManager.addAuthorToBook(bookId, authorId);
 
-        return "administrator";
+        return "redirect:/administrator";
     }
 
     @RequestMapping("/viewAuthorsOfBook")
@@ -171,21 +168,38 @@ public class AdministratorController {
         return "showAuthorsOfBook";
     }
 
-
-
-
-
     @RequestMapping("/addMediaType")
     public String addMediaType(HttpServletRequest request){
-        return "";
+        MediaType mediaType = new MediaType();
+        String mediaTypeName = request.getParameter("mediaType");
+        mediaType.setType(mediaTypeName);
+        mediaTypeManager.add(mediaType);
+        if(mediaType == null){
+            return "addMediaType";
+        }
+        request.getSession().setAttribute("mediaType", mediaType);
+        return "redirect:/administrator";
     }
+
+
+
 
     @RequestMapping("/addMedia")
     public String addMedia(HttpServletRequest request){
-        return "";
+        Media media = new Media();
+        String mediaName = request.getParameter("mediaName");
+        media.setLink(mediaName);
+        return "redirect:/administrator";
     }
 
 
+
+
+
+    @RequestMapping("/updateBookDetails")
+    public String updateBookDetails(HttpServletRequest request){
+        return "";
+    }
 
 
     @RequestMapping("/administrator")

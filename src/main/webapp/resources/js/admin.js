@@ -33,4 +33,14 @@ jQuery(document).ready(function(){
     });
 });
 
+jQuery(document).ready(function(){
+    jQuery('#addMediaType').on('click', function(event) {
+        jQuery('#addMediaTypeContent').toggle('show');
+    });
+});
 
+jQuery(document).ready(function(){
+    jQuery('#addMediaToBook').on('click', function(event) {
+        jQuery('#addMediaToBookContent').toggle('show');
+    });
+});
