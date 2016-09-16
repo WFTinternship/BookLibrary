@@ -74,7 +74,7 @@ public class AuthorManagerImpl implements AuthorManager{
         authorList = authorDAO.getAllAuthorsByBookId(id);
 
         return authorList;
-    } //todo add DAO method
+    }
 
     @Override
     public Author update(Author author) {

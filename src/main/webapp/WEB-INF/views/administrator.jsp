@@ -36,7 +36,7 @@
 
 <input type="button" id="addAuthorToBook" value="add author to book">
 
-<input type="button" id="viewBookAuthors" value="view all authors of the book">
+<input type="button" id="viewAuthorsOfBook" value="view all authors of the book">
 
 <br/><br/>
 <div id='addAuthorContent' class="addAuthor">
@@ -116,7 +116,7 @@
         pages:<br/>
         <input type="text" name="pages" required><br/><br/>
         country of edition:<br/>
-        <input type="text" name="countryOfEdition" required><br/><br/>
+        <input type="text" name="countryOfEdition" required><br/>
 
 
         <br/><input type="submit" value="add book">
@@ -150,9 +150,9 @@
             <%   }
             }
             %>
-        </select>
+        </select><br/>
 
-        <br/><input type="submit" value="add book">
+        <br/><input type="submit" value="add author to book">
         <input type="reset" value="cancel"><br/>
     </form>
 </div>
@@ -161,22 +161,27 @@
 <div id ='viewBookAuthorsContent'>
     <form method="get" action="/viewAuthorsOfBook">
         book:<br/>
-        <select id="bookAuthors" name="bookAuthors">
+        <select id="bookId" name="bookId">
             <%
                 List<Book> bookListForAuthor = (List<Book>)request.getAttribute("books"); // "books"-y ApplicationController-i /Administrator-i mijits e
-                if(!bookList.isEmpty()){
-                    for(Book book : bookList){ %>
+                if(!bookListForAuthor.isEmpty()){
+                    for(Book book : bookListForAuthor){ %>
             <option value="<%=book.getId()%>"><%=book.getTitle()%></option>
             <%   }
             }
             %>
-        </select><br/>
+        </select><br/><br/>
 
-        <br/><input type="submit" value="view authors">
+        <input type="submit" value="view authors">
         <input type="reset" value="cancel"><br/>
     </form>
 </div>
 
+<script>
+    function myFunction(){
+
+    }
+</script>
 
 </body>
 </html>

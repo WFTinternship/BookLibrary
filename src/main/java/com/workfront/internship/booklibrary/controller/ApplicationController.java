@@ -136,18 +136,6 @@ public class ApplicationController {
         return "User";
     }
 
-    @RequestMapping("/administrator")
-    public String getAdminPage(HttpServletRequest request){
-        List<Genre> genreList = genreManager.viewAll();
-        List<Author> authorList = authorManager.viewAllAuthors();
-        List<Book> bookList = bookManager.viewAll();
-
-        request.setAttribute("genres", genreList);
-        request.setAttribute("authors", authorList);
-        request.setAttribute("books", bookList);
-
-        return "administrator";
-    }
 
 //    @RequestMapping("/author")
 //    public String goToAuthorPage(HttpServletRequest request){

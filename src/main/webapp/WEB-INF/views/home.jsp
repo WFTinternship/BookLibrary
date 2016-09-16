@@ -98,7 +98,6 @@
     <br/>
 
 
-
     <div class="buttons" style="position:absolute; bottom:10px; display: inline;">
           <%--<a href="/"><button id="home" type="button">home</button></a>--%>
           <%--&nbsp;--%>
@@ -112,19 +111,6 @@
           <div class="clear"></div>
       </div>
     </div>
-
-
-
-    <%--<div class="buttons" style="position:absolute; bottom:10px;">--%>
-    <%--<a href="/index.jsp" ><button type="button" >home</button></a> &nbsp;--%>
-    <%--<button type="button" onclick="myFunction()">contacts</button>--%>
-
-    <%--<script>--%>
-    <%--function myFunction(){--%>
-      <%--alert("Address: Armenia, 0001, Yerevan\nHyusisain Ave., 1 Building, Office 14\n(Kentron adm. district)\nphone: +374-60-619828");--%>
-    <%--}--%>
-  <%--</script>--%>
-
 
   </body>
 </html>

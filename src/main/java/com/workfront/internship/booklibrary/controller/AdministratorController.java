@@ -10,11 +10,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.IdentityHashMap;
 import java.util.List;
+
+import static com.workfront.internship.booklibrary.controller.ControllerUtil.getIntegerFromString;
 
 /**
  * Created by ${Sona} on 9/9/2016.
@@ -61,7 +64,7 @@ public class AdministratorController {
         }
 
         request.getSession().setAttribute("author", author);
-        return "redirect:/administrator";
+        return "administrator";
     }
 
     @RequestMapping("/addBook")
@@ -122,7 +125,7 @@ public class AdministratorController {
         }
 
         request.setAttribute("book", book);
-        return "redirect:/administrator";
+        return "administrator";
     }
 
     @RequestMapping("/addGenre")
@@ -151,20 +154,22 @@ public class AdministratorController {
 
         bookManager.addAuthorToBook(bookId, authorId);
 
-        return "redirect:/administrator";
+        return "administrator";
     }
 
     @RequestMapping("/viewAuthorsOfBook")
     public String viewAuthorsOfBook(HttpServletRequest request){
         Book book = new Book();
-        String bookIdString = request.getParameter("book");
-        int bookId = getIntegerFromString(bookIdString); // Integer.parseInt(bookIdString);
+        String bookIdString = request.getParameter("bookId");
+        int bookId = getIntegerFromString(bookIdString);
+        book = bookManager.findBookByID(bookId);
+        request.setAttribute("book", book);
 
         List<Author> authorList = authorManager.viewAllAuthorsByBook(bookId);
         request.setAttribute("view authors", authorList);
 
-        return "administrator";
-    } //todo
+        return "showAuthorsOfBook";
+    }
 
 
 
@@ -181,8 +186,19 @@ public class AdministratorController {
     }
 
 
-    private int getIntegerFromString(String str){
-        int result = str == null || str == "" ? 0 : Integer.parseInt(str);
-        return result;
+
+
+    @RequestMapping("/administrator")
+    public String getAdminPage(HttpServletRequest request){
+        List<Genre> genreList = genreManager.viewAll();
+        List<Author> authorList = authorManager.viewAllAuthors();
+        List<Book> bookList = bookManager.viewAll();
+
+        request.setAttribute("genres", genreList);
+        request.setAttribute("authors", authorList);
+        request.setAttribute("books", bookList);
+
+        return "administrator";
     }
+
 }

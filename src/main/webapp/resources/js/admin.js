@@ -32,3 +32,5 @@ jQuery(document).ready(function(){
         jQuery('#viewBookAuthorsContent').toggle('show');
     });
 });
+
+
