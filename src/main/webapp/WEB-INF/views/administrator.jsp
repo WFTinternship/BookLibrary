@@ -42,6 +42,10 @@
 
 <input type="button" id="addMediaToBook" value="add media to book">
 
+<input type="button" id="showBooks" value="show books"
+
+<%--<input type="button" id="editBook" value="edit book" formaction="/editBook">--%>
+
 
 <br/><br/>
 <div id='addAuthorContent' class="addAuthor">
@@ -201,5 +205,86 @@
     </form>
 </div>
 
+<div id="showBooksContent" class="showBooks">
+    <%List<Book> books = new ArrayList<>();
+        books = (List<Book>)request.getAttribute("books");
+    %>
+    <table id="showBooksTable">
+        <thead>
+        <tr>
+            <th></th>
+            <th>title</th>
+            <th>volume</th>
+            <th>abstract</th>
+            <th>genre</th>
+            <th>language</th>
+            <th>count</th>
+            <th>edition year</th>
+            <th>pages</th>
+            <th>country of edition</th>
+            <th>edit</th>
+            <th>delete</th>
+        </tr>
+        </thead>
+        <%for(int i = 0; i < books.size(); i++) {%>
+        <tbody>
+        <tr>
+            <td><input type="checkbox" id="checkbox"></td>
+            <td><%out.print(books.get(i).getTitle());%></td>
+            <td><%int vol = books.get(i).getVolume(); if(vol != 0) {out.print(vol);}%></td>
+            <td><%out.print(books.get(i).getBookAbstract());%></td>
+            <td><%out.print(books.get(i).getGenre().getGenre());%></td>
+            <td><%out.print(books.get(i).getLanguage());%></td>
+            <td><%out.print(books.get(i).getCount());%></td>
+            <td><%out.print(books.get(i).getEditionYear());%></td>
+            <td><%out.print(books.get(i).getPages());%></td>
+            <td><%out.print(books.get(i).getCountryOfEdition());%></td>
+            <td><button class='edit' onclick="myEditFunction()">edit</button></td>
+            <td><button class='delete'>delete</button></td>
+        </tr>
+        </tbody >
+        <%}%>
+    </table>
+</div>
+
+<%--<script>--%>
+    <%--function myEditFunction(){--%>
+        <%--if(document.getElementById('checkbox').checked){--%>
+
+        <%--}--%>
+    <%--}--%>
+
+    <%--$(document).ready(function () {--%>
+        <%--$('#checkbox').click(function(){--%>
+            <%--if ($('#checkbox').attr('checked')) {--%>
+                <%--var currentTD = $(this).parents('tr').find('td');--%>
+                <%--if ($(this).html() == 'edit') {--%>
+                    <%--$.each(currentTD, function () {--%>
+                        <%--$(this).prop('contenteditable', true)--%>
+                    <%--});--%>
+                <%--} else {--%>
+                    <%--$.each(currentTD, function () {--%>
+                        <%--$(this).prop('contenteditable', false)--%>
+                    <%--});--%>
+                <%--}--%>
+
+                <%--$(this).html($(this).html() == 'edit' ? 'save' : 'edit');--%>
+
+                <%--if($(this).html()=='delete'){--%>
+                    <%--$(this).getAttribute()--%>
+                <%--}--%>
+            <%--}--%>
+        <%--});--%>
+    <%--});--%>
+
+<%--//    $(document).ready(function () {--%>
+<%--//        $('#checkbox').onclick..click(function () {--%>
+<%--//--%>
+<%--//--%>
+<%--//        });--%>
+<%--//--%>
+<%--//    });--%>
+<%--//    function myDeleteFunction(){}--%>
+<%--</script>--%>
 </body>
 </html>

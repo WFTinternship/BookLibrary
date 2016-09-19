@@ -44,3 +44,9 @@ jQuery(document).ready(function(){
         jQuery('#addMediaToBookContent').toggle('show');
     });
 });
+
+jQuery(document).ready(function(){
+    jQuery('#showBooksContent').on('click', function(event) {
+        jQuery('#showBooksTable').toggle('show');
+    });
+});

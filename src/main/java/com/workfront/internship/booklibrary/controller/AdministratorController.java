@@ -5,6 +5,7 @@ import com.workfront.internship.booklibrary.common.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -195,10 +196,22 @@ public class AdministratorController {
 
 
 
+    @RequestMapping("/editBook")
+    public String goToEditBookPage(HttpServletRequest request){
+        return "editBook";
+    }
 
     @RequestMapping("/updateBookDetails")
-    public String updateBookDetails(HttpServletRequest request){
-        return "";
+    public String showBookDetails(HttpServletRequest request){
+        List<Book> bookList = bookManager.viewAll();
+        request.setAttribute("books", bookList);
+        return "editBook";
+    }
+
+    @RequestMapping(params = "/updateBookDetails")
+    public String updateBook(HttpServletRequest request){
+
+        return "redirect:/administrator";
     }
 
 
