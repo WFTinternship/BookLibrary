@@ -85,7 +85,7 @@
         genre:<br/>
         <select id="genre" name="genre">
             <%
-                List<Genre> genreList = (List<Genre>)request.getAttribute("genres"); // "genres"-y ApplicationController-i /Administrator-i mijits e
+                List<Genre> genreList = (List<Genre>)request.getAttribute("genres"); // "genres"-y AdministratorController-i /Administrator-i mijits e
                 if(!genreList.isEmpty()){
                     for(Genre genre: genreList){ %>
             <option value="<%=genre.getId()%>"><%=genre.getGenre()%></option>

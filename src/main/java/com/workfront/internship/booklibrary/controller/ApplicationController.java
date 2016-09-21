@@ -122,14 +122,14 @@ public class ApplicationController {
         int id = 0;
         try {
             id = userManager.register(user);
+            if(id == 0){
+                String errorString = "User with this e-mail already exists";
+                request.setAttribute("errorString", errorString);
+                return "Registration";
+            }
         } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
             e.printStackTrace();
             return "ErrorPage";
-        }
-        if(id == 0){
-            String errorString = "User with this e-mail already exists";
-            request.setAttribute("errorString", errorString);
-            return "Registration";
         }
 
         request.getSession().setAttribute("user", user);

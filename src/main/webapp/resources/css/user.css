@@ -54,3 +54,20 @@
     /*color: white;*/
     /*font-style: italic;*/
 /*}*/
+
+
+#showBooksContent{
+    display: none;
+}
+
+#showBooksTable{
+    border: 1px solid #ddd;;
+    border-collapse: collapse;
+    padding: 15px;
+}
+
+#showBooksTable td, th{
+    border: 1px solid #ddd;;
+    border-collapse: collapse;
+    padding: 15px;
+}

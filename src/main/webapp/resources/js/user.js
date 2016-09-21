@@ -6,3 +6,9 @@ window.history.forward();
 function noBack() {
     window.history.forward();
 }
+
+jQuery(document).ready(function(){
+    jQuery('#showBooks').on('click', function(event) {
+        jQuery('#showBooksContent').toggle('show');
+    });
+});

@@ -33,10 +33,10 @@
 
   <%}else{
   %>
-  <ul>
-      <li><a href="/activeUser" id="activeUser"  style="text-decoration: none"><%User user = (User)request.getSession().getAttribute("user");
+  <ul style="float:right">
+      <li style="padding: 0px 20px"><a href="/activeUser" id="activeUser"  style="text-decoration: none"><%User user = (User)request.getSession().getAttribute("user");
           out.print(user.getName());%></a></li>
-      <li><a href="/signout" name="signout"  style="text-decoration: none">sign out</a></li>
+      <li style="padding: 0px 20px"><a href="/signout" name="signout"  style="text-decoration: none">sign out</a></li>
   </ul>
   <%}%>
   </div>

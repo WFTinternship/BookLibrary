@@ -49,7 +49,7 @@ public class AdministratorController {
         String authorBirthCity = request.getParameter("authorBirthCity");
         String email=request.getParameter("email");
         String webPage=request.getParameter("web-page");
-        String biography=request.getParameter("biography:e");
+        String biography=request.getParameter("biography");
 
         author.setName(name);
         author.setSurname(surname);

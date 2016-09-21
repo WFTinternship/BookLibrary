@@ -1,53 +1,26 @@
-<%@ page import="com.workfront.internship.booklibrary.common.User" %>
 <%@ page import="com.workfront.internship.booklibrary.common.Book" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.workfront.internship.booklibrary.common.Genre" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
+<%@ page import="com.workfront.internship.booklibrary.common.Genre" %><%--
   Created by IntelliJ IDEA.
-  User: Workfront
-  Date: 8/10/2016
+  User: Sona Mikayelyan
+  Date: 9/21/2016
+  Time: 7:25 PM
+  To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <html>
 <head>
-    <title>User page</title>
-
-    <script src="<c:url value="/resources/js/jquery-3.1.0.js" />"></script>
-    <script src="<c:url value="/resources/js/user.js"/>"></script>
-    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/user.css"/>">
+    <title>trial</title>
 </head>
-
 <body>
+    <%--<input type="button" id="showBooks" value="show books">--%>
+    <button type="button" id="showBooks">Show all books</button>
 
-    <div>
-        <p> <%User user = (User)request.getSession().getAttribute("user");
-            out.print("hi " + user.getName());
-        %></p>
-        <a href="/signout"><button type="button" >Sign out</button></a>
 
-        <%--<span id="userId"><%user.getId();%></span>--%>
-        <input type="hidden" name="userID" id="userId" value="<%=user.getId()%>"/>
-
-        <br/><br/>
-        <div id="searchHeader">
-            <form id="newSearch" method="get" action="#">
-                <input type="text" class="textInput" name="q" size="21" maxlength="250" autofocus autocomplete="on" autocapitalize="off" aria-autocomplete="list" aria-expanded="false"><input type="submit" value="search" class="searchButton">
-            </form>
-            <div class="clear"></div>
-        </div>
-
-        <div class="buttons" style="position:absolute; bottom:10px; display: inline;">
-            <a href="/"><button id="home" type="button">home</button></a>
-        </div>
-            <%--&nbsp;--%>
-    </div>
-
-    <button type="button" id="showBooks" value="show books">Show all books</button>
 
     <div id="showBooksContent" class="showBooks">
+
         genre:<br/>
         <select id="genre" name="genre">
             <%
@@ -88,6 +61,17 @@
                     <td><%int vol = books.get(i).getVolume(); if(vol != 0) {out.print(vol);}%></td>
                     <td><%out.print(books.get(i).getBookAbstract());%></td>
 
+                    <%--<td id="chooseGenre" class="not_editable"><select name="genre" class="select" disabled>--%>
+                        <%--<%--%>
+                            <%--List<Genre> genres = (List<Genre>)request.getAttribute("genres"); // "genres"-y AdministratorController-i /Administrator-i mijits e--%>
+                            <%--if(!genreList.isEmpty()){--%>
+                                <%--for(Genre genre: genreList){ %>--%>
+                        <%--<option value="<%=genre.getId()%>" <%=(genre.getId() == books.get(i).getGenre().getId() ? "selected='selected'" : "")%>><%=genre.getGenre()%></option>--%>
+                        <%--<%   }--%>
+                        <%--}--%>
+                        <%--%>--%>
+                    <%--</select></td>--%>
+
                     <td class="not_editable"><%out.print(books.get(i).getGenre().getGenre());%></td>
                     <td><%out.print(books.get(i).getLanguage());%></td>
                     <td><%out.print(books.get(i).getCount());%></td>
@@ -102,6 +86,7 @@
             </table>
         </form>
     </div>
+
 
 
 
@@ -133,7 +118,6 @@
                 }
 
                 var bookID = tr.find('input[name="bookID"]').val();
-                var userID = document.getElementById("userId");
 //                var title = tr.find('td').eq(1).text();
 //                var volume = tr.find('td').eq(2).text();
 //                if(volume==""){volume = 0;}
@@ -145,10 +129,9 @@
 //                var pages = tr.find('td').eq(8).text();
 //                var countryOfEdition = tr.find('td').eq(9).text();
 
-                $.ajax('/pickBook', {
+                $.ajax('/editBook', {
                     method: 'POST',
                     data: {
-                        userId: userID,
                         bookId: bookID,
                         title: title,
                         volume: volume,
@@ -169,7 +152,7 @@
 
             });
 
-            $('button.pend').click(function (event) {
+            $('button.delete').click(function (event) {
                 event.preventDefault();
                 var tr = $(this).parents('tr');
                 if (!tr.data('selected')) {
@@ -177,13 +160,11 @@
                 }
 
                 var bookID = tr.find('input[name="bookID"]').val();
-                var userID = document.getElementById("userId");
 
-                $.ajax('/pendBook', {
+                $.ajax('/deleteBook', {
                     method: 'POST',
                     data: {
-                        bookId: bookID,
-                        userId: userID
+                        bookId: bookID
                     },
                     success: function (responseData) {
                         if (responseData.success) {
@@ -199,46 +180,6 @@
         });
 
     </script>
-
-
-
-
-
-
-
-
-
-
-    <%--<div>--%>
-        <%--<form method="get" action="/showBooks">--%>
-            <%--<button type="button" onclick="myFunction()">Show all books</button>--%>
-        <%--</form>--%>
-
-        <%--<table id="books" style="visibility:hidden">--%>
-            <%--<thead>--%>
-                <%--<tr>--%>
-                    <%--&lt;%&ndash;<th></th>&ndash;%&gt;--%>
-                    <%--<th>title</th>--%>
-                    <%--<th>author</th>--%>
-                    <%--<th>genre</th>--%>
-                    <%--<th>language</th>--%>
-                    <%--<th>publication year</th>--%>
-                    <%--<th>number of pages</th>--%>
-                    <%--<th>available count</th>--%>
-                <%--</tr>--%>
-            <%--</thead>--%>
-            <%--<tbody>--%>
-            <%----%>
-            <%--</tbody>--%>
-        <%--</table>--%>
-    <%--</div>--%>
-
-<%--<script>--%>
-    <%--function myFunction(){--%>
-        <%--document.getElementById("books").style.visibility = "visible";--%>
-    <%--}--%>
-<%--</script>--%>
-
 
 </body>
 </html>
