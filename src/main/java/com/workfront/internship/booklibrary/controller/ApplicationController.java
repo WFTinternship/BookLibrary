@@ -81,7 +81,7 @@ public class ApplicationController {
         }
 
         request.getSession().setAttribute("user", user);
-        return "User";
+        return "redirect:/User";
     }
 
     @RequestMapping("/signout")
@@ -133,7 +133,7 @@ public class ApplicationController {
         }
 
         request.getSession().setAttribute("user", user);
-        return "User";
+        return "redirect:/User";
     }
 
 

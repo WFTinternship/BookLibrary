@@ -146,9 +146,6 @@ public class AdministratorController {
 
     @RequestMapping("/addAuthorToBook")
     public String addAuthorToBook(HttpServletRequest request){
-        Book book = new Book();
-        Author author = new Author();
-
         String bookIdString = request.getParameter("book");
         int bookId = Integer.parseInt(bookIdString);
 
@@ -187,7 +184,6 @@ public class AdministratorController {
         return "redirect:/administrator";
     }
 
-
     @RequestMapping("/addMedia")
     public String addMedia(HttpServletRequest request){
         Media media = new Media();
@@ -196,13 +192,12 @@ public class AdministratorController {
         return "redirect:/administrator";
     }
 
-
-    @RequestMapping("/showBook")
-    public String showBookDetails(HttpServletRequest request){
-        List<Book> bookList = bookManager.viewAll();
-        request.setAttribute("books", bookList);
-        return "redirect:/administrator";
-    }
+//    @RequestMapping("/showBook")
+//    public String showBookDetails(HttpServletRequest request){
+//        List<Book> bookList = bookManager.viewAll();
+//        request.setAttribute("books", bookList);
+//        return "redirect:/administrator";
+//    }
 
     @RequestMapping(value="/editBook", method = RequestMethod.POST)
     public String editBook(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -216,7 +211,7 @@ public class AdministratorController {
         int bookId = getIntegerFromString(request.getParameter("bookId"));
         String title = request.getParameter("title");
         String volumeString = request.getParameter("volume");
-        int volume = getIntegerFromString(volumeString); // volumeString == null || volumeString == ""? 0 : Integer.parseInt(volumeString);
+        int volume = getIntegerFromString(volumeString);
         String bookAbstract = request.getParameter("bookAbstract");
         String language = request.getParameter("language");
         int bookCount = Integer.parseInt(request.getParameter("count"));

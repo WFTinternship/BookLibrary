@@ -52,50 +52,47 @@ public class UserController {
 //        return "User";
 //    }
 
-
-
-
-    @RequestMapping("/showBooks")
-    public String showBookDetails(HttpServletRequest request){
+    @RequestMapping("/showBooksDetails")
+    public String showBookDetailsInUserPage(HttpServletRequest request){
         List<Book> bookList = bookManager.viewAll();
-        request.getSession().setAttribute("books", bookList);
+        request.setAttribute("books", bookList);
         return "redirect:/User";
     }
 
     @RequestMapping(value="/pickBook", method = RequestMethod.POST)
-    public String pickBook(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public String pickBookMethod(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Book book = new Book();
         User user = new User();
         PickBook pickBook = new PickBook();
-//        Genre genre = new Genre();
-//        String genreIdString = request.getParameter("genre");
-//
-//        int genreId = Integer.parseInt(genreIdString);
-//        genre = genreManager.findGenreByID(genreId);
+        Genre genre = new Genre();
+        String genreIdString = request.getParameter("genre");
+
+        int genreId = Integer.parseInt(genreIdString);
+        genre = genreManager.findGenreByID(genreId);
 
         int bookId = getIntegerFromString(request.getParameter("bookId"));
         int userId = getIntegerFromString(request.getParameter("userId"));
-//        String title = request.getParameter("title");
-//        String volumeString = request.getParameter("volume");
-//        int volume = getIntegerFromString(volumeString);
-//        String bookAbstract = request.getParameter("bookAbstract");
-//        String language = request.getParameter("language");
-//        int bookCount = Integer.parseInt(request.getParameter("count"));
-//        String editionYear = request.getParameter("editionYear");
-//        int pages = Integer.parseInt(request.getParameter("pages"));
-//        String countryOfEdition = request.getParameter("countryOfEdition");
+        String title = request.getParameter("title");
+        String volumeString = request.getParameter("volume");
+        int volume = getIntegerFromString(volumeString);
+        String bookAbstract = request.getParameter("bookAbstract");
+        String language = request.getParameter("language");
+        int bookCount = Integer.parseInt(request.getParameter("count"));
+        String editionYear = request.getParameter("editionYear");
+        int pages = Integer.parseInt(request.getParameter("pages"));
+        String countryOfEdition = request.getParameter("countryOfEdition");
 
         book.setId(bookId);
         user.setId(userId);
-//        book.setTitle(title);
-//        book.setVolume(volume);
-//        book.setBookAbstract(bookAbstract);
-//        book.setLanguage(language);
-//        book.setCount(bookCount);
-//        book.setEditionYear(editionYear);
-//        book.setPages(pages);
-//        book.setCountryOfEdition(countryOfEdition);
-//        book.setGenre(genre);
+        book.setTitle(title);
+        book.setVolume(volume);
+        book.setBookAbstract(bookAbstract);
+        book.setLanguage(language);
+        book.setCount(bookCount);
+        book.setEditionYear(editionYear);
+        book.setPages(pages);
+        book.setCountryOfEdition(countryOfEdition);
+        book.setGenre(genre);
 
         DateFormat dateFormat =
                 new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
@@ -112,12 +109,11 @@ public class UserController {
         pickBook.setUser(userManager.findUserByID(userId));
 
         try{
-//            if(book.getCount()>0)
             pickBookManager.add(pickBook);
 
         }catch (Exception e) {
             String errorString = "No book available at this moment.\nYou can pend for it now";
-            request.getSession().setAttribute("errorString", errorString);
+            request.setAttribute("errorString", errorString);
             return "redirect:/User";
 //            e.printStackTrace();
 //            return "/ErrorPage";
@@ -134,7 +130,7 @@ public class UserController {
     }
 
     @RequestMapping(value="/pendBook", method = RequestMethod.POST)
-    public String pendBook(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+    public String pendBookMethod(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
         Book book = new Book();
         User user = new User();
         Pending pend = new Pending();
@@ -161,8 +157,6 @@ public class UserController {
             String errorString = "No book available at this moment.";
             request.getSession().setAttribute("errorString", errorString);
             return "ErrorPage";
-//            e.printStackTrace();
-//            return "/ErrorPage";
         }
 
         response.setCharacterEncoding("utf8");
@@ -172,28 +166,19 @@ public class UserController {
         writer.write("{\"success\":true}");
         writer.close();
 
-//        request.setAttribute("bookId", 0);
         return "redirect:/User";
     }
 
-
-
-
-
-
-
-
-
     @RequestMapping("/User")
-    public String getAdminPage(HttpServletRequest request){
+    public String getUserPage(HttpServletRequest request){
         List<Genre> genreList = genreManager.viewAll();
         List<Author> authorList = authorManager.viewAllAuthors();
         List<Book> bookList = bookManager.viewAll();
 
-        request.getSession().setAttribute("genres", genreList);
-        request.getSession().setAttribute("authors", authorList);
-        request.getSession().setAttribute("books", bookList);
+        request.setAttribute("genres", genreList);
+        request.setAttribute("authors", authorList);
+        request.setAttribute("books", bookList);
 
-        return "redirect:/User";
+        return "User";
     }
 }

@@ -62,7 +62,7 @@ public class AuthorDAOImpl extends General implements AuthorDAO {
             LOGGER.error("SQL exception occurred!");
             throw new RuntimeException(e);
         } finally{
-            closeConnection( preparedStatement, connection);
+            closeConnection(resultSet, preparedStatement, connection);
         }
         return author.getId();
     }

@@ -45,24 +45,13 @@
             <%--&nbsp;--%>
     </div>
 
-    <button type="button" id="showBooks" value="show books">Show all books</button>
+    <input type="button" id="showBooksButton" value="show books">
+    <br/><br/>
 
     <div id="showBooksContent" class="showBooks">
-        genre:<br/>
-        <select id="genre" name="genre">
-            <%
-                List<Genre> genreList = (List<Genre>)request.getAttribute("genres"); // "genres"-y ApplicationController-i /Administrator-i mijits e
-                if(!genreList.isEmpty()){
-                    for(Genre genre: genreList){ %>
-            <option value="<%=genre.getId()%>"><%=genre.getGenre()%></option>
-            <%   }
-            }
-            %>
-        </select>
-        <form action="/showBook">
-            <%List<Book> books = new ArrayList<>();
-                books = (List<Book>)request.getAttribute("books");
-            %>
+
+        <form action="/showBooksDetails">
+            <%List<Book> books = (List<Book>)request.getAttribute("books");%>
             <table id="showBooksTable">
                 <thead>
                 <tr>
@@ -76,8 +65,8 @@
                     <th>edition year</th>
                     <th>pages</th>
                     <th>country of edition</th>
-                    <th>edit</th>
-                    <th>delete</th>
+                    <th>pick book</th>
+                    <th>pend book</th>
                 </tr>
                 </thead>
                 <%for(int i = 0; i < books.size(); i++) {%>
@@ -88,7 +77,7 @@
                     <td><%int vol = books.get(i).getVolume(); if(vol != 0) {out.print(vol);}%></td>
                     <td><%out.print(books.get(i).getBookAbstract());%></td>
 
-                    <td class="not_editable"><%out.print(books.get(i).getGenre().getGenre());%></td>
+                    <td><%out.print(books.get(i).getGenre().getGenre());%></td>
                     <td><%out.print(books.get(i).getLanguage());%></td>
                     <td><%out.print(books.get(i).getCount());%></td>
                     <td><%out.print(books.get(i).getEditionYear());%></td>
@@ -102,7 +91,6 @@
             </table>
         </form>
     </div>
-
 
 
     <script>
@@ -125,7 +113,7 @@
 
             });
 
-            $('button.pick').click(function(event) {
+            $('button.pickBook').click(function(event) {
                 event.preventDefault();
                 var tr = $(this).parents('tr');
                 if (!tr.data('selected')) {
@@ -134,16 +122,16 @@
 
                 var bookID = tr.find('input[name="bookID"]').val();
                 var userID = document.getElementById("userId");
-//                var title = tr.find('td').eq(1).text();
-//                var volume = tr.find('td').eq(2).text();
-//                if(volume==""){volume = 0;}
-//                var bookAbstract = tr.find('td').eq(3).text();
-//                var genre = tr.find('td').eq(4).find('select[name="genre"]').val();
-//                var language = tr.find('td').eq(5).text();
+                var title = tr.find('td').eq(1).text();
+                var volume = tr.find('td').eq(2).text();
+                if(volume==""){volume = 0;}
+                var bookAbstract = tr.find('td').eq(3).text();
+                var genre = tr.find('td').eq(4).text();
+                var language = tr.find('td').eq(5).text();
                 var count = tr.find('td').eq(6).text();
-//                var editionYear = tr.find('td').eq(7).text();
-//                var pages = tr.find('td').eq(8).text();
-//                var countryOfEdition = tr.find('td').eq(9).text();
+                var editionYear = tr.find('td').eq(7).text();
+                var pages = tr.find('td').eq(8).text();
+                var countryOfEdition = tr.find('td').eq(9).text();
 
                 $.ajax('/pickBook', {
                     method: 'POST',
@@ -166,10 +154,9 @@
                         }
                     }
                 })
-
             });
 
-            $('button.pend').click(function (event) {
+            $('button.pendForBook').click(function (event) {
                 event.preventDefault();
                 var tr = $(this).parents('tr');
                 if (!tr.data('selected')) {
@@ -187,7 +174,7 @@
                     },
                     success: function (responseData) {
                         if (responseData.success) {
-                            tr.remove();
+                            tr.find('input:checkbox').trigger('click');
                         }
                     },
                     error: function () {
@@ -195,49 +182,9 @@
                     }
                 });
             });
-
         });
 
     </script>
-
-
-
-
-
-
-
-
-
-
-    <%--<div>--%>
-        <%--<form method="get" action="/showBooks">--%>
-            <%--<button type="button" onclick="myFunction()">Show all books</button>--%>
-        <%--</form>--%>
-
-        <%--<table id="books" style="visibility:hidden">--%>
-            <%--<thead>--%>
-                <%--<tr>--%>
-                    <%--&lt;%&ndash;<th></th>&ndash;%&gt;--%>
-                    <%--<th>title</th>--%>
-                    <%--<th>author</th>--%>
-                    <%--<th>genre</th>--%>
-                    <%--<th>language</th>--%>
-                    <%--<th>publication year</th>--%>
-                    <%--<th>number of pages</th>--%>
-                    <%--<th>available count</th>--%>
-                <%--</tr>--%>
-            <%--</thead>--%>
-            <%--<tbody>--%>
-            <%----%>
-            <%--</tbody>--%>
-        <%--</table>--%>
-    <%--</div>--%>
-
-<%--<script>--%>
-    <%--function myFunction(){--%>
-        <%--document.getElementById("books").style.visibility = "visible";--%>
-    <%--}--%>
-<%--</script>--%>
 
 
 </body>

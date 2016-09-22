@@ -64,7 +64,7 @@
         </li>
 
         <li class="book-genres" style="padding: 14px 30px">
-          <a href="#" class="dropbtn"  style="text-decoration: none">books</a>
+          <a href="#" class="dropbtn"  style="text-decoration: none">genres</a>
           <div class="dropdown-content">
             <%
               List<Genre> genres = (List<Genre>)request.getSession().getAttribute("genres");

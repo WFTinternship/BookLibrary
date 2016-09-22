@@ -8,7 +8,7 @@ function noBack() {
 }
 
 jQuery(document).ready(function(){
-    jQuery('#showBooks').on('click', function(event) {
+    jQuery('#showBooksButton').on('click', function(event) {
         jQuery('#showBooksContent').toggle('show');
     });
 });

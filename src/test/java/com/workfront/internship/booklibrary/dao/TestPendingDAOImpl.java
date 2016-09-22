@@ -28,6 +28,8 @@ public class TestPendingDAOImpl {
     @Autowired
     private PendingDAO pendingDAO;
     @Autowired
+    private AuthorDAO authorDAO;
+    @Autowired
     private UserDAO userDAO;
     @Autowired
     private BookDAO bookDAO;
@@ -37,6 +39,7 @@ public class TestPendingDAOImpl {
     List<Integer> authorsIdList;
 
     private Pending expectedPending = null;
+    private Author expectedAuthor = null;
     private User expectedUser = null;
     private Book expectedBook = null;
 
@@ -65,6 +68,11 @@ public class TestPendingDAOImpl {
     }
 
     private List<Integer> init() throws Exception {
+        expectedAuthor = getRandomAuthor();
+        authorDAO.add(expectedAuthor);
+
+        authorList = new ArrayList<>();
+        authorList.add(expectedAuthor);
         List<Integer> authorsIdList = new ArrayList<>();
         for(int i = 0; i < authorList.size(); i++){
             authorsIdList.add(authorList.get(i).getId());

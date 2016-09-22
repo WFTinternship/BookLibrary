@@ -25,10 +25,8 @@ import static org.mockito.Mockito.when;
  */
 public class BookDaoUnitTest {
     LegacyDataSource dataSource;
-    BookDAO realBookDAO;
 
     BookDAO bookDAO;
-    GenreDAO genreDAO;
     List<Integer> authorsIdList = new ArrayList<>();
 
     @SuppressWarnings("unchecked")
@@ -41,11 +39,7 @@ public class BookDaoUnitTest {
         when(connection.prepareStatement(any(String.class))).thenThrow(SQLException.class);
         when(connection.prepareStatement(any(String.class), eq(PreparedStatement.RETURN_GENERATED_KEYS))).thenThrow(SQLException.class);
 
-        realBookDAO = new BookDAOImpl();
         bookDAO = new BookDAOImpl();
-        Whitebox.setInternalState(bookDAO, "dataSource", dataSource);
-        bookDAO = new BookDAOImpl();
-        genreDAO = new GenreDAOImpl();
     }
 
     @After
@@ -55,7 +49,7 @@ public class BookDaoUnitTest {
 
     // region <TEST CASES>
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = Exception.class)
     public void add_dbError() {
         bookDAO.add((new Book()), authorsIdList);
     }
@@ -85,8 +79,8 @@ public class BookDaoUnitTest {
 
     @Test(expected = RuntimeException.class)
     public void updateBook_dbErrorID1(){
-        Book realBook = realBookDAO.getBookByID(212);
-        bookDAO.updateBook(realBook);
+        Book book = bookDAO.getBookByID(212);
+        bookDAO.updateBook(book);
         PreparedStatement preparedStatement = null;
         Connection connection = null;
         verify(((BookDAOImpl)bookDAO)).closeConnection(Mockito.eq(preparedStatement), Mockito.eq(connection));

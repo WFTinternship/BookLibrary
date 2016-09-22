@@ -205,6 +205,8 @@ public class TestAuthorDAOImpl {
     private void checkAssertions(Author expectedAuthor, Author actualAuthor){
         assertEquals(expectedAuthor.getName(), actualAuthor.getName());
         assertEquals(expectedAuthor.getSurname(), actualAuthor.getSurname());
+        assertEquals(expectedAuthor.getBirthYear(), actualAuthor.getBirthYear());
+        assertEquals(expectedAuthor.getBirthCity(), actualAuthor.getBirthCity());
         assertEquals(expectedAuthor.geteMail(), actualAuthor.geteMail());
         assertEquals(expectedAuthor.getWebPage(), actualAuthor.getWebPage());
         assertEquals(expectedAuthor.getBiography(), actualAuthor.getBiography());

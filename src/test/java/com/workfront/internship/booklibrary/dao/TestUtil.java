@@ -75,7 +75,7 @@ public class TestUtil {
         book.setVolume(1);
         book.setBookAbstract("BookAbstract");
         book.setLanguage("English");
-        book.setCount(0);
+        book.setCount(3);
         book.setEditionYear("2015");
         book.setPages(100);
         book.setCountryOfEdition("Armenia");
@@ -105,6 +105,8 @@ public class TestUtil {
 
         author.setName("Hermann");
         author.setSurname("Hesse" + uuid());
+        author.setBirthYear(1970);
+        author.setBirthCity("Delhi" + uuid());
         author.seteMail("hehe@yahoo.com");
         author.setBiography("HermannHesseBioLink");
 

@@ -76,6 +76,7 @@ public class BookDAOImpl extends General implements BookDAO {
             throw new RuntimeException(e);
         }catch (Exception e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         } finally {
             closeConnection(resultSet, preparedStatement, connection);
         }
@@ -263,15 +264,47 @@ public class BookDAOImpl extends General implements BookDAO {
             }
         } catch (SQLException e){
             LOGGER.error("SQL exception occurred!");
-            throw new RuntimeException(e);
-        } finally {
             closeConnection(preparedStatement, connection);
+            throw new RuntimeException(e);
         }
     }
 
     @Override
     public void updateBook(Book book){
-        updateBook(null, book);
+//        updateBook(null, book);
+
+        PreparedStatement preparedStatement = null;
+        Connection connection = null;
+
+        try{
+            if(book.getId() != 0){
+                connection = dataSource.getConnection();
+                String sql = "UPDATE Book SET " +
+                        "ISBN=?, title=?, genre_id=?, volume=?, abstract=?, language=?, count=?, edition_year=?, pages=?, country_of_edition=?" +
+                        " WHERE book_id=?";
+
+                preparedStatement = connection.prepareStatement(sql);
+
+                preparedStatement.setString(1, book.getISBN());
+                preparedStatement.setString(2, book.getTitle());
+                preparedStatement.setInt(3, book.getGenre().getId());
+                preparedStatement.setInt(4, book.getVolume());
+                preparedStatement.setString(5, book.getBookAbstract());
+                preparedStatement.setString(6, book.getLanguage());
+                preparedStatement.setInt(7, book.getCount());
+                preparedStatement.setString(8, book.getEditionYear());
+                preparedStatement.setInt(9, book.getPages());
+                preparedStatement.setString(10, book.getCountryOfEdition());
+                preparedStatement.setInt(11, book.getId());
+
+                preparedStatement.executeUpdate();
+            }
+        } catch (SQLException e){
+            LOGGER.error("SQL exception occurred!");
+            throw new RuntimeException(e);
+        } finally {
+            closeConnection(preparedStatement, connection);
+        }
     }
 
     @Override

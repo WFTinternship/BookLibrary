@@ -207,9 +207,7 @@
 
 <div id="showBooksContent" class="showBooks">
     <form action="/showBook">
-        <%List<Book> books = new ArrayList<>();
-            books = (List<Book>)request.getAttribute("books");
-        %>
+        <%List<Book> books = (List<Book>)request.getAttribute("books");%>
         <table id="showBooksTable">
             <thead>
             <tr>

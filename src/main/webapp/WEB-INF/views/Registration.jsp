@@ -13,62 +13,6 @@
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/registration.css"/>">
 </head>
 <body>
-<%--style="background-color: #ffffcc"--%>
-
-
-
-
-
-<%----%>
-
-
-<%--<div id="openModal" class="modalDialog">--%>
-    <%--<div>   <a href="#close" title="Close" class="close">X</a>--%>
-
-        <%--<div class="registration">--%>
-            <%--<form method="post" action="/Registration">--%>
-
-                    <%--&lt;%&ndash;<legend>Create account</legend>&ndash;%&gt;--%>
-                    <%--name<br/>--%>
-                    <%--<input type="text" name="name"><br/>--%>
-                    <%--<br/>surname<br/>--%>
-                    <%--<input type="text" name="surname"><br/>--%>
-                    <%--<br/>e-mail<br/>--%>
-                    <%--<input type="text" name="e-mail"><br/>--%>
-                    <%--<br/>address<br/>--%>
-                    <%--<input type="text" name="address"><br/>--%>
-                    <%--<br/>phone<br/>--%>
-                    <%--<input type="text" name="phone"><br/>--%>
-                    <%--<br/>username<br/>--%>
-                    <%--<input type="text" name="username"><br/>--%>
-                    <%--<br/>password<br/>--%>
-                    <%--<input type="password" name="password"><br/>--%>
-                    <%--<br/>access privilege<br/>--%>
-                    <%--<input type="text" name="access-privilege">--%>
-                    <%--<br/><input type="submit" value= "create account"><br/>--%>
-
-            <%--</form>--%>
-        <%--</div>--%>
-
-        <%--<br/> <br/> <br/>--%>
-
-
-            <%--<ul>--%>
-                <%--<br/><li><a href="/">cancel</a></li>--%>
-            <%--</ul>--%>
-
-
-
-    <%--</div>--%>
-<%--</div>--%>
-
-<%----%>
-
-
-
-
-
-
 
 <div class="registration">
     <form method="post" action="/Registration">
