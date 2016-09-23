@@ -36,8 +36,6 @@ public class BookDAOImpl extends General implements BookDAO {
             connection = dataSource.getConnection();
             connection.setAutoCommit(false);
 
-
-
             String sql = "INSERT INTO Book(ISBN, title, genre_id, volume, abstract, language, count, edition_year, pages, country_of_edition) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             preparedStatement = connection.prepareStatement(sql, preparedStatement.RETURN_GENERATED_KEYS);
 
@@ -64,8 +62,6 @@ public class BookDAOImpl extends General implements BookDAO {
             }
 
             connection.commit();
-
-//            return book.getId();
         }catch (SQLException e){
             try {
                 connection.rollback();

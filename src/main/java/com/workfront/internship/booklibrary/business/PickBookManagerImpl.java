@@ -31,9 +31,23 @@ public class PickBookManagerImpl implements PickBookManager{
     @Override
     public PickBook getPickBookByID(int id) {
         if(id < 1){
-            throw new IllegalArgumentException("Invalid id is entered");
+//            throw new IllegalArgumentException("Invalid id is entered");
+            return null;
         }
         PickBook pickBook = pickBookDAO.getPickedBookByID(id);
+        if(pickBookValidator(pickBook)){
+            return pickBook;
+        }
+        return null;
+    }
+
+    @Override
+    public PickBook getPickBookByBookID(int id){
+        if(id < 1){
+//            throw new IllegalArgumentException("Invalid id is entered");
+            return null;
+        }
+        PickBook pickBook = pickBookDAO.getPickedBookByBookID(id);
         if(pickBookValidator(pickBook)){
             return pickBook;
         }

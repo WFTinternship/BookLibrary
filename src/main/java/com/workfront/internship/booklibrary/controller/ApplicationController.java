@@ -136,6 +136,10 @@ public class ApplicationController {
         return "redirect:/User";
     }
 
+    @RequestMapping("/ErrorPage")
+    public String getErrorPage(){
+        return "ErrorPage";
+    }
 
 //    @RequestMapping("/author")
 //    public String goToAuthorPage(HttpServletRequest request){

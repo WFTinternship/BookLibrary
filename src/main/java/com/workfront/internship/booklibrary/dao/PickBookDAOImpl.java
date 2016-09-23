@@ -105,6 +105,40 @@ public class PickBookDAOImpl extends General implements PickBookDAO {
     }
 
     @Override
+    public PickBook getPickedBookByBookID(int id) {
+        PickBook pickedBook = null;
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try{
+            connection = dataSource.getConnection();
+
+            String sql = "SELECT * FROM Pick_Book inner join User ON Pick_Book.user_id = User.user_id" +
+                    " inner join Book ON Pick_Book.book_id = Book.book_id inner join Genre " +
+                    " ON Book.genre_id = Genre.genre_id" +
+                    " where Pick_Book.book_id = ?";
+
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+            resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next()){
+                pickedBook = new PickBook();
+
+                setPickBookDetails(resultSet, pickedBook);
+            }
+
+        } catch (SQLException e){
+            LOGGER.error("SQL exception occurred!");
+            throw new RuntimeException(e);
+        }finally {
+            closeConnection(resultSet, preparedStatement, connection);
+        }
+        return pickedBook;
+    }
+
+    @Override
     public List<PickBook> getAllPickedBooks() {
         Connection connection = null;
         PreparedStatement preparedStatement = null;

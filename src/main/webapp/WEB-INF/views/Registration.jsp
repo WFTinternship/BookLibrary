@@ -16,7 +16,7 @@
 
 <div class="registration">
     <form method="post" action="/Registration">
-        <fieldset>
+        <input>
             <legend>Create account</legend>
             name<br/>
             <input type="text" name="name" required><br/>

@@ -8,6 +8,8 @@ public interface PickBookDAO {
 
     PickBook getPickedBookByID(int id);
 
+    PickBook getPickedBookByBookID(int id);
+
     List<PickBook> getAllPickedBooks();
 
     List<PickBook> getAllPickedBooksByUserId(int userId);

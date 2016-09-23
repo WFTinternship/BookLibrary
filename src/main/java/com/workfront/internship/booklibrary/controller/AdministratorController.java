@@ -253,7 +253,7 @@ public class AdministratorController {
     }
 
     private boolean bookIsPicked(int bookId){
-        return pickBookManager.getPickBookByID(bookId) == null;
+        return !(pickBookManager.getPickBookByBookID(bookId) == null);
     }
 
     @RequestMapping(value="/deleteBook", method = RequestMethod.POST)

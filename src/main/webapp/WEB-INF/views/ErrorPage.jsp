@@ -23,6 +23,6 @@
     <br/>
 
     <br/>
-    <img src="/image/error.jpg" align="left">
+    <img src="/resources/image/error.jpg" align="left">
 </body>
 </html>

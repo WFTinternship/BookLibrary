@@ -11,6 +11,8 @@ public interface PickBookManager {
 
     PickBook getPickBookByID(int id);
 
+    PickBook getPickBookByBookID(int id);
+
     List<PickBook> viewAllPickedBooks();
 
     List<PickBook> viewAllPickedBooksByUser(int id);
