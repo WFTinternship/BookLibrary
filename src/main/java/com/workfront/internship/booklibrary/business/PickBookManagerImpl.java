@@ -19,7 +19,7 @@ public class PickBookManagerImpl implements PickBookManager{
 
     @Override
     public int add(PickBook pickBook) {
-        if(pickBookValidator(pickBook)){
+        if(pickBookValidator(pickBook) && pickBook.getBook().getCount() > 0){
             pickBookDAO.add(pickBook);
             if(pickBook.getId() > 0){
                 return pickBook.getId();

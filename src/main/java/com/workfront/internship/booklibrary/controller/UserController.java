@@ -59,40 +59,33 @@ public class UserController {
         return "redirect:/User";
     }
 
+    private boolean lastTimePickedSoonerThanNow(int userId, int bookId){
+        List<PickBook> pickedBooksOfUser = pickBookManager.viewAllPickedBooksByUser(userId);
+        for(PickBook pickedBook : pickedBooksOfUser){
+            if(pickedBook.getBook().getId() == bookId){
+                DateFormat dateFormat =
+                        new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                Calendar cal = Calendar.getInstance();
+                cal.add(Calendar.DATE, 0);
+                Date now = cal.getTime();
+                String nowDate = dateFormat.format(now);
+                if(pickedBook.getReturnDate().compareTo(Timestamp.valueOf(nowDate)) <= 0){ //yete return  date-y aveli shut e qan stugman pahy
+                    return true;
+                } else{return false;}
+            } //else{return true;} //ays girqy pick chi arac
+        }
+        return true;
+    }
+
     @RequestMapping(value="/pickBook", method = RequestMethod.POST)
     public String pickBookMethod(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Book book = new Book();
-        User user = new User();
         PickBook pickBook = new PickBook();
-        Genre genre = new Genre();
-        String genreIdString = request.getParameter("genre");
-
-        int genreId = Integer.parseInt(genreIdString);
-        genre = genreManager.findGenreByID(genreId);
 
         int bookId = getIntegerFromString(request.getParameter("bookId"));
         int userId = getIntegerFromString(request.getParameter("userId"));
-        String title = request.getParameter("title");
-        String volumeString = request.getParameter("volume");
-        int volume = getIntegerFromString(volumeString);
-        String bookAbstract = request.getParameter("bookAbstract");
-        String language = request.getParameter("language");
-        int bookCount = Integer.parseInt(request.getParameter("count"));
-        String editionYear = request.getParameter("editionYear");
-        int pages = Integer.parseInt(request.getParameter("pages"));
-        String countryOfEdition = request.getParameter("countryOfEdition");
 
-        book.setId(bookId);
-        user.setId(userId);
-        book.setTitle(title);
-        book.setVolume(volume);
-        book.setBookAbstract(bookAbstract);
-        book.setLanguage(language);
-        book.setCount(bookCount);
-        book.setEditionYear(editionYear);
-        book.setPages(pages);
-        book.setCountryOfEdition(countryOfEdition);
-        book.setGenre(genre);
+        Book book = bookManager.findBookByID(bookId);
+        User user = userManager.findUserByID(userId);
 
         DateFormat dateFormat =
                 new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
@@ -105,41 +98,54 @@ public class UserController {
         String toDate = dateFormat.format(todate2);
         pickBook.setPickingDate(Timestamp.valueOf(fromdate));
         pickBook.setReturnDate(Timestamp.valueOf(toDate));
-        pickBook.setBook(bookManager.findBookByID(bookId));
-        pickBook.setUser(userManager.findUserByID(userId));
+        pickBook.setBook(book);
+        pickBook.setUser(user);
 
+        /* todo if there are pendings for this book then assign the book to the user
+         who's been pending for it first. If there are many of them at the same time,
+         then choose one of them randomly and inform(send an e-mail) the user that he is given the access to pick the book
+         */
         try{
-            pickBookManager.add(pickBook);
+            if(lastTimePickedSoonerThanNow(userId, bookId)) {
+                pickBookManager.add(pickBook);
+            }
 
         }catch (Exception e) {
             String errorString = "No book available at this moment.\nYou can pend for it now";
             request.setAttribute("errorString", errorString);
             return "redirect:/User";
-//            e.printStackTrace();
-//            return "/ErrorPage";
         }
 
+        request.setAttribute("book", book);
         response.setCharacterEncoding("utf8");
         response.setContentType("application/json");
 
         PrintWriter writer = response.getWriter();
-        writer.write("{\"success\":true}");
+        writer.write("{\"success\":true, \"book\":{\"count\":" + book.getCount() + "}}");
         writer.close();
 
         return "redirect:/User";
     }
 
+    private boolean isPended(int userId, int bookId){
+        List<Pending> pendingList = pendingsManager.viewAllPendingByUser(userId);
+        for(Pending pendingBook : pendingList){
+            if(pendingBook.getBook().getId() == bookId){
+                return true;
+            }
+        }
+        return false;
+    }
+
     @RequestMapping(value="/pendBook", method = RequestMethod.POST)
     public String pendBookMethod(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
-        Book book = new Book();
-        User user = new User();
         Pending pend = new Pending();
 
         int bookId = getIntegerFromString(request.getParameter("bookId"));
         int userId = getIntegerFromString(request.getParameter("userId"));
 
-        book.setId(bookId);
-        user.setId(userId);
+        Book book = bookManager.findBookByID(bookId);
+        User user = userManager.findUserByID(userId);
 
         DateFormat dateFormat =
                 new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
@@ -148,16 +154,20 @@ public class UserController {
         Date todate1 = cal.getTime();
         String fromdate = dateFormat.format(todate1);
         pend.setPendingDate(Timestamp.valueOf(fromdate));
-        pend.setBook(bookManager.findBookByID(bookId));
-        pend.setUser(userManager.findUserByID(userId));
+        pend.setBook(book);
+        pend.setUser(user);
 
         try{
-            pendingsManager.add(pend);
+            if ((!isPended(userId, bookId)) && book.getCount()==0) {
+                pendingsManager.add(pend);
+            }
         }catch (Exception e) {
             String errorString = "No book available at this moment.";
             request.getSession().setAttribute("errorString", errorString);
             return "ErrorPage";
         }
+
+        request.setAttribute("book", book);
 
         response.setCharacterEncoding("utf8");
         response.setContentType("application/json");

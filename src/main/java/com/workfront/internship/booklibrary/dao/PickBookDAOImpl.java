@@ -221,7 +221,7 @@ public class PickBookDAOImpl extends General implements PickBookDAO {
             List<PickBook> pickedBookList = new ArrayList<PickBook>();
 
             String sql = "SELECT * FROM Pick_Book INNER JOIN User ON Pick_Book.user_id = User.user_id " +
-                    "INNer JOIN Book ON Pick_Book.book_id = Book.book_id INNER JOIN Genre " +
+                    "INNER JOIN Book ON Pick_Book.book_id = Book.book_id INNER JOIN Genre " +
                     "ON Book.genre_id = Genre.genre_id " +
                     "where pick_book.user_id =?";
 

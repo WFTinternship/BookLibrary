@@ -33,7 +33,12 @@
             <br/>password<br/>
             <input type="password" name="password" required><br/>
             <br/>access privilege<br/>
-            <input type="text" name="access-privilege" required>
+            <select id="accessType">
+                <option value="user" selected>user</option>
+                <option value="admin">administrator</option>
+            </select>
+            <br/>
+            <%--<input type="text" name="access-privilege" required>--%>
             <br/><input type="submit" value= "Submit">
             <input type="reset" value="cancel"><br/>
         </fieldset>

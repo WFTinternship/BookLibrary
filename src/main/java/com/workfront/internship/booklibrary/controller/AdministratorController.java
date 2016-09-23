@@ -37,6 +37,10 @@ public class AdministratorController {
     private MediaManager mediaManager;
     @Autowired
     private BookManager bookManager;
+    @Autowired
+    private PickBookManager pickBookManager;
+    @Autowired
+    private PendingsManager pendingsManager;
 
     @RequestMapping("/addAuthor")
     public String addAuthor(HttpServletRequest request){
@@ -248,13 +252,21 @@ public class AdministratorController {
         return "redirect:/administrator";
     }
 
+    private boolean bookIsPicked(int bookId){
+        return pickBookManager.getPickBookByID(bookId) == null;
+    }
+
     @RequestMapping(value="/deleteBook", method = RequestMethod.POST)
     public String deleteBook(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
         Book book = new Book();
         int id = getIntegerFromString(request.getParameter("bookId"));
 
         try{
-            bookManager.delete(id);
+            if(!bookIsPicked(id)) {
+                bookManager.delete(id);
+            }else{
+                throw new Exception("The book is picked and cannot be deleted");
+            }
         }catch (Exception e) {
             e.printStackTrace();
             throw new SQLException("Cannot delete the book");

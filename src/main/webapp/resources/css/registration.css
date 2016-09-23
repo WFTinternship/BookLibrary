@@ -61,10 +61,16 @@ form { text-align: left;
     font-style: italic;
 }
 
+#accessType{
+    border-style: solid;
+    background-color: white;
+    color: #006080;
+    /*border: none;*/
+    /*border-radius: 10px;*/
+    /*width: 150px;*/
+    /*height: 30px;*/
 
-
-
-
+}
 
 /*.modalDialog {*/
     /*position: fixed;*/

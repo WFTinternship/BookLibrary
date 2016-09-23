@@ -77,7 +77,7 @@
                     <td><%int vol = books.get(i).getVolume(); if(vol != 0) {out.print(vol);}%></td>
                     <td><%out.print(books.get(i).getBookAbstract());%></td>
 
-                    <td><%out.print(books.get(i).getGenre().getGenre());%></td>
+                    <td data-genre-id="<%=books.get(i).getGenre().getId()%>"><%out.print(books.get(i).getGenre().getGenre());%></td>
                     <td><%out.print(books.get(i).getLanguage());%></td>
                     <td><%out.print(books.get(i).getCount());%></td>
                     <td><%out.print(books.get(i).getEditionYear());%></td>
@@ -102,15 +102,6 @@
                 } else {
                     tr.data('selected', false);
                 }
-
-//                if (tr.data('selected')) {
-//                    tr.find('td:not(.not_editable)').prop('contenteditable', true);
-//                    tr.find('select[name="genre"]').prop('disabled', false);
-//                } else{
-//                    tr.find('td:not(.not_editable)').prop('contenteditable', false);
-//                    tr.find('select[name="genre"]').prop('disabled', true);
-//                }
-
             });
 
             $('button.pickBook').click(function(event) {
@@ -121,35 +112,18 @@
                 }
 
                 var bookID = tr.find('input[name="bookID"]').val();
-                var userID = document.getElementById("userId");
-                var title = tr.find('td').eq(1).text();
-                var volume = tr.find('td').eq(2).text();
-                if(volume==""){volume = 0;}
-                var bookAbstract = tr.find('td').eq(3).text();
-                var genre = tr.find('td').eq(4).text();
-                var language = tr.find('td').eq(5).text();
-                var count = tr.find('td').eq(6).text();
-                var editionYear = tr.find('td').eq(7).text();
-                var pages = tr.find('td').eq(8).text();
-                var countryOfEdition = tr.find('td').eq(9).text();
+                var userID = document.getElementById("userId").value;
+                var count = tr.find('td').eq(6);
 
                 $.ajax('/pickBook', {
                     method: 'POST',
                     data: {
                         userId: userID,
-                        bookId: bookID,
-                        title: title,
-                        volume: volume,
-                        bookAbstract: bookAbstract,
-                        genre: genre,
-                        language: language,
-                        count: count,
-                        editionYear: editionYear,
-                        pages: pages,
-                        countryOfEdition: countryOfEdition
+                        bookId: bookID
                     },
                     success: function (responseData) {
                         if (responseData.success) {
+                            count.text(responseData.book.count);
                             tr.find('input:checkbox').trigger('click');
                         }
                     }
@@ -164,7 +138,7 @@
                 }
 
                 var bookID = tr.find('input[name="bookID"]').val();
-                var userID = document.getElementById("userId");
+                var userID = document.getElementById("userId").value;
 
                 $.ajax('/pendBook', {
                     method: 'POST',

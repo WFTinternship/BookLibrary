@@ -138,7 +138,7 @@ public class BookManagerImpl implements BookManager{
 
     private boolean isValidBook(Book book){
         return book != null && book.getTitle() != null && book.getGenre()!= null && book.getBookAbstract() != null &&
-                book.getLanguage() != null && book.getCount() > 0 && book.getEditionYear() != null && book.getPages() > 1 &&
+                book.getLanguage() != null && book.getCount() >= 0 && book.getEditionYear() != null && book.getPages() > 1 &&
                 book.getCountryOfEdition() != null;
     }
 }
