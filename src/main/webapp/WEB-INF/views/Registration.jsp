@@ -16,28 +16,28 @@
 
 <div class="registration">
     <form method="post" action="/Registration">
-        <input>
+        <fieldset>
             <legend>Create account</legend>
-            name<br/>
+            name<span>*</span><br/>
             <input type="text" name="name" required><br/>
-            <br/>surname<br/>
+            <br/>surname<span>*</span><br/>
             <input type="text" name="surname" required><br/>
-            <br/>e-mail<br/>
+            <br/>e-mail<span>*</span><br/>
             <input type="text" name="e-mail" required><br/>
-            <br/>address<br/>
+            <br/>address<span>*</span><br/>
             <input type="text" name="address" required><br/>
-            <br/>phone<br/>
+            <br/>phone<span>*</span><br/>
             <input type="text" name="phone" required><br/>
-            <br/>username<br/>
+            <br/>username<span>*</span><br/>
             <input type="text" name="username" required><br/>
-            <br/>password<br/>
+            <br/>password<span>*</span><br/>
             <input type="password" name="password" required><br/>
-            <br/>access privilege<br/>
-            <select id="accessType">
-                <option value="user" selected>user</option>
-                <option value="admin">administrator</option>
-            </select>
-            <br/>
+            <input type="hidden" name="accessPrivilege" value="user"><br/>
+            <%--<br/>access privilege<br/>--%>
+            <%--<select id="accessType">--%>
+                <%--<option value="user" selected>user</option>--%>
+                <%--<option value="admin">administrator</option>--%>
+            <%--</select>        --%>
             <%--<input type="text" name="access-privilege" required>--%>
             <br/><input type="submit" value= "Submit">
             <input type="reset" value="cancel"><br/>
@@ -45,6 +45,10 @@
     </form>
 </div>
 
+<style>
+    /*.required:after { content:" *"; }*/
+    .required input:after { content:"*"; }
+</style>​
 
 <br/>
 <div class="buttons" style="position:absolute; bottom:10px;">

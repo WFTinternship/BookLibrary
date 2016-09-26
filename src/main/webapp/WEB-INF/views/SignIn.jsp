@@ -15,9 +15,9 @@
 <body style="background-color: #ffffcc">
 <div class="signin">
 <form method="post" action="/SignIn">
-    username/email:<br/>
+    username<span>*</span><br/>
     <input type="text" name="username/email" required><br/>
-    <br/>password:<br/>
+    <br/>password<span>*</span><br/>
     <input type="password" name="password" required><br/>
     <br/><input type="submit" value= "Submit">
     <input type="reset" value = "cancel"><br/>

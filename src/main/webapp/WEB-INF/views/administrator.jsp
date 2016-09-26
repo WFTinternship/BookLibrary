@@ -50,13 +50,13 @@
 <br/><br/>
 <div id='addAuthorContent' class="addAuthor">
     <form method="get" action="/addAuthor">
-        name:<br/>
+        name:<span>*</span><br/>
         <input type="text" name="name" required><br/><br/>
-        surname:<br/>
+        surname:<span>*</span><br/>
         <input type="text" name="surname" required><br/><br/>
-        author birth year:<br/>
+        author birth year:<span>*</span><br/>
         <input type="text" name="authorBirthYear" required><br/><br/>
-        author birth city:<br/>
+        author birth city:<span>*</span><br/>
         <input type="text" name="authorBirthCity" required><br/><br/>
         email:<br/>
         <input type="email" name="email"><br/><br/>
@@ -72,7 +72,7 @@
 
 <div id='addGenreContent' class="addGenre">
     <form method="get" action="/addGenre">
-        genre:<br/>
+        genre:<span>*</span><br/>
         <input type="text" name="genre" required><br/>
         <br/><input type="submit" value="add genre">
         <input type="reset" value="cancel"><br/>
@@ -82,8 +82,8 @@
 
 <div id ='addBookContent'>
     <form method="get" action="/addBook">
-        genre:<br/>
-        <select id="genre" name="genre">
+        genre:<span>*</span><br/>
+        <select id="genre" name="genre" required>
             <%
                 List<Genre> genreList = (List<Genre>)request.getAttribute("genres"); // "genres"-y AdministratorController-i /Administrator-i mijits e
                 if(!genreList.isEmpty()){
@@ -95,13 +95,13 @@
         </select>
 
         <br/><br/>
-        author name:<br/>
+        author name:<span>*</span><br/>
         <input type="text" name="authorName" required><br/><br/>
-        author surname:<br/>
+        author surname:<span>*</span><br/>
         <input type="text" name="authorSurname" required><br/><br/>
-        author birth year:<br/>
+        author birth year:<span>*</span><br/>
         <input type="text" name="authorBirthYear" required><br/><br/>
-        author birth city:<br/>
+        author birth city:<span>*</span><br/>
         <input type="text" name="authorBirthCity" required><br/><br/>
         email:<br/>
         <input type="email" name="email"><br/><br/>
@@ -110,21 +110,21 @@
         biography:<br/>
         <input type="text" name="biography"><br/><br/>
 
-        title:<br/>
+        title:<span>*</span><br/>
         <input type="text" name="title" required><br/><br/>
         volume:<br/>
         <input type="text" name="volume"><br/><br/>
-        abstract:<br/>
+        abstract:<span>*</span><br/>
         <input type="text" name="abstract" required><br/><br/>
-        language:<br/>
+        language:<span>*</span><br/>
         <input type="text" name="language" required><br/><br/>
-        count:<br/>
+        count:<span>*</span><br/>
         <input type="text" name="count" required><br/><br/>
-        edition year:<br/>
+        edition year:<span>*</span><br/>
         <input type="text" name="editionYear" required><br/><br/>
-        pages:<br/>
+        pages:<span>*</span><br/>
         <input type="text" name="pages" required><br/><br/>
-        country of edition:<br/>
+        country of edition:<span>*</span><br/>
         <input type="text" name="countryOfEdition" required><br/>
 
 
@@ -136,8 +136,8 @@
 
 <div id ='addAuthorToBookContent'>
     <form method="get" action="/addAuthorToBook">
-        book:<br/>
-        <select id="book" name="book">
+        book:<span>*</span><br/>
+        <select id="book" name="book" required>
             <%
                 List<Book> bookList = (List<Book>)request.getAttribute("books"); // "books"-y ApplicationController-i /Administrator-i mijits e
                 if(!bookList.isEmpty()){
@@ -149,8 +149,8 @@
         </select>
 
         <br/><br/>
-        author:<br/>
-        <select id="author" name="author">
+        author:<span>*</span><br/>
+        <select id="author" name="author" required>
             <%
                 List<Author> authorList = (List<Author>)request.getAttribute("authors");
                 if(!authorList.isEmpty()){
@@ -188,7 +188,7 @@
 
 <div id='addMediaTypeContent' class="addMediaType">
     <form method="get" action="/addMediaType">
-        media type:<br/>
+        media type:<span>*</span><br/>
         <input type="text" name="mediaType" required><br/>
         <br/><input type="submit" value="add media type">
         <input type="reset" value="cancel"><br/>
@@ -197,7 +197,7 @@
 
 <div id='addMediaToBookContent' class="addMediaToBook">
     <form method="get" action="/addMediaToBook">
-        media:<br/>
+        media:<span>*</span><br/>
         <input type="text" name="media" required><br/>
         <br/><input type="submit" value="add media">
         <%--to book--%>

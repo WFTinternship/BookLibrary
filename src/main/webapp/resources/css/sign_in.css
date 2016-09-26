@@ -55,3 +55,12 @@ form {
     display: inline-block;
     padding: 20px; width: auto;
 }
+
+/*input:invalid {*/
+    /*!*border: 1px solid red;*!*/
+    /*box-shadow: 0 0 5px 1px red;*/
+/*}*/
+
+/*input:valid {*/
+    /*border: 1px solid black;*/
+/*}*/

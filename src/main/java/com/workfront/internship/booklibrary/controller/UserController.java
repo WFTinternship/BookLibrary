@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -178,6 +179,25 @@ public class UserController {
 
         return "redirect:/User";
     }
+
+    @RequestMapping("/search")
+    public String searchInput(HttpServletRequest request){
+        List<Book> bookList = bookManager.viewAll();
+        List<Book> existingBooks = new ArrayList<>();
+
+        String bookTitle = request.getParameter("searchText");
+
+        for(Book book : bookList){
+            if(book.getTitle().contains(bookTitle)){
+                existingBooks.add(book);
+            }
+        }
+
+        request.setAttribute("books", existingBooks);
+        return "redirect:/User";
+    }
+
+
 
     @RequestMapping("/User")
     public String getUserPage(HttpServletRequest request){
