@@ -19,7 +19,7 @@
         <fieldset>
             <legend>Create account</legend>
             name<span>*</span><br/>
-            <input type="text" name="name" required><br/>
+            <input type="text" name="name" required autofocus><br/>
             <br/>surname<span>*</span><br/>
             <input type="text" name="surname" required><br/>
             <br/>e-mail<span>*</span><br/>

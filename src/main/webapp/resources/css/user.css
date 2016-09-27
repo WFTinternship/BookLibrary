@@ -60,13 +60,13 @@
     display: none;
 }
 
-#showBooksTable{
+.showBooksTable{
     border: 1px solid #ddd;;
     border-collapse: collapse;
     padding: 15px;
 }
 
-#showBooksTable td, th{
+.showBooksTable td, th{
     border: 1px solid #ddd;;
     border-collapse: collapse;
     padding: 15px;

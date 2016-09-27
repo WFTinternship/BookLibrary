@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Writer;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.DateFormat;
@@ -20,6 +21,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import static com.workfront.internship.booklibrary.controller.ControllerUtil.getDateTime;
 import static com.workfront.internship.booklibrary.controller.ControllerUtil.getIntegerFromString;
 
 /**
@@ -45,14 +47,6 @@ public class UserController {
     @Autowired
     private AuthorManager authorManager;
 
-//    @RequestMapping("/showBooks")
-//    public String showAllBooks(HttpServletRequest request){
-//        List<Book> bookList = bookManager.viewAll();
-//        request.getSession().setAttribute("books", bookList);
-//
-//        return "User";
-//    }
-
     @RequestMapping("/showBooksDetails")
     public String showBookDetailsInUserPage(HttpServletRequest request){
         List<Book> bookList = bookManager.viewAll();
@@ -60,27 +54,10 @@ public class UserController {
         return "redirect:/User";
     }
 
-    private boolean lastTimePickedSoonerThanNow(int userId, int bookId){
-        List<PickBook> pickedBooksOfUser = pickBookManager.viewAllPickedBooksByUser(userId);
-        for(PickBook pickedBook : pickedBooksOfUser){
-            if(pickedBook.getBook().getId() == bookId){
-                DateFormat dateFormat =
-                        new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-                Calendar cal = Calendar.getInstance();
-                cal.add(Calendar.DATE, 0);
-                Date now = cal.getTime();
-                String nowDate = dateFormat.format(now);
-                if(pickedBook.getReturnDate().compareTo(Timestamp.valueOf(nowDate)) <= 0){ //yete return  date-y aveli shut e qan stugman pahy
-                    return true;
-                } else{return false;}
-            } //else{return true;} //ays girqy pick chi arac
-        }
-        return true;
-    }
-
     @RequestMapping(value="/pickBook", method = RequestMethod.POST)
     public String pickBookMethod(HttpServletRequest request, HttpServletResponse response) throws IOException {
         PickBook pickBook = new PickBook();
+        Pending pend = new Pending();
 
         int bookId = getIntegerFromString(request.getParameter("bookId"));
         int userId = getIntegerFromString(request.getParameter("userId"));
@@ -88,17 +65,8 @@ public class UserController {
         Book book = bookManager.findBookByID(bookId);
         User user = userManager.findUserByID(userId);
 
-        DateFormat dateFormat =
-                new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.DATE, 0);
-        Date todate1 = cal.getTime();
-        String fromdate = dateFormat.format(todate1);
-        cal.add(Calendar.DATE, 10);
-        Date todate2 = cal.getTime();
-        String toDate = dateFormat.format(todate2);
-        pickBook.setPickingDate(Timestamp.valueOf(fromdate));
-        pickBook.setReturnDate(Timestamp.valueOf(toDate));
+        pickBook.setPickingDate(Timestamp.valueOf(getDateTime(0)));
+        pickBook.setReturnDate(Timestamp.valueOf(getDateTime(10)));
         pickBook.setBook(book);
         pickBook.setUser(user);
 
@@ -106,9 +74,27 @@ public class UserController {
          who's been pending for it first. If there are many of them at the same time,
          then choose one of them randomly and inform(send an e-mail) the user that he is given the access to pick the book
          */
+        PrintWriter writer = response.getWriter();
         try{
-            if(lastTimePickedSoonerThanNow(userId, bookId)) {
+            if(book.getCount() == 0){
+                if(pendingsManager.isPended(userId, bookId)){
+                    writer.write("{\"success\":false, \"message\":\"You already pend for the book\"}");
+                }else if(pickBookManager.isPicked(userId, bookId)) {
+                    writer.write("{\"success\":false, \"message\":\"You already picked the book\"}");
+                }else {
+                    pend.setPendingDate(Timestamp.valueOf(getDateTime(0)));
+                    pend.setBook(book);
+                    pend.setUser(user);
+                    pendingsManager.add(pend);
+                    writer.write("{\"success\":false, \"message\":\"The book is not available now. You are set to pend for it.\"}");
+                }
+
+            }
+            else if(pickBookManager.lastTimePickedSoonerThanNow(userId, bookId)) {
                 pickBookManager.add(pickBook);
+                writer.write("{\"success\":true, \"book\":{\"count\":" + book.getCount() + "}}");
+            } else {
+                writer.write("{\"success\":false, \"message\":\"the book is already picked\"}");
             }
 
         }catch (Exception e) {
@@ -120,61 +106,6 @@ public class UserController {
         request.setAttribute("book", book);
         response.setCharacterEncoding("utf8");
         response.setContentType("application/json");
-
-        PrintWriter writer = response.getWriter();
-        writer.write("{\"success\":true, \"book\":{\"count\":" + book.getCount() + "}}");
-        writer.close();
-
-        return "redirect:/User";
-    }
-
-    private boolean isPended(int userId, int bookId){
-        List<Pending> pendingList = pendingsManager.viewAllPendingByUser(userId);
-        for(Pending pendingBook : pendingList){
-            if(pendingBook.getBook().getId() == bookId){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @RequestMapping(value="/pendBook", method = RequestMethod.POST)
-    public String pendBookMethod(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
-        Pending pend = new Pending();
-
-        int bookId = getIntegerFromString(request.getParameter("bookId"));
-        int userId = getIntegerFromString(request.getParameter("userId"));
-
-        Book book = bookManager.findBookByID(bookId);
-        User user = userManager.findUserByID(userId);
-
-        DateFormat dateFormat =
-                new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.DATE, 0);
-        Date todate1 = cal.getTime();
-        String fromdate = dateFormat.format(todate1);
-        pend.setPendingDate(Timestamp.valueOf(fromdate));
-        pend.setBook(book);
-        pend.setUser(user);
-
-        try{
-            if ((!isPended(userId, bookId)) && book.getCount()==0) {
-                pendingsManager.add(pend);
-            }
-        }catch (Exception e) {
-            String errorString = "No book available at this moment.";
-            request.getSession().setAttribute("errorString", errorString);
-            return "ErrorPage";
-        }
-
-        request.setAttribute("book", book);
-
-        response.setCharacterEncoding("utf8");
-        response.setContentType("application/json");
-
-        PrintWriter writer = response.getWriter();
-        writer.write("{\"success\":true}");
         writer.close();
 
         return "redirect:/User";
@@ -185,18 +116,19 @@ public class UserController {
         List<Book> bookList = bookManager.viewAll();
         List<Book> existingBooks = new ArrayList<>();
 
-        String bookTitle = request.getParameter("searchText");
+        String bookTitle = request.getParameter("q");
 
-        for(Book book : bookList){
-            if(book.getTitle().contains(bookTitle)){
-                existingBooks.add(book);
+        if (!bookTitle.isEmpty()) {
+            for (Book book : bookList) {
+                if (book.getTitle().contains(bookTitle)) {
+                    existingBooks.add(book);
+                }
             }
         }
 
-        request.setAttribute("books", existingBooks);
+        request.getSession().setAttribute("searchedBooks", existingBooks);
         return "redirect:/User";
     }
-
 
 
     @RequestMapping("/User")

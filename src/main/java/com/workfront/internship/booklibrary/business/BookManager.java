@@ -26,6 +26,8 @@ public interface BookManager {
     //get book list ordered by title
     List<Book> viewAll();
 
+    List<Book> viewAllWithCondition(String string);
+
     //get book list ordered by author name, surname
 //    List<Book> viewAllBooksByAuthor(int id);
 //

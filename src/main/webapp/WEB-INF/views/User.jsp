@@ -36,6 +36,46 @@
             <form id="newSearch" method="get" action="/search">
                 <input type="text" class="textInput" name="q" size="21" maxlength="250" autofocus autocomplete="on" autocapitalize="off" aria-autocomplete="list" aria-expanded="false"><input type="submit" value="search" class="searchButton">
             </form>
+            <%
+                List<Book> bookList = (List<Book>)request.getSession().getAttribute("searchedBooks");
+                if (bookList != null && !bookList.isEmpty()) {
+            %>
+                    <table class="showBooksTable">
+                        <thead>
+                        <tr>
+                            <th>title</th>
+                            <th>volume</th>
+                            <th>abstract</th>
+                            <th>genre</th>
+                            <th>language</th>
+                            <th>count</th>
+                            <th>edition year</th>
+                            <th>pages</th>
+                            <th>country of edition</th>
+                            <th>pick book</th>
+                        </tr>
+                        </thead>
+                        <%for(int i = 0; i < bookList.size(); i++) {%>
+                        <tbody>
+                        <tr>
+                            <td><input type="hidden" name="bookID" value="<%=bookList.get(i).getId()%>"/><%out.print(bookList.get(i).getTitle());%></td>
+                            <td><%int vol = bookList.get(i).getVolume(); if(vol != 0) {out.print(vol);}%></td>
+                            <td><%out.print(bookList.get(i).getBookAbstract());%></td>
+
+                            <td data-genre-id="<%=bookList.get(i).getGenre().getId()%>"><%out.print(bookList.get(i).getGenre().getGenre());%></td>
+                            <td><%out.print(bookList.get(i).getLanguage());%></td>
+                            <td><%out.print(bookList.get(i).getCount());%></td>
+                            <td><%out.print(bookList.get(i).getEditionYear());%></td>
+                            <td><%out.print(bookList.get(i).getPages());%></td>
+                            <td><%out.print(bookList.get(i).getCountryOfEdition());%></td>
+                            <td class="not_editable"><button class='pickBook'>pick</button></td>
+                        </tr>
+                        </tbody >
+                        <%}%>
+                    </table>
+            <%
+                }
+            %>
             <div class="clear"></div>
         </div>
 
@@ -45,31 +85,8 @@
             <%--&nbsp;--%>
     </div>
 
-<script>
-    $(window).load(function() { //document.ready-ov shat dandax er ashxatum, kaxvum er
-        document.getElementById("newSearch").addEventListener("input", function () {
-            var searchExpression = document.getElementsByClassName("textInput");
 
-            $.ajax('/search', {
-                method: 'POST',
-                data: {
-                    searchText: searchExpression
-                }
-//            success: function (responseData) {
-//                if (responseData.success) {
-//                    ;
-//                }
-//            }
-            })
-        });
-    });
-
-</script>
-
-
-
-
-
+    <br/><br/>
     <input type="button" id="showBooksButton" value="show books">
     <br/><br/>
 
@@ -77,7 +94,7 @@
 
         <form action="/showBooksDetails">
             <%List<Book> books = (List<Book>)request.getAttribute("books");%>
-            <table id="showBooksTable">
+            <table class="showBooksTable">
                 <thead>
                 <tr>
                     <th>title</th>
@@ -116,143 +133,58 @@
 
     <script>
         $(document).ready(function () {
-//            $('input:checkbox').click(function(){
-//                var tr = $(this).parents('tr');
-//                if ($(this).prop('checked')) {
-//                    tr.data('selected', true);
-//                } else {
-//                    tr.data('selected', false);
-//                }
-//            });
+            $('button.pickBook').click(function(event) {
+                event.preventDefault();
 
-//            $('button.pickBook').click(function(event) {
-//                event.preventDefault();
-//                var tr = $(this).parents('tr');
-//                if (!tr.data('selected')) {
-//                    return false;
-//                }
-//
-//                var bookID = tr.find('input[name="bookID"]').val();
-//                var userID = document.getElementById("userId").value;
-//                var count = tr.find('td').eq(6);
-//
-//                $.ajax('/pickBook', {
-//                    method: 'POST',
-//                    data: {
-//                        userId: userID,
-//                        bookId: bookID
-//                    },
-//                    success: function (responseData) {
-//                        if (responseData.success) {
-//                            count.text(responseData.book.count);
-//                            tr.find('input:checkbox').trigger('click');
-//                        }
-//                    }
-//                })
-//            });
+                if (window.confirm("Do you really want to pick this book?")) {
+                    var tr = $(this).parents('tr');
+                    var bookID = tr.find('input[name="bookID"]').val();
+                    var userID = document.getElementById("userId").value;
+                    var count = tr.find('td').eq(5);
 
-
-            $.confirm({
-                text: "Do you really want to pick this book?",
-                confirm: function() {
-//                    pickBook();
-                    $('button.pickBook').click(function(event) {
-                        event.preventDefault();
-                        var tr = $(this).parents('tr');
-                        if (!tr.data('selected')) {
-                            return false;
-                        }
-
-                        var bookID = tr.find('input[name="bookID"]').val();
-                        var userID = document.getElementById("userId").value;
-                        var count = tr.find('td').eq(6);
-
-                        $.ajax('/pickBook', {
-                            method: 'POST',
-                            data: {
-                                userId: userID,
-                                bookId: bookID
-                            },
-                            success: function (responseData) {
-                                if (responseData.success) {
-                                    count.text(responseData.book.count);
-                                    tr.find('input:checkbox').trigger('click');
-                                }
+                    $.ajax('/pickBook', {
+                        method: 'POST',
+                        data: {
+                            userId: userID,
+                            bookId: bookID
+                        },
+                        success: function (responseData) {
+                            if (responseData.success) {
+                                count.text(responseData.book.count);
+//                                tr.find('input:checkbox').trigger('click');
+                            } else {
+                                window.alert(responseData.message)
                             }
-                        })
-                    });
-                },
-                cancel: function() {
-                    // nothing to do
+                        }
+                    })
                 }
             });
-
-            $.confirm.options = {
-                text: "Do you want to pick the book?",
-                title: "",
-                confirmButton: "Yes",
-                cancelButton: "Cancel",
-                post: false,
-                submitForm: false,
-                confirmButtonClass: "btn-warning",
-                cancelButtonClass: "btn-default",
-                dialogClass: "modal-dialog"
-            };
-
-//            $('button.pendForBook').click(function (event) {
-//                event.preventDefault();
-//                var tr = $(this).parents('tr');
-//                if (!tr.data('selected')) {
-//                    return false;
-//                }
-//
-//                var bookID = tr.find('input[name="bookID"]').val();
-//                var userID = document.getElementById("userId").value;
-//
-//                $.ajax('/pendBook', {
-//                    method: 'POST',
-//                    data: {
-//                        bookId: bookID,
-//                        userId: userID
-//                    },
-//                    success: function (responseData) {
-//                        if (responseData.success) {
-//                            tr.find('input:checkbox').trigger('click');
-//                        }
-//                    },
-//                    error: function () {
-//                        tr.find('input:checkbox').trigger('click');
-//                    }
-//                });
-//            });
         });
 
     </script>
 
 
 
+    <%--<script>--%>
+            <%--$(window).load(function() { //document.ready-ov shat dandax er ashxatum, kaxvum er--%>
+                <%--document.getElementById("newSearch").addEventListener("submit", function () {--%>
+                    <%--var searchExpression = document.getElementsByClassName("textInput");--%>
+        <%----%>
+                    <%--$.ajax('/search', {--%>
+                        <%--method: 'POST',--%>
+                        <%--data: {--%>
+                            <%--searchText: searchExpression--%>
+                        <%--}--%>
+        <%--//            success: function (responseData) {--%>
+        <%--//                if (responseData.success) {--%>
+        <%--//                    ;--%>
+        <%--//                }--%>
+        <%--//            }--%>
+                    <%--})--%>
+                <%--});--%>
+            <%--});--%>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <%--</script>--%>
 
 
 

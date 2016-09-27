@@ -5,6 +5,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.workfront.internship.booklibrary.common.Author" %>
 <%@ page import="com.workfront.internship.booklibrary.common.Book" %>
+<%@ page import="com.workfront.internship.booklibrary.common.MediaType" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -198,7 +199,30 @@
 <div id='addMediaToBookContent' class="addMediaToBook">
     <form method="get" action="/addMediaToBook">
         media:<span>*</span><br/>
-        <input type="text" name="media" required><br/>
+        <input type="text" name="media" required><br/><br/>
+        media type:<span>*</span><br/>
+        <select id="mediaTypeId" name="mediaTypeId">
+            <%
+                List<MediaType> mediaTypeList = (List<MediaType>)request.getAttribute("mediaTypes"); // "books"-y AdministratorController-i /Administrator-i mijits e
+                if(!mediaTypeList.isEmpty()){
+                    for(MediaType mediaType : mediaTypeList){ %>
+            <option value="<%=mediaType.getId()%>"><%=mediaType.getType()%></option>
+            <%   }
+            }
+            %>
+        </select><br/><br/>
+        book:<span>*</span><br/>
+        <select id="bookId" name="bookId">
+            <%
+                List<Book> bookListForMedia = (List<Book>)request.getAttribute("books"); // "books"-y AdministratorController-i /Administrator-i mijits e
+                if(!bookListForMedia.isEmpty()){
+                    for(Book book : bookListForMedia){ %>
+            <option value="<%=book.getId()%>"><%=book.getTitle()%></option>
+            <%   }
+            }
+            %>
+        </select><br/><br/>
+
         <br/><input type="submit" value="add media">
         <%--to book--%>
         <input type="reset" value="cancel"><br/>

@@ -194,6 +194,8 @@ public class AdministratorController {
         String mediaName = request.getParameter("mediaName");
         media.setLink(mediaName);
         return "redirect:/administrator";
+
+
     }
 
 //    @RequestMapping("/showBook")
@@ -289,10 +291,12 @@ public class AdministratorController {
         List<Genre> genreList = genreManager.viewAll();
         List<Author> authorList = authorManager.viewAllAuthors();
         List<Book> bookList = bookManager.viewAll();
+        List<MediaType> mediaTypeList = mediaTypeManager.viewAllMediaTypes();
 
         request.setAttribute("genres", genreList);
         request.setAttribute("authors", authorList);
         request.setAttribute("books", bookList);
+        request.setAttribute("mediaTypes", mediaTypeList);
 
         return "administrator";
     }

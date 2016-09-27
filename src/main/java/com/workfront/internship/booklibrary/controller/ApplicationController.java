@@ -24,7 +24,9 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.Authenticator;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.List;
+import static com.workfront.internship.booklibrary.controller.ControllerUtil.correctSearchText;
 
 
 /**
@@ -115,9 +117,9 @@ public class ApplicationController {
         String phone=request.getParameter("phone");
         String username=request.getParameter("username");
         String password=request.getParameter("password");
-        String accessPrivilege=request.getParameter("access-privilege");
+//        String accessPrivilege=request.getParameter("access-privilege");
 
-        User user = new User().setName(name).setSurname(surname).setUsername(username).setPassword(password).setAddress(address).seteMail(email).setPhone(phone).setAccessPrivilege(accessPrivilege);
+        User user = new User().setName(name).setSurname(surname).setUsername(username).setPassword(password).setAddress(address).seteMail(email).setPhone(phone).setAccessPrivilege("user");
 
         int id = 0;
         try {
@@ -136,30 +138,29 @@ public class ApplicationController {
         return "redirect:/User";
     }
 
+    @RequestMapping("/searchHome")
+    public String searchInputHome(HttpServletRequest request){
+
+        List<Book> existingBooks = new ArrayList<>();
+
+        String bookTitle = request.getParameter("q");
+//        bookTitle = correctSearchText(bookTitle);
+        List<Book> bookList = bookManager.viewAllWithCondition(bookTitle);
+
+        if (!bookTitle.isEmpty()) {
+            for (Book book : bookList) {
+                if (book.getTitle().contains(bookTitle)) {
+                    existingBooks.add(book);
+                }
+            }
+        }
+
+        request.getSession().setAttribute("searchedBooks", existingBooks);
+        return "redirect:/";
+    }
+
     @RequestMapping("/ErrorPage")
     public String getErrorPage(){
         return "ErrorPage";
     }
-
-//    @RequestMapping("/author")
-//    public String goToAuthorPage(HttpServletRequest request){
-////        Author author = (Author) request.getAttribute("author");
-////        request.setAttribute("name", author.getName());
-////        request.setAttribute("surname", author.getSurname());
-//
-//        return "author";
-//    }
-
-
-
-//    @RequestMapping(value = "/save", method = RequestMethod.GET)
-//    public String simpleRequest(@RequestAttribute("id") String id, Model model) {
-//        model.addAttribute("message", "Simple Message");
-//
-//        User user = userManager.findUserByUserName("sonamikayelyan");
-//        model.addAttribute("user", user);
-//        return "simpleRequest";
-//    }
-
-
 }

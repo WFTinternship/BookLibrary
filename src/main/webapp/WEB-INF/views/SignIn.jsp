@@ -16,7 +16,7 @@
 <div class="signin">
 <form method="post" action="/SignIn">
     username<span>*</span><br/>
-    <input type="text" name="username/email" required><br/>
+    <input type="text" name="username/email" required autofocus><br/>
     <br/>password<span>*</span><br/>
     <input type="password" name="password" required><br/>
     <br/><input type="submit" value= "Submit">

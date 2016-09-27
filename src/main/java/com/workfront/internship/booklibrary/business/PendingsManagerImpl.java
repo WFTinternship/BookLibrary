@@ -60,7 +60,7 @@ public class PendingsManagerImpl implements PendingsManager{
         if(id < 1){
             throw new IllegalArgumentException("Invalid id is entered");
         }
-        ;
+
         if(id > 0){
             List<Pending> pendingList = pendingDAO.getAllPendingsByUserID(id);
             if(pendingList != null){
@@ -78,6 +78,16 @@ public class PendingsManagerImpl implements PendingsManager{
         if(id > 0){
             pendingDAO.deletePending(id);
             if(pendingDAO.getPendingByID(id) == null){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isPended(int userId, int bookId){
+        List<Pending> pendingList = viewAllPendingByUser(userId);
+        for(Pending pendingBook : pendingList){
+            if(pendingBook.getBook().getId() == bookId){
                 return true;
             }
         }

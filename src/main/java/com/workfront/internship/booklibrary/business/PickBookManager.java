@@ -20,4 +20,8 @@ public interface PickBookManager {
     PickBook update(PickBook pickBook);
 
     boolean delete(int id);
+
+    boolean lastTimePickedSoonerThanNow(int userId, int bookId);
+
+    boolean isPicked(int userId, int bookId);
 }

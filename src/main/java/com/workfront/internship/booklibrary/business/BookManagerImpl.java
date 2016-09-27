@@ -102,6 +102,15 @@ public class BookManagerImpl implements BookManager{
         return null;
     }
 
+    @Override
+    public List<Book> viewAllWithCondition(String string) {
+        List<Book> bookList = bookDAO.getAllBooksWithCondition(string);
+        if(bookList != null){
+            return bookList;
+        }
+        return null;
+    }
+
 //    @Override
 //    public List<Book> viewAllBooksByAuthor(int id) {
 //

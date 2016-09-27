@@ -146,10 +146,10 @@
 }
 
 
-#searchHeader{
+#searchHeaderHome{
 	background-color:#c3dfef;
 }
-#newSearch{
+#newSearchHome{
 	/*display: inline-block;*/
 	float:right;
 	padding:20px;
@@ -287,4 +287,21 @@ li.a{
 	text-align: center;
 	padding: 14px 16px;
 	text-decoration: none;
+}
+
+
+#showBooksContent{
+	display: none;
+}
+
+.showBooksTable{
+	border: 1px solid #979797;
+	border-collapse: collapse;
+	padding: 15px;
+}
+
+.showBooksTable td, th{
+	border: 1px solid #979797;
+	border-collapse: collapse;
+	padding: 15px;
 }

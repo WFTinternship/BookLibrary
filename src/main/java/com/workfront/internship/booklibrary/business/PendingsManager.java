@@ -16,4 +16,6 @@ public interface PendingsManager {
     List<Pending> viewAllPendingByUser(int id);
 
     boolean delete(int id);
+
+    boolean isPended(int userId, int bookId);
 }

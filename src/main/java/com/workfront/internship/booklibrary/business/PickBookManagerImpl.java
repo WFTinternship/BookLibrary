@@ -6,6 +6,11 @@ import com.workfront.internship.booklibrary.dao.PickBookDAOImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -94,6 +99,36 @@ public class PickBookManagerImpl implements PickBookManager{
         if(id > 0){
             pickBookDAO.deletePickedBook(id);
             if(pickBookDAO.getPickedBookByID(id) == null){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean lastTimePickedSoonerThanNow(int userId, int bookId){
+        List<PickBook> pickedBooksOfUser = viewAllPickedBooksByUser(userId);
+        for(PickBook pickedBook : pickedBooksOfUser){
+            if(pickedBook.getBook().getId() == bookId){
+                DateFormat dateFormat =
+                        new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                Calendar cal = Calendar.getInstance();
+                cal.add(Calendar.DATE, 0);
+                Date now = cal.getTime();
+                String nowDate = dateFormat.format(now);
+                if(pickedBook.getReturnDate().compareTo(Timestamp.valueOf(nowDate)) <= 0){ //yete return  date-y aveli shut e qan stugman pahy
+                    return true;
+                } else{return false;}
+            } //ays girqy pick chi arac
+        }
+        return true;
+    }
+
+    @Override
+    public boolean isPicked(int userId, int bookId){
+        List<PickBook> pickBookList = viewAllPickedBooksByUser(userId);
+        for(PickBook pickBook : pickBookList){
+            if(pickBook.getBook().getId() == bookId){
                 return true;
             }
         }

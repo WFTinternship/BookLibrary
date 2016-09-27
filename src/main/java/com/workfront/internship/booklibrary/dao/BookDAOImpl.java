@@ -230,6 +230,42 @@ public class BookDAOImpl extends General implements BookDAO {
     }
 
     @Override
+    public List<Book> getAllBooksWithCondition(String string) {
+        List<Book> books = null;
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try{
+            connection = dataSource.getConnection();
+            books = new ArrayList<Book>();
+            String sql = "SELECT * FROM Book WHERE title LIKE '%?%'";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, string);
+            resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next()){
+                Book book = new Book();
+                Genre genre = new Genre();
+                genre.setId(resultSet.getInt(4)).setGenre(resultSet.getString("genre"));
+
+                setBookDetails(resultSet, book);
+                book.setGenre(genre);
+
+                books.add(book);
+            }
+
+        } catch (SQLException e){
+            LOGGER.error("SQL exception occurred!");
+            throw new RuntimeException(e);
+        } finally {
+            closeConnection(resultSet, preparedStatement, connection);
+        }
+
+        return books;
+    }
+
+    @Override
     public void updateBook(Connection connection, Book book) {
         PreparedStatement preparedStatement = null;
 

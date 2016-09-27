@@ -15,6 +15,8 @@ public interface BookDAO {
 
     List<Book> getAllBooks();
 
+    List<Book> getAllBooksWithCondition(String string);
+
     void updateBook(Book book);
 
     void updateBook(Connection connection, Book book);
