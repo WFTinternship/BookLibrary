@@ -9,6 +9,8 @@ import java.util.List;
 public interface PickBookManager {
     int add(PickBook pickBook);
 
+    String addPickOrPend(int bookId, int userId);
+
     PickBook getPickBookByID(int id);
 
     PickBook getPickBookByBookID(int id);

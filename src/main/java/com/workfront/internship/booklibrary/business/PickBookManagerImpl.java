@@ -1,17 +1,24 @@
 package com.workfront.internship.booklibrary.business;
 
+import com.workfront.internship.booklibrary.common.Book;
+import com.workfront.internship.booklibrary.common.Pending;
 import com.workfront.internship.booklibrary.common.PickBook;
+import com.workfront.internship.booklibrary.common.User;
 import com.workfront.internship.booklibrary.dao.PickBookDAO;
 import com.workfront.internship.booklibrary.dao.PickBookDAOImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import static com.workfront.internship.booklibrary.controller.ControllerUtil.getDateTime;
+import static com.workfront.internship.booklibrary.controller.ControllerUtil.getIntegerFromString;
 
 /**
  * Created by ${Sona} on 7/21/2016.
@@ -21,6 +28,12 @@ import java.util.List;
 public class PickBookManagerImpl implements PickBookManager{
     @Autowired
     private PickBookDAO pickBookDAO;
+    @Autowired
+    private BookManager bookManager;
+    @Autowired
+    private UserManager userManager;
+    @Autowired
+    private PendingsManager pendingsManager;
 
     @Override
     public int add(PickBook pickBook) {
@@ -31,6 +44,50 @@ public class PickBookManagerImpl implements PickBookManager{
             }
         }
         return 0;
+    }
+
+    @Override
+    public String addPickOrPend(int bookId, int userId) {
+        String message=null;
+        PickBook pickBook = new PickBook();
+        Pending pend = new Pending();
+
+        Book book = bookManager.findBookByID(bookId);
+        User user = userManager.findUserByID(userId);
+
+        pickBook.setPickingDate(Timestamp.valueOf(getDateTime(0)));
+        pickBook.setReturnDate(Timestamp.valueOf(getDateTime(10)));
+        pickBook.setBook(book);
+        pickBook.setUser(user);
+
+        try{
+            if(book.getCount() == 0){
+                if(pendingsManager.isPended(userId, bookId)){
+                    message = "{\"success\":false, \"message\":\"You already pend for the book\"}";
+//                    writer.write("{\"success\":false, \"message\":\"You already pend for the book\"}");
+                }else if(isPicked(userId, bookId)) {
+                    message = "{\"success\":false, \"message\":\"You already picked the book\"}";
+                }else {
+                    pend.setPendingDate(Timestamp.valueOf(getDateTime(0)));
+                    pend.setBook(book);
+                    pend.setUser(user);
+                    pendingsManager.add(pend);
+                    message = "{\"success\":false, \"message\":\"The book is not available now. You are set to pend for it.\"}";
+                }
+
+            }
+            else if(lastTimePickedSoonerThanNow(userId, bookId)) {
+                add(pickBook);
+                message = "{\"success\":true, \"book\":{\"count\":" + book.getCount() + "}}";
+            } else {
+                message = "{\"success\":false, \"message\":\"the book is already picked\"}";
+            }
+
+        }catch (Exception e) {
+            message = "No book available at this moment.\nYou can pend for it now";
+        }
+
+        return message;
     }
 
     @Override

@@ -56,54 +56,22 @@ public class UserController {
 
     @RequestMapping(value="/pickBook", method = RequestMethod.POST)
     public String pickBookMethod(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        PickBook pickBook = new PickBook();
-        Pending pend = new Pending();
+        String result = null;
 
         int bookId = getIntegerFromString(request.getParameter("bookId"));
         int userId = getIntegerFromString(request.getParameter("userId"));
 
-        Book book = bookManager.findBookByID(bookId);
-        User user = userManager.findUserByID(userId);
-
-        pickBook.setPickingDate(Timestamp.valueOf(getDateTime(0)));
-        pickBook.setReturnDate(Timestamp.valueOf(getDateTime(10)));
-        pickBook.setBook(book);
-        pickBook.setUser(user);
-
-        /* todo if there are pendings for this book then assign the book to the user
-         who's been pending for it first. If there are many of them at the same time,
-         then choose one of them randomly and inform(send an e-mail) the user that he is given the access to pick the book
-         */
         PrintWriter writer = response.getWriter();
         try{
-            if(book.getCount() == 0){
-                if(pendingsManager.isPended(userId, bookId)){
-                    writer.write("{\"success\":false, \"message\":\"You already pend for the book\"}");
-                }else if(pickBookManager.isPicked(userId, bookId)) {
-                    writer.write("{\"success\":false, \"message\":\"You already picked the book\"}");
-                }else {
-                    pend.setPendingDate(Timestamp.valueOf(getDateTime(0)));
-                    pend.setBook(book);
-                    pend.setUser(user);
-                    pendingsManager.add(pend);
-                    writer.write("{\"success\":false, \"message\":\"The book is not available now. You are set to pend for it.\"}");
-                }
-
-            }
-            else if(pickBookManager.lastTimePickedSoonerThanNow(userId, bookId)) {
-                pickBookManager.add(pickBook);
-                writer.write("{\"success\":true, \"book\":{\"count\":" + book.getCount() + "}}");
-            } else {
-                writer.write("{\"success\":false, \"message\":\"the book is already picked\"}");
-            }
-
+            result = pickBookManager.addPickOrPend(bookId, userId);
         }catch (Exception e) {
             String errorString = "No book available at this moment.\nYou can pend for it now";
             request.setAttribute("errorString", errorString);
             return "redirect:/User";
         }
 
-        request.setAttribute("book", book);
+        writer.write(result);
+
         response.setCharacterEncoding("utf8");
         response.setContentType("application/json");
         writer.close();

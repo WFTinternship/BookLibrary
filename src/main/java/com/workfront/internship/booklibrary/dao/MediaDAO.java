@@ -1,10 +1,15 @@
 package com.workfront.internship.booklibrary.dao;
 
+import com.workfront.internship.booklibrary.common.Book;
 import com.workfront.internship.booklibrary.common.Media;
+import com.workfront.internship.booklibrary.common.MediaType;
+
 import java.util.List;
 
 public interface MediaDAO {
     int add(Media media);
+
+    int add(String link, int mediaTypeId, int bookId);
 
     Media getMediaByID(int id);
 

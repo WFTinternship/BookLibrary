@@ -28,4 +28,6 @@ public interface BookDAO {
     boolean isExist(int id);
 
     void addAuthorToBook(int bookId, int authorID);
+
+    void addMediaToBook(int bookId, int mediaId);
 }

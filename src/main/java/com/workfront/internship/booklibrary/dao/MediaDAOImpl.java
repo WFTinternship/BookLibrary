@@ -62,6 +62,39 @@ public class MediaDAOImpl extends General implements MediaDAO{
     }
 
     @Override
+    public int add(String link, int mediaTypeId, int bookId) {
+        Media media = null;
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet;
+        int lastId = 0;
+
+        try{
+            connection = dataSource.getConnection();
+            String sql = "INSERT INTO media(media, media_type_id, book_id) VALUES(?, ?, ?)";
+            preparedStatement = connection.prepareStatement(sql, preparedStatement.RETURN_GENERATED_KEYS);
+
+            preparedStatement.setString(1, link);
+            preparedStatement.setInt(2, mediaTypeId);
+            preparedStatement.setInt(3, bookId);
+
+            preparedStatement.executeUpdate();
+            resultSet = preparedStatement.getGeneratedKeys();
+            if(resultSet.next()){
+                lastId = resultSet.getInt(1);
+            }
+            media.setId(lastId);
+
+        } catch (SQLException e){
+            LOGGER.error("SQL exception occurred!");
+            throw new RuntimeException(e);
+        }finally {
+            closeConnection(preparedStatement, connection);
+        }
+        return media.getId();
+    }
+
+    @Override
     public Media getMediaByID(int id) {
         Media media = null;
         Connection connection = null;

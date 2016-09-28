@@ -22,6 +22,14 @@
         <param-value>Development</param-value>
     </context-param>
 
+    <context-param>
+        <description>Location to store uploaded file</description>
+        <param-name>file-upload</param-name>
+        <param-value>
+            C:\Users\Workfront\Application\apache-tomcat-9.0.0.M8\webapps\data\
+        </param-value>
+    </context-param>
+
 
     <!--<listener>-->
     <!--<listener-class>com.workfront.internship.booklibrary.spring.SpringContextListener</listener-class>-->

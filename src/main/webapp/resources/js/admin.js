@@ -46,6 +46,12 @@ jQuery(document).ready(function(){
 });
 
 jQuery(document).ready(function(){
+    jQuery('#showMedias').on('click', function(/*event*/) {
+        jQuery('#viewMediasForBookContent').toggle('show');
+    });
+});
+
+jQuery(document).ready(function(){
     jQuery('#showBooks').on('click', function(event) {
         jQuery('#showBooksContent').toggle('show');
     });

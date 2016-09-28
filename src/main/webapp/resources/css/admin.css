@@ -26,6 +26,10 @@
     display: none;
 }
 
+#viewMediasForBookContent{
+    display: none;
+}
+
 #showBooksContent{
     display: none;
 }

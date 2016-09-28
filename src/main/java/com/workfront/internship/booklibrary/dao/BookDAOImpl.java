@@ -119,6 +119,11 @@ public class BookDAOImpl extends General implements BookDAO {
     }
 
     @Override
+    public void addMediaToBook(int bookId, int mediaId) {
+
+    }
+
+    @Override
     public Book getBookByID(int id) {
         Book book = null;
         Connection connection = null;
@@ -239,9 +244,9 @@ public class BookDAOImpl extends General implements BookDAO {
         try{
             connection = dataSource.getConnection();
             books = new ArrayList<Book>();
-            String sql = "SELECT * FROM Book WHERE title LIKE '%?%'";
+            String sql = "SELECT * FROM Book LEFT JOIN Genre ON Book.genre_id = Genre.genre_id WHERE title LIKE ?";
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, string);
+            preparedStatement.setString(1, '%' + string + '%');
             resultSet = preparedStatement.executeQuery();
 
             while(resultSet.next()){

@@ -45,6 +45,8 @@
 
 <input type="button" id="showBooks" value="show books">
 
+<input type="button" id="showMedias" value="show medias for the book">
+
 <%--<input type="button" id="editBook" value="edit book" formaction="/editBook">--%>
 
 
@@ -187,6 +189,25 @@
     </form>
 </div>
 
+<div id="viewMediasForBookContent">
+    <form method="get" action="/viewMediasForBook">
+        book:<br/>
+        <select id="bookIdForMedias" name="bookId">
+            <%
+                List<Book> bookListForMedias = (List<Book>)request.getAttribute("books"); // "books"-y AdministratorController-i /Administrator-i mijits e
+                if(!bookListForAuthor.isEmpty()){
+                    for(Book book : bookListForAuthor){ %>
+            <option value="<%=book.getId()%>"><%=book.getTitle()%></option>
+            <%   }
+            }
+            %>
+        </select><br/><br/>
+
+        <input type="submit" value="view medias">
+        <input type="reset" value="cancel"><br/>
+    </form>
+</div>
+
 <div id='addMediaTypeContent' class="addMediaType">
     <form method="get" action="/addMediaType">
         media type:<span>*</span><br/>
@@ -196,10 +217,19 @@
     </form>
 </div>
 
+
+
+
 <div id='addMediaToBookContent' class="addMediaToBook">
-    <form method="get" action="/addMediaToBook">
+    <form method="post" action="/addMediaToBook">
         media:<span>*</span><br/>
-        <input type="text" name="media" required><br/><br/>
+        <input type="file" name="file" enctype="multipart/form-data" required>
+        Name: <input type="text" name="name">
+        <br/><br/>
+
+
+        <%--media:<span>*</span><br/>--%>
+        <%--<input type="text" name="media" required><br/><br/>--%>
         media type:<span>*</span><br/>
         <select id="mediaTypeId" name="mediaTypeId">
             <%
@@ -212,7 +242,7 @@
             %>
         </select><br/><br/>
         book:<span>*</span><br/>
-        <select id="bookId" name="bookId">
+        <select id="bookIdForMedia" name="bookId">
             <%
                 List<Book> bookListForMedia = (List<Book>)request.getAttribute("books"); // "books"-y AdministratorController-i /Administrator-i mijits e
                 if(!bookListForMedia.isEmpty()){
@@ -224,10 +254,12 @@
         </select><br/><br/>
 
         <br/><input type="submit" value="add media">
-        <%--to book--%>
         <input type="reset" value="cancel"><br/>
     </form>
 </div>
+
+
+
 
 <div id="showBooksContent" class="showBooks">
     <form action="/showBook">

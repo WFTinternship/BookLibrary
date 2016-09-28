@@ -9,9 +9,13 @@ import java.util.List;
 public interface MediaManager {
     int add(Media media);
 
+    int add(String link, int mediaTypeId, int bookId);
+
     Media getMediaByID(int id);
 
     List<Media> viewAllMedia();
+
+    List<Media> viewAllMediaByBookId(int bookId);
 
 //    List<Media> viewAllMediaByMediaType(int id);
 
