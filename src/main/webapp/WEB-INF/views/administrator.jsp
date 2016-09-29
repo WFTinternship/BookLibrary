@@ -192,11 +192,11 @@
 <div id="viewMediasForBookContent">
     <form method="get" action="/viewMediasForBook">
         book:<br/>
-        <select id="bookIdForMedias" name="bookId">
+        <select id="bookIdForMedias" name="bookIdForMedias">
             <%
                 List<Book> bookListForMedias = (List<Book>)request.getAttribute("books"); // "books"-y AdministratorController-i /Administrator-i mijits e
-                if(!bookListForAuthor.isEmpty()){
-                    for(Book book : bookListForAuthor){ %>
+                if(!bookListForMedias.isEmpty()){
+                    for(Book book : bookListForMedias){ %>
             <option value="<%=book.getId()%>"><%=book.getTitle()%></option>
             <%   }
             }
@@ -221,11 +221,14 @@
 
 
 <div id='addMediaToBookContent' class="addMediaToBook">
-    <form method="post" action="/addMediaToBook">
-        media:<span>*</span><br/>
-        <input type="file" name="file" enctype="multipart/form-data" required>
-        Name: <input type="text" name="name">
-        <br/><br/>
+    <form method="post" action="/addMediaToBook" enctype="multipart/form-data">
+        <%--<form method="post" action="/upload" >--%>
+            media:<span>*</span><br/>
+            <input type="file" name="file" required>
+            <%--Name: <input type="text" name="name">--%>
+            <%--<input type="submit" value="Upload"> upload the file--%>
+            <br/><br/>
+        <%--</form>--%>
 
 
         <%--media:<span>*</span><br/>--%>

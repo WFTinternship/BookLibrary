@@ -1,9 +1,6 @@
 package com.workfront.internship.booklibrary.controller;
 
-import com.workfront.internship.booklibrary.business.AuthorManager;
-import com.workfront.internship.booklibrary.business.BookManager;
-import com.workfront.internship.booklibrary.business.GenreManager;
-import com.workfront.internship.booklibrary.business.UserManager;
+import com.workfront.internship.booklibrary.business.*;
 import com.workfront.internship.booklibrary.common.Author;
 import com.workfront.internship.booklibrary.common.Book;
 import com.workfront.internship.booklibrary.common.Genre;
@@ -47,10 +44,19 @@ public class ApplicationController {
     @Autowired
     private BookManager bookManager;
 
+    @Autowired
+    private MediaManager mediaManager;
+
+
     @RequestMapping("/")
     public String simpleRequest(HttpServletRequest request) {
         List<Author> authorList = authorManager.viewAllAuthors();
         request.getSession().setAttribute("authors", authorList);
+
+        List<Book> bookList = bookManager.viewAll();
+        request.setAttribute("books", bookList);
+
+        request.setAttribute("mediaManager", mediaManager);
 
         List<Genre> genreList = genreManager.viewAll();
         request.getSession().setAttribute("genres", genreList);

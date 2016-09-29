@@ -27,8 +27,13 @@
         List<Author> authors = (List<Author>)request.getAttribute("view authors");
         for(Author author : authors){
     %>
-   <a href="#" ><%=author.getName() + "  " + author.getSurname()%></a><br/>
+   <a href="#" ><%=author.getName() + "  " + author.getSurname()%></a><br/><br/>
     <%}%>
+</div>
+<br/><br/>
+
+<div id="back">
+    <a href="/administrator"><button type="button">back</button></a>
 </div>
 </body>
 </html>

@@ -4,13 +4,18 @@ import com.workfront.internship.booklibrary.business.*;
 import com.workfront.internship.booklibrary.common.*;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.spi.LoggerFactory;
+import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartResolver;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
@@ -28,7 +33,6 @@ import static com.workfront.internship.booklibrary.controller.ControllerUtil.get
  */
 @Controller
 public class AdministratorController {
-
     @Autowired
     private AuthorManager authorManager;
     @Autowired
@@ -43,6 +47,10 @@ public class AdministratorController {
     private PickBookManager pickBookManager;
     @Autowired
     private PendingsManager pendingsManager;
+
+    private static final org.apache.log4j.Logger LOGGER = org.apache.log4j.Logger.getLogger(FileUploadController.class);
+    //    private static final Logger logger = LoggerFactory.getLogger(FileUploadController.class);
+    private MultipartResolver multipartResolver;
 
     @RequestMapping("/addAuthor")
     public String addAuthor(HttpServletRequest request){
@@ -180,7 +188,7 @@ public class AdministratorController {
     @RequestMapping("/viewMediasForBook")
     public String showMediasOfBook(HttpServletRequest request){
         Book book = new Book();
-        String bookIdString = request.getParameter("bookId");
+        String bookIdString = request.getParameter("bookIdForMedias");
         int bookId = getIntegerFromString(bookIdString);
         book = bookManager.findBookByID(bookId);
         request.setAttribute("book", book);
@@ -191,7 +199,7 @@ public class AdministratorController {
             return "redirect:/administrator";
         }
 
-        return "showMediasOfBook";
+        return "ShowMediasOfBook";
     }
 
     @RequestMapping("/addMediaType")
@@ -207,138 +215,60 @@ public class AdministratorController {
         return "redirect:/administrator";
     }
 
-//    @RequestMapping(value="/addMediaToBook", headers = "content-type=multipart/*", method = RequestMethod.POST)
-//    public String addMedia(HttpServletRequest request, HttpServletResponse response, @RequestParam("name") String name,
-//                           @RequestParam("file") MultipartFile file) throws IOException {
-//
-//        String message = null;
-//        Media media = new Media();
-//        String mediaName = request.getParameter("mediaName");
-//        media.setLink(mediaName);
-//
-//        if (!file.isEmpty()) {
-//            try {
-//                byte[] bytes = file.getBytes();
-//
-//                // Creating the directory to store file
-//                String rootPath = System.getProperty("catalina.home");
-//                File dir = new File(rootPath + File.separator + "tmpFiles");
-//                if (!dir.exists())
-//                    dir.mkdirs();
-//
-//                // Create the file on server
-//                File serverFile = new File(dir.getAbsolutePath()
-//                        + File.separator + name);
-//                BufferedOutputStream stream = new BufferedOutputStream(
-//                        new FileOutputStream(serverFile));
-//                stream.write(bytes);
-//                stream.close();
-//
-////                Logger logger.info("Server File Location="
-////                        + serverFile.getAbsolutePath());
-//
-////                return "You successfully uploaded file=" + name;
-//
-//                message = "ou successfully uploaded file=" + name;
-//            } catch (Exception e) {
-//                return "You failed to upload " + name + " => " + e.getMessage();
-//            }
-//        } else {
-//            message = "You failed to upload " + name
-//                    + " because the file was empty.";
-////            return "You failed to upload " + name + " because the file was empty.";
-//        }
-//
-//
-////        response.setCharacterEncoding("utf8");
-////        response.setContentType("application/json");
-////
-////        PrintWriter writer = response.getWriter();
-////        writer.write("{\"success\":true}");
-////        writer.close();
-//
-//        return "redirect:/administrator";
-//    }
+    @RequestMapping(value = "/addMediaToBook", method = RequestMethod.POST)
+    public String addMediaToBook(HttpServletRequest request, @RequestParam(value = "file", required = false) MultipartFile file) throws IOException {
+        Media media = new Media();
 
+        ServletContext context = request.getSession().getServletContext();
+        String contextPath  = context.getRealPath("WEB-INF\\..");
 
-    @RequestMapping("/addMediaToBook")
-    public String addMediaToBook(HttpServletRequest request,
-                              @RequestParam(value = "file", required = false) MultipartFile image) throws IOException {
-
-        String bookIdString = request.getParameter("book");
+        String bookIdString = request.getParameter("bookId");
         int bookId = Integer.parseInt(bookIdString);
 
-        String mediaTypeIdString = request.getParameter("mediaType");
+        String mediaTypeIdString = request.getParameter("mediaTypeId");
         int mediaTypeId = Integer.parseInt(mediaTypeIdString);
 
-//        String authorIdString = request.getParameter("author");
-//        int authorId = Integer.parseInt(authorIdString);
+//        String rootPath = System.getProperty("catalina.home");
+//        String rootPath = "C:\\Users\\Workfront\\IdeaProjects\\BookLibrary\\src\\main\\webapp\\resources\\image";
+        String uploadPath = contextPath + "\\resources\\upload";
 
-//        bookManager.addAuthorToBook(bookId, authorId);
+        String filePath = null;
 
-        String filePath = request.getSession().getServletContext().getRealPath("/resources/image");
-        String link = null;
-
-//        List<String> imagePath = new ArrayList<>();
-//        Product product = (Product) request.getSession().getAttribute("product");
-//        if(product == null) {
-//            product = new Product();
-//        }
-//        for(MultipartFile multipartFile : image) {
-
-            if (!image.isEmpty()) {
-                try {
-                     link = saveFile(filePath, image);
-//                    imagePath.add("/resources/image/" + multipartFile.getOriginalFilename());
-
-                }catch(IOException e){
-
-                }
+            if (!file.isEmpty()) {
+                filePath = uploadImage(uploadPath, file);
             }
 
-        mediaManager.add(link, mediaTypeId, bookId);
-//        }
-        //set request parameters to user
-//        setRequestParametersToProduct(product, request);
-//        String option = (String) request.getSession().getAttribute("option");
-//        if (option.equals("edit")) {
-//            formSubmissionEditMode(request, product, imagePath);
-//
-//            List<Product> products = productManager.getAllProducts();
-//            request.getSession().setAttribute("products", products);
-//            return "products";
-//
-//        } else {
-//            formSubmissionAddMode(product, imagePath);
-//            List<Product> products = productManager.getAllProducts();
-//            request.getSession().setAttribute("products", products);
-//            return "products";
-//        }
+        media.setLink(filePath);
+        media.setType(mediaTypeManager.getMediaTypeByID(mediaTypeId));
+        media.setBook(bookManager.findBookByID(bookId));
+        mediaManager.add(media);
 
         return "redirect:/administrator";
     }
 
-
-    private String saveFile(String uploadPath, MultipartFile image) throws IOException {
-        String fileName = image.getOriginalFilename();
+    private String uploadImage(String uploadPath, MultipartFile file) throws IOException {
+        String fileName = file.getOriginalFilename();
         String filePath = null;
 
         //create file path
+        File uploadFolder = new File(uploadPath);
+        if(!uploadFolder.exists()){
+            uploadFolder.mkdir();
+        }
         filePath = uploadPath + File.separator + fileName;
         File storeFile = new File(filePath);
 
         // saves the file on disk
-        FileUtils.writeByteArrayToFile(storeFile, image.getBytes());
+        FileUtils.writeByteArrayToFile(storeFile, file.getBytes());
         return filePath;
     }
 
-
-//    @RequestMapping("/showBook")
-//    public String showBookDetails(HttpServletRequest request){
-//        List<Book> bookList = bookManager.viewAll();
-//        request.setAttribute("books", bookList);
-//        return "redirect:/administrator";
-//    }
+    @RequestMapping("/showBook")
+    public String showBookDetails(HttpServletRequest request){
+        List<Book> bookList = bookManager.viewAll();
+        request.setAttribute("books", bookList);
+        return "redirect:/administrator";
+    }
 
     @RequestMapping(value="/editBook", method = RequestMethod.POST)
     public String editBook(HttpServletRequest request, HttpServletResponse response) throws IOException {

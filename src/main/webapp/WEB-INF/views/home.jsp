@@ -1,11 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.workfront.internship.booklibrary.business.GenreManager" %>
 <%@ page import="com.workfront.internship.booklibrary.business.GenreManagerImpl" %>
-<%@ page import="com.workfront.internship.booklibrary.common.Genre" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.workfront.internship.booklibrary.common.Author" %>
-<%@ page import="com.workfront.internship.booklibrary.common.User" %>
-<%@ page import="com.workfront.internship.booklibrary.common.Book" %>
+<%@ page import="com.workfront.internship.booklibrary.common.*" %>
+<%@ page import="com.workfront.internship.booklibrary.business.MediaManagerImpl" %>
+<%@ page import="com.workfront.internship.booklibrary.business.MediaManager" %>
+<%@ page import="org.springframework.beans.factory.annotation.Autowired" %>
+<%@ page import="com.workfront.internship.booklibrary.controller.ApplicationController" %>
+<%@ page import="java.io.File" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
   <head>
@@ -126,11 +128,27 @@
 
     <div class="floating_media">
       <ul style="list-style-type: none;">
-        <li><img src="/resources/image/download1.jpg" alt="changing images" style="position: absolute; top: 0; /*left: 100px;*/"></li>
-        <li><img src="/resources/image/download2.jpg" alt="changing images" style="position: absolute; top: 0; left: 200px;"></li>
-        <li><img src="/resources/image/download3.jpg" alt="changing images" style="position: absolute; top: 0; left: 400px;"></li>
-        <li><img src="/resources/image/download4.jpg" alt="changing images" style="position: absolute; top: 0; left: 600px;"></li>
-        <li><img src="/resources/image/download5.jpg" alt="changing images" style="position: absolute; top: 0; left: 800px;"></li>
+          <%
+              List<Book> bookListMedia = (List<Book>)request.getAttribute("books");
+              MediaManager mediaManager = (MediaManager)request.getAttribute("mediaManager");
+              int i = 0;
+              if (bookListMedia != null && !bookListMedia.isEmpty()) {
+                  for(Book book : bookListMedia){
+                      List<Media> medialistb = mediaManager.viewAllMediaByBookId(book.getId());
+                      for(Media media : medialistb){
+                          if(i < 1500){
+                          String path = media.getLink();
+                          path = "/resources/upload/" + path.substring(path.lastIndexOf(File.separator));
+          %>
+          <li><img src="<%=path%>" alt="changing images" style="position: absolute; top: 0; left: <%=i%>"></li>
+          <% i += 230;}}}}%>
+
+
+        <%--<li><img src="/resources/upload/" alt="changing images" style="position: absolute; top: 0; /*left: 100px;*/"></li>--%>
+        <%--<li><img src="/resources/image/download2.jpg" alt="changing images" style="position: absolute; top: 0; left: 200px;"></li>--%>
+        <%--<li><img src="/resources/image/download3.jpg" alt="changing images" style="position: absolute; top: 0; left: 400px;"></li>--%>
+        <%--<li><img src="/resources/image/download4.jpg" alt="changing images" style="position: absolute; top: 0; left: 600px;"></li>--%>
+        <%--<li><img src="/resources/image/download5.jpg" alt="changing images" style="position: absolute; top: 0; left: 800px;"></li>--%>
       </ul>
     </div>
 

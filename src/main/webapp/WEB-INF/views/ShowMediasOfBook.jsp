@@ -1,6 +1,8 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.workfront.internship.booklibrary.common.Book" %>
 <%@ page import="com.workfront.internship.booklibrary.common.Media" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%--
   Created by IntelliJ IDEA.
   User: Workfront
   Date: 9/28/2016
@@ -16,7 +18,7 @@
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/admin.css"/>">
 </head>
 <body>
-<div id="showAuthorsOfBook">
+<div id="showMediasOfBook">
     Medias of
     <% Book book = (Book)request.getAttribute("book");
         out.print(" " + book.getTitle() + ":");
@@ -25,8 +27,14 @@
         List<Media> medias = (List<Media>)request.getAttribute("view medias");
         for(Media media : medias){
     %>
-    <a href="#" ><%=media.getLink() + "  " + media.getType()%></a><br/>
+    <a href="#" ><%=media.getLink()%></a><br/>
+    <%out.print("media type:  " + media.getType());%><br/><br/>
     <%}%>
+</div>
+<br/><br/>
+
+<div id="back">
+    <a href="/administrator"><button type="button">back</button></a>
 </div>
 </body>
 </html>

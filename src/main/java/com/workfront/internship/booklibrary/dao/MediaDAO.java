@@ -9,8 +9,6 @@ import java.util.List;
 public interface MediaDAO {
     int add(Media media);
 
-    int add(String link, int mediaTypeId, int bookId);
-
     Media getMediaByID(int id);
 
     List<Media> getAllMedia();

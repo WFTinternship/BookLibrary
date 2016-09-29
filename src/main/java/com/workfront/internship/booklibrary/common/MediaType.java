@@ -27,10 +27,9 @@ public class MediaType {
 
     @Override
     public String toString() {
-        return "MediaType{" +
+        return "MediaType  " +
                 "mediaType_id = " + getId() +
-                "media type = " + getType() +
-                "}";
+                " media type = " + getType();
     }
 
     @Override

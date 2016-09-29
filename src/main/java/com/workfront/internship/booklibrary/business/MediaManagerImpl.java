@@ -28,15 +28,6 @@ public class MediaManagerImpl implements MediaManager{
     }
 
     @Override
-    public int add(String link, int mediaTypeId, int bookId) {
-        if(link != null && mediaTypeId != 0 && bookId != 0){
-            int id = mediaDAO.add(link, mediaTypeId, bookId);
-            return id;
-        }
-        return 0;
-    }
-
-    @Override
     public Media getMediaByID(int id) {
         if(id < 1){
             throw new IllegalArgumentException("Invalid id is entered");
