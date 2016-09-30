@@ -60,7 +60,6 @@ public class BookDAOImpl extends General implements BookDAO {
             for(int i= 0; i < authorsIdList.size(); i++){
                 addAuthorToBook(connection, book, authorsIdList.get(i));
             }
-
             connection.commit();
         }catch (SQLException e){
             try {
@@ -76,7 +75,6 @@ public class BookDAOImpl extends General implements BookDAO {
         } finally {
             closeConnection(resultSet, preparedStatement, connection);
         }
-
         return book.getId();
     }
 
