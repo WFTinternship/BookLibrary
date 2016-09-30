@@ -132,18 +132,18 @@ public class TestBookDAOImpl {
         List<Book> expectedBookList = new ArrayList<>();
         List<Book> actualBookList = new ArrayList<>();
 
-        int bookCount = 2;
-        for(int i = 0; i < bookCount; i++){
+//        int bookCount = 2;
+//        for(int i = 0; i < bookCount; i++){
             Book book = getRandomBook(expectedGenre);
             bookDAO.add(book, authorsIdList);
             expectedBookList.add(book);
-        }
+//        }
 
         //Test method getAllBooks()
         actualBookList = bookDAO.getAllBooks();
 
         assertEquals(expectedBookList.size(), actualBookList.size());
-        for(int i = 0; i < bookCount; i++){
+        for(int i = 0; i < expectedBookList.size(); i++){
             checkAssertions(expectedBookList.get(i), actualBookList.get(i));
         }
 

@@ -83,19 +83,19 @@ public class TestGenreDAOImpl {
 
         List<Genre> expectedGenreList = new ArrayList<>();
         List<Genre> actualGenreList = new ArrayList<>();
-        int genreCount = 2;
+//        int genreCount = 2;
 
-        for(int i = 0; i < genreCount; i++){
+//        for(int i = 0; i < genreCount; i++){
             Genre genre = getRandomGenre();
             genreDAO.add(genre);
             expectedGenreList.add(genre);
-        }
+//        }
 
         //Test method getAllGenres()
         actualGenreList = genreDAO.getAllGenres();
 
         assertEquals(expectedGenreList.size(), actualGenreList.size());
-        for(int i = 0; i < genreCount; i++){
+        for(int i = 0; i < expectedGenreList.size(); i++){
             checkAssertions(expectedGenreList.get(i), actualGenreList.get(i));
         }
 

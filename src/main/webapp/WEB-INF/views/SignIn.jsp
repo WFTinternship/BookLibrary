@@ -19,7 +19,7 @@
     <input type="text" name="username/email" required autofocus><br/>
     <br/>password<span>*</span><br/>
     <input type="password" name="password" required><br/>
-    <br/><input type="submit" value= "Submit">
+    <br/><input type="submit" value= "Submit" name="sign-in">
     <input type="reset" value = "cancel"><br/>
 
 </form>

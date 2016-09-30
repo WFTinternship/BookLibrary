@@ -23,7 +23,7 @@ import static org.mockito.Mockito.when;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = DevelopmentConfig.class)
 @ActiveProfiles("Development")
-public class UserControllerIntegrationTest {
+public class ApplicationControllerIntegrationTest {
     @Autowired
     ApplicationController applicationController;
 
@@ -37,13 +37,13 @@ public class UserControllerIntegrationTest {
 
         when(testRequest.getSession()).thenReturn(testSession);
         when(testRequest.getParameter("username/email")).thenReturn("sonamikayelyan");
-        when(testRequest.getParameter("password")).thenReturn("sonapass");
+        when(testRequest.getParameter("password")).thenReturn("sona");
     }
 
     @Test
     public void login() {
         String userPage = applicationController.signinRequest(testRequest);
-        assertEquals("Wrong page", userPage, "User");
+        assertEquals("Wrong page", userPage, "redirect:/User");
     }
 
     @Test

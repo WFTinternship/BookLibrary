@@ -91,13 +91,13 @@ public class TestMediaTypeDAOImpl {
 
         List<MediaType> expectedMediaTypeList = new ArrayList<>();
         List<MediaType> actualMediaTypeList = new ArrayList<>();
-        int mediaTypeCount = 2;
+//        int mediaTypeCount = 2;
 
-        for(int i = 0; i < mediaTypeCount; i++){
+//        for(int i = 0; i < mediaTypeCount; i++){
             MediaType mediaType = getRandomMediaType();
             mediaTypeDAO.add(mediaType);
             expectedMediaTypeList.add(mediaType);
-        }
+//        }
 
         //Test method getAllMediaTypes()
         actualMediaTypeList = mediaTypeDAO.getAllMediaTypes();
@@ -106,7 +106,7 @@ public class TestMediaTypeDAOImpl {
 
 //        assertEquals(expectedMediaTypeList.get(0), actualMediaTypeList.get(1));
 //        assertEquals(expectedMediaTypeList.get(1), actualMediaTypeList.get(0));
-        for(int i = 0; i < mediaTypeCount; i++){
+        for(int i = 0; i < expectedMediaTypeList.size(); i++){
             checkAssertions(expectedMediaTypeList.get(i), actualMediaTypeList.get(i));
         }
 

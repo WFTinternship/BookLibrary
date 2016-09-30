@@ -131,7 +131,7 @@ public class Author {
         if (getBirthCity() != null ? !getBirthCity().equals(author.getBirthCity()) : author.getBirthCity() != null) return false;
         if (geteMail() != null ? !geteMail().equals(author.geteMail()) : author.geteMail() != null) return false;
         if (getWebPage() != null ? !getWebPage().equals(author.getWebPage()) : author.getWebPage() != null) return false;
-        return getBiography() != null ? getBiography().equals(author.getBiography()) : author.getBiography() == null;
+        return (getBiography() != null ? !getBiography().equals(author.getBiography()) : author.getBiography() != null);
     }
 
     @Override

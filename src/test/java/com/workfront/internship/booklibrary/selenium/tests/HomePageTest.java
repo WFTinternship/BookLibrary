@@ -27,6 +27,8 @@ public class HomePageTest {
     @After
     public void afterMethod(){
         homePage.getWebDriver().get("http://localhost:8080/index.jsp");
+//        homePage.getWebDriver().get("http://localhost:8080/home.jsp");
+//        homePage.getWebDriver().get("http://localhost:8080");
     }
 
 
@@ -37,8 +39,8 @@ public class HomePageTest {
     }
 
     @Test
-    public void bookButtonHover() throws InterruptedException {
-        WebElement overButton = homePage.pointAtBooks();
+    public void authorsButtonHover() throws InterruptedException {
+        WebElement overButton = homePage.pointAtAuthors();
 
         Actions action = new Actions(homePage.getWebDriver());
         action.moveToElement(overButton).perform();
@@ -47,7 +49,7 @@ public class HomePageTest {
 //        Thread.sleep(2000);
 
         WebElement dropdown = homePage.getWebDriver().findElement(By.className("dropdown-content"));
-        assertTrue("Genres window is not shown", dropdown.isDisplayed());
+        assertTrue("Authors window is not shown", dropdown.isDisplayed());
     }
 
     @Test

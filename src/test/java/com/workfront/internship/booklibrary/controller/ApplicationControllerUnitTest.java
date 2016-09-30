@@ -1,9 +1,8 @@
 package com.workfront.internship.booklibrary.controller;
 
-import com.workfront.internship.booklibrary.business.AuthorManager;
-import com.workfront.internship.booklibrary.business.GenreManager;
-import com.workfront.internship.booklibrary.business.UserManager;
+import com.workfront.internship.booklibrary.business.*;
 import com.workfront.internship.booklibrary.common.Author;
+import com.workfront.internship.booklibrary.common.Book;
 import com.workfront.internship.booklibrary.common.Genre;
 import com.workfront.internship.booklibrary.common.User;
 import org.junit.*;
@@ -31,7 +30,7 @@ import static org.mockito.Mockito.*;
 /**
  * Created by ${Sona} on 8/30/2016.
  */
-public class UserControllerUnitTest {
+public class ApplicationControllerUnitTest {
     private static ApplicationController applicationController;
 
     private UserManager userManager;
@@ -42,6 +41,8 @@ public class UserControllerUnitTest {
 
     private AuthorManager authorManager;
     private GenreManager genreManager;
+    private MediaManager mediaManager;
+    private BookManager bookManager;
 
     private Author testAuthor;
     private Genre testGenre;
@@ -68,8 +69,10 @@ public class UserControllerUnitTest {
 
         authorManager = mock(AuthorManager.class);
         genreManager = mock(GenreManager.class);
+        bookManager = mock(BookManager.class);
         Whitebox.setInternalState(applicationController, "authorManager", authorManager);
         Whitebox.setInternalState(applicationController, "genreManager", genreManager);
+        Whitebox.setInternalState(applicationController, "bookManager", bookManager);
 
         testRequest = mock(HttpServletRequest.class);
         testSession = mock(HttpSession.class);
@@ -94,14 +97,19 @@ public class UserControllerUnitTest {
         List<Genre> genreList = new ArrayList<>();
 //        genreList.add(testGenre);
 
+        List<Book> bookList = new ArrayList<>();
+
         when(authorManager.viewAllAuthors()).thenReturn(authorList);
         when(genreManager.viewAll()).thenReturn(genreList);
+        when(bookManager.viewAll()).thenReturn(bookList);
 
         //testing method
         applicationController.simpleRequest(testRequest);
 
         verify(testSession).setAttribute("authors", authorList);
         verify(testSession).setAttribute("genres", genreList);
+//        verify(testSession).setAttribute("books", bookList);
+//        verify(testSession).setAttribute("mediaManager", mediaManager);
 
     }
 
@@ -110,7 +118,7 @@ public class UserControllerUnitTest {
         when(userManager.loginWithUsername(anyString(), anyString())).thenReturn(testUser);
         String result = applicationController.signinRequest(testRequest);
         verify(testSession).setAttribute("user", testUser);
-        assertEquals(result, "User");
+        assertEquals(result, "redirect:/User");
     }
 
     @Test
@@ -133,7 +141,7 @@ public class UserControllerUnitTest {
 
         String result = applicationController.registrationRequest(testRequest);
         verify(testSession).setAttribute(eq("user"), any(User.class));
-        assertEquals(result, "User");
+        assertEquals(result, "redirect:/User");
     }
 
     @Test

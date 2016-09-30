@@ -91,19 +91,19 @@ public class TestMediaDAOImpl {
 
         List<Media> expectedMediaList = new ArrayList<>();
         List<Media> actualMediaList = new ArrayList<>();
-        int mediaCount = 2;
+//        int mediaCount = 2;
 
-        for(int i = 0; i < mediaCount; i++){
+//        for(int i = 0; i < mediaCount; i++){
             Media media = getRandomMedia(expectedMediaType, expectedBook);
             mediaDAO.add(media);
             expectedMediaList.add(media);
-        }
+//        }
 
         //Test method getAllMedia()
         actualMediaList = mediaDAO.getAllMedia();
 
         assertEquals(expectedMediaList.size(), actualMediaList.size());
-        for(int i = 0; i < mediaCount; i++){
+        for(int i = 0; i < expectedMediaList.size(); i++){
             checkAssertions(expectedMediaList.get(i), actualMediaList.get(i));
         }
 

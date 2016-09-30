@@ -40,7 +40,7 @@ public class MediaType {
         MediaType mediaType = (MediaType) obj;
 
         if (getId() != mediaType.getId()) return false;
-        return (getType() != null ? getType().equals(mediaType.getType()) : mediaType.getType() == null);
+        return (getType() != null ? !getType().equals(mediaType.getType()) : mediaType.getType() == null);
     }
 
     @Override

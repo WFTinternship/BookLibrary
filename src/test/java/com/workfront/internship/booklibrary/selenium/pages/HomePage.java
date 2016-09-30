@@ -11,7 +11,10 @@ public class HomePage extends AbstractPage {
     }
 
     public WebElement clickLogin() throws InterruptedException {
-        WebElement loginButton = getWebDriver().findElement(By.name("sign-in"));
+//        WebElement loginButton = getWebDriver().findElement(By.name("sign-in"));
+        WebElement loginButton = getWebDriver().findElement(By.id("login"));
+//        WebElement loginButton = getWebDriver().findElement(By.tagName("Submit"));
+
 //        loginButton.SendKeys(Keys.Retur‌​n) ;
         loginButton.click();
         return getLogin();
@@ -23,8 +26,10 @@ public class HomePage extends AbstractPage {
         return login;
     }
 
-    public WebElement pointAtBooks() throws InterruptedException {
-        WebElement pointer = getWebDriver().findElement(By.className("dropbtn"));
+    public WebElement pointAtAuthors() throws InterruptedException {
+//        WebElement pointer = getWebDriver().findElement(By.className("dropbtn"));
+        WebElement pointer = getWebDriver().findElement(By.className("authorList"));
+//        WebElement pointer = getWebDriver().findElement(By.className("main-functions"));
         return pointer;
     }
 

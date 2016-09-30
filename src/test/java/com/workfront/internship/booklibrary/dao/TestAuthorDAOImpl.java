@@ -44,9 +44,9 @@ public class TestAuthorDAOImpl {
     @Before
     public void setup() throws Exception {
 //        authorsIdList = init();
-        expectedAuthor = getRandomAuthor();
-        authorDAO.add(expectedAuthor);
-        authorsIdList.add(expectedAuthor.getId());
+//        expectedAuthor = getRandomAuthor();
+//        authorDAO.add(expectedAuthor);
+//        authorsIdList.add(expectedAuthor.getId());
     }
 
     @After
@@ -82,6 +82,7 @@ public class TestAuthorDAOImpl {
 
     @Test
     public void getAuthorByName() {
+        authorDAO.deleteAllAuthors();
         expectedAuthor = getRandomAuthor();
         authorDAO.add(expectedAuthor);
 
@@ -97,19 +98,19 @@ public class TestAuthorDAOImpl {
 
         List<Author> expectedAuthorList = new ArrayList<>();
         List<Author> actualAuthorList = new ArrayList<>();
-        int authorCount = 2;
+//        int authorCount = 2;
 
-        for(int i = 0; i < authorCount; i++){
+//        for(int i = 0; i < authorCount; i++){
             Author author = getRandomAuthor();
             authorDAO.add(author);
             expectedAuthorList.add(author);
-        }
+//        }
 
         //Test method getAllAuthors()
         actualAuthorList = authorDAO.getAllAuthors();
 
         assertEquals(expectedAuthorList.size(), actualAuthorList.size());
-        for(int i = 0; i < authorCount; i++){
+        for(int i = 0; i < expectedAuthorList.size(); i++){
             checkAssertions(expectedAuthorList.get(i), actualAuthorList.get(i));
         }
 

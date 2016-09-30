@@ -68,6 +68,7 @@ public class TestPickBookDAOImpl {
         bookDAO.deleteAll();
         genreDAO.deleteAll();
         userDAO.deleteAll();
+        authorDAO.deleteAllAuthors();
     }
 
     private List<Integer> init() throws Exception {

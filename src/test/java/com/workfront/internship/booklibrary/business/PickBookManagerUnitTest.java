@@ -92,15 +92,15 @@ public class PickBookManagerUnitTest {
         assertTrue("pickBook is not added", id > 0);
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void getPickBookByID_idLessThan1(){
-        testPickBook.setId(0);
-        pickBookDAO.add(testPickBook);
-        int id = testPickBook.getId();
-
-        //test
-        pickBookManager.getPickBookByID(id);
-    }
+//    @Test(expected = IllegalArgumentException.class)
+//    public void getPickBookByID_idLessThan1(){
+//        testPickBook.setId(0);
+//        pickBookDAO.add(testPickBook);
+//        int id = testPickBook.getId();
+//
+//        //test
+//        pickBookManager.getPickBookByID(id);
+//    }
 
     @Test
     public void getPickBookByID_nullPickBook(){
