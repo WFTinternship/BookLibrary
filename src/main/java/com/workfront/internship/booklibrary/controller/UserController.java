@@ -86,7 +86,8 @@ public class UserController {
 
         String bookTitle = request.getParameter("q");
 
-        if (!bookTitle.isEmpty()) {
+//        if (!bookTitle.isEmpty()) {
+        if(ControllerUtil.isNotEmpty(bookTitle.trim())){
             for (Book book : bookList) {
                 if (book.getTitle().contains(bookTitle)) {
                     existingBooks.add(book);

@@ -242,7 +242,7 @@ public class BookDAOImpl extends General implements BookDAO {
         try{
             connection = dataSource.getConnection();
             books = new ArrayList<Book>();
-            String sql = "SELECT * FROM Book LEFT JOIN Genre ON Book.genre_id = Genre.genre_id WHERE title LIKE ?";
+            String sql = "SELECT * FROM Book LEFT JOIN Genre ON Book.genre_id = Genre.genre_id WHERE title LIKE ?"; // COLLATE utf8_general_ci
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, '%' + string + '%');
             resultSet = preparedStatement.executeQuery();

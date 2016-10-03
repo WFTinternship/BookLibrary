@@ -149,11 +149,11 @@ public class ApplicationController {
 
         List<Book> existingBooks = new ArrayList<>();
 
-        String bookTitle = request.getParameter("q");
+        String bookTitle = request.getParameter("q").trim();
 //        bookTitle = correctSearchText(bookTitle);
         List<Book> bookList = bookManager.viewAllWithCondition(bookTitle);
 
-        if (!bookTitle.isEmpty()) {
+        if (ControllerUtil.isNotEmpty(bookTitle)) {
             for (Book book : bookList) {
                 if (book.getTitle().contains(bookTitle)) {
                     existingBooks.add(book);
