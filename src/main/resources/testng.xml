@@ -1,0 +1,25 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="unit-test-suite" verbose="1" parallel="classes" >
+<!--<test name="unit" thread-count="5">-->
+    <!--<groups>-->
+        <!--<run>-->
+            <!--<include name="unit" />-->
+            <!--<exclude name="single_threaded" />-->
+        <!--</run>-->
+    <!--</groups>-->
+    <!--<packages>-->
+        <!--<package name="com.workfront.testframework.*" />-->
+    <!--</packages>-->
+<!--</test>-->
+<test name="single-threaded-unit" thread-count="1">
+    <groups>
+        <run>
+            <include name="unit-single_threaded" />
+        </run>
+    </groups>
+    <packages>
+        <package name="com.workfront.testframework.*" />
+    </packages>
+</test>
+</suite>
